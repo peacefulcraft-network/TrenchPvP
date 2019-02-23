@@ -38,7 +38,7 @@ public class TrenchDemoman extends TrenchPlayer{
 		ArrayList<String> pDesc = new ArrayList<String>();
 		pDesc.add("Left Click to Launch Grenades!");
 		pMetaData.setLore(pDesc);
-		
+		//Comment
 		primary.setItemMeta(pMetaData);
 		
 		primaryUtil = new ItemStack(Material.FIREWORK_ROCKET, 16);//give arrows for syringe gun
