@@ -1,4 +1,4 @@
-package net.peacefulcraft.trenchpvp.gamehande.events;
+package net.peacefulcraft.trenchpvp.gameclasses.specials;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -6,7 +6,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 
-import net.peacefulcraft.trenchpvp.gameclasses.TrenchClass;
+import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchClass;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeam;
 

@@ -1,4 +1,4 @@
-package net.peacefulcraft.trenchpvp.gamehande.events;
+package net.peacefulcraft.trenchpvp.gameclasses.specials;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -12,8 +12,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
-import net.peacefulcraft.trenchpvp.gameclasses.MediGun;
-import net.peacefulcraft.trenchpvp.gameclasses.TrenchClass;
+import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchClass;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchMedic;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeam;
@@ -47,14 +46,14 @@ public class RightClickMediGun implements Listener {
 		//Check on same team
 		if(!(sender.getPlayerTeam() == receive.getPlayerTeam())) return;
 
-		MediGun medigun = ((TrenchMedic) sender).getMediGun();
+		//MediGun medigun = ((TrenchMedic) sender).getMediGun();
 		
 		//TODO:BETTER SYSTEM
 		//Check if not fired in last 30 ticks
 		//if(!(MinecraftServer.currentTick >= medigun.getFire() + 30)) return;
 		
 		//Update last fire tick
-		medigun.updateFire();
+		//medigun.updateFire();
 		
 		//Snowball projectile. Possibly remove b/c garbage
 		Location tLoc = e.getRightClicked().getLocation();

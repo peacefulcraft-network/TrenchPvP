@@ -1,7 +1,5 @@
 package net.peacefulcraft.trenchpvp.gameclasses.classConfigurations;
 
-import java.util.ArrayList;
-
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -11,7 +9,6 @@ import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import net.peacefulcraft.trenchpvp.gameclasses.TrenchClass;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeam;
 

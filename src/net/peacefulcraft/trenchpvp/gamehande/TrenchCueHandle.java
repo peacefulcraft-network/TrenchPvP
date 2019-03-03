@@ -7,6 +7,7 @@ import org.bukkit.inventory.ItemStack;
 
 import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchUndefined;
+import net.peacefulcraft.trenchpvp.gamehande.player.Teleports;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeam;
 
@@ -18,12 +19,12 @@ public abstract class TrenchCueHandle {
 			TrenchTeam.redCount++;//Add one to team count
 			TrenchTeam.trenchPlayers[TrenchTeam.redCount + TrenchTeam.blueCount] = new TrenchUndefined(user ,TrenchTeam.RED);//Add user to team list as undefined tClass type
 			teamAssign.setRed(user.getDisplayName());
-			user.teleport(TrenchPvP.RED_SPAWN);
+			user.teleport(Teleports.getRedClassSpawn());
 		}else{//Add to blue
 			TrenchTeam.blueCount++;//Add one to team count
 			TrenchTeam.trenchPlayers[TrenchTeam.redCount + TrenchTeam.blueCount] = new TrenchUndefined(user, TrenchTeam.BLUE);//Add user to team list as undefined tClass type
 			teamAssign.setBlue(user.getDisplayName());
-			user.teleport(TrenchPvP.BLUE_SPAWN);
+			user.teleport(Teleports.getRedSpawn());
 		}
 		user.setGameMode(GameMode.ADVENTURE);
 	}
@@ -46,7 +47,7 @@ public abstract class TrenchCueHandle {
 			ItemStack[] emptyArmor = new ItemStack[4];
 			user.getInventory().setArmorContents(emptyArmor);
 			user.setGameMode(GameMode.ADVENTURE);
-			user.teleport(TrenchPvP.WORLD_SPAWN);
+			user.teleport(Teleports.getQuitSpawn());
 		}else{
 			user.sendMessage(TrenchPvP.CMD_PREFIX + ChatColor.RED + "You are not apart of a team!");
 		}
