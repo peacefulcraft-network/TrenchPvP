@@ -2,3 +2,37 @@ name: TrenchPvP
 main: net.peacefulcraft.trenchpvp.TrenchPvP
 version: 1.0
 api-version: 1.13
+
+commands:
+    tppToggle:
+      description: Toggle Trench PvP Game Running State.
+      permission: tpp.admin.tppToggle
+      usage: /<command> To Toggle Game State
+    tppGetGameState:
+      description: Get Trench Game state
+      permission: tpp.admin.tppGetGameState
+      usage: /<command> To Get Game State
+    trjoin:
+      description: Join Trench
+      permission: tpp.player
+      usage: /<command> To join game
+    trleave:
+      description: Leave Trench
+      permission: tpp.player
+      usage: /<command> To join game
+    tppDebug:
+      description: Get Trench Debug Information
+      usage: /<command>
+
+permissions:
+    tpp.admin.*:
+      description: Trench PvP Admin Commands
+      children:
+        tpp.admin.tppToggle: true
+        tpp.admin.tppGetGameState: true
+    tpp.admin.tppToggle:
+      description: Trench PvP Admin Command. Toggle Trench Game State
+    tpp.admin.getGameState:
+      description: Trench PvP Admin Command. Get Trench Game State
+    tpp.player:
+      description: Trench PvP General User Commands.

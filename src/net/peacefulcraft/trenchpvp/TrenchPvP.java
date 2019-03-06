@@ -1,8 +1,6 @@
 package net.peacefulcraft.trenchpvp;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import net.peacefulcraft.trenchpvp.commands.tppDebug;
@@ -10,32 +8,33 @@ import net.peacefulcraft.trenchpvp.commands.tppGetGameState;
 import net.peacefulcraft.trenchpvp.commands.tppToggle;
 import net.peacefulcraft.trenchpvp.commands.trJoin;
 import net.peacefulcraft.trenchpvp.commands.trLeave;
+import net.peacefulcraft.trenchpvp.gameclasses.specials.GameClassChange;
+import net.peacefulcraft.trenchpvp.gameclasses.specials.RightClickMediGun;
+import net.peacefulcraft.trenchpvp.gameclasses.specials.joinGameSign;
+import net.peacefulcraft.trenchpvp.gameclasses.specials.leaveGameListen;
 import net.peacefulcraft.trenchpvp.gamehande.TrenchScoreboard;
-import net.peacefulcraft.trenchpvp.gamehande.events.GameClassChange;
-import net.peacefulcraft.trenchpvp.gamehande.events.RightClickMediGun;
-import net.peacefulcraft.trenchpvp.gamehande.events.joinGameSign;
-import net.peacefulcraft.trenchpvp.gamehande.events.leaveGameListen;
-import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeam;
-
+//asfdasdfs
 public class TrenchPvP extends JavaPlugin{
 	//Prefix for all plugin -> player messages
 	public static final String CMD_PREFIX = ChatColor.DARK_RED + "[" + ChatColor.RED + "Trench" + ChatColor.DARK_RED + "]";
-	public static final Location WORLD_SPAWN= new Location(Bukkit.getWorld("Trench"), -36.5, 37.5, -66.5);
 	
-	public static final Location BLUE_SPAWN = new Location(Bukkit.getWorld("Trench"), TrenchTeam.getBlueSpawn()[0], TrenchTeam.getBlueSpawn()[1], TrenchTeam.getBlueSpawn()[2]);
-	public static final Location RED_SPAWN = new Location(Bukkit.getWorld("Trench"), TrenchTeam.getRedSpawn()[0], TrenchTeam.getRedSpawn()[1], TrenchTeam.getRedSpawn()[2]);
 	public static boolean gameRunning = false;
 	
 	private static TrenchPvP main;
+	private static TrenchConfig config;
 	//Handle scoreboard events to run through console
 	public static final TrenchScoreboard TEAMS = new TrenchScoreboard();
 	
 	public TrenchPvP(){
 		main = this;
+		config = new TrenchConfig(getConfig());
 	}
 	
 	public void onEnable(){
-	//Load all plugin commands from ~.commands.CommandLoader.java
+		//Generate default config, if none exists
+		this.saveDefaultConfig();
+		
+		//Load all plugin commands from ~.commands.CommandLoader.java
 		this.loadCommands();
 		this.loadEventListners();
 		
@@ -48,21 +47,28 @@ public class TrenchPvP extends JavaPlugin{
 	}
 	
 	private void loadCommands(){
-		getCommand("tppToggle").setExecutor(new tppToggle());
-		getCommand("tppGetGameState").setExecutor(new tppGetGameState());
-		getCommand("trjoin").setExecutor(new trJoin());
-		getCommand("trleave").setExecutor(new trLeave());
-		getCommand("tppdebug").setExecutor(new tppDebug());;
+		this.getCommand("tppToggle").setExecutor(new tppToggle());
+		this.getCommand("tppGetGameState").setExecutor(new tppGetGameState());
+		this.getCommand("trjoin").setExecutor(new trJoin());
+		this.getCommand("trleave").setExecutor(new trLeave());
+		this.getCommand("tppdebug").setExecutor(new tppDebug());;
 	}
 	
 	private void loadEventListners(){
 		getServer().getPluginManager().registerEvents(new joinGameSign(), this);
 		getServer().getPluginManager().registerEvents(new leaveGameListen(), this);
 		getServer().getPluginManager().registerEvents(new GameClassChange(), this);
-		getServer().getPluginManager().registerEvents(new RightClickMediGun(), this);
+	
+		if(this.getConfig().getBoolean("classes.medic")) {
+			getServer().getPluginManager().registerEvents(new RightClickMediGun(), this);
+		}
 	}
 	
 	public static TrenchPvP getPluginInstance(){
 		return main;
+	}
+	
+	public static TrenchConfig getTrenchCFG() {
+		return config;
 	}
 }
