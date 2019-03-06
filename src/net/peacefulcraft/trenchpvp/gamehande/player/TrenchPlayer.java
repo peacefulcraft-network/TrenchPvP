@@ -6,16 +6,13 @@ import org.bukkit.inventory.ItemStack;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchClass;
 
 public class TrenchPlayer{
-	private int[] playerScore;
 	protected Player user;
 	private TrenchTeam playerTeam;
 	private TrenchClass playerClass;
-	private int ID;
 	
 	public TrenchPlayer(Player userIn, TrenchTeam team, TrenchClass classSelection){
 		user = userIn;
 		playerTeam = team;
-		playerScore = new int[3];//score, kills, deaths
 		playerClass = classSelection;
 	}
 	
