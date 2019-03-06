@@ -1,4 +1,4 @@
 name: TrenchPvP
 main: net.peacefulcraft.trenchpvp.TrenchPvP
 version: 1.0
-api-version: 1.13.2
+api-version: 1.13
