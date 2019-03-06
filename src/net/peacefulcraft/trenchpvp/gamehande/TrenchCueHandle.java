@@ -14,32 +14,32 @@ import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeam;
 public abstract class TrenchCueHandle {
 	private TrenchCueHandle(){}//Private constructor
 	public static void joinTeam(Player user){
-		TrenchScoreboard teamAssign = new TrenchScoreboard();
+		//TrenchScoreboard teamAssign = new TrenchScoreboard();
 		if(TrenchTeam.blueCount > TrenchTeam.redCount){//Add to red
 			TrenchTeam.redCount++;//Add one to team count
 			TrenchTeam.trenchPlayers[TrenchTeam.redCount + TrenchTeam.blueCount] = new TrenchUndefined(user ,TrenchTeam.RED);//Add user to team list as undefined tClass type
-			teamAssign.setRed(user.getDisplayName());
-			user.teleport(Teleports.getRedClassSpawn());
+			//teamAssign.setRed(user.getDisplayName());
+			//user.teleport(Teleports.getRedClassSpawn());
 		}else{//Add to blue
 			TrenchTeam.blueCount++;//Add one to team count
 			TrenchTeam.trenchPlayers[TrenchTeam.redCount + TrenchTeam.blueCount] = new TrenchUndefined(user, TrenchTeam.BLUE);//Add user to team list as undefined tClass type
-			teamAssign.setBlue(user.getDisplayName());
-			user.teleport(Teleports.getRedSpawn());
+			//teamAssign.setBlue(user.getDisplayName());
+			//user.teleport(Teleports.getRedSpawn());
 		}
 		user.setGameMode(GameMode.ADVENTURE);
 	}
 	
 	public static void leaveTeam(Player user){
 		int userReferenceInt = TrenchPlayer.findTrenchPlayer(user);
-		TrenchScoreboard teamAssign = new TrenchScoreboard();
+		//TrenchScoreboard teamAssign = new TrenchScoreboard();
 		if(userReferenceInt != -1){//Return index for array where user reference resides
 			TrenchPlayer userReference = TrenchTeam.trenchPlayers[userReferenceInt];
 			TrenchTeam.trenchPlayers[userReferenceInt] = null;
 			if(userReference.getPlayerTeam() == TrenchTeam.BLUE){
-				teamAssign.unsetBlue(user.getDisplayName());
+				//teamAssign.unsetBlue(user.getDisplayName());
 				TrenchTeam.blueCount--;
 			}else{
-				teamAssign.unsetRed(user.getDisplayName());
+				//teamAssign.unsetRed(user.getDisplayName());
 				TrenchTeam.redCount--;
 				user.sendMessage(TrenchPvP.CMD_PREFIX + ChatColor.RED + "You have left Trench PvP!");
 			}
@@ -47,7 +47,7 @@ public abstract class TrenchCueHandle {
 			ItemStack[] emptyArmor = new ItemStack[4];
 			user.getInventory().setArmorContents(emptyArmor);
 			user.setGameMode(GameMode.ADVENTURE);
-			user.teleport(Teleports.getQuitSpawn());
+			//user.teleport(Teleports.getQuitSpawn());
 		}else{
 			user.sendMessage(TrenchPvP.CMD_PREFIX + ChatColor.RED + "You are not apart of a team!");
 		}
