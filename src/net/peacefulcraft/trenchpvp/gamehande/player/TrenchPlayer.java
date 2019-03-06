@@ -3,7 +3,7 @@ package net.peacefulcraft.trenchpvp.gamehande.player;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import net.peacefulcraft.trenchpvp.gameclasses.TrenchClass;
+import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchClass;
 
 public class TrenchPlayer{
 	private int[] playerScore;

@@ -1,0 +1,17 @@
+trenchspawns:
+  quit: {}
+  red: {}
+  blue: {}
+  red_class: {}
+  blue_class: {}
+  spectator: {}
+  
+classes:
+  demoman: true
+  heavy: true
+  medic: true
+  pyro: true
+  scout: true
+  sniper: true
+  soldier: true
+  spy: true

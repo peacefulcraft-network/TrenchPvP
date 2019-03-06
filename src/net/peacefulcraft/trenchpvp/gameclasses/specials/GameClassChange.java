@@ -1,4 +1,4 @@
-package net.peacefulcraft.trenchpvp.gamehande.events;
+package net.peacefulcraft.trenchpvp.gameclasses.specials;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -9,7 +9,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 import net.peacefulcraft.trenchpvp.TrenchPvP;
-import net.peacefulcraft.trenchpvp.gameclasses.TrenchClass;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.*;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeam;
@@ -39,21 +38,21 @@ public class GameClassChange implements Listener {
 						break;case SOLDIER:
 						break;case PYRO:
 						break;case DEMOMAN:
-							if(TrenchClass.useDemoman){
+							if(TrenchPvP.getTrenchCFG().isDemomanEnabled()){
 								TrenchTeam.trenchPlayers[loc] = new TrenchDemoman(e.getPlayer(), team);
 								TrenchTeam.trenchPlayers[loc].giveInvent();
 							}
 							e.getPlayer().sendMessage("Sorry, the Demoman class is currently not avalible for use. Please select another class.");
 						break;case HEAVY:
 						break;case SNIPER:
-							if(TrenchClass.useSniper){
+							if(TrenchPvP.getTrenchCFG().isSniperEnabled()){
 								TrenchTeam.trenchPlayers[loc] = new TrenchSniper(e.getPlayer(), team);
 								TrenchTeam.trenchPlayers[loc].giveInvent();
 							}else{
 								e.getPlayer().sendMessage("Sorry, the Sniper class is currently not avalible for use. Please select another class.");
 							}
 						break;case MEDIC:
-							if(TrenchClass.useMedic){
+							if(TrenchPvP.getTrenchCFG().isMedicEnabled()){
 								TrenchTeam.trenchPlayers[loc] = new TrenchMedic(e.getPlayer(), team);
 								TrenchTeam.trenchPlayers[loc].giveInvent();
 							}else{

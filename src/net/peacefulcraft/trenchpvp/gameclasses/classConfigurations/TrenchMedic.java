@@ -3,33 +3,23 @@ package net.peacefulcraft.trenchpvp.gameclasses.classConfigurations;
 import java.util.ArrayList;
 
 import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
-import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.potion.PotionType;
-
-import net.peacefulcraft.trenchpvp.gameclasses.MediGun;
-import net.peacefulcraft.trenchpvp.gameclasses.TrenchClass;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeam;
 
 public class TrenchMedic extends TrenchPlayer{
-	private MediGun medigun;
+
 	
 	public TrenchMedic(Player userIn, TrenchTeam team){
 		super(userIn, team, TrenchClass.MEDIC);
 		configure();//Configure class Inventory
-		medigun = new MediGun();
 	}
 	
-	public MediGun getMediGun(){
-		return medigun;
-	}
 	
 	public void configure() {		
 	//Primary///////////////////////////////////////
