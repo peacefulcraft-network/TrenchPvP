@@ -4,7 +4,6 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -22,9 +21,11 @@ public class ArmaClickListener implements Listener
 		Player user = e.getPlayer();
 		//Checks item in main hand is Shell
 		if(!(user.getInventory().getItemInMainHand().getType() == Material.SHULKER_SHELL)) return;
-		if(!(user.getInventory().getItemInMainHand().getItemMeta().getDisplayName() == "Armadillo Shell")) return;
+
+		if(!(user.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Armadillo Shell"))) return;
 		//if(!(e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK)) return;
 		//Confirms location
+
 		int location = TrenchPlayer.findTrenchPlayer(user);
 		if(location == -1) return;
 		//Confirms class
