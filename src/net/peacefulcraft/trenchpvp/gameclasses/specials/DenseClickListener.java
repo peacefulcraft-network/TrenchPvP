@@ -10,6 +10,7 @@ import org.bukkit.potion.PotionEffectType;
 
 import net.peacefulcraft.trenchpvp.gameclasses.specials.DenseAxe;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchClass;
+import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeam;
 
@@ -18,16 +19,19 @@ public class DenseClickListener implements Listener
 	@EventHandler
 	public void onRightClick(PlayerInteractEvent e)
 	{
-		Player user = e.getPlayer();
+		Player p = e.getPlayer();
 		//Checks item in main hand is Dense Axe
-		if(!(user.getInventory().getItemInMainHand().getType() == Material.IRON_AXE)) return;
-		if(!(user.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Dense Axe"))) return;
-		//Confirms location
-		int location = TrenchPlayer.findTrenchPlayer(user);
-		if(location == -1) return;
-		//Confirms class
-		TrenchPlayer player = TrenchTeam.trenchPlayers[location];
-		if(!(player.getPlayerClass() == TrenchClass.HEAVY)) return;
+		if(!(p.getInventory().getItemInMainHand().getType() == Material.IRON_AXE)) return;
+		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Dense Axe"))) return;
+		
+		TrenchPlayer t;
+		try {
+			t = TeamManager.findTrenchPlayer(p);
+		}catch(RuntimeException x) {
+			return;
+		}
+		
+		if(!(t.getPlayerClass() == TrenchClass.HEAVY)) return;
 		
 		DenseAxe axe = new DenseAxe();
 		axe.updateClick();

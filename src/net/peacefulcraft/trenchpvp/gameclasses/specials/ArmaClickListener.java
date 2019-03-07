@@ -10,6 +10,7 @@ import org.bukkit.potion.PotionEffectType;
 
 import net.peacefulcraft.trenchpvp.gameclasses.specials.ArmadilloShell;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchClass;
+import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeam;
 
@@ -18,21 +19,24 @@ public class ArmaClickListener implements Listener
 	@EventHandler
 	public void onRightClick(PlayerInteractEvent e)
 	{
-		Player user = e.getPlayer();
+		Player p = e.getPlayer();
 		//Checks item in main hand is Shell
-		if(!(user.getInventory().getItemInMainHand().getType() == Material.SHULKER_SHELL)) return;
+		if(!(p.getInventory().getItemInMainHand().getType() == Material.SHULKER_SHELL)) return;
 
-		if(!(user.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Armadillo Shell"))) return;
+		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Armadillo Shell"))) return;
 		//if(!(e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK)) return;
 		//Confirms location
 
-		int location = TrenchPlayer.findTrenchPlayer(user);
-		if(location == -1) return;
-		//Confirms class
-		TrenchPlayer player = TrenchTeam.trenchPlayers[location];
-		if(!(player.getPlayerClass() == TrenchClass.HEAVY)) return;
+		TrenchPlayer t;
+		try {
+			t = TeamManager.findTrenchPlayer(p);
+		}catch(RuntimeException x) {
+			return;
+		}
 		
-		user.sendMessage("It worked.");
+		if(!(t.getPlayerClass() == TrenchClass.HEAVY)) return;
+		
+		p.sendMessage("It worked.");
 		
 		ArmadilloShell shell = new ArmadilloShell();
 		shell.updateClick();

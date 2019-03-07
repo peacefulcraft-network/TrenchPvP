@@ -9,6 +9,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchClass;
+import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeam;
 
@@ -17,16 +18,19 @@ public class SugarRushListener implements Listener
 	@EventHandler
 	public void onrightClick(PlayerInteractEvent e)
 	{
-		Player user = e.getPlayer();
+		Player p = e.getPlayer();
 		//Checks item in main hand is Shell
-		if(!(user.getInventory().getItemInMainHand().getType() == Material.SUGAR)) return;
-		if(!(user.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Sugar Rush"))) return;
-		//Confirms location
-		int location = TrenchPlayer.findTrenchPlayer(user);
-		if(location == -1) return;
-		//Confirms class
-		TrenchPlayer player = TrenchTeam.trenchPlayers[location];
-		if(!(player.getPlayerClass() == TrenchClass.SPY)) return;
+		if(!(p.getInventory().getItemInMainHand().getType() == Material.SUGAR)) return;
+		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Sugar Rush"))) return;
+		
+		TrenchPlayer t;
+		try {
+			t = TeamManager.findTrenchPlayer(p);
+		}catch(RuntimeException x) {
+			return;
+		}
+		
+		if(!(t.getPlayerClass() == TrenchClass.SPY)) return;
 	
 		SugarRush sugar = new SugarRush();
 		sugar.updateClick();
