@@ -8,24 +8,38 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import net.peacefulcraft.trenchpvp.TrenchPvP;
-import net.peacefulcraft.trenchpvp.gamehande.TrenchCueHandle;
+import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 
 public class trLeave implements CommandExecutor{
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-		if(sender instanceof Player){
-			if(command.getName().equalsIgnoreCase("trleave")){
-				Player user = (Player) sender;
-				if(user.hasPermission("tpp.player")){
-					TrenchCueHandle.leaveTeam(user);
+		
+		if(command.getName().equalsIgnoreCase("trleave")) {
+			
+			if(sender instanceof Player) {
+				
+				Player p = (Player) sender;
+				
+				if(p.hasPermission("tpp.player")) {
+					
+					TeamManager.leaveTeam(p);
+					sender.sendMessage("You've left Trench!");
 					return true;
-				}else{
-					user.sendMessage(TrenchPvP.CMD_PREFIX + ChatColor.RED + "You do not have access to this command");
-					return true;
+					
+				}else {
+					
+					sender.sendMessage(TrenchPvP.CMD_PREFIX + ChatColor.RED + "You do not have access to this command");
+					return false;
+					
 				}
-			}else{return false;}
-		}else{
-			System.out.println("@" + sender + " Command only executable by players");
-			return true;
+				
+			}else {
+				
+				sender.sendMessage("Hey, silly! Only player's can join Trench.");
+				return false;
+				
+			}
+			
 		}
+		return false;
 	}
 }

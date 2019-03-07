@@ -7,33 +7,54 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import net.peacefulcraft.trenchpvp.TrenchPvP;
-import net.peacefulcraft.trenchpvp.gamehande.TrenchCueHandle;
+import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeam;
 
 public class trJoin implements CommandExecutor{
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-		if(sender instanceof Player){
-			if(command.getName().equalsIgnoreCase("trjoin")){
-				Player user = (Player) sender;
-				if(TrenchPlayer.findTrenchPlayer(user) == -1){
-					if(user.hasPermission("tpp.player")){
-						TrenchCueHandle.joinTeam(user);//Join game / tp player to spawn for class choosing
-						if(TrenchTeam.trenchPlayers[TrenchPlayer.findTrenchPlayer(user)].getPlayerTeam() == TrenchTeam.BLUE)
-							user.sendMessage(TrenchPvP.CMD_PREFIX + ChatColor.RED + "You have joined " + ChatColor.DARK_BLUE + "Blue" + ChatColor.RED + " team!");
-						else
-							user.sendMessage(TrenchPvP.CMD_PREFIX + ChatColor.RED + "You have joined " + ChatColor.DARK_RED + "Red" + ChatColor.RED + " team!");
-						return true;
-					}else{
-						user.sendMessage(TrenchPvP.CMD_PREFIX + ChatColor.RED + "You do not have access to this command");
-						return true;
-					}
-				}else{user.sendMessage(TrenchPvP.CMD_PREFIX + ChatColor.RED + "You are already on a Trench team! Type /trleave to leave."); 
-					return true;}
-			}else{return false;}
-		}else{
-			System.out.println("@" + sender + " Command only executable by players");
-			return true;
-		}
+			
+		if(command.getName().equalsIgnoreCase("trjoin")){
+				
+			if(sender instanceof Player){
+			
+			Player p = (Player) sender;
+			
+			try {
+				TrenchPlayer t = TeamManager.findTrenchPlayer(p);
+				sender.sendMessage(TrenchPvP.CMD_PREFIX + ChatColor.RED + "You are already on a Trench team! Type /trleave to leave.");
+				return false;
+			}catch(RuntimeException e) {
+				//RuntimeException good, means user is not on a team
+			}
+			
+			if(p.hasPermission("tpp.player")){
+				
+				TrenchPlayer t = TeamManager.joinTeam(p);
+				if(t.getPlayerTeam() == TrenchTeam.BLUE)
+					p.sendMessage(TrenchPvP.CMD_PREFIX + ChatColor.RED + "You have joined " + ChatColor.DARK_BLUE + "Blue" + ChatColor.RED + " team!");
+				else
+					p.sendMessage(TrenchPvP.CMD_PREFIX + ChatColor.RED + "You have joined " + ChatColor.DARK_RED + "Red" + ChatColor.RED + " team!");
+				
+				//TODO: GIVE SHIT TO PLAYER
+				
+				return true;
+			
+			}else{
+			
+				p.sendMessage(TrenchPvP.CMD_PREFIX + ChatColor.RED + "You do not have access to this command");
+				return false;
+			
+			}
+		
+			}else{
+				
+				System.out.println("@" + sender + " Command only executable by players");
+				return false;
+			
+			}
+				
+		}else{return false;}
 	}
+	
 }

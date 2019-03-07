@@ -11,7 +11,7 @@ import net.peacefulcraft.trenchpvp.commands.trLeave;
 import net.peacefulcraft.trenchpvp.gameclasses.specials.GameClassChange;
 import net.peacefulcraft.trenchpvp.gameclasses.specials.RightClickMediGun;
 import net.peacefulcraft.trenchpvp.gameclasses.specials.joinGameSign;
-import net.peacefulcraft.trenchpvp.gameclasses.specials.leaveGameListen;
+import net.peacefulcraft.trenchpvp.gameclasses.specials.QuitGameListen;
 import net.peacefulcraft.trenchpvp.gamehande.TrenchScoreboard;
 //asfdasdfs
 public class TrenchPvP extends JavaPlugin{
@@ -56,7 +56,7 @@ public class TrenchPvP extends JavaPlugin{
 	
 	private void loadEventListners(){
 		getServer().getPluginManager().registerEvents(new joinGameSign(), this);
-		getServer().getPluginManager().registerEvents(new leaveGameListen(), this);
+		getServer().getPluginManager().registerEvents(new QuitGameListen(), this);
 		getServer().getPluginManager().registerEvents(new GameClassChange(), this);
 	
 		if(this.getConfig().getBoolean("classes.medic")) {
