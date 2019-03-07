@@ -44,6 +44,12 @@ public class GameClassChange implements Listener {
 							}
 							e.getPlayer().sendMessage("Sorry, the Demoman class is currently not avalible for use. Please select another class.");
 						break;case HEAVY:
+							if(TrenchPvP.getTrenchCFG().isHeavyEnabled())
+							{
+								TrenchTeam.trenchPlayers[loc] = new TrenchHeavy(e.getPlayer(), team);
+								TrenchTeam.trenchPlayers[loc].giveInvent();
+							}
+							e.getPlayer().sendMessage("Sorry, the Heavy class is currently not avalible for use. Please select another class.");
 						break;case SNIPER:
 							if(TrenchPvP.getTrenchCFG().isSniperEnabled()){
 								TrenchTeam.trenchPlayers[loc] = new TrenchSniper(e.getPlayer(), team);

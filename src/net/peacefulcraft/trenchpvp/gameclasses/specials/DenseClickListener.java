@@ -21,7 +21,7 @@ public class DenseClickListener implements Listener
 		Player user = e.getPlayer();
 		//Checks item in main hand is Dense Axe
 		if(!(user.getInventory().getItemInMainHand().getType() == Material.IRON_AXE)) return;
-		if(!(user.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Dense Axe"))) return;
+		if(!(user.getInventory().getItemInMainHand().getItemMeta().getDisplayName() == "Dense Axe")) return;
 		//Confirms location
 		int location = TrenchPlayer.findTrenchPlayer(user);
 		if(location == -1) return;

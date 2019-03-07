@@ -25,8 +25,8 @@ public class RightClickMediGun implements Listener {
 		if(!(e.getRightClicked() instanceof Player)) return;
 
 		//Check if clicked with medi gun item
-		if(!(e.getPlayer().getItemInHand().getType() == Material.REDSTONE_BLOCK)) return;
-		if(!(e.getPlayer().getItemInHand().getItemMeta().getDisplayName() == "Medi Gun")) return;
+		if(!(e.getPlayer().getInventory().getItemInMainHand().getType() == Material.REDSTONE_BLOCK)) return;
+		if(!(e.getPlayer().getInventory().getItemInMainHand().getItemMeta().getDisplayName() == "Medi Gun")) return;
 
 		//Get trenchplayer reference location in array
 		int sendIndex = TrenchPlayer.findTrenchPlayer(e.getPlayer());

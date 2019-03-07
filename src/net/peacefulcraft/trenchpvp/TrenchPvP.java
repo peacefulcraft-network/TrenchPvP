@@ -8,6 +8,8 @@ import net.peacefulcraft.trenchpvp.commands.tppGetGameState;
 import net.peacefulcraft.trenchpvp.commands.tppToggle;
 import net.peacefulcraft.trenchpvp.commands.trJoin;
 import net.peacefulcraft.trenchpvp.commands.trLeave;
+import net.peacefulcraft.trenchpvp.gameclasses.specials.ArmaClickListener;
+import net.peacefulcraft.trenchpvp.gameclasses.specials.DenseClickListener;
 import net.peacefulcraft.trenchpvp.gameclasses.specials.GameClassChange;
 import net.peacefulcraft.trenchpvp.gameclasses.specials.RightClickMediGun;
 import net.peacefulcraft.trenchpvp.gameclasses.specials.joinGameSign;
@@ -58,10 +60,9 @@ public class TrenchPvP extends JavaPlugin{
 		getServer().getPluginManager().registerEvents(new joinGameSign(), this);
 		getServer().getPluginManager().registerEvents(new leaveGameListen(), this);
 		getServer().getPluginManager().registerEvents(new GameClassChange(), this);
-	
-		if(this.getConfig().getBoolean("classes.medic")) {
-			getServer().getPluginManager().registerEvents(new RightClickMediGun(), this);
-		}
+		getServer().getPluginManager().registerEvents(new RightClickMediGun(), this);
+		getServer().getPluginManager().registerEvents(new ArmaClickListener(), this);
+		getServer().getPluginManager().registerEvents(new DenseClickListener(), this);
 	}
 	
 	public static TrenchPvP getPluginInstance(){
