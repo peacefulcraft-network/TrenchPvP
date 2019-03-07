@@ -5,13 +5,34 @@ import org.bukkit.entity.Player;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeam;
 
-public class TrenchSoldier extends TrenchPlayer{
-	
-	public TrenchSoldier(Player userIn, TrenchTeam team){
-		super(userIn, team, TrenchClass.SOLDIER);
+public class TrenchSoldier extends TrenchKit{
+
+	public TrenchSoldier() {
+		kitType = TrenchKits.SOLDIER;
 	}
-	public void configure() {
+
+	@Override
+	protected void equipPrimary(Player p) {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	protected void equipSecondary(Player p) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void equipGenerics(Player p) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void equipArmor(Player p) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

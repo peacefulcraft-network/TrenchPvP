@@ -5,14 +5,33 @@ import org.bukkit.entity.Player;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeam;
 
-public class TrenchPyro extends TrenchPlayer{
-	
-	public TrenchPyro(Player userIn, TrenchTeam team){
-		super(userIn, team, TrenchClass.PYRO);
+public class TrenchPyro extends TrenchKit{
+	public TrenchPyro() {
+		kitType = TrenchKits.PYRO;
 	}
 	
-	public void configure() {
+	@Override
+	protected void equipPrimary(Player p) {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	protected void equipSecondary(Player p) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void equipGenerics(Player p) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void equipArmor(Player p) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 }

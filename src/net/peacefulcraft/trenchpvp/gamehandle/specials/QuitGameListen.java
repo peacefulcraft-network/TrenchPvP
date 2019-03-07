@@ -1,4 +1,4 @@
-package net.peacefulcraft.trenchpvp.gameclasses.specials;
+package net.peacefulcraft.trenchpvp.gamehandle.specials;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

@@ -12,20 +12,20 @@ import org.bukkit.potion.PotionEffectType;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeam;
 
-public class TrenchSniper extends TrenchPlayer{
-	public TrenchSniper(Player userIn, TrenchTeam team){
-		super(userIn, team, TrenchClass.SNIPER);
-		configure();//Configure Inventory for class
+public class TrenchSniper extends TrenchKit{
+	
+	public TrenchSniper() {
+		kitType = TrenchKits.SNIPER;
 	}
 	
-	public void configure() {
-		user.sendMessage("Configuring your class");
-	//Primary///////////////////////////////////////
-		/*Sniper - punch 2 power 1
-		 *32 arrows
-		 */
+	/*Sniper - punch 2 power 1
+	 *32 arrows
+	 */
+	@Override
+	protected void equipPrimary(Player p) {
+
 		//Create Bow / give enchantments
-		primary = new ItemStack(Material.BOW, 1);
+		ItemStack primary = new ItemStack(Material.BOW, 1);
 		primary.addEnchantment(Enchantment.ARROW_KNOCKBACK, 2);
 		primary.addEnchantment(Enchantment.ARROW_DAMAGE, 1);
 		
@@ -35,22 +35,36 @@ public class TrenchSniper extends TrenchPlayer{
 		primary.setItemMeta(pMetaData);
 		
 		//Create arrows for sniper riffle
-		primaryUtil = new ItemStack(Material.ARROW, 32);
+		ItemStack primaryUtil = new ItemStack(Material.ARROW, 32);
 		ItemMeta pUMetaData = primaryUtil.getItemMeta();
 		pUMetaData.setDisplayName("Bullets");
 		primaryUtil.setItemMeta(pUMetaData);
+		
+		p.getInventory().setItem(0, primary);
+		p.getInventory().setItem(2, primaryUtil);
+		
+	}
 
-	//Secondary///////////////////////////////////////////
-		/*Stone Sword "Kukri" 
-		 * 
-		 */
-		secondary = new ItemStack(Material.STONE_SWORD, 1);
+	/*Stone Sword "Kukri" 
+	 * 
+	 */
+	@Override
+	protected void equipSecondary(Player p) {
+
+		ItemStack secondary = new ItemStack(Material.STONE_SWORD, 1);
 		secondary.getItemMeta().setDisplayName("Kukri");
+		
+		p.getInventory().setItem(1, secondary);
+		
+	}
 
-		bread = new ItemStack(Material.BREAD, 32);
+	@Override
+	protected void equipGenerics(Player p) {
+		
+		ItemStack bread = new ItemStack(Material.BREAD, 32);
 		
 		//Create PotionMeta ItemStack to set type of Instant Health 2. Overrides existing effects (true)
-		health = new ItemStack(Material.POTION, 2);
+		ItemStack health = new ItemStack(Material.POTION, 2);
 		ItemMeta healthMeta = health.getItemMeta();
 		healthMeta.setDisplayName("Instant Health");
 		PotionMeta pHealthMeta = (PotionMeta) healthMeta;
@@ -59,14 +73,20 @@ public class TrenchSniper extends TrenchPlayer{
 		pHealthMeta.addCustomEffect(instantHealth, true);
 		
 		health.setItemMeta(pHealthMeta);
+		
+		p.getInventory().setItem(7, bread);
+		p.getInventory().setItem(8, (ItemStack) health);
+	}
 
-	//Armor///////////////////////////////////////////////	
-		/*Leather Helment
-		 * Leather Chestplate : Projectile Protection 1
-		 * Leather Leggings
-		 * Leather Boots
-		 */
-		armor = new ItemStack[4];
+	/*Leather Helment
+	 * Leather Chestplate : Projectile Protection 1
+	 * Leather Leggings
+	 * Leather Boots
+	 */
+	@Override
+	protected void equipArmor(Player p) {
+
+		ItemStack[] armor = new ItemStack[4];
 		armor[3] = new ItemStack(Material.LEATHER_HELMET,1);
 		
 		armor[2] = new ItemStack(Material.LEATHER_CHESTPLATE,1);
@@ -75,5 +95,7 @@ public class TrenchSniper extends TrenchPlayer{
 		armor[1] = new ItemStack(Material.LEATHER_LEGGINGS, 1);
 		
 		armor[0] = new ItemStack(Material.LEATHER_BOOTS, 1);
+		p.getInventory().setArmorContents(armor);
+		
 	}
 }

@@ -12,7 +12,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
-import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchClass;
+import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchMedic;
 import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
@@ -40,7 +40,7 @@ public class RightClickMediGun implements Listener {
 		}
 		
 		//Check if sender is medic
-		if(!(healer.getPlayerClass() == TrenchClass.MEDIC)) return;
+		if(!(healer.getKitType() == TrenchKits.MEDIC)) return;
 
 		//Check on same team
 		if(!(healer.getPlayerTeam() == healTarget.getPlayerTeam())) return;

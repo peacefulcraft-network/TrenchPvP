@@ -4,13 +4,14 @@ import java.util.ArrayList;
 
 import org.bukkit.entity.Player;
 
-import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchClass;
+import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeam;
 
 public class TeamManager {
 	
 	private static ArrayList<TrenchPlayer> players = new ArrayList<TrenchPlayer>();
+		public static ArrayList<TrenchPlayer> getPlayers(){return players;}
 	
 	//[0]:red, [1]:blue
 	private static int[] teamcounts = {0,0};
@@ -23,7 +24,7 @@ public class TeamManager {
 		if(teamcounts[0] < teamcounts[1]) {
 			
 			//Add to red team
-			TrenchPlayer t = new TrenchPlayer(p, TrenchTeam.RED, TrenchClass.UNASSIGNED);
+			TrenchPlayer t = new TrenchPlayer(p, TrenchTeam.RED);
 			teamcounts[0]++;
 			players.add(t);
 			return t;
@@ -31,7 +32,7 @@ public class TeamManager {
 		}else {
 			
 			//Add to blue team
-			TrenchPlayer t = new TrenchPlayer(p, TrenchTeam.BLUE, TrenchClass.UNASSIGNED);
+			TrenchPlayer t = new TrenchPlayer(p, TrenchTeam.BLUE);
 			teamcounts[1]++;
 			players.add(t);
 			return t;
@@ -68,7 +69,7 @@ public class TeamManager {
 		private static int getArrayPos(Player p) {
 			
 			for(int i=0; i < players.size(); i++) {
-				if(players.get(i) == p) {
+				if(players.get(i).getPlayer() == p) {
 					return i;
 				}
 			}

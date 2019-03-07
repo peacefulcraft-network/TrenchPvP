@@ -10,19 +10,21 @@ import org.bukkit.inventory.meta.ItemMeta;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeam;
 
-public class TrenchSpy extends TrenchPlayer{
+public class TrenchSpy extends TrenchKit{
 	
-	public TrenchSpy(Player userIn, TrenchTeam team){
-		super(userIn, team, TrenchClass.SPY);
-		configure();
+	public TrenchSpy() {
+		kitType = TrenchKits.SPY;
 	}
-	public void configure() {
-		/*
-		 * Primary
-		 * Spy - Sugar Rush - Raises Health and Speed
-		 */
+	
+	/*
+	 * Primary
+	 * Spy - Sugar Rush - Raises Health and Speed
+	 */
+	@Override
+	protected void equipPrimary(Player p) {
+
 		//Creates Sugar
-		primary = new ItemStack(Material.SUGAR, 1);
+		ItemStack primary = new ItemStack(Material.SUGAR, 1);
 		//Set sugar name
 		ItemMeta pMetaData = primary.getItemMeta();
 		pMetaData.setDisplayName("Sugar Rush");
@@ -32,6 +34,23 @@ public class TrenchSpy extends TrenchPlayer{
 		pMetaData.setLore(pDesc);
 		
 		primary.setItemMeta(pMetaData);
+		
+		p.getInventory().setItem(0, primary);
+		
+	}
+	@Override
+	protected void equipSecondary(Player p) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	protected void equipGenerics(Player p) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	protected void equipArmor(Player p) {
+		// TODO Auto-generated method stub
 		
 	}
 }

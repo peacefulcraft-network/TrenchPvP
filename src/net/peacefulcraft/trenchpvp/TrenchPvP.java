@@ -10,11 +10,11 @@ import net.peacefulcraft.trenchpvp.commands.trJoin;
 import net.peacefulcraft.trenchpvp.commands.trLeave;
 import net.peacefulcraft.trenchpvp.gameclasses.specials.ArmaClickListener;
 import net.peacefulcraft.trenchpvp.gameclasses.specials.DenseClickListener;
-import net.peacefulcraft.trenchpvp.gameclasses.specials.GameClassChange;
 import net.peacefulcraft.trenchpvp.gameclasses.specials.RightClickMediGun;
-import net.peacefulcraft.trenchpvp.gameclasses.specials.joinGameSign;
-import net.peacefulcraft.trenchpvp.gameclasses.specials.QuitGameListen;
 import net.peacefulcraft.trenchpvp.gamehande.TrenchScoreboard;
+import net.peacefulcraft.trenchpvp.gamehandle.specials.KitSignListener;
+import net.peacefulcraft.trenchpvp.gamehandle.specials.QuitGameListen;
+import net.peacefulcraft.trenchpvp.gamehandle.specials.joinGameSign;
 //asfdasdfs
 public class TrenchPvP extends JavaPlugin{
 	//Prefix for all plugin -> player messages
@@ -57,13 +57,17 @@ public class TrenchPvP extends JavaPlugin{
 	}
 	
 	private void loadEventListners(){
+		//gamehandle.special
 		getServer().getPluginManager().registerEvents(new joinGameSign(), this);
-		getServer().getPluginManager().registerEvents(new GameClassChange(), this);
+		getServer().getPluginManager().registerEvents(new KitSignListener(), this);
+		getServer().getPluginManager().registerEvents(new QuitGameListen(), this);
+		
+		//gameclasses.special
 		getServer().getPluginManager().registerEvents(new RightClickMediGun(), this);
 		getServer().getPluginManager().registerEvents(new ArmaClickListener(), this);
 		getServer().getPluginManager().registerEvents(new DenseClickListener(), this);
 
-		getServer().getPluginManager().registerEvents(new QuitGameListen(), this);
+
 	
 		if(this.getConfig().getBoolean("classes.medic")) {
 			getServer().getPluginManager().registerEvents(new RightClickMediGun(), this);

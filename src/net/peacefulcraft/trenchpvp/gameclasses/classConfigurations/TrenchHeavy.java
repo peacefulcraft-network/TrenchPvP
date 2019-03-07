@@ -13,18 +13,18 @@ import org.bukkit.potion.PotionEffectType;
 
 import net.peacefulcraft.trenchpvp.gameclasses.specials.ArmadilloShell;
 import net.peacefulcraft.trenchpvp.gameclasses.specials.DenseAxe;
-import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchClass;
+import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
 
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeam;
 
-public class TrenchHeavy extends TrenchPlayer{
+public class TrenchHeavy extends TrenchKit{
+	
 	private DenseAxe denseAxe;
 	private ArmadilloShell armadilloShell;
 	
-	public TrenchHeavy(Player userIn, TrenchTeam team){
-		super(userIn, team, TrenchClass.HEAVY);
-		configure();
+	public TrenchHeavy() {
+		kitType = TrenchKits.HEAVY;
 		denseAxe = new DenseAxe();
 		armadilloShell = new ArmadilloShell();
 	}
@@ -38,14 +38,16 @@ public class TrenchHeavy extends TrenchPlayer{
 	{
 		return denseAxe;
 	}
-	
-	public void configure() {
-		/*
-		 * Primary
-		 * Heavy - Dense Axe - Slows player and increases attack
-		 */
+
+	/*
+	 * Primary
+	 * Heavy - Dense Axe - Slows player and increases attack
+	 */
+	@Override
+	protected void equipPrimary(Player p) {
+		
 		//Create Axe
-		primary = new ItemStack(Material.IRON_AXE, 1);
+		ItemStack primary = new ItemStack(Material.IRON_AXE, 1);
 		
 		//Set axe name
 		ItemMeta pMetaData = primary.getItemMeta();
@@ -57,11 +59,18 @@ public class TrenchHeavy extends TrenchPlayer{
 		
 		primary.setItemMeta(pMetaData);
 		
-		/*
-		 * Secondary
-		 * Heavy - Armadillo Shell - Slows, fatigues player increase defense
-		 */
-		secondary = new ItemStack(Material.SHULKER_SHELL, 1);
+		p.getInventory().setItem(0, primary);
+		
+	}
+
+	/*
+	 * Secondary
+	 * Heavy - Armadillo Shell - Slows, fatigues player increase defense
+	 */
+	@Override
+	protected void equipSecondary(Player p) {
+		
+		ItemStack secondary = new ItemStack(Material.SHULKER_SHELL, 1);
 		
 		ItemMeta sMetaData = secondary.getItemMeta();
 		sMetaData.setDisplayName("Armadillo Shell");
@@ -72,13 +81,20 @@ public class TrenchHeavy extends TrenchPlayer{
 		
 		secondary.setItemMeta(sMetaData);
 		
-		/*
-		 * Assorted Inventory
-		 */
+		p.getInventory().setItem(1, secondary);
+		
+	}
+
+	/*
+	 * Assorted Inventory
+	 */
+	@Override
+	protected void equipGenerics(Player p) {
+		
 		//Food
-		bread = new ItemStack(Material.BREAD, 32);
+		ItemStack bread = new ItemStack(Material.BREAD, 32);
 		//Create PotionMeta ItemStack to set type of Instant Health 2. Overrides existing effects (true)
-		health = new ItemStack(Material.POTION, 2);
+		ItemStack health = new ItemStack(Material.POTION, 2);
 		ItemMeta healthMeta = health.getItemMeta();
 		healthMeta.setDisplayName("Instant Health");
 		PotionMeta pHealthMeta = (PotionMeta) healthMeta;
@@ -88,14 +104,21 @@ public class TrenchHeavy extends TrenchPlayer{
 		
 		health.setItemMeta(healthMeta);
 		
-		/*
-		 * Armor Set:
-		 * Iron Helmet
-		 * Iron Chestplate : Projectile Protection 1
-		 * Leather Leggings
-		 * Leather Boots
-		 */
-		armor = new ItemStack[4];
+		p.getInventory().setItem(7, bread);
+		p.getInventory().setItem(8, (ItemStack) health);
+	}
+
+	/*
+	 * Armor Set:
+	 * Iron Helmet
+	 * Iron Chestplate : Projectile Protection 1
+	 * Leather Leggings
+	 * Leather Boots
+	 */
+	@Override
+	protected void equipArmor(Player p) {
+		
+		ItemStack[] armor = new ItemStack[4];
 		armor[3] = new ItemStack(Material.IRON_HELMET,1);
 		
 		armor[2] = new ItemStack(Material.IRON_CHESTPLATE,1);
@@ -107,6 +130,9 @@ public class TrenchHeavy extends TrenchPlayer{
 		ItemMeta enchantMeta = armor[2].getItemMeta();
 		enchantMeta.addEnchant(Enchantment.PROTECTION_PROJECTILE, 1, true);
 		armor[2].setItemMeta(enchantMeta);
+		
+		p.getInventory().setArmorContents(armor);
+		
 	}
 
 }
