@@ -62,7 +62,7 @@ public class TrenchPvP extends JavaPlugin{
 		getServer().getPluginManager().registerEvents(new RightClickMediGun(), this);
 		getServer().getPluginManager().registerEvents(new ArmaClickListener(), this);
 		getServer().getPluginManager().registerEvents(new DenseClickListener(), this);
-=======
+
 		getServer().getPluginManager().registerEvents(new QuitGameListen(), this);
 	
 		if(this.getConfig().getBoolean("classes.medic")) {
