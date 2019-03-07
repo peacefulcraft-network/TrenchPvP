@@ -14,21 +14,21 @@ import org.bukkit.potion.PotionEffectType;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeam;
 
-public class TrenchDemoman extends TrenchPlayer{
+public class TrenchDemoman extends TrenchKit{
 
-	public TrenchDemoman(Player userIn, TrenchTeam team){
-		super(userIn, team, TrenchClass.DEMOMAN);
-		configure();
+	public TrenchDemoman() {
+		kitType = TrenchKits.DEMOMAN;
 	}
-	public void configure() {
-	//Primary///////////////////////////////////////
-		/*Demoman - Grenade Launcher - Launches grenades(FireWork Charges x 16) that bounce and explode on impact
-		 * --Handled by GrenadeLauncher(class)
-		 * 
-		 *
-		 */
+	
+	/*Demoman - Grenade Launcher - Launches grenades(FireWork Charges x 16) that bounce and explode on impact
+	 * --Handled by GrenadeLauncher(class)
+	 * 
+	 *
+	 */
+	@Override
+	protected void equipPrimary(Player p) {
 		//Create Bow / give enchantments
-		primary = new ItemStack(Material.QUARTZ, 1);
+		ItemStack primary = new ItemStack(Material.QUARTZ, 1);
 		
 		//Get metadata / set bow name
 		ItemMeta pMetaData = primary.getItemMeta();
@@ -40,7 +40,7 @@ public class TrenchDemoman extends TrenchPlayer{
 		//Comment
 		primary.setItemMeta(pMetaData);
 		
-		primaryUtil = new ItemStack(Material.FIREWORK_ROCKET, 16);//give arrows for syringe gun
+		ItemStack primaryUtil = new ItemStack(Material.FIREWORK_ROCKET, 16);//give arrows for syringe gun
 		pMetaData = primaryUtil.getItemMeta();
 		pMetaData.setDisplayName("Grenades");
 
@@ -48,20 +48,41 @@ public class TrenchDemoman extends TrenchPlayer{
 		pMetaData.setLore(pDesc);
 		
 		primaryUtil.setItemMeta(pMetaData);
-	//Secondary///////////////////////////////////////////
-		/*Demoman - Stick Bomb Launcher - Launches Sticky Bombs (Fire Charges) On land, turns into pressure plate that explodes when right click with launcher
-		 *--Handled by StickyLauncher(class)
-		 */
-		secondary = new ItemStack(Material.NETHER_BRICK, 1);
+		
+		p.getInventory().setItem(0, primary);
+		p.getInventory().setItem(2, primaryUtil);
+	}
+	
+	/*Demoman - Stick Bomb Launcher - Launches Sticky Bombs (Fire Charges) On land, turns into pressure plate that explodes when right click with launcher
+	 *--Handled by StickyLauncher(class)
+	 */
+	@Override
+	protected void equipSecondary(Player p) {
+		
+		ItemStack secondary = new ItemStack(Material.NETHER_BRICK, 1);
 		ItemMeta sMeta = secondary.getItemMeta();
 		sMeta.setDisplayName("Sticky Bomb Launcher.");
 		secondary.setItemMeta(sMeta);
 		
+		ItemStack stickyAmo = new ItemStack(Material.LEGACY_FIREBALL, 12);
+		ItemMeta sAMeta = stickyAmo.getItemMeta();
+		sAMeta.setDisplayName("Sticky Bombs");
+		
+		stickyAmo.setItemMeta(sAMeta);
+		
+		p.getInventory().setItem(3, stickyAmo);
+		p.getInventory().setItem(1, secondary);
+		
+	}
+	
+	@Override
+	protected void equipGenerics(Player p) {
+		
 		//Bread for food
-		bread = new ItemStack(Material.BREAD, 32);
+		ItemStack bread = new ItemStack(Material.BREAD, 32);
 		
 		//Create PotionMeta ItemStack to set type of Instant Health 2. Overrides existing effects (true)
-		health = new ItemStack(Material.POTION, 1);
+		ItemStack health = new ItemStack(Material.POTION, 1);
 		ItemMeta healthMeta = health.getItemMeta();
 		healthMeta.setDisplayName("Instant Health");
 		PotionMeta pHealthMeta = (PotionMeta) healthMeta;
@@ -70,14 +91,20 @@ public class TrenchDemoman extends TrenchPlayer{
 		pHealthMeta.addCustomEffect(instantHealth, true);
 		
 		health.setItemMeta(healthMeta);
-
-	//Armor///////////////////////////////////////////////	
-		/*Leather Helment
-		 * Leather Chestplate : Projectile Protection 1
-		 * Leather Leggings
-		 * Leather Boots
-		 */
-		armor = new ItemStack[4];
+		p.getInventory().setItem(7, bread);
+		p.getInventory().setItem(8, (ItemStack) health);
+		
+	}
+	
+	/*Leather Helment
+	 * Leather Chestplate : Projectile Protection 1
+	 * Leather Leggings
+	 * Leather Boots
+	 */
+	@Override
+	protected void equipArmor(Player p) {
+		
+		ItemStack[] armor = new ItemStack[4];
 		armor[3] = new ItemStack(Material.LEATHER_HELMET,1);
 		
 		armor[2] = new ItemStack(Material.LEATHER_CHESTPLATE,1);
@@ -87,15 +114,7 @@ public class TrenchDemoman extends TrenchPlayer{
 		armor[1].addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 1);
 		
 		armor[0] = new ItemStack(Material.LEATHER_BOOTS, 1);
-	}
-
-	public void giveCustom(){
-		ItemStack stickyAmo = new ItemStack(Material.LEGACY_FIREBALL, 12);
-		ItemMeta sAMeta = stickyAmo.getItemMeta();
-		sAMeta.setDisplayName("Sticky Bombs");
+		p.getInventory().setArmorContents(armor);
 		
-		stickyAmo.setItemMeta(sAMeta);
-		
-		user.getInventory().setItem(3, stickyAmo);
 	}
 }

@@ -3,53 +3,28 @@ package net.peacefulcraft.trenchpvp.gamehande.player;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchClass;
+import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKit;
+import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
 
 public class TrenchPlayer{
-	protected Player user;
+	private Player user;
 		public Player getPlayer() {return this.user;}
 	
-	protected TrenchTeam playerTeam;
-		public TrenchTeam getPlayerTeam() {return this.playerTeam;}
+	private TrenchTeam team;
+		public TrenchTeam getPlayerTeam() {return this.team;}
 	
-	protected TrenchClass playerClass;
-		public void setPlayerClass(TrenchClass playerClass){this.playerClass = playerClass;}	
-		public TrenchClass getPlayerClass(){return playerClass;}
+	protected TrenchKits kitType;
+		public TrenchKits getKitType() {return kitType;}
 	
-	
-	public TrenchPlayer(Player userIn, TrenchTeam team, TrenchClass classSelection){
-		user = userIn;
-		playerTeam = team;
-		playerClass = classSelection;
+	public TrenchPlayer(Player user, TrenchTeam team){
+		this.user = user;
+		this.team = team;
+		this.kitType = TrenchKits.UNASSIGNED;
 	}
 	
-//////Class Inventory////////////////////////////////////
-	protected ItemStack primary;
-	protected ItemStack primaryUtil;
-	
-	protected ItemStack secondary;
-	
-	protected ItemStack bread;
-	protected ItemStack  health;
-	
-	protected ItemStack[] armor = new ItemStack[4];
-		
-	public void giveInvent(){		
-		user.getInventory().setItem(0, primary);
-		user.getInventory().setItem(2, primaryUtil);
-		
-		user.getInventory().setItem(1, secondary);
-		
-		user.getInventory().setItem(7, bread);
-		user.getInventory().setItem(8, (ItemStack) health);
-		
-		user.getInventory().setArmorContents(armor);
-		giveCustom();
-		user.updateInventory();
+	public void equipKit(TrenchKit k) {
+		this.kitType = k.getKitType();
+		k.equip(this);
 	}
 	
-	public void giveCustom(){
-		//Defined by child class. Used to give custom items that may not fit in the above template
-		//Items are defined and given to the player directly
-	}
 }

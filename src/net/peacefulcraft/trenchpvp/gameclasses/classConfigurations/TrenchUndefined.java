@@ -2,11 +2,33 @@ package net.peacefulcraft.trenchpvp.gameclasses.classConfigurations;
 
 import org.bukkit.entity.Player;
 
-import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
-import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeam;
+public class TrenchUndefined extends TrenchKit{
+	
+	public TrenchUndefined() {
+		kitType = TrenchKits.UNASSIGNED;
+	}
+	
+	@Override
+	protected void equipPrimary(Player p) {
+		// TODO Auto-generated method stub
+		
+	}
 
-public class TrenchUndefined extends TrenchPlayer{
-	public TrenchUndefined(Player userIn, TrenchTeam team){
-		super(userIn, team, TrenchClass.UNASSIGNED);
+	@Override
+	protected void equipSecondary(Player p) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void equipGenerics(Player p) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void equipArmor(Player p) {
+		// TODO Auto-generated method stub
+		
 	}
 }
