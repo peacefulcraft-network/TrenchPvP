@@ -14,6 +14,7 @@ import org.bukkit.util.Vector;
 
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchClass;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchMedic;
+import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeam;
 
@@ -28,23 +29,21 @@ public class RightClickMediGun implements Listener {
 		if(!(e.getPlayer().getItemInHand().getType() == Material.REDSTONE_BLOCK)) return;
 		if(!(e.getPlayer().getItemInHand().getItemMeta().getDisplayName() == "Medi Gun")) return;
 
-		//Get trenchplayer reference location in array
-		int sendIndex = TrenchPlayer.findTrenchPlayer(e.getPlayer());
-		int recIndex = TrenchPlayer.findTrenchPlayer((Player)e.getRightClicked());
-		
-		//Check to make sure both players in trench
-		if(sendIndex == -1) return;
-		if(recIndex ==  -1) return;
-
-		//Get TrenchPlayer reference
-		TrenchPlayer sender = TrenchTeam.trenchPlayers[sendIndex];
-		TrenchPlayer receive = TrenchTeam.trenchPlayers[recIndex];
+		TrenchPlayer healer, healTarget;
+		try {
+			//Get trenchplayer reference location in array
+			healer = TeamManager.findTrenchPlayer(e.getPlayer());
+			healTarget = TeamManager.findTrenchPlayer((Player)e.getRightClicked());
+		} catch (RuntimeException x) {
+			//One or both players not in Trench so we don't care
+			return;
+		}
 		
 		//Check if sender is medic
-		if(!(sender.getPlayerClass() == TrenchClass.MEDIC)) return;
+		if(!(healer.getPlayerClass() == TrenchClass.MEDIC)) return;
 
 		//Check on same team
-		if(!(sender.getPlayerTeam() == receive.getPlayerTeam())) return;
+		if(!(healer.getPlayerTeam() == healTarget.getPlayerTeam())) return;
 
 		//MediGun medigun = ((TrenchMedic) sender).getMediGun();
 		

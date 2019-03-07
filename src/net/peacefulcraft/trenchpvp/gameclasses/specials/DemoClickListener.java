@@ -7,22 +7,25 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchClass;
+import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeam;
 
 public class DemoClickListener implements Listener {
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent e){
-		Player user = e.getPlayer();
-		if(!(user.getItemInHand().getType() == Material.NETHER_BRICK)) return;
-		if(!(user.getItemInHand().getItemMeta().getDisplayName().equals("Grenade Launcher"))) return;
+		Player p = e.getPlayer();
+		if(!(p.getItemInHand().getType() == Material.NETHER_BRICK)) return;
+		if(!(p.getItemInHand().getItemMeta().getDisplayName().equals("Grenade Launcher"))) return;
 		
-		int loc = TrenchPlayer.findTrenchPlayer(user);
-		if(loc == -1) return;
+		try {
 		
-		TrenchPlayer player = TrenchTeam.trenchPlayers[loc];
-		if(!(player.getPlayerClass() == TrenchClass.DEMOMAN)) return;
+			TrenchPlayer player = TeamManager.findTrenchPlayer(p);
+			if(!(player.getPlayerClass() == TrenchClass.DEMOMAN)) return;
 		
+		}catch(RuntimeException x) {
+			return;
+		}
 		
 	}
 }
