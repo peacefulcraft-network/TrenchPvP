@@ -21,14 +21,14 @@ public class tppDebug implements CommandExecutor{
 			for(TrenchPlayer index: TrenchTeam.trenchPlayers){
 				if(index != null){
 					if(index.getPlayerTeam() == TrenchTeam.BLUE)
-						user.sendMessage(index.getPlayerReference().getDisplayName() + ":" +index.getPlayerClass());
+						user.sendMessage(index.getPlayer().getDisplayName() + ":" +index.getPlayerClass());
 				}	
 			}
 			user.sendMessage("Red:");
 			for(TrenchPlayer index: TrenchTeam.trenchPlayers){
 				if(index != null){
 					if(index.getPlayerTeam() == TrenchTeam.RED)
-						user.sendMessage(index.getPlayerReference().getDisplayName() + ":" +index.getPlayerClass());
+						user.sendMessage(index.getPlayer().getDisplayName() + ":" +index.getPlayerClass());
 				}	
 			}
 			return true;

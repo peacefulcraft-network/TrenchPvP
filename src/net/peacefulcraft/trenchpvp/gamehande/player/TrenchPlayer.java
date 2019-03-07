@@ -6,27 +6,21 @@ import org.bukkit.inventory.ItemStack;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchClass;
 
 public class TrenchPlayer{
-	private int[] playerScore;
 	protected Player user;
-	private TrenchTeam playerTeam;
-	private TrenchClass playerClass;
-	private int ID;
+		public Player getPlayer() {return this.user;}
+	
+	protected TrenchTeam playerTeam;
+		public TrenchTeam getPlayerTeam() {return this.playerTeam;}
+	
+	protected TrenchClass playerClass;
+		public void setPlayerClass(TrenchClass playerClass){this.playerClass = playerClass;}	
+		public TrenchClass getPlayerClass(){return playerClass;}
+	
 	
 	public TrenchPlayer(Player userIn, TrenchTeam team, TrenchClass classSelection){
 		user = userIn;
 		playerTeam = team;
-		playerScore = new int[3];//score, kills, deaths
 		playerClass = classSelection;
-	}
-	
-	public static int findTrenchPlayer(Player user){
-		for(int i=0;i<TrenchTeam.trenchPlayers.length; i++){
-			if(TrenchTeam.trenchPlayers[i] != null){
-				if(TrenchTeam.trenchPlayers[i].getPlayerReference() == user)
-					return i;
-			}
-		}
-		return -1;
 	}
 	
 //////Class Inventory////////////////////////////////////
@@ -57,20 +51,5 @@ public class TrenchPlayer{
 	public void giveCustom(){
 		//Defined by child class. Used to give custom items that may not fit in the above template
 		//Items are defined and given to the player directly
-	}
-//////////////////////////////////////////////////////
-	public void setPlayerClass(TrenchClass classSelection){
-		playerClass = classSelection;
-	}	
-	
-	public TrenchClass getPlayerClass(){
-		return playerClass;
-	}
-	
-	public Player getPlayerReference(){
-		return user;
-	}
-	public TrenchTeam getPlayerTeam(){
-		return playerTeam;
 	}
 }
