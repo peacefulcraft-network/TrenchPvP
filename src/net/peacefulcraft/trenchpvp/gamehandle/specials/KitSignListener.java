@@ -14,6 +14,7 @@ import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchHeavy;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchMedic;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchSniper;
+import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchSpy;
 import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeam;
@@ -99,7 +100,11 @@ public class KitSignListener implements Listener {
 							return;
 							
 						case SPY:
-							
+							if(TrenchPvP.getTrenchCFG().isSpyEnabled()) {
+								
+								t.equipKit(new TrenchSpy());
+								return;
+							}
 						default:
 							
 						}

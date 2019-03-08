@@ -11,8 +11,6 @@ import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import net.peacefulcraft.trenchpvp.gameclasses.specials.ArmadilloShell;
-import net.peacefulcraft.trenchpvp.gameclasses.specials.DenseAxe;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
 
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
@@ -20,23 +18,9 @@ import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeam;
 
 public class TrenchHeavy extends TrenchKit{
 	
-	private DenseAxe denseAxe;
-	private ArmadilloShell armadilloShell;
 	
 	public TrenchHeavy() {
 		kitType = TrenchKits.HEAVY;
-		denseAxe = new DenseAxe();
-		armadilloShell = new ArmadilloShell();
-	}
-	
-	public ArmadilloShell getArmaShell()
-	{
-		return armadilloShell;
-	}
-	
-	public DenseAxe getDenseAxe()
-	{
-		return denseAxe;
 	}
 
 	/*
