@@ -59,19 +59,7 @@ public class TrenchDemoman extends TrenchKit{
 	@Override
 	protected void equipSecondary(Player p) {
 		
-		ItemStack secondary = new ItemStack(Material.NETHER_BRICK, 1);
-		ItemMeta sMeta = secondary.getItemMeta();
-		sMeta.setDisplayName("Sticky Bomb Launcher.");
-		secondary.setItemMeta(sMeta);
 		
-		ItemStack stickyAmo = new ItemStack(Material.LEGACY_FIREBALL, 12);
-		ItemMeta sAMeta = stickyAmo.getItemMeta();
-		sAMeta.setDisplayName("Sticky Bombs");
-		
-		stickyAmo.setItemMeta(sAMeta);
-		
-		p.getInventory().setItem(3, stickyAmo);
-		p.getInventory().setItem(1, secondary);
 		
 	}
 	

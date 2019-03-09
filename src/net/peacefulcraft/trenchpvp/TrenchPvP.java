@@ -11,7 +11,9 @@ import net.peacefulcraft.trenchpvp.commands.trLeave;
 import net.peacefulcraft.trenchpvp.gameclasses.specials.ArmaClickListener;
 import net.peacefulcraft.trenchpvp.gameclasses.specials.DenseClickListener;
 import net.peacefulcraft.trenchpvp.gameclasses.specials.DoubleJumpListener;
+import net.peacefulcraft.trenchpvp.gameclasses.specials.FlamethrowerListener;
 import net.peacefulcraft.trenchpvp.gameclasses.specials.HiddenBladeListener;
+import net.peacefulcraft.trenchpvp.gameclasses.specials.InfernoTrapListener;
 import net.peacefulcraft.trenchpvp.gameclasses.specials.RightClickMediGun;
 import net.peacefulcraft.trenchpvp.gameclasses.specials.SlimSlicerListener;
 import net.peacefulcraft.trenchpvp.gameclasses.specials.SpeedShotListener;
@@ -74,6 +76,8 @@ public class TrenchPvP extends JavaPlugin{
 		getServer().getPluginManager().registerEvents(new SpeedShotListener(), this);
 		getServer().getPluginManager().registerEvents(new DoubleJumpListener(), this);
 		getServer().getPluginManager().registerEvents(new SlimSlicerListener(), this);
+		getServer().getPluginManager().registerEvents(new FlamethrowerListener(), this);
+		getServer().getPluginManager().registerEvents(new InfernoTrapListener(), this);
 
 	
 		if(this.getConfig().getBoolean("classes.medic")) {
