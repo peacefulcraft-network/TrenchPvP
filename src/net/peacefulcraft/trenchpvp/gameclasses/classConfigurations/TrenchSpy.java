@@ -22,7 +22,7 @@ public class TrenchSpy extends TrenchKit{
 	
 	/*
 	 * Primary
-	 * Spy - Sugar Rush - Raises Health and Speed
+	 * Spy - Hidden Blade - Speed and Invisibility
 	 */
 	@Override
 	protected void equipPrimary(Player p) {
