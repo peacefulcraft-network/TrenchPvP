@@ -28,76 +28,49 @@ import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
 
 public class DoubleJumpListener implements Listener
 {
-	private Set<UUID> players = new HashSet<UUID>();
 	
 	@EventHandler
-    public void join(PlayerJoinEvent e) {
-        Player p = e.getPlayer();
-        TrenchPlayer t;
-		try {
-			t = TeamManager.findTrenchPlayer(p);
-		}catch(RuntimeException x) {
-			return;
-		}
+    public void onPlayerJoin(PlayerJoinEvent e){
+		Player p = e.getPlayer();
 		
-		if(!(t.getKitType() == TrenchKits.SCOUT)) return;
-		
-        p.setAllowFlight(true);
-        p.setFlying(false);
+		p.setAllowFlight(true);
+		p.setFlying(false);
     }
    
     @EventHandler
-    public void setFlyOnJump(PlayerToggleFlightEvent e) {
+    public void onPlayerDoubleJump(PlayerToggleFlightEvent e){
         Player p = e.getPlayer();
+        
+        if(p.getGameMode() == GameMode.CREATIVE || p.getGameMode() == GameMode.SPECTATOR) return;
         
         TrenchPlayer t;
 		try {
 			t = TeamManager.findTrenchPlayer(p);
 		}catch(RuntimeException x) {
+			p.setFlying(false);
+			e.setCancelled(true);			
 			return;
 		}
 		
-		if(!(t.getKitType() == TrenchKits.SCOUT)) return;
+		if(!(t.getKitType() == TrenchKits.SCOUT)) 
+			{	
+				p.setFlying(false);
+				e.setCancelled(true);
+				return;
+			}
 		
-		if(p.getGameMode() == GameMode.CREATIVE || p.getGameMode() == GameMode.SPECTATOR) return;
-		if(p.isFlying()) return;
-		
-		players.add(p.getUniqueId());
-		
-		e.setCancelled(true);
-        
-        p.setAllowFlight(false);
-        p.setFlying(false);
+        if(p.getGameMode() != GameMode.CREATIVE){
+            e.setCancelled(true);
+            Block b = p.getWorld().getBlockAt(p.getLocation().subtract(0,2,0));
+            if(!b.getType().equals(Material.AIR)){
        
-        p.setVelocity(e.getPlayer().getLocation().getDirection().multiply(1.5).setY(1));
-        p.playSound(p.getLocation(), Sound.ENTITY_BAT_TAKEOFF, 1.0f, -5.0f);
-       
-        p.setFallDistance(100);
-    }
-    @EventHandler
-    public void removePlayer(PlayerQuitEvent e) {
-       Player p = e.getPlayer();
-       if (players.contains(p.getUniqueId())) players.remove(p.getUniqueId());
-       
-    }
-    @EventHandler
-    public void onPlayerDamage(EntityDamageEvent e) {
-       
-        if (e.getEntity() instanceof Player && e.getCause() == DamageCause.FALL) {
-           
-            Player p = (Player) e.getEntity();
-           
-            if (players.contains(p.getUniqueId())) {
-               
-                e.setCancelled(true);
-               
-                players.remove(p.getUniqueId());
-               
-                p.setAllowFlight(true);
-               
+                Vector v = new Vector(p.getVelocity().getX(), p.getVelocity().getY(), p.getVelocity().getZ());
+                Vector forward = p.getLocation().getDirection().multiply(0.3);
+                Vector jump = p.getLocation().getDirection().multiply(0.07).setY(1);
+                v.add(forward).add(jump);
+                p.setVelocity(v);
+            	
             }
-           
         }
     }
-    
 }

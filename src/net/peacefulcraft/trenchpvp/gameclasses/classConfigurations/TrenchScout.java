@@ -42,9 +42,9 @@ public class TrenchScout extends TrenchKit {
 		pMetaData.setDisplayName("Sling Shot");
 		primary.setItemMeta(pMetaData);
 		
-		ArrayList<String> pDesc = new ArrayList<String>();
-		pDesc.add("Tag Your Foes to Help Your Team!");
-		pMetaData.setLore(pDesc);
+		ArrayList<String> sDesc = new ArrayList<String>();
+		sDesc.add("Tag Your Foes to Help Your Team!");
+		pMetaData.setLore(sDesc);
 		
 		ItemStack pUtil = new ItemStack(Material.SPECTRAL_ARROW, 32);
 		ItemMeta pUMetaData = pUtil.getItemMeta();
