@@ -16,6 +16,8 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
@@ -77,6 +79,25 @@ public class DoubleJumpListener implements Listener
        Player p = e.getPlayer();
        if (players.contains(p.getUniqueId())) players.remove(p.getUniqueId());
        
+    }
+    @EventHandler
+    public void onPlayerDamage(EntityDamageEvent e) {
+       
+        if (e.getEntity() instanceof Player && e.getCause() == DamageCause.FALL) {
+           
+            Player p = (Player) e.getEntity();
+           
+            if (players.contains(p.getUniqueId())) {
+               
+                e.setCancelled(true);
+               
+                players.remove(p.getUniqueId());
+               
+                p.setAllowFlight(true);
+               
+            }
+           
+        }
     }
     
 }
