@@ -13,7 +13,11 @@ import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchDemoman
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchHeavy;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchMedic;
+import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchPyro;
+import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchScout;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchSniper;
+import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchSoldier;
+import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchSpy;
 import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeam;
@@ -51,8 +55,41 @@ public class KitSignListener implements Listener {
 						String signText = sign.getLine(2).toUpperCase();
 						switch(TrenchKits.valueOf(signText)){//Check which class was selected (based on 3rd line of class sign)
 						case SCOUT:
+
+							if(TrenchPvP.getTrenchCFG().isScoutEnabled()){
+								
+								t.equipKit(new TrenchScout());
+								return;
+							
+							}else
+							
+							e.getPlayer().sendMessage("Sorry, the Scout class is currently not avalible for use. Please select another class.");
+							return;
+							
 						case SOLDIER:
+							
+							if(TrenchPvP.getTrenchCFG().isSoldierEnabled()){
+								
+								t.equipKit(new TrenchSoldier());
+								return;
+							
+							}else
+							
+							e.getPlayer().sendMessage("Sorry, the Soldier class is currently not avalible for use. Please select another class.");
+							return;
+							
 						case PYRO:
+							
+							if(TrenchPvP.getTrenchCFG().isPyroEnabled()){
+								
+								t.equipKit(new TrenchPyro());
+								return;
+							
+							}else
+							
+							e.getPlayer().sendMessage("Sorry, the Pyro class is currently not avalible for use. Please select another class.");
+							return;
+							
 						case DEMOMAN:
 							
 							if(TrenchPvP.getTrenchCFG().isDemomanEnabled()){
@@ -99,6 +136,14 @@ public class KitSignListener implements Listener {
 							return;
 							
 						case SPY:
+							if(TrenchPvP.getTrenchCFG().isSpyEnabled()) {
+								
+								t.equipKit(new TrenchSpy());
+								return;
+							}
+							
+							e.getPlayer().sendMessage("Sorry, the Medic class is currently not avalible for use. Please select another class");
+							return;
 							
 						default:
 							

@@ -10,7 +10,14 @@ import net.peacefulcraft.trenchpvp.commands.trJoin;
 import net.peacefulcraft.trenchpvp.commands.trLeave;
 import net.peacefulcraft.trenchpvp.gameclasses.specials.ArmaClickListener;
 import net.peacefulcraft.trenchpvp.gameclasses.specials.DenseClickListener;
+import net.peacefulcraft.trenchpvp.gameclasses.specials.DoubleJumpListener;
+import net.peacefulcraft.trenchpvp.gameclasses.specials.FlamethrowerListener;
+import net.peacefulcraft.trenchpvp.gameclasses.specials.HiddenBladeListener;
+import net.peacefulcraft.trenchpvp.gameclasses.specials.InfernoTrapListener;
 import net.peacefulcraft.trenchpvp.gameclasses.specials.RightClickMediGun;
+import net.peacefulcraft.trenchpvp.gameclasses.specials.SlimSlicerListener;
+import net.peacefulcraft.trenchpvp.gameclasses.specials.SpeedShotListener;
+import net.peacefulcraft.trenchpvp.gamehande.TrenchScoreboard;
 import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehandle.specials.KitSignListener;
 import net.peacefulcraft.trenchpvp.gamehandle.specials.QuitGameListen;
@@ -70,7 +77,12 @@ public class TrenchPvP extends JavaPlugin{
 		getServer().getPluginManager().registerEvents(new RightClickMediGun(), this);
 		getServer().getPluginManager().registerEvents(new ArmaClickListener(), this);
 		getServer().getPluginManager().registerEvents(new DenseClickListener(), this);
-
+		getServer().getPluginManager().registerEvents(new HiddenBladeListener(), this);
+		getServer().getPluginManager().registerEvents(new SpeedShotListener(), this);
+		getServer().getPluginManager().registerEvents(new DoubleJumpListener(), this);
+		getServer().getPluginManager().registerEvents(new SlimSlicerListener(), this);
+		getServer().getPluginManager().registerEvents(new FlamethrowerListener(), this);
+		getServer().getPluginManager().registerEvents(new InfernoTrapListener(), this);
 
 	
 		if(this.getConfig().getBoolean("classes.medic")) {

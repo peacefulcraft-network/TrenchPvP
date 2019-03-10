@@ -1,6 +1,15 @@
 package net.peacefulcraft.trenchpvp.gameclasses.classConfigurations;
 
+import java.util.ArrayList;
+
+import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.PotionMeta;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeam;
@@ -12,25 +21,82 @@ public class TrenchPyro extends TrenchKit{
 	
 	@Override
 	protected void equipPrimary(Player p) {
-		// TODO Auto-generated method stub
+		ItemStack primary = new ItemStack(Material.GOLDEN_AXE);
+		primary.addEnchantment(Enchantment.FIRE_ASPECT, 2);
+		
+		ItemMeta pMetaData = primary.getItemMeta();
+		pMetaData.setDisplayName("Flamethrower");
+		
+		ArrayList<String> pDesc = new ArrayList<String>();
+		pDesc.add("Hold Right Click to Shoot Flames!");
+		pMetaData.setLore(pDesc);
+		
+		primary.setItemMeta(pMetaData);
+		
+		p.getInventory().setItem(0, primary);
 		
 	}
 
 	@Override
 	protected void equipSecondary(Player p) {
-		// TODO Auto-generated method stub
+		ItemStack secondary = new ItemStack(Material.TRIPWIRE_HOOK, 1);
+		ItemMeta sMeta = secondary.getItemMeta();
+		sMeta.setDisplayName("Inferno Trap Detonator");
+		
+		ArrayList<String> sDesc = new ArrayList<String>();
+		sDesc.add("Right Click to Detonate Inferno Traps!");
+		sMeta.setLore(sDesc);
+		
+		secondary.setItemMeta(sMeta);
+		
+		ItemStack trapAmmo = new ItemStack(Material.LIGHT_WEIGHTED_PRESSURE_PLATE, 5);
+		ItemMeta tAMeta = trapAmmo.getItemMeta();
+		tAMeta.setDisplayName("Inferno Trap Detonator");
+		
+		ArrayList<String> aDesc = new ArrayList<String>();
+		aDesc.add("Can Only Place 5 at a Time! Detonate to Get More!");
+		tAMeta.setLore(aDesc);
+		
+		trapAmmo.setItemMeta(tAMeta);
+		
+		p.getInventory().setItem(1, secondary);
+		p.getInventory().setItem(2, trapAmmo);
 		
 	}
 
 	@Override
 	protected void equipGenerics(Player p) {
-		// TODO Auto-generated method stub
+		//Bread for food
+				ItemStack bread = new ItemStack(Material.BREAD, 32);
+				
+				//Create PotionMeta ItemStack to set type of Instant Health 2. Overrides existing effects (true)
+				ItemStack health = new ItemStack(Material.POTION, 1);
+				ItemMeta healthMeta = health.getItemMeta();
+				healthMeta.setDisplayName("Instant Health");
+				PotionMeta pHealthMeta = (PotionMeta) healthMeta;
+				
+				PotionEffect instantHealth = new PotionEffect(PotionEffectType.HEAL, 1, 2);
+				pHealthMeta.addCustomEffect(instantHealth, true);
+				
+				health.setItemMeta(healthMeta);
+				p.getInventory().setItem(7, bread);
+				p.getInventory().setItem(8, (ItemStack) health);
 		
 	}
 
 	@Override
 	protected void equipArmor(Player p) {
-		// TODO Auto-generated method stub
+		ItemStack[] armor = new ItemStack[4];
+		armor[3] = new ItemStack(Material.IRON_HELMET,1);
+		
+		armor[2] = new ItemStack(Material.LEATHER_CHESTPLATE,1);
+		armor[2].addEnchantment(Enchantment.PROTECTION_FIRE, 2);
+		
+		armor[1] = new ItemStack(Material.LEATHER_LEGGINGS, 1);
+		armor[1].addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 1);
+		
+		armor[0] = new ItemStack(Material.LEATHER_BOOTS, 1);
+		p.getInventory().setArmorContents(armor);
 		
 	}
 	
