@@ -30,7 +30,7 @@ public class trJoin implements CommandExecutor{
 			
 			if(p.hasPermission("tpp.player")){
 				
-				TrenchPlayer t = TeamManager.joinTeam(p);
+				TrenchPlayer t = TrenchPvP.getTeamManager().joinTeam(p);
 				if(t.getPlayerTeam() == TrenchTeam.BLUE)
 					p.sendMessage(TrenchPvP.CMD_PREFIX + ChatColor.RED + "You have joined " + ChatColor.DARK_BLUE + "Blue" + ChatColor.RED + " team!");
 				else

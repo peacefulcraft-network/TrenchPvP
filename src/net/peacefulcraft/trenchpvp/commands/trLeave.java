@@ -21,7 +21,7 @@ public class trLeave implements CommandExecutor{
 				
 				if(p.hasPermission("tpp.player")) {
 					
-					TeamManager.leaveTeam(p);
+					TrenchPvP.getTeamManager().leaveTeam(p);
 					sender.sendMessage("You've left Trench!");
 					return true;
 					
