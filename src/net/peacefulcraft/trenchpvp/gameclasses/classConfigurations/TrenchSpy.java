@@ -30,7 +30,7 @@ public class TrenchSpy extends TrenchKit{
 		//Creates sword
 		ItemStack primary = new ItemStack(Material.GOLDEN_SWORD, 1);
 		ItemMeta enchantMeta = primary.getItemMeta();
-		enchantMeta.addEnchant(Enchantment.KNOCKBACK, 5, true);
+		enchantMeta.addEnchant(Enchantment.KNOCKBACK, 2, true);
 		enchantMeta.addEnchant(Enchantment.DAMAGE_ALL, 2, true);
 		primary.setItemMeta(enchantMeta);
 		//Set name
