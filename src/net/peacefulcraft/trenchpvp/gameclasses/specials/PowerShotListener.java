@@ -77,7 +77,7 @@ public class PowerShotListener implements Listener
 			shotR.addEnchantment(Enchantment.ARROW_DAMAGE, 4);
 			
 			ItemMeta meta = shotR.getItemMeta();
-			meta.setDisplayName("Sniper Rifle Mk.IV");
+			meta.setDisplayName("Component Rifle Mk.IV");
 			shotR.setItemMeta(meta);
 			
 			p.getInventory().setItem(itemIndex, shotR);

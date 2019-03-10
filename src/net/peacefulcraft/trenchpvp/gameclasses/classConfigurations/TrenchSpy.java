@@ -39,6 +39,8 @@ public class TrenchSpy extends TrenchKit{
 		//Lore for item
 		ArrayList<String> pDesc = new ArrayList<String>();
 		pDesc.add("Right Click to Sneak Fast!");
+		pDesc.add("Ability Time: 8 Seconds");
+		pDesc.add("Cooldown Time: 16 Seconds");
 		pMetaData.setLore(pDesc);
 		
 		primary.setItemMeta(pMetaData);
@@ -54,6 +56,8 @@ public class TrenchSpy extends TrenchKit{
 		
 		ArrayList<String> sDesc = new ArrayList<String>();
 		sDesc.add("Right Click Your Teammate to Give Them a Boost!");
+		sDesc.add("Ability Time: 7 Seconds");
+		sDesc.add("Cooldown Time: 16 Seconds");
 		sMetaData.setLore(sDesc);
 		
 		secondary.setItemMeta(sMetaData);

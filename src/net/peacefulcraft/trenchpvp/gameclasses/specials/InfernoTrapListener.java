@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -16,7 +17,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitScheduler;
 
+import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
 import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
@@ -89,12 +92,17 @@ public class InfernoTrapListener implements Listener
 			
 			ArrayList<Location> traps = trapCord.get(p.getUniqueId());
 			//Iterates through ArrayList to detonate each trap.
-			//TODO: Add Runnable? to delay each detonation by X amount.
 			for(Location temp : traps) {
-				if(temp.getBlock().getType() == Material.LIGHT_WEIGHTED_PRESSURE_PLATE) {
-					temp.getWorld().createExplosion(temp.getX(), temp.getY(), temp.getZ(), 2.0f, true, false);
-					temp.getBlock().setType(Material.AIR);
-				}
+				BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
+	            scheduler.scheduleSyncDelayedTask(TrenchPvP.getPluginInstance() , new Runnable() {
+	                public void run() {
+	                	if(temp.getBlock().getType() == Material.LIGHT_WEIGHTED_PRESSURE_PLATE) {
+	    					temp.getWorld().createExplosion(temp.getX(), temp.getY(), temp.getZ(), 2.0f, true, false);
+	    					temp.getBlock().setType(Material.AIR);
+	    				}
+	                }
+	            }, 20);
+				
 			}	
 		}
 	}

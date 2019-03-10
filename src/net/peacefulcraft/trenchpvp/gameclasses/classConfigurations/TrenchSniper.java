@@ -35,7 +35,7 @@ public class TrenchSniper extends TrenchKit{
 		
 		//Get metadata / set bow name
 		ItemMeta pMetaData = primary.getItemMeta();
-		pMetaData.setDisplayName("Sniper Riffle Mk.II");
+		pMetaData.setDisplayName("Component Rifle Mk.II");
 		ArrayList<String> pDesc = new ArrayList<String>();
 		pDesc.add("Equipped With Upgradable Components!");
 		pMetaData.setLore(pDesc);

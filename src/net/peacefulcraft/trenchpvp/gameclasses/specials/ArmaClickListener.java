@@ -20,7 +20,7 @@ import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
 public class ArmaClickListener implements Listener
 {
 	private HashMap<UUID, Long> cooldown = new HashMap<UUID, Long>();//Creating cooldown
-	private final int COOLDOWN_TIME = 10;
+	private final int COOLDOWN_TIME = 14;
 	
 	@EventHandler
 	public void onRightClick(PlayerInteractEvent e)
