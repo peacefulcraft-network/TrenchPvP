@@ -4,6 +4,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
 
+import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 
 public class QuitGameListen implements Listener {
@@ -12,7 +13,7 @@ public class QuitGameListen implements Listener {
 		
 		try {
 			TeamManager.findTrenchPlayer(e.getPlayer());
-			TeamManager.leaveTeam(e.getPlayer());
+			TrenchPvP.getTeamManager().leaveTeam(e.getPlayer());
 		}catch(RuntimeException x) {
 			return;
 		}

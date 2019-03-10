@@ -11,7 +11,7 @@ import net.peacefulcraft.trenchpvp.commands.trLeave;
 import net.peacefulcraft.trenchpvp.gameclasses.specials.ArmaClickListener;
 import net.peacefulcraft.trenchpvp.gameclasses.specials.DenseClickListener;
 import net.peacefulcraft.trenchpvp.gameclasses.specials.RightClickMediGun;
-import net.peacefulcraft.trenchpvp.gamehande.TrenchScoreboard;
+import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehandle.specials.KitSignListener;
 import net.peacefulcraft.trenchpvp.gamehandle.specials.QuitGameListen;
 import net.peacefulcraft.trenchpvp.gamehandle.specials.joinGameSign;
@@ -21,11 +21,14 @@ public class TrenchPvP extends JavaPlugin{
 	public static final String CMD_PREFIX = ChatColor.DARK_RED + "[" + ChatColor.RED + "Trench" + ChatColor.DARK_RED + "]";
 	
 	public static boolean gameRunning = false;
+	private static TeamManager teamManager;
+		public static TeamManager getTeamManager() {return teamManager;}
 	
 	private static TrenchPvP main;
+		public static TrenchPvP getPluginInstance(){return main;}
+	
 	private static TrenchConfig config;
-	//Handle scoreboard events to run through console
-	public static final TrenchScoreboard TEAMS = new TrenchScoreboard();
+		public static TrenchConfig getTrenchCFG() {return config;}
 	
 	public TrenchPvP(){
 		main = this;
@@ -41,6 +44,7 @@ public class TrenchPvP extends JavaPlugin{
 		this.loadEventListners();
 		
 		TrenchPvP.gameRunning = true;
+		teamManager = new TeamManager();
 		this.getLogger().info("[TPP]Trench PvP Alpha 0.1 has been enabled!");
 	}
 	
@@ -73,12 +77,5 @@ public class TrenchPvP extends JavaPlugin{
 			getServer().getPluginManager().registerEvents(new RightClickMediGun(), this);
 		}
 	}
-	
-	public static TrenchPvP getPluginInstance(){
-		return main;
-	}
-	
-	public static TrenchConfig getTrenchCFG() {
-		return config;
-	}
+
 }

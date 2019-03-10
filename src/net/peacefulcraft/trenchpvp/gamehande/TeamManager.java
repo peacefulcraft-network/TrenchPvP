@@ -2,7 +2,12 @@ package net.peacefulcraft.trenchpvp.gamehande;
 
 import java.util.ArrayList;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.scoreboard.NameTagVisibility;
+import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.ScoreboardManager;
+import org.bukkit.scoreboard.Team;
 
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
@@ -10,22 +15,36 @@ import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeam;
 
 public class TeamManager {
 	
-	private static ArrayList<TrenchPlayer> players = new ArrayList<TrenchPlayer>();
+	private static ArrayList<TrenchPlayer> players;
 		public static ArrayList<TrenchPlayer> getPlayers(){return players;}
 	
-	//[0]:red, [1]:blue
-	private static int[] teamcounts = {0,0};
+	private static ScoreboardManager sbm;
+	private static Scoreboard sb;
+	private static Team red;
+	private static Team blue;
 	
-	public static TrenchPlayer joinTeam(Player p) {
+	public TeamManager() {
+		players = new ArrayList<TrenchPlayer>();
+		sbm = Bukkit.getScoreboardManager();
+		sb = sbm.getNewScoreboard();
+		
+		red = sb.registerNewTeam("Red");
+			red.setAllowFriendlyFire(false);
+		
+		blue = sb.registerNewTeam("Blue");
+			blue.setAllowFriendlyFire(false);
+	}
+	
+	public TrenchPlayer joinTeam(Player p) {
 		
 		if(getArrayPos(p) != -1) 
 			throw new RuntimeException("Command executor is already playing Trench");
 		
-		if(teamcounts[0] < teamcounts[1]) {
+		if(red.getSize() < blue.getSize()) {
 			
 			//Add to red team
 			TrenchPlayer t = new TrenchPlayer(p, TrenchTeam.RED);
-			teamcounts[0]++;
+			red.addEntry(p.getName());
 			players.add(t);
 			return t;
 			
@@ -33,14 +52,14 @@ public class TeamManager {
 			
 			//Add to blue team
 			TrenchPlayer t = new TrenchPlayer(p, TrenchTeam.BLUE);
-			teamcounts[1]++;
+			blue.addEntry(p.getName());
 			players.add(t);
 			return t;
 		}
 		
 	}
 	
-	public static void leaveTeam(Player p) {
+	public void leaveTeam(Player p) {
 		
 		int target = getArrayPos(p);
 		if(target == -1) {
@@ -48,9 +67,9 @@ public class TeamManager {
 		}
 		
 		if(players.get(target).getPlayerTeam() == TrenchTeam.RED)
-			teamcounts[0]--;
+			red.removeEntry(p.getName());
 		else
-			teamcounts[1]--;
+			blue.removeEntry(p.getName());
 		
 		players.remove(target);
 		
@@ -67,6 +86,10 @@ public class TeamManager {
 	}
 	
 		private static int getArrayPos(Player p) {
+			
+			if(players == null) {
+				throw new NullPointerException("TeamManager not initialized");
+			}
 			
 			for(int i=0; i < players.size(); i++) {
 				if(players.get(i).getPlayer() == p) {
