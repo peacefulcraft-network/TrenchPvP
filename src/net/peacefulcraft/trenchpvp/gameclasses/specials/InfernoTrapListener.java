@@ -23,7 +23,8 @@ import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
 
 public class InfernoTrapListener implements Listener
 {
-	HashMap<UUID,ArrayList<Location>> trapCord = new HashMap<UUID,ArrayList<Location>>();
+	HashMap<UUID,ArrayList<Location>> trapCord = new HashMap<UUID,ArrayList<Location>>(); //HashMap for UUID and Location ArrayList
+	ArrayList<Location> traps = new ArrayList<Location>(); //Creates ArrayList to contain Location of traps.
 	@EventHandler
 	public void trapRightClick(PlayerInteractEvent e)
 	{
@@ -40,7 +41,6 @@ public class InfernoTrapListener implements Listener
 		
 		if(!(t.getKitType() == TrenchKits.PYRO)) return;
 		
-		ArrayList<Location> traps = new ArrayList<Location>();
 		
 		Block lookingBlock = p.getTargetBlock((Set<Material>) null, 4);//Gets block within 4 block range
 		 if (lookingBlock != null && lookingBlock.getType().isBlock() && lookingBlock.getType() != Material.LIGHT_WEIGHTED_PRESSURE_PLATE) {
@@ -49,24 +49,20 @@ public class InfernoTrapListener implements Listener
             	 int itemIndex = p.getInventory().first(Material.LIGHT_WEIGHTED_PRESSURE_PLATE);
             	 if(itemIndex >= 0) {
             		 ItemStack trap = p.getInventory().getItem(itemIndex);
+            		 trapCord.put(p.getUniqueId(), traps);
             		 if(trap.getAmount() <= 1) {
-            			 upBlock.setType(Material.LIGHT_WEIGHTED_PRESSURE_PLATE);
-            			 
-            			 traps.add(upBlock.getLocation());
-            			 trapCord.put(p.getUniqueId(), traps); //Registers trap coords into hashmap
-            			 
+            			 upBlock.setType(Material.LIGHT_WEIGHTED_PRESSURE_PLATE);//"Places" trap
+            			 //Adds location of trap to ArrayList HashMap
+            			 trapCord.get(p.getUniqueId()).add(upBlock.getLocation());
             			 p.getInventory().clear(itemIndex);//Clears item slot
             			 p.sendMessage(ChatColor.RED + "Out of Inferno Traps! Time to Detonate!");
             		 } else {
             			 upBlock.setType(Material.LIGHT_WEIGHTED_PRESSURE_PLATE);
-            			 
-            			 traps.add(upBlock.getLocation());
-            			 trapCord.put(p.getUniqueId(), traps);
-            			 
+            			 //Adds location of trap to ArrayList HashMap
+            			 trapCord.get(p.getUniqueId()).add(upBlock.getLocation());
             			 trap.setAmount(trap.getAmount() - 1);
             		 }
             	 }
-            	 
              }
          }
 	}
@@ -87,19 +83,19 @@ public class InfernoTrapListener implements Listener
 		if(!(t.getKitType() == TrenchKits.PYRO)) return;
 		
 		if(trapCord.containsKey(p.getUniqueId())) {
-			for(Map.Entry<UUID, ArrayList<Location>> entry : trapCord.entrySet()) {
-				UUID key = entry.getKey();
-				ArrayList<Location> traps = entry.getValue();
-				
-				if(key == p.getUniqueId()) {
-					for(Location temp : traps) {
-						if(temp.getBlock().getType() == Material.LIGHT_WEIGHTED_PRESSURE_PLATE) {
-							temp.getWorld().createExplosion(temp.getX(), temp.getY(), temp.getZ(), 2.0f, true, false);
-							temp.getBlock().setType(Material.AIR);
-						}
-					}
+			int itemIndex = p.getInventory().first(Material.LIGHT_WEIGHTED_PRESSURE_PLATE);//Gets amount of traps and slot.
+			ItemStack trap = p.getInventory().getItem(itemIndex);
+			trap.setAmount(5);//Sets traps to 5 after each detonation
+			
+			ArrayList<Location> traps = trapCord.get(p.getUniqueId());
+			//Iterates through ArrayList to detonate each trap.
+			//TODO: Add Runnable? to delay each detonation by X amount.
+			for(Location temp : traps) {
+				if(temp.getBlock().getType() == Material.LIGHT_WEIGHTED_PRESSURE_PLATE) {
+					temp.getWorld().createExplosion(temp.getX(), temp.getY(), temp.getZ(), 2.0f, true, false);
+					temp.getBlock().setType(Material.AIR);
 				}
-			}
+			}	
 		}
 	}
 }

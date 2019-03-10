@@ -26,7 +26,7 @@ public class FlamethrowerListener implements Listener
 	{
 		Player p = e.getPlayer();
 		
-		if(!(p.getInventory().getItemInMainHand().getType() == Material.GOLDEN_AXE)) return;
+		if(!(p.getInventory().getItemInMainHand().getType() == Material.BLAZE_ROD)) return;
 		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Flamethrower"))) return;
 		TrenchPlayer t;
 		try {
@@ -62,7 +62,7 @@ public class FlamethrowerListener implements Listener
             shootSingleFlame(p, playerDirection, particleLocation);
         }
 
-        int fireTimer = 4000;
+        //int fireTimer = 4000;
         
         if (Math.random() < fireChance) { // Light fire to block one fifth of the time
             Block lookingBlock = p.getTargetBlock((Set<Material>) null, 15); // Get target block in 15 block range

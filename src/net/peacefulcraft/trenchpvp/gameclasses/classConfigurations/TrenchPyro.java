@@ -22,18 +22,28 @@ public class TrenchPyro extends TrenchKit{
 	@Override
 	protected void equipPrimary(Player p) {
 		ItemStack primary = new ItemStack(Material.GOLDEN_AXE);
-		primary.addEnchantment(Enchantment.FIRE_ASPECT, 2);
 		
 		ItemMeta pMetaData = primary.getItemMeta();
-		pMetaData.setDisplayName("Flamethrower");
+		pMetaData.setDisplayName("Inferno Axe");
 		
 		ArrayList<String> pDesc = new ArrayList<String>();
-		pDesc.add("Hold Right Click to Shoot Flames!");
+		pDesc.add("Just a Sharp Axe.");
 		pMetaData.setLore(pDesc);
 		
 		primary.setItemMeta(pMetaData);
 		
+		ItemStack pUtil = new ItemStack(Material.BLAZE_ROD);
+		ItemMeta pUMeta = pUtil.getItemMeta();
+		pUMeta.setDisplayName("Flamethrower");
+		
+		ArrayList<String> pUDesc = new ArrayList<String>();
+		pUDesc.add("Right Click to Shoot Flames!");
+		pUMeta.setLore(pUDesc);
+		
+		pUtil.setItemMeta(pUMeta);
+		
 		p.getInventory().setItem(0, primary);
+		p.getInventory().setItem(1, pUtil);
 		
 	}
 
@@ -51,7 +61,7 @@ public class TrenchPyro extends TrenchKit{
 		
 		ItemStack trapAmmo = new ItemStack(Material.LIGHT_WEIGHTED_PRESSURE_PLATE, 5);
 		ItemMeta tAMeta = trapAmmo.getItemMeta();
-		tAMeta.setDisplayName("Inferno Trap Detonator");
+		tAMeta.setDisplayName("Inferno Trap");
 		
 		ArrayList<String> aDesc = new ArrayList<String>();
 		aDesc.add("Can Only Place 5 at a Time! Detonate to Get More!");
@@ -59,8 +69,8 @@ public class TrenchPyro extends TrenchKit{
 		
 		trapAmmo.setItemMeta(tAMeta);
 		
-		p.getInventory().setItem(1, secondary);
-		p.getInventory().setItem(2, trapAmmo);
+		p.getInventory().setItem(2, secondary);
+		p.getInventory().setItem(3, trapAmmo);
 		
 	}
 
