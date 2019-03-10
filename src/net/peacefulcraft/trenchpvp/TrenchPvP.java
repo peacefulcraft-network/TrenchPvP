@@ -17,7 +17,6 @@ import net.peacefulcraft.trenchpvp.gameclasses.specials.InfernoTrapListener;
 import net.peacefulcraft.trenchpvp.gameclasses.specials.RightClickMediGun;
 import net.peacefulcraft.trenchpvp.gameclasses.specials.SlimSlicerListener;
 import net.peacefulcraft.trenchpvp.gameclasses.specials.SpeedShotListener;
-import net.peacefulcraft.trenchpvp.gamehande.TrenchScoreboard;
 import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehandle.specials.KitSignListener;
 import net.peacefulcraft.trenchpvp.gamehandle.specials.QuitGameListen;
