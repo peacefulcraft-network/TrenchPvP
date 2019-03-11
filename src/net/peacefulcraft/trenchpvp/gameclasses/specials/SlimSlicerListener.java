@@ -36,7 +36,7 @@ public class SlimSlicerListener implements Listener
 			if((p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Slim Slicer")))
 			{
 				p.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, 99999, 3));
-				p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 9999, 2));
+				p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 99999, 1));
 			}
 		}
 		else
