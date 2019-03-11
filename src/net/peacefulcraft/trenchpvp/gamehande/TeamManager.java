@@ -3,6 +3,7 @@ package net.peacefulcraft.trenchpvp.gamehande;
 import java.util.ArrayList;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.NameTagVisibility;
 import org.bukkit.scoreboard.Scoreboard;
@@ -26,13 +27,16 @@ public class TeamManager {
 	public TeamManager() {
 		players = new ArrayList<TrenchPlayer>();
 		sbm = Bukkit.getScoreboardManager();
-		sb = sbm.getNewScoreboard();
-		
+		sb = sbm.getMainScoreboard();
+
 		red = sb.registerNewTeam("Red");
 			red.setAllowFriendlyFire(false);
+			red.setColor(ChatColor.RED);
 		
 		blue = sb.registerNewTeam("Blue");
 			blue.setAllowFriendlyFire(false);
+			blue.setColor(ChatColor.BLUE);
+		System.out.println("Teams Initialized");
 	}
 	
 	public TrenchPlayer joinTeam(Player p) {
