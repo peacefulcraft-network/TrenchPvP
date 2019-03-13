@@ -12,7 +12,7 @@ import org.bukkit.scoreboard.Team;
 
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
-import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeam;
+import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeams;
 
 public class TeamManager {
 	
@@ -47,7 +47,7 @@ public class TeamManager {
 		if(red.getSize() < blue.getSize()) {
 			
 			//Add to red team
-			TrenchPlayer t = new TrenchPlayer(p, TrenchTeam.RED);
+			TrenchPlayer t = new TrenchPlayer(p, TrenchTeams.RED);
 			red.addEntry(p.getName());
 			players.add(t);
 			return t;
@@ -55,7 +55,7 @@ public class TeamManager {
 		}else {
 			
 			//Add to blue team
-			TrenchPlayer t = new TrenchPlayer(p, TrenchTeam.BLUE);
+			TrenchPlayer t = new TrenchPlayer(p, TrenchTeams.BLUE);
 			blue.addEntry(p.getName());
 			players.add(t);
 			return t;
@@ -70,7 +70,7 @@ public class TeamManager {
 			throw new RuntimeException("Command executor is not playing Trench");
 		}
 		
-		if(players.get(target).getPlayerTeam() == TrenchTeam.RED)
+		if(players.get(target).getPlayerTeam() == TrenchTeams.RED)
 			red.removeEntry(p.getName());
 		else
 			blue.removeEntry(p.getName());

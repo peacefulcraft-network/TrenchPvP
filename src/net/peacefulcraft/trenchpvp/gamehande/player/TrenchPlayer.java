@@ -10,13 +10,13 @@ public class TrenchPlayer{
 	private Player user;
 		public Player getPlayer() {return this.user;}
 	
-	private TrenchTeam team;
-		public TrenchTeam getPlayerTeam() {return this.team;}
+	private TrenchTeams team;
+		public TrenchTeams getPlayerTeam() {return this.team;}
 	
 	protected TrenchKits kitType;
 		public TrenchKits getKitType() {return kitType;}
 	
-	public TrenchPlayer(Player user, TrenchTeam team){
+	public TrenchPlayer(Player user, TrenchTeams team){
 		this.user = user;
 		this.team = team;
 		this.kitType = TrenchKits.UNASSIGNED;

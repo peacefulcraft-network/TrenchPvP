@@ -16,7 +16,7 @@ import net.peacefulcraft.trenchpvp.gameclasses.specials.DenseAxe;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
 
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
-import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeam;
+import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeams;
 
 public class TrenchHeavy extends TrenchKit{
 	

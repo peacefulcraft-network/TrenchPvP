@@ -9,7 +9,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
 import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
-import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeam;
+import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeams;
 
 public class DemoClickListener implements Listener {
 	@EventHandler

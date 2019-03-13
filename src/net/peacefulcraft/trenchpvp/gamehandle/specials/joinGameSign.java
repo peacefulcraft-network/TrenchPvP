@@ -7,7 +7,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
-import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeam;
+import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeams;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -40,7 +40,7 @@ public class joinGameSign implements Listener {
 				if(p.hasPermission("tpp.player")){
 					
 					TrenchPlayer t = TrenchPvP.getTeamManager().joinTeam(p);
-					if(t.getPlayerTeam() == TrenchTeam.BLUE)
+					if(t.getPlayerTeam() == TrenchTeams.BLUE)
 						p.sendMessage(TrenchPvP.CMD_PREFIX + ChatColor.RED + "You have joined " + ChatColor.DARK_BLUE + "Blue" + ChatColor.RED + " team!");
 					else
 						p.sendMessage(TrenchPvP.CMD_PREFIX + ChatColor.RED + "You have joined " + ChatColor.DARK_RED + "Red" + ChatColor.RED + " team!");

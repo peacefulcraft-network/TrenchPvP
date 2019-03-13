@@ -8,7 +8,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
-import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeam;
+import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeams;
 
 public class TrenchSpy extends TrenchKit{
 	
