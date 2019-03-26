@@ -16,12 +16,13 @@ import org.bukkit.potion.PotionEffectType;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
 import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
+import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeams;
 
 public class ArmaClickListener implements Listener
 {
 	private HashMap<UUID, Long> cooldown = new HashMap<UUID, Long>();//Creating cooldown
 	private final int COOLDOWN_TIME = 14;
-	
+
 	@EventHandler
 	public void onRightClick(PlayerInteractEvent e)
 	{
@@ -39,9 +40,9 @@ public class ArmaClickListener implements Listener
 		}catch(RuntimeException x) {
 			return;
 		}
-		
+
 		if(!(t.getKitType() == TrenchKits.HEAVY)) return;
-		
+
 		//Potion effects
 		if(cooldown.containsKey(p.getUniqueId()))
 		{
@@ -66,7 +67,7 @@ public class ArmaClickListener implements Listener
 			p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 140, 5));
 			p.sendMessage(ChatColor.RED + "Ability is now on cooldown for " + COOLDOWN_TIME + " seconds.");
 		}
-		
+
 	}
 	private boolean canUseAgain(Player player)
 	{

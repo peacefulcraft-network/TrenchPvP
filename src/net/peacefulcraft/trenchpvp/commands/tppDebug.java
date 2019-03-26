@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
-import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeam;
+import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeams;
 
 public class tppDebug implements CommandExecutor{
 
@@ -21,14 +21,14 @@ public class tppDebug implements CommandExecutor{
 			user.sendMessage("Blue:");
 			for(TrenchPlayer index: TeamManager.getPlayers()){
 				if(index != null){
-					if(index.getPlayerTeam() == TrenchTeam.BLUE)
+					if(index.getPlayerTeam() == TrenchTeams.BLUE)
 						user.sendMessage(index.getPlayer().getDisplayName() + ":" +index.getKitType());
 				}	
 			}
 			user.sendMessage("Red:");
-			for(TrenchPlayer index: TrenchTeam.trenchPlayers){
+			for(TrenchPlayer index: TeamManager.getPlayers()){
 				if(index != null){
-					if(index.getPlayerTeam() == TrenchTeam.RED)
+					if(index.getPlayerTeam() == TrenchTeams.RED)
 						user.sendMessage(index.getPlayer().getDisplayName() + ":" +index.getKitType());
 				}	
 			}

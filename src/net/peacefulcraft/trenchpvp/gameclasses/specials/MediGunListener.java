@@ -22,7 +22,7 @@ import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchMedic;
 import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
-import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeam;
+import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeams;
 
 public class MediGunListener implements Listener {
 	private HashMap<UUID, Long> cooldown = new HashMap<UUID, Long>();//Creating cooldown

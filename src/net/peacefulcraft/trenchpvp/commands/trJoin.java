@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
-import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeam;
+import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeams;
 
 public class trJoin implements CommandExecutor{
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -31,7 +31,7 @@ public class trJoin implements CommandExecutor{
 			if(p.hasPermission("tpp.player")){
 				
 				TrenchPlayer t = TrenchPvP.getTeamManager().joinTeam(p);
-				if(t.getPlayerTeam() == TrenchTeam.BLUE)
+				if(t.getPlayerTeam() == TrenchTeams.BLUE)
 					p.sendMessage(TrenchPvP.CMD_PREFIX + ChatColor.RED + "You have joined " + ChatColor.DARK_BLUE + "Blue" + ChatColor.RED + " team!");
 				else
 					p.sendMessage(TrenchPvP.CMD_PREFIX + ChatColor.RED + "You have joined " + ChatColor.DARK_RED + "Red" + ChatColor.RED + " team!");

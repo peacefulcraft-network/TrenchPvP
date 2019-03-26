@@ -20,7 +20,7 @@ import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchSoldier
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchSpy;
 import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
-import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeam;
+import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeams;
 
 public class KitSignListener implements Listener {
 	

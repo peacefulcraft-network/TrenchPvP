@@ -15,6 +15,7 @@ import org.bukkit.potion.PotionEffectType;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
 import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
+import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeams;
 
 public class DenseClickListener implements Listener
 {
@@ -28,16 +29,16 @@ public class DenseClickListener implements Listener
 		//Checks item in main hand is Dense Axe
 		if(!(p.getInventory().getItemInMainHand().getType() == Material.IRON_AXE)) return;
 		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Dense Axe"))) return;
-		
+
 		TrenchPlayer t;
 		try {
 			t = TeamManager.findTrenchPlayer(p);
 		}catch(RuntimeException x) {
 			return;
 		}
-		
+
 		if(!(t.getKitType() == TrenchKits.HEAVY)) return;
-		
+
 		if(cooldown.containsKey(p.getUniqueId()))
 		{
 			long timeLeft = ((cooldown.get(p.getUniqueId())/1000) + COOLDOWN_TIME) - (System.currentTimeMillis()/1000);
@@ -61,7 +62,7 @@ public class DenseClickListener implements Listener
 			p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 80, 3));
 			p.sendMessage(ChatColor.RED + "Ability is now on cooldown for " + COOLDOWN_TIME + " seconds.");
 		}
-		
+
 	}
 	private boolean canUseAgain(Player player)
 	{
@@ -71,4 +72,3 @@ public class DenseClickListener implements Listener
  	}
 
 }
-
