@@ -65,7 +65,7 @@ public class TrenchMedic extends TrenchKit{
 		ItemStack bread = new ItemStack(Material.BREAD, 32);
 		
 		//Create PotionMeta ItemStack to set type of Instant Health 2. Overrides existing effects (true)
-		ItemStack health = new ItemStack(Material.POTION, 2);
+		ItemStack health = new ItemStack(Material.POTION, 4);
 		ItemMeta healthMeta = health.getItemMeta();
 		healthMeta.setDisplayName("Instant Health");
 		PotionMeta pHealthMeta = (PotionMeta) healthMeta;

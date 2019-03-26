@@ -82,6 +82,7 @@ public class SniperRifleListener implements Listener
 			
 			p.getInventory().setItem(itemIndex, tipped);
 			
+			//Delay arrow return switch
 			BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
             scheduler.scheduleSyncDelayedTask(TrenchPvP.getPluginInstance() , new Runnable() {
                 //@Override

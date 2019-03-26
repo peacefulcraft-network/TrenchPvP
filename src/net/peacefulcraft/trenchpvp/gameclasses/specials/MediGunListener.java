@@ -1,10 +1,16 @@
 package net.peacefulcraft.trenchpvp.gameclasses.specials;
 
+import java.util.HashMap;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
+
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Snowball;
+import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
@@ -18,10 +24,12 @@ import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeam;
 
-public class RightClickMediGun implements Listener {
-	
+public class MediGunListener implements Listener {
+	private HashMap<UUID, Long> cooldown = new HashMap<UUID, Long>();//Creating cooldown
+	private final int COOLDOWN_TIME = 1;
 	@EventHandler
 	public void onRightClick(PlayerInteractEntityEvent e){
+		Player p = e.getPlayer();
 		//Check if clicked player
 		if(!(e.getRightClicked() instanceof Player)) return;
 
@@ -38,22 +46,32 @@ public class RightClickMediGun implements Listener {
 			//One or both players not in Trench so we don't care
 			return;
 		}
-		
 		//Check if sender is medic
 		if(!(healer.getKitType() == TrenchKits.MEDIC)) return;
-
 		//Check on same team
 		if(!(healer.getPlayerTeam() == healTarget.getPlayerTeam())) return;
-
-		//MediGun medigun = ((TrenchMedic) sender).getMediGun();
 		
-		//TODO:BETTER SYSTEM
-		//Check if not fired in last 30 ticks
-		//if(!(MinecraftServer.currentTick >= medigun.getFire() + 30)) return;
+		if(cooldown.containsKey(p.getUniqueId()))
+		{
+			long timeLeft = ((cooldown.get(p.getUniqueId())/1000) + COOLDOWN_TIME) - (System.currentTimeMillis()/1000);
+			if(canUseAgain(p) == true)
+			{
+				fireMediGun(p, e);
+				p.sendMessage(ChatColor.RED + "Ability is now on cooldown for " + COOLDOWN_TIME + " seconds.");
+			}
+			else if(canUseAgain(p) == false)
+			{
+				p.sendMessage(ChatColor.RED + "Ability is on cooldown for " + timeLeft + " seconds!");
+			}
+		}
+		else
+		{
+			cooldown.put(p.getUniqueId(), System.currentTimeMillis());
+			fireMediGun(p, e);
+		}
 		
-		//Update last fire tick
-		//medigun.updateFire();
-		
+	}
+	private void fireMediGun(Player p, PlayerInteractEntityEvent e) {
 		//Snowball projectile. Possibly remove b/c garbage
 		Location tLoc = e.getRightClicked().getLocation();
 		Vector vec = new Vector(tLoc.getX(), tLoc.getY(), tLoc.getZ());
@@ -67,4 +85,10 @@ public class RightClickMediGun implements Listener {
 			patient.setHealth((patient.getHealth() + 2));
 		}
 	}
+	public boolean canUseAgain(Player player)
+	{
+		long lastTimeUsed = cooldown.get(player.getUniqueId());
+		long timeToWait = TimeUnit.SECONDS.toMillis(COOLDOWN_TIME);
+		return (System.currentTimeMillis() - lastTimeUsed) > timeToWait;
+ 	}
 }

@@ -86,13 +86,15 @@ public class DoubleJumpListener implements Listener
 			if(cooldown.get(p.getUniqueId()) == 0) {
 				if(p.getGameMode() != GameMode.CREATIVE) {
 					//Double Jump code
-			       	e.setCancelled(true);
+					p.setFlying(false);
+					e.setCancelled(true);
+			       	
 				    Block b = p.getWorld().getBlockAt(p.getLocation().subtract(0,2,0));
 				    if(!b.getType().equals(Material.AIR)){
 				       
 				     	Vector v = new Vector(p.getVelocity().getX(), p.getVelocity().getY(), p.getVelocity().getZ());
 				       	Vector forward = p.getLocation().getDirection().multiply(0.3);
-				        Vector jump = p.getLocation().getDirection().multiply(0.07).setY(1);
+				        Vector jump = p.getLocation().getDirection().multiply(0.05).setY(1);
 				        v.add(forward).add(jump);
 				        p.setVelocity(v);     
 				        
@@ -107,7 +109,9 @@ public class DoubleJumpListener implements Listener
 		} else {
 			if(p.getGameMode() != GameMode.CREATIVE) {
 				//Double Jump code
-		       	e.setCancelled(true);
+				p.setFlying(false);
+				e.setCancelled(true);
+		       	
 			    Block b = p.getWorld().getBlockAt(p.getLocation().subtract(0,2,0));
 			    if(!b.getType().equals(Material.AIR)){
 			       
