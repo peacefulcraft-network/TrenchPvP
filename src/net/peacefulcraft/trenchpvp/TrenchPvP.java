@@ -9,13 +9,17 @@ import net.peacefulcraft.trenchpvp.commands.tppToggle;
 import net.peacefulcraft.trenchpvp.commands.trJoin;
 import net.peacefulcraft.trenchpvp.commands.trLeave;
 import net.peacefulcraft.trenchpvp.gameclasses.specials.ArmaClickListener;
+import net.peacefulcraft.trenchpvp.gameclasses.specials.BigBerthaListener;
+import net.peacefulcraft.trenchpvp.gameclasses.specials.DeepCutListener;
+import net.peacefulcraft.trenchpvp.gameclasses.specials.GrenadeLauncherListener;
 import net.peacefulcraft.trenchpvp.gameclasses.specials.DenseClickListener;
 import net.peacefulcraft.trenchpvp.gameclasses.specials.DoubleJumpListener;
 import net.peacefulcraft.trenchpvp.gameclasses.specials.FlamethrowerListener;
 import net.peacefulcraft.trenchpvp.gameclasses.specials.HiddenBladeListener;
 import net.peacefulcraft.trenchpvp.gameclasses.specials.InfernoTrapListener;
 import net.peacefulcraft.trenchpvp.gameclasses.specials.PowerShotListener;
-import net.peacefulcraft.trenchpvp.gameclasses.specials.RightClickMediGun;
+import net.peacefulcraft.trenchpvp.gameclasses.specials.MediGunListener;
+import net.peacefulcraft.trenchpvp.gameclasses.specials.OnslaughtListener;
 import net.peacefulcraft.trenchpvp.gameclasses.specials.SlimSlicerListener;
 import net.peacefulcraft.trenchpvp.gameclasses.specials.SniperRifleListener;
 import net.peacefulcraft.trenchpvp.gameclasses.specials.SpeedShotListener;
@@ -76,7 +80,7 @@ public class TrenchPvP extends JavaPlugin{
 		getServer().getPluginManager().registerEvents(new QuitGameListen(), this);
 		
 		//gameclasses.special
-		getServer().getPluginManager().registerEvents(new RightClickMediGun(), this);
+		getServer().getPluginManager().registerEvents(new MediGunListener(), this);
 		getServer().getPluginManager().registerEvents(new ArmaClickListener(), this);
 		getServer().getPluginManager().registerEvents(new DenseClickListener(), this);
 		getServer().getPluginManager().registerEvents(new HiddenBladeListener(), this);
@@ -87,9 +91,13 @@ public class TrenchPvP extends JavaPlugin{
 		getServer().getPluginManager().registerEvents(new InfernoTrapListener(), this);
 		getServer().getPluginManager().registerEvents(new SniperRifleListener(), this);
 		getServer().getPluginManager().registerEvents(new PowerShotListener(), this);
+		getServer().getPluginManager().registerEvents(new GrenadeLauncherListener(), this);
+		getServer().getPluginManager().registerEvents(new BigBerthaListener(), this);
+		getServer().getPluginManager().registerEvents(new OnslaughtListener(), this);
+		getServer().getPluginManager().registerEvents(new DeepCutListener(), this);
 	
 		if(this.getConfig().getBoolean("classes.medic")) {
-			getServer().getPluginManager().registerEvents(new RightClickMediGun(), this);
+			getServer().getPluginManager().registerEvents(new MediGunListener(), this);
 		}
 	}
 

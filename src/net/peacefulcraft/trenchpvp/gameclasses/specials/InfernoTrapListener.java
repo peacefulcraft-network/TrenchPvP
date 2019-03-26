@@ -93,17 +93,11 @@ public class InfernoTrapListener implements Listener
 			ArrayList<Location> traps = trapCord.get(p.getUniqueId());
 			//Iterates through ArrayList to detonate each trap.
 			for(Location temp : traps) {
-				BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
-	            scheduler.scheduleSyncDelayedTask(TrenchPvP.getPluginInstance() , new Runnable() {
-	                public void run() {
-	                	if(temp.getBlock().getType() == Material.LIGHT_WEIGHTED_PRESSURE_PLATE) {
-	    					temp.getWorld().createExplosion(temp.getX(), temp.getY(), temp.getZ(), 2.0f, true, false);
-	    					temp.getBlock().setType(Material.AIR);
-	    				}
-	                }
-	            }, 20);
-				
-			}	
+				if(temp.getBlock().getType() == Material.LIGHT_WEIGHTED_PRESSURE_PLATE) {
+					temp.getWorld().createExplosion(temp.getX(), temp.getY(), temp.getZ(), 2.0f, true, false);
+					temp.getBlock().setType(Material.AIR);
+				}
+			}
 		}
 	}
 }

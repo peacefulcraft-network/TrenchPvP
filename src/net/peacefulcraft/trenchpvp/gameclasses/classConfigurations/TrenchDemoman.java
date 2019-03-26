@@ -29,18 +29,16 @@ public class TrenchDemoman extends TrenchKit{
 	protected void equipPrimary(Player p) {
 		//Create Bow / give enchantments
 		ItemStack primary = new ItemStack(Material.QUARTZ, 1);
-		
-		//Get metadata / set bow name
 		ItemMeta pMetaData = primary.getItemMeta();
 		pMetaData.setDisplayName("Grenade Launcher");
 		
 		ArrayList<String> pDesc = new ArrayList<String>();
 		pDesc.add("Left Click to Launch Grenades!");
 		pMetaData.setLore(pDesc);
-		//Comment
+
 		primary.setItemMeta(pMetaData);
 		
-		ItemStack primaryUtil = new ItemStack(Material.FIREWORK_ROCKET, 16);//give arrows for syringe gun
+		ItemStack primaryUtil = new ItemStack(Material.FIREWORK_ROCKET, 16);
 		pMetaData = primaryUtil.getItemMeta();
 		pMetaData.setDisplayName("Grenades");
 
@@ -58,9 +56,19 @@ public class TrenchDemoman extends TrenchKit{
 	 */
 	@Override
 	protected void equipSecondary(Player p) {
+		ItemStack secondary = new ItemStack(Material.TNT, 1);
+		ItemMeta sMetaData = secondary.getItemMeta();
+		sMetaData.setDisplayName("Big Bertha's Embrace");
 		
+		ArrayList<String> sDesc = new ArrayList<String>();
+		sDesc.add("Left Click to Place Big Bertha's Embrace!");
+		sDesc.add("Bomb Fuse Time: 6 Seconds");
+		sDesc.add("Cooldown Time: 20 Seconds");
+		sMetaData.setLore(sDesc);
 		
+		secondary.setItemMeta(sMetaData);
 		
+		p.getInventory().setItem(1, secondary);
 	}
 	
 	@Override

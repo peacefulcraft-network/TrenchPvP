@@ -68,7 +68,7 @@ public class ArmaClickListener implements Listener
 		}
 		
 	}
-	public boolean canUseAgain(Player player)
+	private boolean canUseAgain(Player player)
 	{
 		long lastTimeUsed = cooldown.get(player.getUniqueId());
 		long timeToWait = TimeUnit.SECONDS.toMillis(COOLDOWN_TIME);
