@@ -1,4 +1,4 @@
-package net.peacefulcraft.trenchpvp.gameclasses.specials;
+package net.peacefulcraft.trenchpvp.gameclasses.listeners;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -32,9 +32,10 @@ public class SugarRushListener implements Listener
 		
 		if(!(t.getKitType() == TrenchKits.SPY)) return;
 	
-		SugarRush sugar = new SugarRush();
-		sugar.updateClick();
-		if(!(System.currentTimeMillis() >= (sugar.getClick() + 10000))) return;
+		//TODO: FIX?
+		//SugarRush sugar = new SugarRush();
+		//sugar.updateClick();
+		//if(!(System.currentTimeMillis() >= (sugar.getClick() + 10000))) return;
 	
 		e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 6, 3));
 		e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 4, 2));
