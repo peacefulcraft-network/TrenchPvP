@@ -12,7 +12,7 @@ public class QuitGameListen implements Listener {
 	public void onQuitEvent(PlayerQuitEvent e){
 		
 		try {
-			TeamManager.findTrenchPlayer(e.getPlayer());
+			TeamManager.findTrenchPlayer(e.getPlayer()).dequipKits();;
 			TrenchPvP.getTeamManager().leaveTeam(e.getPlayer());
 		}catch(RuntimeException x) {
 			return;

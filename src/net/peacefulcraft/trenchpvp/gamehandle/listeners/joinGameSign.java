@@ -32,6 +32,7 @@ public class joinGameSign implements Listener {
 				Player p = e.getPlayer();
 				try {
 					TrenchPlayer t = TeamManager.findTrenchPlayer(p);
+					t.dequipKits();
 					p.sendMessage(TrenchPvP.CMD_PREFIX + ChatColor.RED + "You are already on a Trench team! Type /trleave to leave.");
 					return;
 				}catch(RuntimeException x) {

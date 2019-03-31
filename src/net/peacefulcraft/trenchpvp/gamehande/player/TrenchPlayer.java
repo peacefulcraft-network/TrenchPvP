@@ -27,4 +27,7 @@ public class TrenchPlayer{
 		k.equip(this);
 	}
 	
+	public void dequipKits() {
+		user.getInventory().clear();
+	}
 }
