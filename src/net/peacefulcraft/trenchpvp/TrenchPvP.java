@@ -5,6 +5,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import net.peacefulcraft.trenchpvp.commands.tppDebug;
 import net.peacefulcraft.trenchpvp.commands.tppGetGameState;
+import net.peacefulcraft.trenchpvp.commands.tppSet;
 import net.peacefulcraft.trenchpvp.commands.tppToggle;
 import net.peacefulcraft.trenchpvp.commands.trJoin;
 import net.peacefulcraft.trenchpvp.commands.trLeave;
@@ -61,6 +62,7 @@ public class TrenchPvP extends JavaPlugin{
 	}
 
 	public void onDisable(){
+		this.saveConfig();
 		this.getLogger().info("[TPP]Trench PvP Alpha 0.1 has been disabled!");
 	}
 
@@ -70,6 +72,7 @@ public class TrenchPvP extends JavaPlugin{
 		this.getCommand("trjoin").setExecutor(new trJoin());
 		this.getCommand("trleave").setExecutor(new trLeave());
 		this.getCommand("tppdebug").setExecutor(new tppDebug());;
+		this.getCommand("tppSet").setExecutor(new tppSet());
 	}
 
 	private void loadEventListners(){

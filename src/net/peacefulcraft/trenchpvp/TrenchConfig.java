@@ -38,11 +38,11 @@ public class TrenchConfig {
 		spyEnabled = c.getBoolean("classes.spy");
 		
 		quit_spawn = c.getConfigurationSection("trenchspawns.quit").getValues(false);
-		red_spawn = c.getConfigurationSection("trenchspawns.quit").getValues(false);
-		blue_spawn = c.getConfigurationSection("trenchspawns.quit").getValues(false);
-		red_class_spawn = c.getConfigurationSection("trenchspawns.quit").getValues(false);
-		blue_class_spawn = c.getConfigurationSection("trenchspawns.quit").getValues(false);
-		spectator_spawn = c.getConfigurationSection("trenchspawns.quit").getValues(false);
+		red_spawn = c.getConfigurationSection("trenchspawns.red").getValues(false);
+		blue_spawn = c.getConfigurationSection("trenchspawns.blue").getValues(false);
+		red_class_spawn = c.getConfigurationSection("trenchspawns.red_class").getValues(false);
+		blue_class_spawn = c.getConfigurationSection("trenchspawns.blue_class").getValues(false);
+		spectator_spawn = c.getConfigurationSection("trenchspawns.spectator").getValues(false);
 	
 	}
 
@@ -124,6 +124,7 @@ public class TrenchConfig {
 
 	public void setQuit_spawn(Map<String, Object> quit_spawn) {
 		this.quit_spawn = quit_spawn;
+		c.set("trenchspawns.quit", quit_spawn);
 	}
 
 	public Map<String, Object> getRed_spawn() {
@@ -132,6 +133,7 @@ public class TrenchConfig {
 
 	public void setRed_spawn(Map<String, Object> red_spawn) {
 		this.red_spawn = red_spawn;
+		c.set("trenchspawns.red", red_spawn);
 	}
 
 	public Map<String, Object> getBlue_spawn() {
@@ -140,6 +142,7 @@ public class TrenchConfig {
 
 	public void setBlue_spawn(Map<String, Object> blue_spawn) {
 		this.blue_spawn = blue_spawn;
+		c.set("trenchspawns.blue", blue_spawn);
 	}
 
 	public Map<String, Object> getRed_class_spawn() {
@@ -148,6 +151,7 @@ public class TrenchConfig {
 
 	public void setRed_class_spawn(Map<String, Object> red_class_spawn) {
 		this.red_class_spawn = red_class_spawn;
+		c.set("trenchspawns.red_class", red_class_spawn);
 	}
 
 	public Map<String, Object> getBlue_class_spawn() {
@@ -156,6 +160,7 @@ public class TrenchConfig {
 
 	public void setBlue_class_spawn(Map<String, Object> blue_class_spawn) {
 		this.blue_class_spawn = blue_class_spawn;
+		c.set("trenchspawns.blue_class", blue_class_spawn);
 	}
 
 	public Map<String, Object> getSpectator_spawn() {
@@ -164,6 +169,7 @@ public class TrenchConfig {
 
 	public void setSpectator_spawn(Map<String, Object> spectator_spawn) {
 		this.spectator_spawn = spectator_spawn;
+		c.set("trenchspawns.spectator", spectator_spawn);
 	}
 
 }
