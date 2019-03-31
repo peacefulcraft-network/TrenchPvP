@@ -1,4 +1,4 @@
-package net.peacefulcraft.trenchpvp.gameclasses.specials;
+package net.peacefulcraft.trenchpvp.gameclasses.listeners;
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -9,6 +9,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -17,22 +18,19 @@ import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
 import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
 
-public class ArmaClickListener implements Listener
+public class SpeedShotListener implements Listener
 {
 	private HashMap<UUID, Long> cooldown = new HashMap<UUID, Long>();//Creating cooldown
-	private final int COOLDOWN_TIME = 14;
+	private final int COOLDOWN_TIME = 16;
 	
 	@EventHandler
-	public void onRightClick(PlayerInteractEvent e)
+	public void onrightClick(PlayerInteractEntityEvent e)
 	{
 		Player p = e.getPlayer();
-		//Checks item in main hand is Shell
-		if(!(p.getInventory().getItemInMainHand().getType() == Material.SHULKER_SHELL)) return;
-
-		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Armadillo Shell"))) return;
-		//if(!(e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK)) return;
-		//Confirms location
-
+		//Checks item in main hand is 
+		if(!(p.getInventory().getItemInMainHand().getType() == Material.CHORUS_FLOWER)) return;
+		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Speed Shot"))) return;
+		
 		TrenchPlayer t;
 		try {
 			t = TeamManager.findTrenchPlayer(p);
@@ -40,17 +38,22 @@ public class ArmaClickListener implements Listener
 			return;
 		}
 		
-		if(!(t.getKitType() == TrenchKits.HEAVY)) return;
+		if(!(t.getKitType() == TrenchKits.SPY)) return;
 		
-		//Potion effects
 		if(cooldown.containsKey(p.getUniqueId()))
 		{
 			long timeLeft = ((cooldown.get(p.getUniqueId())/1000) + COOLDOWN_TIME) - (System.currentTimeMillis()/1000);
 			if(canUseAgain(p) == true)
 			{
-				p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 140, 4));
-				p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 140, 3));
-				p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 140, 5));
+				TrenchPlayer spy, target;
+				try {
+					spy = TeamManager.findTrenchPlayer(e.getPlayer());
+					target = TeamManager.findTrenchPlayer((Player)e.getRightClicked());
+				} catch (RuntimeException x) {
+					return;
+				}
+				if(!(spy.getPlayerTeam() == target.getPlayerTeam())) return;
+				target.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 140, 4));
 				p.sendMessage(ChatColor.RED + "Ability is now on cooldown for " + COOLDOWN_TIME + " seconds.");
 			}
 			else if(canUseAgain(p) == false)
@@ -61,17 +64,22 @@ public class ArmaClickListener implements Listener
 		else
 		{
 			cooldown.put(p.getUniqueId(), System.currentTimeMillis());
-			p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 140, 4));
-			p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 140, 3));
-			p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 140, 5));
+			TrenchPlayer spy, target;
+			try {
+				spy = TeamManager.findTrenchPlayer(e.getPlayer());
+				target = TeamManager.findTrenchPlayer((Player)e.getRightClicked());
+			} catch (RuntimeException x) {
+				return;
+			}
+			if(!(spy.getPlayerTeam() == target.getPlayerTeam())) return;
+			target.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 140, 4));
 			p.sendMessage(ChatColor.RED + "Ability is now on cooldown for " + COOLDOWN_TIME + " seconds.");
 		}
-		
 	}
-	private boolean canUseAgain(Player player)
+	public boolean canUseAgain(Player player)
 	{
 		long lastTimeUsed = cooldown.get(player.getUniqueId());
 		long timeToWait = TimeUnit.SECONDS.toMillis(COOLDOWN_TIME);
 		return (System.currentTimeMillis() - lastTimeUsed) > timeToWait;
- 	}
+	}
 }

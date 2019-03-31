@@ -1,5 +1,6 @@
-package net.peacefulcraft.trenchpvp.gamehandle.specials;
+package net.peacefulcraft.trenchpvp.gamehandle.listeners;
 
+import org.bukkit.GameMode;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -12,7 +13,8 @@ public class QuitGameListen implements Listener {
 	public void onQuitEvent(PlayerQuitEvent e){
 		
 		try {
-			TeamManager.findTrenchPlayer(e.getPlayer());
+			TeamManager.findTrenchPlayer(e.getPlayer()).dequipKits();
+			e.getPlayer().setGameMode(GameMode.ADVENTURE);
 			TrenchPvP.getTeamManager().leaveTeam(e.getPlayer());
 		}catch(RuntimeException x) {
 			return;

@@ -1,4 +1,4 @@
-package net.peacefulcraft.trenchpvp.gameclasses.specials;
+package net.peacefulcraft.trenchpvp.gameclasses.listeners;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
