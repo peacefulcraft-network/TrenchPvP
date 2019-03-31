@@ -23,6 +23,9 @@ commands:
     tppDebug:
       description: Get Trench Debug Information
       usage: /<command>
+    tppSet:
+      description: Configured Trench Settings
+      usage: "/<command> [ blueSpawn | blueClassSpawn | redSpawn | redClassSpawn | quitSpawn | spectatorSpawn ]"
 
 permissions:
     tpp.admin.*:

@@ -6,10 +6,12 @@ import org.bukkit.event.player.PlayerInteractEvent;
 
 import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
+import net.peacefulcraft.trenchpvp.gamehande.player.Teleports;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeams;
 
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;//(Interface, not the class material)
@@ -31,6 +33,8 @@ public class joinGameSign implements Listener {
 				Player p = e.getPlayer();
 				try {
 					TrenchPlayer t = TeamManager.findTrenchPlayer(p);
+					t.dequipKits();
+					p.setGameMode(GameMode.SURVIVAL);
 					p.sendMessage(TrenchPvP.CMD_PREFIX + ChatColor.RED + "You are already on a Trench team! Type /trleave to leave.");
 					return;
 				}catch(RuntimeException x) {
@@ -40,12 +44,13 @@ public class joinGameSign implements Listener {
 				if(p.hasPermission("tpp.player")){
 					
 					TrenchPlayer t = TrenchPvP.getTeamManager().joinTeam(p);
-					if(t.getPlayerTeam() == TrenchTeams.BLUE)
+					if(t.getPlayerTeam() == TrenchTeams.BLUE) {
+						p.teleport(Teleports.getBlueClassSpawn());
 						p.sendMessage(TrenchPvP.CMD_PREFIX + ChatColor.RED + "You have joined " + ChatColor.DARK_BLUE + "Blue" + ChatColor.RED + " team!");
-					else
+					} else {
+						p.teleport(Teleports.getRedClassSpawn());
 						p.sendMessage(TrenchPvP.CMD_PREFIX + ChatColor.RED + "You have joined " + ChatColor.DARK_RED + "Red" + ChatColor.RED + " team!");
-					
-					//TODO: GIVE SHIT TO PLAYER
+					}
 					
 					return;
 				

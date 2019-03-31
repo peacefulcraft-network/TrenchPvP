@@ -1,6 +1,7 @@
 package net.peacefulcraft.trenchpvp.commands;
 
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -8,6 +9,7 @@ import org.bukkit.entity.Player;
 
 import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
+import net.peacefulcraft.trenchpvp.gamehande.player.Teleports;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeams;
 
@@ -31,12 +33,16 @@ public class trJoin implements CommandExecutor{
 			if(p.hasPermission("tpp.player")){
 				
 				TrenchPlayer t = TrenchPvP.getTeamManager().joinTeam(p);
-				if(t.getPlayerTeam() == TrenchTeams.BLUE)
+				t.dequipKits();
+				if(t.getPlayerTeam() == TrenchTeams.BLUE) {
+					p.teleport(Teleports.getBlueClassSpawn());
+					p.setGameMode(GameMode.SURVIVAL);
 					p.sendMessage(TrenchPvP.CMD_PREFIX + ChatColor.RED + "You have joined " + ChatColor.DARK_BLUE + "Blue" + ChatColor.RED + " team!");
-				else
+				}else {
+					p.teleport(Teleports.getRedClassSpawn());
 					p.sendMessage(TrenchPvP.CMD_PREFIX + ChatColor.RED + "You have joined " + ChatColor.DARK_RED + "Red" + ChatColor.RED + " team!");
-				
-				//TODO: GIVE SHIT TO PLAYER
+				}
+
 				
 				return true;
 			

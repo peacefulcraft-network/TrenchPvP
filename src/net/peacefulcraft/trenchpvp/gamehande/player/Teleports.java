@@ -13,9 +13,9 @@ public class Teleports {
 	public static Location getBlueSpawn(){
 		return new Location(
 			Bukkit.getWorld((String) TrenchPvP.getTrenchCFG().getBlue_spawn().get("world")),
-				(double) TrenchPvP.getTrenchCFG().getBlue_spawn().get("x"),
-				(double) TrenchPvP.getTrenchCFG().getBlue_spawn().get("y"),
-				(double) TrenchPvP.getTrenchCFG().getBlue_spawn().get("z")
+				Double.parseDouble( (String) TrenchPvP.getTrenchCFG().getBlue_spawn().get("x")),
+				Double.parseDouble( (String) TrenchPvP.getTrenchCFG().getBlue_spawn().get("y")),
+				Double.parseDouble( (String) TrenchPvP.getTrenchCFG().getBlue_spawn().get("z"))
 			);
 	}
 	
@@ -25,9 +25,9 @@ public class Teleports {
 	public static Location getBlueClassSpawn() {
 		return new Location(
 				Bukkit.getWorld((String) TrenchPvP.getTrenchCFG().getRed_class_spawn().get("world")),
-					(double) TrenchPvP.getTrenchCFG().getBlue_class_spawn().get("x"),
-					(double) TrenchPvP.getTrenchCFG().getBlue_class_spawn().get("y"),
-					(double) TrenchPvP.getTrenchCFG().getBlue_class_spawn().get("z")
+					Double.parseDouble( (String) TrenchPvP.getTrenchCFG().getBlue_class_spawn().get("x")),
+					Double.parseDouble( (String) TrenchPvP.getTrenchCFG().getBlue_class_spawn().get("y")),
+					Double.parseDouble( (String) TrenchPvP.getTrenchCFG().getBlue_class_spawn().get("z"))
 			);
 	}
 	
@@ -37,9 +37,9 @@ public class Teleports {
 	public static Location getRedSpawn(){
 		return new Location(
 			Bukkit.getWorld((String) TrenchPvP.getTrenchCFG().getRed_spawn().get("world")),
-				(double) TrenchPvP.getTrenchCFG().getRed_spawn().get("x"),
-				(double) TrenchPvP.getTrenchCFG().getRed_spawn().get("y"),
-				(double) TrenchPvP.getTrenchCFG().getRed_spawn().get("z")
+				Double.parseDouble( (String) TrenchPvP.getTrenchCFG().getRed_spawn().get("x")),
+				Double.parseDouble( (String) TrenchPvP.getTrenchCFG().getRed_spawn().get("y")),
+				Double.parseDouble( (String) TrenchPvP.getTrenchCFG().getRed_spawn().get("z"))
 		);
 	}
 	
@@ -49,9 +49,9 @@ public class Teleports {
 	public static Location getRedClassSpawn() {
 		return new Location(
 				Bukkit.getWorld((String) TrenchPvP.getTrenchCFG().getRed_class_spawn().get("world")),
-					(double) TrenchPvP.getTrenchCFG().getRed_class_spawn().get("x"),
-					(double) TrenchPvP.getTrenchCFG().getRed_class_spawn().get("y"),
-					(double) TrenchPvP.getTrenchCFG().getRed_class_spawn().get("z")
+					Double.parseDouble( (String) TrenchPvP.getTrenchCFG().getRed_class_spawn().get("x")),
+					Double.parseDouble( (String) TrenchPvP.getTrenchCFG().getRed_class_spawn().get("y")),
+					Double.parseDouble( (String) TrenchPvP.getTrenchCFG().getRed_class_spawn().get("z"))
 			);
 	}
 	
@@ -61,9 +61,9 @@ public class Teleports {
 	public static Location getQuitSpawn() {
 		return new Location(
 			Bukkit.getWorld((String) TrenchPvP.getTrenchCFG().getQuit_spawn().get("world")),
-				(double) TrenchPvP.getTrenchCFG().getQuit_spawn().get("x"),
-				(double) TrenchPvP.getTrenchCFG().getQuit_spawn().get("y"),
-				(double) TrenchPvP.getTrenchCFG().getQuit_spawn().get("z")
+				Double.parseDouble( (String) TrenchPvP.getTrenchCFG().getQuit_spawn().get("x")),
+				Double.parseDouble( (String) TrenchPvP.getTrenchCFG().getQuit_spawn().get("y")),
+				Double.parseDouble( (String) TrenchPvP.getTrenchCFG().getQuit_spawn().get("z"))
 		);
 	}
 	

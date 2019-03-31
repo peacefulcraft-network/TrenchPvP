@@ -29,6 +29,14 @@ public class TeamManager {
 		sbm = Bukkit.getScoreboardManager();
 		sb = sbm.getMainScoreboard();
 
+		if(sb.getTeam("Red") != null) {
+			sb.getTeam("Red").unregister();
+		}
+		
+		if(sb.getTeam("Blue") != null) {
+			sb.getTeam("Blue").unregister();
+		}
+		
 		red = sb.registerNewTeam("Red");
 			red.setAllowFriendlyFire(false);
 			red.setColor(ChatColor.RED);

@@ -5,6 +5,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import net.peacefulcraft.trenchpvp.commands.tppDebug;
 import net.peacefulcraft.trenchpvp.commands.tppGetGameState;
+import net.peacefulcraft.trenchpvp.commands.tppSet;
 import net.peacefulcraft.trenchpvp.commands.tppToggle;
 import net.peacefulcraft.trenchpvp.commands.trJoin;
 import net.peacefulcraft.trenchpvp.commands.trLeave;
@@ -27,6 +28,7 @@ import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.KitSignListener;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.QuitGameListen;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.joinGameSign;
+import net.peacefulcraft.trenchpvp.gamehandle.listeners.respawningTeleport;
 //asfdasdfs
 public class TrenchPvP extends JavaPlugin{
 	//Prefix for all plugin -> player messages
@@ -61,6 +63,7 @@ public class TrenchPvP extends JavaPlugin{
 	}
 
 	public void onDisable(){
+		this.saveConfig();
 		this.getLogger().info("[TPP]Trench PvP Alpha 0.1 has been disabled!");
 	}
 
@@ -70,15 +73,17 @@ public class TrenchPvP extends JavaPlugin{
 		this.getCommand("trjoin").setExecutor(new trJoin());
 		this.getCommand("trleave").setExecutor(new trLeave());
 		this.getCommand("tppdebug").setExecutor(new tppDebug());;
+		this.getCommand("tppSet").setExecutor(new tppSet());
 	}
 
 	private void loadEventListners(){
-		//gamehandle.special
+		//gamehandle.listeners
 		getServer().getPluginManager().registerEvents(new joinGameSign(), this);
 		getServer().getPluginManager().registerEvents(new KitSignListener(), this);
 		getServer().getPluginManager().registerEvents(new QuitGameListen(), this);
+		getServer().getPluginManager().registerEvents(new respawningTeleport(), this);
 
-		//gameclasses.special
+		//gameclasses.listeners
 		getServer().getPluginManager().registerEvents(new MediGunListener(), this);
 		getServer().getPluginManager().registerEvents(new ArmaClickListener(), this);
 		getServer().getPluginManager().registerEvents(new DenseClickListener(), this);
@@ -94,10 +99,6 @@ public class TrenchPvP extends JavaPlugin{
 		getServer().getPluginManager().registerEvents(new BigBerthaListener(), this);
 		getServer().getPluginManager().registerEvents(new OnslaughtListener(), this);
 		getServer().getPluginManager().registerEvents(new DeepCutListener(), this);
-
-		if(this.getConfig().getBoolean("classes.medic")) {
-			getServer().getPluginManager().registerEvents(new MediGunListener(), this);
-		}
 	}
 
 }
