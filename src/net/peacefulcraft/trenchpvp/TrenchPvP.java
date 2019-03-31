@@ -28,6 +28,7 @@ import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.KitSignListener;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.QuitGameListen;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.joinGameSign;
+import net.peacefulcraft.trenchpvp.gamehandle.listeners.respawningTeleport;
 //asfdasdfs
 public class TrenchPvP extends JavaPlugin{
 	//Prefix for all plugin -> player messages
@@ -76,12 +77,13 @@ public class TrenchPvP extends JavaPlugin{
 	}
 
 	private void loadEventListners(){
-		//gamehandle.special
+		//gamehandle.listeners
 		getServer().getPluginManager().registerEvents(new joinGameSign(), this);
 		getServer().getPluginManager().registerEvents(new KitSignListener(), this);
 		getServer().getPluginManager().registerEvents(new QuitGameListen(), this);
+		getServer().getPluginManager().registerEvents(new respawningTeleport(), this);
 
-		//gameclasses.special
+		//gameclasses.listeners
 		getServer().getPluginManager().registerEvents(new MediGunListener(), this);
 		getServer().getPluginManager().registerEvents(new ArmaClickListener(), this);
 		getServer().getPluginManager().registerEvents(new DenseClickListener(), this);
@@ -97,10 +99,6 @@ public class TrenchPvP extends JavaPlugin{
 		getServer().getPluginManager().registerEvents(new BigBerthaListener(), this);
 		getServer().getPluginManager().registerEvents(new OnslaughtListener(), this);
 		getServer().getPluginManager().registerEvents(new DeepCutListener(), this);
-
-		if(this.getConfig().getBoolean("classes.medic")) {
-			getServer().getPluginManager().registerEvents(new MediGunListener(), this);
-		}
 	}
 
 }

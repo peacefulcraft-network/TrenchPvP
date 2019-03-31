@@ -9,6 +9,7 @@ import org.bukkit.inventory.ItemStack;
 
 import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
+import net.peacefulcraft.trenchpvp.gamehande.player.Teleports;
 
 public class trLeave implements CommandExecutor{
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -22,6 +23,7 @@ public class trLeave implements CommandExecutor{
 				if(p.hasPermission("tpp.player")) {
 					
 					TrenchPvP.getTeamManager().leaveTeam(p);
+					p.teleport(Teleports.getQuitSpawn());
 					sender.sendMessage("You've left Trench!");
 					return true;
 					

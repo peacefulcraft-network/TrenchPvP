@@ -19,6 +19,7 @@ import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchSniper;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchSoldier;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchSpy;
 import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
+import net.peacefulcraft.trenchpvp.gamehande.player.Teleports;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeams;
 
@@ -149,6 +150,11 @@ public class KitSignListener implements Listener {
 							
 						}
 						
+						if(TeamManager.findTrenchPlayer(e.getPlayer()).getPlayerTeam() == TrenchTeams.BLUE) {
+							e.getPlayer().teleport(Teleports.getBlueSpawn());
+						}else {
+							e.getPlayer().teleport(Teleports.getRedSpawn());
+						}
 						e.getPlayer().sendMessage("You are now type " + t.getKitType());
 						
 					}
