@@ -1,6 +1,7 @@
 package net.peacefulcraft.trenchpvp.commands;
 
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -24,6 +25,7 @@ public class trLeave implements CommandExecutor{
 					
 					TrenchPvP.getTeamManager().leaveTeam(p);
 					TrenchPvP.getTeamManager().findTrenchPlayer(p).dequipKits();
+					p.setGameMode(GameMode.ADVENTURE);
 					p.teleport(Teleports.getQuitSpawn());
 					sender.sendMessage("You've left Trench!");
 					return true;

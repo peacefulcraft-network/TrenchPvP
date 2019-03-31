@@ -1,6 +1,7 @@
 package net.peacefulcraft.trenchpvp.commands;
 
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -35,6 +36,7 @@ public class trJoin implements CommandExecutor{
 				t.dequipKits();
 				if(t.getPlayerTeam() == TrenchTeams.BLUE) {
 					p.teleport(Teleports.getBlueClassSpawn());
+					p.setGameMode(GameMode.SURVIVAL);
 					p.sendMessage(TrenchPvP.CMD_PREFIX + ChatColor.RED + "You have joined " + ChatColor.DARK_BLUE + "Blue" + ChatColor.RED + " team!");
 				}else {
 					p.teleport(Teleports.getRedClassSpawn());

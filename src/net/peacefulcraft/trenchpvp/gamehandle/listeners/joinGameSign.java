@@ -11,6 +11,7 @@ import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeams;
 
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;//(Interface, not the class material)
@@ -33,6 +34,7 @@ public class joinGameSign implements Listener {
 				try {
 					TrenchPlayer t = TeamManager.findTrenchPlayer(p);
 					t.dequipKits();
+					p.setGameMode(GameMode.SURVIVAL);
 					p.sendMessage(TrenchPvP.CMD_PREFIX + ChatColor.RED + "You are already on a Trench team! Type /trleave to leave.");
 					return;
 				}catch(RuntimeException x) {
