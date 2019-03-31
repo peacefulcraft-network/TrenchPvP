@@ -1,4 +1,4 @@
-package net.peacefulcraft.trenchpvp.gameclasses.specials;
+package net.peacefulcraft.trenchpvp.gameclasses.listeners;
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -16,37 +16,42 @@ import org.bukkit.potion.PotionEffectType;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
 import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
-import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeam;
+import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeams;
 
-public class HiddenBladeListener implements Listener
+public class ArmaClickListener implements Listener
 {
 	private HashMap<UUID, Long> cooldown = new HashMap<UUID, Long>();//Creating cooldown
-	private final int COOLDOWN_TIME = 16;
-	
+	private final int COOLDOWN_TIME = 14;
+
 	@EventHandler
-	public void onrightClick(PlayerInteractEvent e)
+	public void onRightClick(PlayerInteractEvent e)
 	{
 		Player p = e.getPlayer();
 		//Checks item in main hand is Shell
-		if(!(p.getInventory().getItemInMainHand().getType() == Material.GOLDEN_SWORD)) return;
-		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Hidden Blade"))) return;
-		
+		if(!(p.getInventory().getItemInMainHand().getType() == Material.SHULKER_SHELL)) return;
+
+		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Armadillo Shell"))) return;
+		//if(!(e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK)) return;
+		//Confirms location
+
 		TrenchPlayer t;
 		try {
 			t = TeamManager.findTrenchPlayer(p);
 		}catch(RuntimeException x) {
 			return;
 		}
-		
-		if(!(t.getKitType() == TrenchKits.SPY)) return;
-	
+
+		if(!(t.getKitType() == TrenchKits.HEAVY)) return;
+
+		//Potion effects
 		if(cooldown.containsKey(p.getUniqueId()))
 		{
 			long timeLeft = ((cooldown.get(p.getUniqueId())/1000) + COOLDOWN_TIME) - (System.currentTimeMillis()/1000);
 			if(canUseAgain(p) == true)
 			{
-				p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100, 3)); 
-				p.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 160, 2)); 
+				p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 140, 4));
+				p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 140, 3));
+				p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 140, 5));
 				p.sendMessage(ChatColor.RED + "Ability is now on cooldown for " + COOLDOWN_TIME + " seconds.");
 			}
 			else if(canUseAgain(p) == false)
@@ -57,17 +62,17 @@ public class HiddenBladeListener implements Listener
 		else
 		{
 			cooldown.put(p.getUniqueId(), System.currentTimeMillis());
-			p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100, 3)); 
-			p.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 160, 2)); 
+			p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 140, 4));
+			p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 140, 3));
+			p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 140, 5));
 			p.sendMessage(ChatColor.RED + "Ability is now on cooldown for " + COOLDOWN_TIME + " seconds.");
 		}
-		
+
 	}
-	public boolean canUseAgain(Player player)
+	private boolean canUseAgain(Player player)
 	{
 		long lastTimeUsed = cooldown.get(player.getUniqueId());
 		long timeToWait = TimeUnit.SECONDS.toMillis(COOLDOWN_TIME);
 		return (System.currentTimeMillis() - lastTimeUsed) > timeToWait;
  	}
-		
 }
