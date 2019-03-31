@@ -23,11 +23,13 @@ public class TrenchPlayer{
 	}
 	
 	public void equipKit(TrenchKit k) {
+		dequipKits();
 		this.kitType = k.getKitType();
 		k.equip(this);
 	}
 	
 	public void dequipKits() {
 		user.getInventory().clear();
+		user.getInventory().setArmorContents(new ItemStack[user.getInventory().getArmorContents().length]);
 	}
 }
