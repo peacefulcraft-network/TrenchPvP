@@ -8,11 +8,17 @@ import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gamehande.player.Teleports;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeams;
+import net.peacefulcraft.trenchpvp.gamehandle.tasks.Endgame;
+import net.peacefulcraft.trenchpvp.gamehandle.tasks.Startgame;
 
 public class GameManager {
 	
-	private static boolean gameRunning = false;
+	private static boolean gameRunning = true;
 		public static boolean isRunning() { return gameRunning; }
+		public static void setGameState(boolean running) { gameRunning = running; } 
+		
+	private static boolean allowPvP = true;
+		public static boolean isPvPAllowed() { return allowPvP; }
 		
 	public static boolean joinPlayer(Player p) {
 		
@@ -85,4 +91,42 @@ public class GameManager {
 		t.getPlayer().teleport(Teleports.getQuitSpawn());
 	}
 	
+	public static void startGame() {
+		
+		//TODO: INIT Stats stuff
+		
+		
+		//Teleport players back to their spawns
+		for(TrenchPlayer t : TeamManager.getPlayers()) {
+			
+			if(t.getPlayerTeam() == TrenchTeams.RED) {
+				t.getPlayer().teleport(Teleports.getRedSpawn());
+			}else {
+				t.getPlayer().teleport(Teleports.getBlueSpawn());
+			}
+			
+		}
+		
+		allowPvP = true;
+		
+		//Schedule Endgame proceedings for 10 minutes from now
+		(new Endgame()).runTaskLaterAsynchronously(TrenchPvP.getPluginInstance(), 1000 * 60 * 10);
+		
+	}
+	
+	//TODO: This will be called by gamehandle.taks.endGame which is Async
+	// We should somehow pass all the player stats for the game back to that object / thread
+	// And comitt it async'ly to the DB
+	public static void endGame() {
+		
+		allowPvP = false;
+		Announcer.messageAll("Game over! A new game will begin shortly.");
+		//TODO Announce winner
+		//TODO Send player's their stats
+		
+		
+		//Schedule new game for 10 seconds from now
+		(new Startgame()).runTaskLaterAsynchronously(TrenchPvP.getPluginInstance(), 1000 * 10);
+		
+	}
 }

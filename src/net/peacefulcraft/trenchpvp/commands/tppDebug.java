@@ -6,6 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import net.peacefulcraft.trenchpvp.TrenchPvP;
+import net.peacefulcraft.trenchpvp.gamehande.GameManager;
 import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeams;
@@ -16,7 +17,7 @@ public class tppDebug implements CommandExecutor{
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		if(command.getName().equalsIgnoreCase("tppDebug")){
 			Player user = (Player) sender;
-			user.sendMessage("Trench is currently running: " + TrenchPvP.gameRunning);
+			user.sendMessage("Trench is currently running: " + GameManager.isRunning());
 			user.sendMessage("There are currently " + TeamManager.getPlayers().size() + " playing TrenchPvP.");
 			user.sendMessage("Blue:");
 			for(TrenchPlayer index: TeamManager.getPlayers()){
