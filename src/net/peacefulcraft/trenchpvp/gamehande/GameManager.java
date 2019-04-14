@@ -27,7 +27,7 @@ public class GameManager {
 					return false;
 					
 				}catch(RuntimeException e) {
-					//RuntimeException good, means user is not on a team
+					//RuntimeException fine, means user is not on a team
 				}
 				
 				TrenchPlayer t = TrenchPvP.getTeamManager().joinTeam(p);
@@ -59,6 +59,26 @@ public class GameManager {
 		}
 		
 	}	
+	
+	public static boolean quitPlayer(Player p) {
+		
+		if(p.hasPermission("tpp.player")) {
+			
+			TrenchPvP.getTeamManager().leaveTeam(p);
+			TeamManager.findTrenchPlayer(p).dequipKits();
+			p.setGameMode(GameMode.ADVENTURE);
+			p.teleport(Teleports.getQuitSpawn());
+			p.sendMessage("You've left Trench!");
+			return true;
+			
+		}else {
+			
+			p.sendMessage(TrenchPvP.CMD_PREFIX + ChatColor.RED + "You do not have access to this command");
+			return false;
+			
+		}
+		
+	}
 	
 	public static void kickPlayer(TrenchPlayer t, String reason) {
 		Announcer.messagePlayer(t.getPlayer(), reason);
