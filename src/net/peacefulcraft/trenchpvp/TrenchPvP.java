@@ -26,15 +26,16 @@ import net.peacefulcraft.trenchpvp.gameclasses.listeners.SniperRifleListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.SpeedShotListener;
 import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.KitSignListener;
+import net.peacefulcraft.trenchpvp.gamehandle.listeners.PvPController;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.QuitGameListen;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.joinGameSign;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.respawningTeleport;
+import net.peacefulcraft.trenchpvp.gamehandle.tasks.Startgame;
 //asfdasdfs
 public class TrenchPvP extends JavaPlugin{
 	//Prefix for all plugin -> player messages
 	public static final String CMD_PREFIX = ChatColor.DARK_RED + "[" + ChatColor.RED + "Trench" + ChatColor.DARK_RED + "]";
 
-	public static boolean gameRunning = false;
 	private static TeamManager teamManager;
 		public static TeamManager getTeamManager() {return teamManager;}
 
@@ -57,9 +58,11 @@ public class TrenchPvP extends JavaPlugin{
 		this.loadCommands();
 		this.loadEventListners();
 
-		TrenchPvP.gameRunning = true;
 		teamManager = new TeamManager();
 		this.getLogger().info("[TPP]Trench PvP Alpha 0.1 has been enabled!");
+		
+		//Trigger game start
+		(new Startgame()).runTaskAsynchronously(this);
 	}
 
 	public void onDisable(){
@@ -82,7 +85,8 @@ public class TrenchPvP extends JavaPlugin{
 		getServer().getPluginManager().registerEvents(new KitSignListener(), this);
 		getServer().getPluginManager().registerEvents(new QuitGameListen(), this);
 		getServer().getPluginManager().registerEvents(new respawningTeleport(), this);
-
+		getServer().getPluginManager().registerEvents(new PvPController(), this);
+		
 		//gameclasses.listeners
 		getServer().getPluginManager().registerEvents(new MediGunListener(), this);
 		getServer().getPluginManager().registerEvents(new ArmaClickListener(), this);
