@@ -62,7 +62,7 @@ public class TrenchPvP extends JavaPlugin{
 		this.getLogger().info("[TPP]Trench PvP Alpha 0.1 has been enabled!");
 		
 		//Trigger game start
-		(new Startgame()).runTaskAsynchronously(this);
+		(new Startgame(this)).runTask(this);
 	}
 
 	public void onDisable(){
