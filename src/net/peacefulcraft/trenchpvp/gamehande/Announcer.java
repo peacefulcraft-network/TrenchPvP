@@ -1,7 +1,5 @@
 package net.peacefulcraft.trenchpvp.gamehande;
 
-import java.util.ArrayList;
-
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
@@ -31,14 +29,12 @@ public abstract class Announcer {
 	}
 	
 		private static void messageTarget(String message, TrenchTeams team) {
-			ArrayList<TrenchPlayer> ps = TeamManager.getPlayers();
-			for(TrenchPlayer p : ps) {
-				if(team == null || p.getPlayerTeam() == team) {
-					p.getPlayer().sendMessage(message);
+			
+			TeamManager.ExecuteOnAllPlayers(
+				(TrenchPlayer t) -> {
+					if(team == null || t.getPlayerTeam() == team)
+						t.getPlayer().sendMessage(trench_prefix + message);
 				}
-			}
+			);
 		}
-	
-	
-	
 }

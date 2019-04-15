@@ -5,6 +5,7 @@ import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 
 import net.peacefulcraft.trenchpvp.TrenchPvP;
+import net.peacefulcraft.trenchpvp.gamehande.TeamManager.PlayerWideExecutor;
 import net.peacefulcraft.trenchpvp.gamehande.player.Teleports;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeams;
@@ -93,24 +94,22 @@ public class GameManager {
 	
 	public static void startGame() {
 		
-		//TODO: INIT Stats stuff
-		
-		
-		//Teleport players back to their spawns
-		for(TrenchPlayer t : TeamManager.getPlayers()) {
-			
-			if(t.getPlayerTeam() == TrenchTeams.RED) {
-				t.getPlayer().teleport(Teleports.getRedSpawn());
-			}else {
-				t.getPlayer().teleport(Teleports.getBlueSpawn());
+		TeamManager.ExecuteOnAllPlayers(
+			(TrenchPlayer t)->{
+				
+				if(t.getPlayerTeam() == TrenchTeams.RED) {
+					t.getPlayer().teleport(Teleports.getRedSpawn());
+				}else {
+					t.getPlayer().teleport(Teleports.getBlueSpawn());
+				}
+				
 			}
-			
-		}
+		);
 		
 		allowPvP = true;
 		
-		//Schedule Endgame proceedings for 10 minutes from now
-		(new Endgame()).runTaskLaterAsynchronously(TrenchPvP.getPluginInstance(), 1000 * 60 * 10);
+		//Schedule Endgame proceedings for 10 minutes from now (in ticks)
+		(new Endgame(TrenchPvP.getPluginInstance())).runTaskLater(TrenchPvP.getPluginInstance(), 20 * 60 * 10);
 		
 	}
 	
@@ -125,8 +124,8 @@ public class GameManager {
 		//TODO Send player's their stats
 		
 		
-		//Schedule new game for 10 seconds from now
-		(new Startgame()).runTaskLaterAsynchronously(TrenchPvP.getPluginInstance(), 1000 * 10);
+		//Schedule new game for 10 seconds from now (in ticks)
+		(new Startgame(TrenchPvP.getPluginInstance())).runTaskLater(TrenchPvP.getPluginInstance(), 200);
 		
 	}
 }
