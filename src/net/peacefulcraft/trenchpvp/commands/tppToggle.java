@@ -7,6 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import net.peacefulcraft.trenchpvp.TrenchPvP;
+import net.peacefulcraft.trenchpvp.gamehande.GameManager;
 
 public class tppToggle implements CommandExecutor{
 
@@ -15,13 +16,13 @@ public class tppToggle implements CommandExecutor{
 			if(command.getName().equalsIgnoreCase("tppToggle")){
 				Player player = (Player) sender;
 				if(player.hasPermission("tpp.admin.tppToggle")){
-					if(TrenchPvP.gameRunning){
-						TrenchPvP.gameRunning = false;
+					if(GameManager.isRunning()){
+						GameManager.setGameState(false);
 						player.sendMessage(TrenchPvP.CMD_PREFIX + ChatColor.WHITE + "Trench PvP is now " + ChatColor.RED + "disabled!");
 						return true;
 					}
 					else{
-						TrenchPvP.gameRunning = true;
+						GameManager.setGameState(true);;
 						player.sendMessage(TrenchPvP.CMD_PREFIX + ChatColor.WHITE + "Trench PvP is now " + ChatColor.GREEN + "enabled!");
 						return true;
 					}
