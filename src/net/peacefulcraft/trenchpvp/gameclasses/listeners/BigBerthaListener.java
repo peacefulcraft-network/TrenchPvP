@@ -31,7 +31,7 @@ public class BigBerthaListener implements Listener
 	private HashMap<UUID, Long> cooldown = new HashMap<UUID, Long>();
 	private HashMap<UUID, ArrayList<Location>> bombCord = new HashMap<UUID,ArrayList<Location>>();
 	private ArrayList<Location> bombs = new ArrayList<Location>();
-	private final int COOLDOWN_TIME = 20;
+	private final int COOLDOWN_TIME = 25;
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent e){
 		Player p = e.getPlayer();

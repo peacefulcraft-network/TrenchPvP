@@ -26,7 +26,7 @@ import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeams;
 
 public class MediGunListener implements Listener {
 	private HashMap<UUID, Long> cooldown = new HashMap<UUID, Long>();//Creating cooldown
-	private final int COOLDOWN_TIME = 1;
+	private final int COOLDOWN_TIME = 3;
 	@EventHandler
 	public void onRightClick(PlayerInteractEntityEvent e){
 		Player p = e.getPlayer();

@@ -73,8 +73,8 @@ public class PowerShotListener implements Listener
 			ItemStack rifle = p.getInventory().getItem(itemIndex);
 			
 			ItemStack shotR = new ItemStack(Material.BOW);
-			shotR.addEnchantment(Enchantment.ARROW_KNOCKBACK, 2);
-			shotR.addEnchantment(Enchantment.ARROW_DAMAGE, 4);
+			shotR.addEnchantment(Enchantment.ARROW_KNOCKBACK, 3);
+			shotR.addEnchantment(Enchantment.ARROW_DAMAGE, 2);
 			
 			ItemMeta meta = shotR.getItemMeta();
 			meta.setDisplayName("Component Rifle Mk.IV");
