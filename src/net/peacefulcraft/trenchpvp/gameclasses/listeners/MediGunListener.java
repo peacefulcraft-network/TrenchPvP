@@ -23,6 +23,8 @@ import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchMedic;
 import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeams;
+import net.peacefulcraft.trenchpvp.stats.StatTracker;
+import net.peacefulcraft.trenchpvp.stats.TrenchStats.MedicStat;
 
 public class MediGunListener implements Listener {
 	private HashMap<UUID, Long> cooldown = new HashMap<UUID, Long>();//Creating cooldown
@@ -77,13 +79,18 @@ public class MediGunListener implements Listener {
 		Vector vec = new Vector(tLoc.getX(), tLoc.getY(), tLoc.getZ());
 		e.getPlayer().launchProjectile(Snowball.class, vec);	
 		
+		StatTracker s = new StatTracker();//Stat Tracker
+		
 		//Give target player health, 1 heart UNLESS full health, then over heal 2 hearts
 		Damageable patient = (Damageable) e.getRightClicked();
 		if((patient.getHealth() + 2) > 20){
 			e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 1, 16), true);
+			s.track(p.getUniqueId(), MedicStat.DamageHealed, 4);
 		}else{
 			patient.setHealth((patient.getHealth() + 2));
+			s.track(p.getUniqueId(), MedicStat.DamageHealed, 2);
 		}
+		
 	}
 	public boolean canUseAgain(Player player)
 	{

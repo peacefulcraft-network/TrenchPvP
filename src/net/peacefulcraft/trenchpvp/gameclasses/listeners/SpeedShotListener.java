@@ -17,6 +17,8 @@ import org.bukkit.potion.PotionEffectType;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
 import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
+import net.peacefulcraft.trenchpvp.stats.StatTracker;
+import net.peacefulcraft.trenchpvp.stats.TrenchStats.SpyStat;
 
 public class SpeedShotListener implements Listener
 {
@@ -24,7 +26,7 @@ public class SpeedShotListener implements Listener
 	private final int COOLDOWN_TIME = 16;
 	
 	@EventHandler
-	public void onrightClick(PlayerInteractEntityEvent e)
+	private void onrightClick(PlayerInteractEntityEvent e)
 	{
 		Player p = e.getPlayer();
 		//Checks item in main hand is 
@@ -40,46 +42,37 @@ public class SpeedShotListener implements Listener
 		
 		if(!(t.getKitType() == TrenchKits.SPY)) return;
 		
-		if(cooldown.containsKey(p.getUniqueId()))
-		{
+		if(cooldown.containsKey(p.getUniqueId())) {
 			long timeLeft = ((cooldown.get(p.getUniqueId())/1000) + COOLDOWN_TIME) - (System.currentTimeMillis()/1000);
-			if(canUseAgain(p) == true)
-			{
-				TrenchPlayer spy, target;
-				try {
-					spy = TeamManager.findTrenchPlayer(e.getPlayer());
-					target = TeamManager.findTrenchPlayer((Player)e.getRightClicked());
-				} catch (RuntimeException x) {
-					return;
-				}
-				if(!(spy.getPlayerTeam() == target.getPlayerTeam())) return;
-				target.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 140, 4));
-				p.sendMessage(ChatColor.RED + "Ability is now on cooldown for " + COOLDOWN_TIME + " seconds.");
-			}
-			else if(canUseAgain(p) == false)
-			{
+			if(canUseAgain(p) == true) {
+				abilityEffects(e);
+			} else if(canUseAgain(p) == false) {
 				p.sendMessage(ChatColor.RED + "Ability is on cooldown for " + timeLeft + " seconds!");
 			}
-		}
-		else
-		{
+		} else {
 			cooldown.put(p.getUniqueId(), System.currentTimeMillis());
-			TrenchPlayer spy, target;
-			try {
-				spy = TeamManager.findTrenchPlayer(e.getPlayer());
-				target = TeamManager.findTrenchPlayer((Player)e.getRightClicked());
-			} catch (RuntimeException x) {
-				return;
-			}
-			if(!(spy.getPlayerTeam() == target.getPlayerTeam())) return;
-			target.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 140, 4));
-			p.sendMessage(ChatColor.RED + "Ability is now on cooldown for " + COOLDOWN_TIME + " seconds.");
+			abilityEffects(e);
 		}
 	}
-	public boolean canUseAgain(Player player)
-	{
+	private boolean canUseAgain(Player player) {
 		long lastTimeUsed = cooldown.get(player.getUniqueId());
 		long timeToWait = TimeUnit.SECONDS.toMillis(COOLDOWN_TIME);
 		return (System.currentTimeMillis() - lastTimeUsed) > timeToWait;
+	}
+	private void abilityEffects(PlayerInteractEntityEvent e) {
+		Player p = e.getPlayer();
+		TrenchPlayer spy, target;
+		try {
+			spy = TeamManager.findTrenchPlayer(e.getPlayer());
+			target = TeamManager.findTrenchPlayer((Player)e.getRightClicked());
+		} catch (RuntimeException x) {
+			return;
+		}
+		if(!(spy.getPlayerTeam() == target.getPlayerTeam())) return;
+		target.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 140, 4));
+		p.sendMessage(ChatColor.RED + "Ability is now on cooldown for " + COOLDOWN_TIME + " seconds.");
+		
+		StatTracker s = new StatTracker(); //Stat tracking handler
+		s.track(p.getUniqueId(), SpyStat.SpeedShotUsage, 1);
 	}
 }

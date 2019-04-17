@@ -22,7 +22,7 @@ import net.peacefulcraft.trenchpvp.gameclasses.listeners.MediGunListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.OnslaughtListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.PowerShotListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.SlimSlicerListener;
-import net.peacefulcraft.trenchpvp.gameclasses.listeners.SniperRifleListener;
+import net.peacefulcraft.trenchpvp.gameclasses.listeners.PoisonRoundListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.SpeedShotListener;
 import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.KitSignListener;
@@ -97,7 +97,7 @@ public class TrenchPvP extends JavaPlugin{
 		getServer().getPluginManager().registerEvents(new SlimSlicerListener(), this);
 		getServer().getPluginManager().registerEvents(new FlamethrowerListener(), this);
 		getServer().getPluginManager().registerEvents(new InfernoTrapListener(), this);
-		getServer().getPluginManager().registerEvents(new SniperRifleListener(), this);
+		getServer().getPluginManager().registerEvents(new PoisonRoundListener(), this);
 		getServer().getPluginManager().registerEvents(new PowerShotListener(), this);
 		getServer().getPluginManager().registerEvents(new GrenadeLauncherListener(), this);
 		getServer().getPluginManager().registerEvents(new BigBerthaListener(), this);

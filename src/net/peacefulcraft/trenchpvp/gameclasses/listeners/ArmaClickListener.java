@@ -17,6 +17,8 @@ import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
 import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeams;
+import net.peacefulcraft.trenchpvp.stats.StatTracker;
+import net.peacefulcraft.trenchpvp.stats.TrenchStats.HeavyStat;
 
 public class ArmaClickListener implements Listener
 {
@@ -49,10 +51,7 @@ public class ArmaClickListener implements Listener
 			long timeLeft = ((cooldown.get(p.getUniqueId())/1000) + COOLDOWN_TIME) - (System.currentTimeMillis()/1000);
 			if(canUseAgain(p) == true)
 			{
-				p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 140, 4));
-				p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 140, 3));
-				p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 140, 5));
-				p.sendMessage(ChatColor.RED + "Ability is now on cooldown for " + COOLDOWN_TIME + " seconds.");
+				abilityEffects(p);
 			}
 			else if(canUseAgain(p) == false)
 			{
@@ -62,10 +61,7 @@ public class ArmaClickListener implements Listener
 		else
 		{
 			cooldown.put(p.getUniqueId(), System.currentTimeMillis());
-			p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 140, 4));
-			p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 140, 3));
-			p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 140, 5));
-			p.sendMessage(ChatColor.RED + "Ability is now on cooldown for " + COOLDOWN_TIME + " seconds.");
+			abilityEffects(p);
 		}
 
 	}
@@ -75,4 +71,13 @@ public class ArmaClickListener implements Listener
 		long timeToWait = TimeUnit.SECONDS.toMillis(COOLDOWN_TIME);
 		return (System.currentTimeMillis() - lastTimeUsed) > timeToWait;
  	}
+	private void abilityEffects(Player p) {
+		p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 140, 4));
+		p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 140, 3));
+		p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 140, 5));
+		p.sendMessage(ChatColor.RED + "Ability is now on cooldown for " + COOLDOWN_TIME + " seconds.");
+		
+		StatTracker s = new StatTracker(); //Handling of stat tracking
+		s.track(p.getUniqueId(), HeavyStat.ArmadilloShellUsage, 1);
+	}
 }

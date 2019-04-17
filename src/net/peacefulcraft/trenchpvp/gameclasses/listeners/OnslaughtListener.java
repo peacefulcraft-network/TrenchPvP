@@ -1,6 +1,5 @@
 package net.peacefulcraft.trenchpvp.gameclasses.listeners;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -17,6 +16,8 @@ import org.bukkit.potion.PotionEffectType;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
 import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
+import net.peacefulcraft.trenchpvp.stats.StatTracker;
+import net.peacefulcraft.trenchpvp.stats.TrenchStats.SoldierStat;
 
 public class OnslaughtListener implements Listener
 {
@@ -69,6 +70,7 @@ public class OnslaughtListener implements Listener
 		
 		if(killCount.containsKey(p.getUniqueId())) {
 			killCount.remove(p.getUniqueId());
+			onslaughtTracking(p);
 		}
 	}
 	/*
@@ -87,6 +89,19 @@ public class OnslaughtListener implements Listener
 				p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 99999, 1+i));
 			}
 		}
-		
+	}
+	/*
+	 * Compares and tracks highest onslaught value
+	 */
+	private void onslaughtTracking(Player p) {
+		StatTracker s = new StatTracker();
+		if(killCount.containsKey(p.getUniqueId())) {
+			int streak = killCount.get(p.getUniqueId());
+			if(s.check(p.getUniqueId(), SoldierStat.HighestOnslaughtPerRound) == true) {
+				if(streak >= s.getValue(p.getUniqueId(), SoldierStat.HighestOnslaughtPerRound)) {
+					s.track(p.getUniqueId(), SoldierStat.HighestOnslaughtPerRound, streak);
+				}
+			}
+		}
 	}
 }
