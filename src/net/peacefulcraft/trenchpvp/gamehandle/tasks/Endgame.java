@@ -18,7 +18,7 @@ public class Endgame extends BukkitRunnable{
 		plugin.getServer().getConsoleSender().sendMessage("[TPvP] Executing Start Game Task");
 		
 		SyncStats sync = new SyncStats();
-		sync.setStatData();//TODO: GIVE IT STATS
+		sync.commitStats(null);//TODO: GIVE IT STATS
 		sync.runTaskAsynchronously(plugin);
 		
 		GameManager.endGame();		
