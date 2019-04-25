@@ -9,7 +9,8 @@ public class TrenchStats {
 	public enum GeneralStat implements TrenchStat {
 		player_bread_eaten,
 		player_health_potion_drank, player_kills, player_damage,
-		player_highest_kill_streak, player_highest_round_kill_count
+		player_highest_kill_streak, player_highest_round_kill_count,
+		player_friendly_kills
 	}
 	public enum DemoStat implements TrenchStat {
 		demoman_kills, demoman_daamage_dealt, demoman_bethas_placed 

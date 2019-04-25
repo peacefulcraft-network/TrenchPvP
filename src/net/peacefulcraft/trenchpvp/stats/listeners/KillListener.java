@@ -55,7 +55,6 @@ public class KillListener implements Listener
 			spyKill(killer);
 		}
 	}
-	
 	private void demoKill(Player demoman) {
 		TrenchPvP.getStatTracker().track(demoman.getUniqueId(), DemoStat.demoman_kills, 1);
 	}
