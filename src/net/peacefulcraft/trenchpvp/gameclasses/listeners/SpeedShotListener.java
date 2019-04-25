@@ -14,6 +14,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
 import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
@@ -72,7 +73,6 @@ public class SpeedShotListener implements Listener
 		target.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 140, 4));
 		p.sendMessage(ChatColor.RED + "Ability is now on cooldown for " + COOLDOWN_TIME + " seconds.");
 		
-		StatTracker s = new StatTracker(); //Stat tracking handler
-		s.track(p.getUniqueId(), SpyStat.SpeedShotUsage, 1);
+		TrenchPvP.getStatTracker().track(p.getUniqueId(), SpyStat.spy_speed_shot_usage, 1);
 	}
 }

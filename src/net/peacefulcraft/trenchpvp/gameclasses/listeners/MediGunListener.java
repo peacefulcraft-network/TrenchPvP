@@ -18,6 +18,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
+import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchMedic;
 import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
@@ -79,16 +80,14 @@ public class MediGunListener implements Listener {
 		Vector vec = new Vector(tLoc.getX(), tLoc.getY(), tLoc.getZ());
 		e.getPlayer().launchProjectile(Snowball.class, vec);	
 		
-		StatTracker s = new StatTracker();//Stat Tracker
-		
 		//Give target player health, 1 heart UNLESS full health, then over heal 2 hearts
 		Damageable patient = (Damageable) e.getRightClicked();
 		if((patient.getHealth() + 2) > 20){
 			e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 1, 16), true);
-			s.track(p.getUniqueId(), MedicStat.DamageHealed, 4);
+			TrenchPvP.getStatTracker().track(p.getUniqueId(), MedicStat.medic_damage_healed, 4);
 		}else{
 			patient.setHealth((patient.getHealth() + 2));
-			s.track(p.getUniqueId(), MedicStat.DamageHealed, 2);
+			TrenchPvP.getStatTracker().track(p.getUniqueId(), MedicStat.medic_damage_healed, 2);
 		}
 		
 	}

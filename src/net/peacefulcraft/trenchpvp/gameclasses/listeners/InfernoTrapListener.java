@@ -56,8 +56,7 @@ public class InfernoTrapListener implements Listener
             		 ItemStack trap = p.getInventory().getItem(itemIndex);
             		 trapCord.put(p.getUniqueId(), traps);
             		 
-            		 StatTracker s = new StatTracker();//Handling stat tracking
-            		 s.track(p.getUniqueId(), PyroStat.InfernoTrapsPlaced, 1);
+            		 TrenchPvP.getStatTracker().track(p.getUniqueId(), PyroStat.pyro_traps_placed, 1);
             		 
             		 if(trap.getAmount() <= 1) {
             			 upBlock.setType(Material.LIGHT_WEIGHTED_PRESSURE_PLATE);//"Places" trap

@@ -64,7 +64,7 @@ public class PoisonRoundListener implements Listener
 			p.sendMessage(ChatColor.RED + "Ability is now on cooldown for " + COOLDOWN_TIME + " seconds.");
 		}
 	}
-	public boolean canUseAgain(Player player)
+	private boolean canUseAgain(Player player)
 	{
 		long lastTimeUsed = cooldown.get(player.getUniqueId());
 		long timeToWait = TimeUnit.SECONDS.toMillis(COOLDOWN_TIME);
@@ -84,8 +84,7 @@ public class PoisonRoundListener implements Listener
 			
 			p.getInventory().setItem(itemIndex, tipped);
 			
-			StatTracker s = new StatTracker();//Stat tracking handler
-			s.track(p.getUniqueId(), SniperStat.PoisonRoundUpgrades, 1);
+			TrenchPvP.getStatTracker().track(p.getUniqueId(), SniperStat.sniper_poison_upgrades, 1);
 			
 			//Delay arrow return switch
 			BukkitScheduler scheduler = Bukkit.getServer().getScheduler();

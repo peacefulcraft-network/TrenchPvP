@@ -13,6 +13,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
 import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
@@ -77,7 +78,6 @@ public class ArmaClickListener implements Listener
 		p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 140, 5));
 		p.sendMessage(ChatColor.RED + "Ability is now on cooldown for " + COOLDOWN_TIME + " seconds.");
 		
-		StatTracker s = new StatTracker(); //Handling of stat tracking
-		s.track(p.getUniqueId(), HeavyStat.ArmadilloShellUsage, 1);
+		TrenchPvP.getStatTracker().track(p.getUniqueId(), HeavyStat.heavy_armadillo_usage, 1);
 	}
 }

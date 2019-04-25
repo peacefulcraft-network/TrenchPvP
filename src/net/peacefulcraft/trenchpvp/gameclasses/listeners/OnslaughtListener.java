@@ -13,6 +13,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
 import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
@@ -94,12 +95,11 @@ public class OnslaughtListener implements Listener
 	 * Compares and tracks highest onslaught value
 	 */
 	private void onslaughtTracking(Player p) {
-		StatTracker s = new StatTracker();
 		if(killCount.containsKey(p.getUniqueId())) {
 			int streak = killCount.get(p.getUniqueId());
-			if(s.check(p.getUniqueId(), SoldierStat.HighestOnslaughtPerRound) == true) {
-				if(streak >= s.getValue(p.getUniqueId(), SoldierStat.HighestOnslaughtPerRound)) {
-					s.track(p.getUniqueId(), SoldierStat.HighestOnslaughtPerRound, streak);
+			if(TrenchPvP.getStatTracker().check(p.getUniqueId(), SoldierStat.soldier_highest_onslaught) == true) {
+				if(streak >= TrenchPvP.getStatTracker().getValue(p.getUniqueId(), SoldierStat.soldier_highest_onslaught)) {
+					TrenchPvP.getStatTracker().track(p.getUniqueId(), SoldierStat.soldier_highest_onslaught, streak);
 				}
 			}
 		}

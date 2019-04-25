@@ -84,8 +84,7 @@ public class PowerShotListener implements Listener
 			
 			p.getInventory().setItem(itemIndex, shotR);
 			
-			StatTracker s = new StatTracker();//Stat tracking handler
-			s.track(p.getUniqueId(), SniperStat.PowerShotUpgrades, 1);
+			TrenchPvP.getStatTracker().track(p.getUniqueId(), SniperStat.sniper_power_shot_upgrades, 1);
 			
 			BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
             scheduler.scheduleSyncDelayedTask(TrenchPvP.getPluginInstance() , new Runnable() {

@@ -6,6 +6,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
+import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
 import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
@@ -22,7 +23,6 @@ import net.peacefulcraft.trenchpvp.stats.TrenchStats.SpyStat;
 
 public class DamageListener implements Listener
 {
-	StatTracker s = new StatTracker();
 	@EventHandler
 	private void onDamageEvent(EntityDamageByEntityEvent e) {
 		Entity agent = e.getDamager();
@@ -41,24 +41,24 @@ public class DamageListener implements Listener
 				TrenchKits kit = t.getKitType();
 				int damage = (int) e.getDamage();
 				
-				s.track(damager.getUniqueId(), GeneralStat.TotalDamage, damage);
+				TrenchPvP.getStatTracker().track(damager.getUniqueId(), GeneralStat.player_damage, damage);
 				
 				if(kit == TrenchKits.DEMOMAN) {
-					s.track(damager.getUniqueId(), DemoStat.DamageDealt, damage);
+					TrenchPvP.getStatTracker().track(damager.getUniqueId(), DemoStat.demoman_daamage_dealt, damage);
 				} else if(kit == TrenchKits.HEAVY) {
-					s.track(damager.getUniqueId(), HeavyStat.DamageDealt, damage);
+					TrenchPvP.getStatTracker().track(damager.getUniqueId(), HeavyStat.heavy_damage_dealt, damage);
 				} else if(kit == TrenchKits.MEDIC) {
-					s.track(damager.getUniqueId(), MedicStat.DamageDealt, damage);
+					TrenchPvP.getStatTracker().track(damager.getUniqueId(), MedicStat.medic_damage_dealt, damage);
 				} else if(kit == TrenchKits.PYRO) {
-					s.track(damager.getUniqueId(), PyroStat.DamageDealt, damage);
+					TrenchPvP.getStatTracker().track(damager.getUniqueId(), PyroStat.pyro_damage_dealt, damage);
 				} else if(kit == TrenchKits.SCOUT) {
-					s.track(damager.getUniqueId(), ScoutStat.DamageDealt, damage);
+					TrenchPvP.getStatTracker().track(damager.getUniqueId(), ScoutStat.scout_damage_dealt, damage);
 				} else if(kit == TrenchKits.SNIPER) {
-					s.track(damager.getUniqueId(), SniperStat.DamageDealt, damage);
+					TrenchPvP.getStatTracker().track(damager.getUniqueId(), SniperStat.sniper_damage_dealt, damage);
 				} else if(kit == TrenchKits.SOLDIER) {
-					s.track(damager.getUniqueId(), SoldierStat.DamageDealt, damage);
+					TrenchPvP.getStatTracker().track(damager.getUniqueId(), SoldierStat.soldier_damage_dealt, damage);
 				} else if(kit == TrenchKits.SPY) {
-					s.track(damager.getUniqueId(), SpyStat.DamageDealt, damage);
+					TrenchPvP.getStatTracker().track(damager.getUniqueId(), SpyStat.spy_damage_dealt, damage);
 				}
 			}
 		}

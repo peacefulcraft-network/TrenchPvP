@@ -8,6 +8,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
+import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.stats.StatTracker;
@@ -16,7 +17,6 @@ import net.peacefulcraft.trenchpvp.stats.TrenchStats.GeneralStat;
 public class KillStreakListener implements Listener
 {
 	private HashMap<UUID, Integer> reference = new HashMap<UUID, Integer>();
-	StatTracker s = new StatTracker();
 	@EventHandler
 	private void onKillEvent(PlayerDeathEvent e) {
 		Player killer = e.getEntity().getKiller();
@@ -28,7 +28,7 @@ public class KillStreakListener implements Listener
 			return;
 		}
 		
-		s.track(killer.getUniqueId(), GeneralStat.HighestKillStreak, 1);
+		TrenchPvP.getStatTracker().track(killer.getUniqueId(), GeneralStat.player_highest_kill_streak, 1);
 		if(reference.containsKey(killer.getUniqueId())) {
 			reference.put(killer.getUniqueId(), reference.get(killer.getUniqueId()) + 1);
 		} else if(!(reference.containsKey(killer.getUniqueId()))) {
@@ -49,10 +49,10 @@ public class KillStreakListener implements Listener
 			return;
 		}
 		
-		if(s.check(victim.getUniqueId(), GeneralStat.HighestKillStreak) == true) {
+		if(TrenchPvP.getStatTracker().check(victim.getUniqueId(), GeneralStat.player_highest_kill_streak) == true) {
 			int streak = reference.get(victim.getUniqueId());
-			if(streak >= s.getValue(victim.getUniqueId(), GeneralStat.HighestKillStreak)) {
-				s.track(victim.getUniqueId(), GeneralStat.HighestKillStreak, streak);
+			if(streak >= TrenchPvP.getStatTracker().getValue(victim.getUniqueId(), GeneralStat.player_highest_kill_streak)) {
+				TrenchPvP.getStatTracker().track(victim.getUniqueId(), GeneralStat.player_highest_kill_streak, streak);
 				reference.put(victim.getUniqueId(), 0);
 			} else {
 				reference.put(victim.getUniqueId(), 0);

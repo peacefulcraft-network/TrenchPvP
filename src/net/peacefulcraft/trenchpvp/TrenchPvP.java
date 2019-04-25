@@ -31,6 +31,7 @@ import net.peacefulcraft.trenchpvp.gamehandle.listeners.QuitGameListen;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.joinGameSign;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.respawningTeleport;
 import net.peacefulcraft.trenchpvp.gamehandle.tasks.Startgame;
+import net.peacefulcraft.trenchpvp.stats.StatTracker;
 //asfdasdfs
 public class TrenchPvP extends JavaPlugin{
 	//Prefix for all plugin -> player messages
@@ -44,6 +45,9 @@ public class TrenchPvP extends JavaPlugin{
 
 	private static TrenchConfig config;
 		public static TrenchConfig getTrenchCFG() {return config;}
+		
+	private static StatTracker tracker;
+		public static StatTracker getStatTracker() {return tracker;}
 
 	public TrenchPvP(){
 		main = this;
@@ -59,6 +63,7 @@ public class TrenchPvP extends JavaPlugin{
 		this.loadEventListners();
 
 		teamManager = new TeamManager();
+		tracker = new StatTracker();
 		this.getLogger().info("[TPP]Trench PvP Alpha 0.1 has been enabled!");
 		
 		//Trigger game start
