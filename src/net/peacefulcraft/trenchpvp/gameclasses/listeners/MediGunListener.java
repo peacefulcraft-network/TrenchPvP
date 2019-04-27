@@ -18,15 +18,18 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
+import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchMedic;
 import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeams;
+import net.peacefulcraft.trenchpvp.stats.StatTracker;
+import net.peacefulcraft.trenchpvp.stats.TrenchStats.MedicStat;
 
 public class MediGunListener implements Listener {
 	private HashMap<UUID, Long> cooldown = new HashMap<UUID, Long>();//Creating cooldown
-	private final int COOLDOWN_TIME = 1;
+	private final int COOLDOWN_TIME = 3;
 	@EventHandler
 	public void onRightClick(PlayerInteractEntityEvent e){
 		Player p = e.getPlayer();
@@ -81,9 +84,12 @@ public class MediGunListener implements Listener {
 		Damageable patient = (Damageable) e.getRightClicked();
 		if((patient.getHealth() + 2) > 20){
 			e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 1, 16), true);
+			TrenchPvP.getStatTracker().track(p.getUniqueId(), MedicStat.medic_damage_healed, 4);
 		}else{
 			patient.setHealth((patient.getHealth() + 2));
+			TrenchPvP.getStatTracker().track(p.getUniqueId(), MedicStat.medic_damage_healed, 2);
 		}
+		
 	}
 	public boolean canUseAgain(Player player)
 	{

@@ -25,13 +25,15 @@ import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
 import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
+import net.peacefulcraft.trenchpvp.stats.StatTracker;
+import net.peacefulcraft.trenchpvp.stats.TrenchStats.DemoStat;
 
 public class BigBerthaListener implements Listener
 {
 	private HashMap<UUID, Long> cooldown = new HashMap<UUID, Long>();
 	private HashMap<UUID, ArrayList<Location>> bombCord = new HashMap<UUID,ArrayList<Location>>();
 	private ArrayList<Location> bombs = new ArrayList<Location>();
-	private final int COOLDOWN_TIME = 20;
+	private final int COOLDOWN_TIME = 25;
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent e){
 		Player p = e.getPlayer();
@@ -82,6 +84,8 @@ public class BigBerthaListener implements Listener
 				bombCord.get(p.getUniqueId()).add(upBlock.getLocation());
 				p.sendMessage(ChatColor.RED + "Fuse is lit!");
 				
+				TrenchPvP.getStatTracker().track(p.getUniqueId(), DemoStat.demoman_bethas_placed, 1);
+				
 				ItemStack bomb = p.getInventory().getItem(1); //Copies bomb stack and clears
 				p.getInventory().clear(1);
 				
@@ -103,7 +107,7 @@ public class BigBerthaListener implements Listener
 	                	}
 	                }
 	            }, 100);
-	            BukkitScheduler scheduler2 = Bukkit.getServer().getScheduler();//Delayed explosion; 24 seconds
+	            BukkitScheduler scheduler2 = Bukkit.getServer().getScheduler();//Delayed item return; 24 seconds
 	            scheduler2.scheduleSyncDelayedTask(TrenchPvP.getPluginInstance() , new Runnable() {
 	                public void run() {
 	                	p.getInventory().setItem(1, bomb);

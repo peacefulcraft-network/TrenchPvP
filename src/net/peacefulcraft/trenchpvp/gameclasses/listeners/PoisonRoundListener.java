@@ -21,8 +21,10 @@ import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
 import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
+import net.peacefulcraft.trenchpvp.stats.StatTracker;
+import net.peacefulcraft.trenchpvp.stats.TrenchStats.SniperStat;
 
-public class SniperRifleListener implements Listener
+public class PoisonRoundListener implements Listener
 {
 	private HashMap<UUID, Long> cooldown = new HashMap<UUID, Long>();//Creating cooldown
 	private final int COOLDOWN_TIME = 12;
@@ -62,7 +64,7 @@ public class SniperRifleListener implements Listener
 			p.sendMessage(ChatColor.RED + "Ability is now on cooldown for " + COOLDOWN_TIME + " seconds.");
 		}
 	}
-	public boolean canUseAgain(Player player)
+	private boolean canUseAgain(Player player)
 	{
 		long lastTimeUsed = cooldown.get(player.getUniqueId());
 		long timeToWait = TimeUnit.SECONDS.toMillis(COOLDOWN_TIME);
@@ -81,6 +83,8 @@ public class SniperRifleListener implements Listener
 			tipped.setItemMeta(pMeta);
 			
 			p.getInventory().setItem(itemIndex, tipped);
+			
+			TrenchPvP.getStatTracker().track(p.getUniqueId(), SniperStat.sniper_poison_upgrades, 1);
 			
 			//Delay arrow return switch
 			BukkitScheduler scheduler = Bukkit.getServer().getScheduler();

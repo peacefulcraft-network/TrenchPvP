@@ -22,7 +22,7 @@ import net.peacefulcraft.trenchpvp.gameclasses.listeners.MediGunListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.OnslaughtListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.PowerShotListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.SlimSlicerListener;
-import net.peacefulcraft.trenchpvp.gameclasses.listeners.SniperRifleListener;
+import net.peacefulcraft.trenchpvp.gameclasses.listeners.PoisonRoundListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.SpeedShotListener;
 import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.KitSignListener;
@@ -31,6 +31,7 @@ import net.peacefulcraft.trenchpvp.gamehandle.listeners.QuitGameListen;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.joinGameSign;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.respawningTeleport;
 import net.peacefulcraft.trenchpvp.gamehandle.tasks.Startgame;
+import net.peacefulcraft.trenchpvp.stats.StatTracker;
 //asfdasdfs
 public class TrenchPvP extends JavaPlugin{
 	//Prefix for all plugin -> player messages
@@ -44,6 +45,9 @@ public class TrenchPvP extends JavaPlugin{
 
 	private static TrenchConfig config;
 		public static TrenchConfig getTrenchCFG() {return config;}
+		
+	private static StatTracker tracker;
+		public static StatTracker getStatTracker() {return tracker;}
 
 	public TrenchPvP(){
 		main = this;
@@ -59,6 +63,7 @@ public class TrenchPvP extends JavaPlugin{
 		this.loadEventListners();
 
 		teamManager = new TeamManager();
+		tracker = new StatTracker();
 		this.getLogger().info("[TPP]Trench PvP Alpha 0.1 has been enabled!");
 		
 		//Trigger game start
@@ -97,7 +102,7 @@ public class TrenchPvP extends JavaPlugin{
 		getServer().getPluginManager().registerEvents(new SlimSlicerListener(), this);
 		getServer().getPluginManager().registerEvents(new FlamethrowerListener(), this);
 		getServer().getPluginManager().registerEvents(new InfernoTrapListener(), this);
-		getServer().getPluginManager().registerEvents(new SniperRifleListener(), this);
+		getServer().getPluginManager().registerEvents(new PoisonRoundListener(), this);
 		getServer().getPluginManager().registerEvents(new PowerShotListener(), this);
 		getServer().getPluginManager().registerEvents(new GrenadeLauncherListener(), this);
 		getServer().getPluginManager().registerEvents(new BigBerthaListener(), this);

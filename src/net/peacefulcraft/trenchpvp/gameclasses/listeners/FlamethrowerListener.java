@@ -7,6 +7,7 @@ import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -47,6 +48,13 @@ public class FlamethrowerListener implements Listener
 
         Vector playerDirection = p.getLocation().getDirection();
         Vector particleVector = playerDirection.clone();
+        
+		Vector fireballVector = playerDirection.clone();
+		        
+		        Fireball f = p.launchProjectile(Fireball.class);
+		        f.setVelocity(fireballVector.multiply(2));//Possibly remove because garbage
+		        f.setIsIncendiary(true);
+		        f.setYield(0);
 
         playerDirection.multiply(8); // Set length to 8 blocks out
 

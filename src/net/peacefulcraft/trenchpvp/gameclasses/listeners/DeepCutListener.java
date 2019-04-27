@@ -72,5 +72,6 @@ public class DeepCutListener implements Listener
 			victim.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 200, 1));
 			victim.sendMessage("You Are Bleeding!");
 		}
+		abilityCase = true; //Quick fix to continuous wither damage occurrence. Change?
 	}
 }

@@ -23,6 +23,8 @@ import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
 import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
+import net.peacefulcraft.trenchpvp.stats.StatTracker;
+import net.peacefulcraft.trenchpvp.stats.TrenchStats.PyroStat;
 
 public class InfernoTrapListener implements Listener
 {
@@ -53,6 +55,9 @@ public class InfernoTrapListener implements Listener
             	 if(itemIndex >= 0) {
             		 ItemStack trap = p.getInventory().getItem(itemIndex);
             		 trapCord.put(p.getUniqueId(), traps);
+            		 
+            		 TrenchPvP.getStatTracker().track(p.getUniqueId(), PyroStat.pyro_traps_placed, 1);
+            		 
             		 if(trap.getAmount() <= 1) {
             			 upBlock.setType(Material.LIGHT_WEIGHTED_PRESSURE_PLATE);//"Places" trap
             			 //Adds location of trap to ArrayList HashMap
