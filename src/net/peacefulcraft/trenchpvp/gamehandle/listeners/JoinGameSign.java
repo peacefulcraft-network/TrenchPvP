@@ -26,19 +26,19 @@ public class JoinGameSign implements Listener {
 		
 		if(e.getClickedBlock() == null){return;}
 		
-		if(TeamManager.findTrenchPlayer(e.getPlayer()) != null) {
-			e.getPlayer().sendMessage(TrenchPvP.CMD_PREFIX + ChatColor.RED + " You're already playing TrenchPvP!");
-			return;
-		}
-		
 		if(e.getClickedBlock().getType() == Material.SIGN || e.getClickedBlock().getType() == Material.WALL_SIGN ){
 			
 			Block block = e.getClickedBlock();
 			Sign sign = (Sign)block.getState();
-			if(sign.getLine(0).equalsIgnoreCase("[TRJOIN]")){
-				
-				GameManager.joinPlayer(e.getPlayer());
-				
+			if(sign.getLine(0).equalsIgnoreCase("[Trench]")){
+				if(sign.getLine(1).equalsIgnoreCase("Join")) {
+					if(TeamManager.findTrenchPlayer(e.getPlayer()) != null) {
+						e.getPlayer().sendMessage(TrenchPvP.CMD_PREFIX + ChatColor.RED + " You're already playing TrenchPvP!");
+						return;
+					}
+					
+					GameManager.joinPlayer(e.getPlayer());
+				}
 			}else{ return; }
 			
 		}else{ return; }
