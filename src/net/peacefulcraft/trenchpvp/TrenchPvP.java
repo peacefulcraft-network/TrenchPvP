@@ -31,7 +31,13 @@ import net.peacefulcraft.trenchpvp.gamehandle.listeners.QuitGameListen;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.joinGameSign;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.respawningTeleport;
 import net.peacefulcraft.trenchpvp.gamehandle.tasks.Startgame;
+import net.peacefulcraft.trenchpvp.gamehandle.tasks.SyncStats;
 import net.peacefulcraft.trenchpvp.stats.StatTracker;
+import net.peacefulcraft.trenchpvp.stats.listeners.ConsumeListener;
+import net.peacefulcraft.trenchpvp.stats.listeners.DamageListener;
+import net.peacefulcraft.trenchpvp.stats.listeners.FriendlykillListener;
+import net.peacefulcraft.trenchpvp.stats.listeners.KillListener;
+import net.peacefulcraft.trenchpvp.stats.listeners.KillStreakListener;
 //asfdasdfs
 public class TrenchPvP extends JavaPlugin{
 	//Prefix for all plugin -> player messages
@@ -64,6 +70,7 @@ public class TrenchPvP extends JavaPlugin{
 
 		teamManager = new TeamManager();
 		tracker = new StatTracker();
+		SyncStats.onEnable();
 		this.getLogger().info("[TPP]Trench PvP Alpha 0.1 has been enabled!");
 		
 		//Trigger game start
@@ -72,6 +79,7 @@ public class TrenchPvP extends JavaPlugin{
 
 	public void onDisable(){
 		this.saveConfig();
+		SyncStats.onDisable();
 		this.getLogger().info("[TPP]Trench PvP Alpha 0.1 has been disabled!");
 	}
 
@@ -108,6 +116,13 @@ public class TrenchPvP extends JavaPlugin{
 		getServer().getPluginManager().registerEvents(new BigBerthaListener(), this);
 		getServer().getPluginManager().registerEvents(new OnslaughtListener(), this);
 		getServer().getPluginManager().registerEvents(new DeepCutListener(), this);
+		
+		//Stat listeners
+		getServer().getPluginManager().registerEvents(new ConsumeListener(), this);
+		getServer().getPluginManager().registerEvents(new DamageListener(), this);
+		getServer().getPluginManager().registerEvents(new FriendlykillListener(), this);
+		getServer().getPluginManager().registerEvents(new KillListener(), this);
+		getServer().getPluginManager().registerEvents(new KillStreakListener(), this);
 	}
 
 }

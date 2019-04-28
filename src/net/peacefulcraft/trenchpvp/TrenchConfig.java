@@ -49,12 +49,13 @@ public class TrenchConfig {
 		blue_class_spawn = c.getConfigurationSection("trenchspawns.blue_class").getValues(false);
 		spectator_spawn = c.getConfigurationSection("trenchspawns.spectator").getValues(false);
 	
-		db_ip = (String) c.getConfigurationSection("database.ip").getValues(false).get("ip");
-		db_name = (String) c.getConfigurationSection("database.name").getValues(false).get("name");
-		db_user = (String) c.getConfigurationSection("database.username").getValues(false).get("username");
-		db_password = (String) c.getConfigurationSection("database.password").getValues(false).get("password");
+		db_ip = (String) c.getString("database.ip");
+		db_name = (String) c.getString("database.name");
+		db_user = (String) c.getString("database.username");
+		db_password = (String) c.getString("database.password");
+		
 	}
-
+	
 	public boolean isScoutEnabled() {
 		return scoutEnabled;
 	}

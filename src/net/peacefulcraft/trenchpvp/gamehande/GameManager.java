@@ -11,6 +11,7 @@ import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeams;
 import net.peacefulcraft.trenchpvp.gamehandle.tasks.Endgame;
 import net.peacefulcraft.trenchpvp.gamehandle.tasks.Startgame;
+import net.peacefulcraft.trenchpvp.gamehandle.tasks.SyncStats;
 
 public class GameManager {
 	
@@ -27,17 +28,13 @@ public class GameManager {
 			
 			if(GameManager.isRunning()) {
 							
-				try {
-					
-					TrenchPlayer t = TeamManager.findTrenchPlayer(p);
+				TrenchPlayer t = TeamManager.findTrenchPlayer(p);
+				if(t != null) {
 					p.sendMessage(TrenchPvP.CMD_PREFIX + ChatColor.RED + "You are already on a Trench team! Type /trleave to leave.");
-					return false;
-					
-				}catch(RuntimeException e) {
-					//RuntimeException fine, means user is not on a team
+					return true;
 				}
 				
-				TrenchPlayer t = TrenchPvP.getTeamManager().joinTeam(p);
+				t = TrenchPvP.getTeamManager().joinTeam(p);
 				t.dequipKits();
 				if(t.getPlayerTeam() == TrenchTeams.BLUE) {
 					p.teleport(Teleports.getBlueClassSpawn());
@@ -69,10 +66,15 @@ public class GameManager {
 	
 	public static boolean quitPlayer(Player p) {
 		
+		TrenchPlayer t = TeamManager.findTrenchPlayer(p);
+		if(t == null) {
+			return false;
+		}
+		
 		if(p.hasPermission("tpp.player")) {
 			
-			TrenchPvP.getTeamManager().leaveTeam(p);
 			TeamManager.findTrenchPlayer(p).dequipKits();
+			TrenchPvP.getTeamManager().leaveTeam(p);
 			p.setGameMode(GameMode.ADVENTURE);
 			p.teleport(Teleports.getQuitSpawn());
 			p.sendMessage("You've left Trench!");
@@ -121,7 +123,11 @@ public class GameManager {
 		allowPvP = false;
 		Announcer.messageAll("Game over! A new game will begin shortly.");
 		//TODO Announce winner
-		//TODO Send player's their stats
+		
+		SyncStats sync = new SyncStats();
+		sync.commitStats(TrenchPvP.getStatTracker().getStatData());
+		TrenchPvP.getStatTracker().clearStats();
+		sync.runTaskAsynchronously(TrenchPvP.getPluginInstance());
 		
 		
 		//Schedule new game for 10 seconds from now (in ticks)

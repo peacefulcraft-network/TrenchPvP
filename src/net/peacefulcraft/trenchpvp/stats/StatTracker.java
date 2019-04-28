@@ -6,8 +6,9 @@ import java.util.UUID;
 public class StatTracker
 {
 	private HashMap<UUID, HashMap<TrenchStat, Integer>> statMap = new HashMap<UUID, HashMap<TrenchStat, Integer>>();
-	public HashMap<TrenchStat, Integer> data = new HashMap<TrenchStat, Integer>();
-	
+		public HashMap<UUID, HashMap<TrenchStat, Integer>> getStatData(){ return statMap; }
+		public void clearStats() { statMap = new HashMap<UUID, HashMap<TrenchStat,Integer>>(); }
+		
 	public StatTracker() {
 
 	}
