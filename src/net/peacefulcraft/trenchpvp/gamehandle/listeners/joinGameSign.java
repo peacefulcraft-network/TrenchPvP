@@ -26,6 +26,11 @@ public class joinGameSign implements Listener {
 		
 		if(e.getClickedBlock() == null){return;}
 		
+		if(TeamManager.findTrenchPlayer(e.getPlayer()) != null) {
+			e.getPlayer().sendMessage(TrenchPvP.CMD_PREFIX + ChatColor.RED + " You're already playing TrenchPvP!");
+			return;
+		}
+		
 		if(e.getClickedBlock().getType() == Material.SIGN || e.getClickedBlock().getType() == Material.WALL_SIGN ){
 			
 			Block block = e.getClickedBlock();
