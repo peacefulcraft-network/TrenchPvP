@@ -1,6 +1,5 @@
 package net.peacefulcraft.trenchpvp.gameclasses.listeners;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -14,9 +13,12 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
 import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
+import net.peacefulcraft.trenchpvp.stats.StatTracker;
+import net.peacefulcraft.trenchpvp.stats.TrenchStats.SoldierStat;
 
 public class OnslaughtListener implements Listener
 {
@@ -26,12 +28,9 @@ public class OnslaughtListener implements Listener
 		String killed = e.getEntity().getName();
 		Player p = e.getEntity().getKiller();
 		
-		TrenchPlayer t;
-		try {
-			t = TeamManager.findTrenchPlayer(p);
-		} catch(RuntimeException x) {
-			return;
-		}
+		TrenchPlayer t = TeamManager.findTrenchPlayer(p);
+		if(t == null) { return; }
+		
 		if(!(t.getKitType() == TrenchKits.SOLDIER)) return;
 		
 		int itemIndex = p.getInventory().first(Material.REDSTONE);
@@ -69,6 +68,7 @@ public class OnslaughtListener implements Listener
 		
 		if(killCount.containsKey(p.getUniqueId())) {
 			killCount.remove(p.getUniqueId());
+			onslaughtTracking(p);
 		}
 	}
 	/*
@@ -87,6 +87,18 @@ public class OnslaughtListener implements Listener
 				p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 99999, 1+i));
 			}
 		}
-		
+	}
+	/*
+	 * Compares and tracks highest onslaught value
+	 */
+	private void onslaughtTracking(Player p) {
+		if(killCount.containsKey(p.getUniqueId())) {
+			int streak = killCount.get(p.getUniqueId());
+			if(TrenchPvP.getStatTracker().check(p.getUniqueId(), SoldierStat.soldier_highest_onslaught) == true) {
+				if(streak >= TrenchPvP.getStatTracker().getValue(p.getUniqueId(), SoldierStat.soldier_highest_onslaught)) {
+					TrenchPvP.getStatTracker().track(p.getUniqueId(), SoldierStat.soldier_highest_onslaught, streak);
+				}
+			}
+		}
 	}
 }

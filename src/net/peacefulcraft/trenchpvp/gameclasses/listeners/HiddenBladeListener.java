@@ -31,12 +31,8 @@ public class HiddenBladeListener implements Listener
 		if(!(p.getInventory().getItemInMainHand().getType() == Material.GOLDEN_SWORD)) return;
 		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Hidden Blade"))) return;
 		
-		TrenchPlayer t;
-		try {
-			t = TeamManager.findTrenchPlayer(p);
-		}catch(RuntimeException x) {
-			return;
-		}
+		TrenchPlayer t = TeamManager.findTrenchPlayer(p);
+		if(t == null) { return; }
 		
 		if(!(t.getKitType() == TrenchKits.SPY)) return;
 	

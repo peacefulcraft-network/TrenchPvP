@@ -20,6 +20,8 @@ import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
 import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
+import net.peacefulcraft.trenchpvp.stats.StatTracker;
+import net.peacefulcraft.trenchpvp.stats.TrenchStats.SniperStat;
 
 public class PowerShotListener implements Listener
 {
@@ -35,12 +37,8 @@ public class PowerShotListener implements Listener
 		if(!(p.getInventory().getItemInMainHand().getType() == Material.PISTON)) return;
 		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Power Shot"))) return;
 		
-		TrenchPlayer t;
-		try {
-			t = TeamManager.findTrenchPlayer(p);
-		}catch(RuntimeException x) {
-			return;
-		}
+		TrenchPlayer t = TeamManager.findTrenchPlayer(p);
+		if(t == null) { return; }
 		
 		if(!(t.getKitType() == TrenchKits.SNIPER)) return;
 		
@@ -73,14 +71,16 @@ public class PowerShotListener implements Listener
 			ItemStack rifle = p.getInventory().getItem(itemIndex);
 			
 			ItemStack shotR = new ItemStack(Material.BOW);
-			shotR.addEnchantment(Enchantment.ARROW_KNOCKBACK, 2);
-			shotR.addEnchantment(Enchantment.ARROW_DAMAGE, 4);
+			shotR.addEnchantment(Enchantment.ARROW_KNOCKBACK, 3);
+			shotR.addEnchantment(Enchantment.ARROW_DAMAGE, 2);
 			
 			ItemMeta meta = shotR.getItemMeta();
 			meta.setDisplayName("Component Rifle Mk.IV");
 			shotR.setItemMeta(meta);
 			
 			p.getInventory().setItem(itemIndex, shotR);
+			
+			TrenchPvP.getStatTracker().track(p.getUniqueId(), SniperStat.sniper_power_shot_upgrades, 1);
 			
 			BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
             scheduler.scheduleSyncDelayedTask(TrenchPvP.getPluginInstance() , new Runnable() {

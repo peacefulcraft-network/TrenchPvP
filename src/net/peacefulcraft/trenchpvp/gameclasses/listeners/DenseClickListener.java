@@ -20,7 +20,7 @@ import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeams;
 public class DenseClickListener implements Listener
 {
 	private HashMap<UUID, Long> cooldown = new HashMap<UUID, Long>();//Creating cooldown
-	private final int COOLDOWN_TIME = 8;
+	private final int COOLDOWN_TIME = 15;
 
 	@EventHandler
 	public void onRightClick(PlayerInteractEvent e)
@@ -30,12 +30,8 @@ public class DenseClickListener implements Listener
 		if(!(p.getInventory().getItemInMainHand().getType() == Material.IRON_AXE)) return;
 		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Dense Axe"))) return;
 
-		TrenchPlayer t;
-		try {
-			t = TeamManager.findTrenchPlayer(p);
-		}catch(RuntimeException x) {
-			return;
-		}
+		TrenchPlayer t = TeamManager.findTrenchPlayer(p);
+		if(t == null) { return; }
 
 		if(!(t.getKitType() == TrenchKits.HEAVY)) return;
 

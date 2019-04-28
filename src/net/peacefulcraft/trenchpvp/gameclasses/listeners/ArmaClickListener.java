@@ -13,15 +13,18 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
 import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeams;
+import net.peacefulcraft.trenchpvp.stats.StatTracker;
+import net.peacefulcraft.trenchpvp.stats.TrenchStats.HeavyStat;
 
 public class ArmaClickListener implements Listener
 {
 	private HashMap<UUID, Long> cooldown = new HashMap<UUID, Long>();//Creating cooldown
-	private final int COOLDOWN_TIME = 14;
+	private final int COOLDOWN_TIME = 20;
 
 	@EventHandler
 	public void onRightClick(PlayerInteractEvent e)
@@ -34,12 +37,9 @@ public class ArmaClickListener implements Listener
 		//if(!(e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK)) return;
 		//Confirms location
 
-		TrenchPlayer t;
-		try {
-			t = TeamManager.findTrenchPlayer(p);
-		}catch(RuntimeException x) {
-			return;
-		}
+		TrenchPlayer t = TeamManager.findTrenchPlayer(p);
+		if(t == null) { return; }
+
 
 		if(!(t.getKitType() == TrenchKits.HEAVY)) return;
 
@@ -49,10 +49,7 @@ public class ArmaClickListener implements Listener
 			long timeLeft = ((cooldown.get(p.getUniqueId())/1000) + COOLDOWN_TIME) - (System.currentTimeMillis()/1000);
 			if(canUseAgain(p) == true)
 			{
-				p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 140, 4));
-				p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 140, 3));
-				p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 140, 5));
-				p.sendMessage(ChatColor.RED + "Ability is now on cooldown for " + COOLDOWN_TIME + " seconds.");
+				abilityEffects(p);
 			}
 			else if(canUseAgain(p) == false)
 			{
@@ -62,10 +59,7 @@ public class ArmaClickListener implements Listener
 		else
 		{
 			cooldown.put(p.getUniqueId(), System.currentTimeMillis());
-			p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 140, 4));
-			p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 140, 3));
-			p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 140, 5));
-			p.sendMessage(ChatColor.RED + "Ability is now on cooldown for " + COOLDOWN_TIME + " seconds.");
+			abilityEffects(p);
 		}
 
 	}
@@ -75,4 +69,12 @@ public class ArmaClickListener implements Listener
 		long timeToWait = TimeUnit.SECONDS.toMillis(COOLDOWN_TIME);
 		return (System.currentTimeMillis() - lastTimeUsed) > timeToWait;
  	}
+	private void abilityEffects(Player p) {
+		p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 140, 4));
+		p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 140, 3));
+		p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 140, 5));
+		p.sendMessage(ChatColor.RED + "Ability is now on cooldown for " + COOLDOWN_TIME + " seconds.");
+		
+		TrenchPvP.getStatTracker().track(p.getUniqueId(), HeavyStat.heavy_armadillo_usage, 1);
+	}
 }

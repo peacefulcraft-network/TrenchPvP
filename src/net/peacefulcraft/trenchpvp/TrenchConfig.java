@@ -24,6 +24,11 @@ public class TrenchConfig {
 	private Map<String, Object> blue_class_spawn;
 	private Map<String, Object> spectator_spawn;
 	
+	private String db_ip = "";
+	private String db_name = "";
+	private String db_user = "";
+	private String db_password = "";
+	
 	public TrenchConfig(FileConfiguration c) {
 		
 		this.c = c;
@@ -44,8 +49,13 @@ public class TrenchConfig {
 		blue_class_spawn = c.getConfigurationSection("trenchspawns.blue_class").getValues(false);
 		spectator_spawn = c.getConfigurationSection("trenchspawns.spectator").getValues(false);
 	
+		db_ip = (String) c.getString("database.ip");
+		db_name = (String) c.getString("database.name");
+		db_user = (String) c.getString("database.username");
+		db_password = (String) c.getString("database.password");
+		
 	}
-
+	
 	public boolean isScoutEnabled() {
 		return scoutEnabled;
 	}
@@ -170,6 +180,22 @@ public class TrenchConfig {
 	public void setSpectator_spawn(Map<String, Object> spectator_spawn) {
 		this.spectator_spawn = spectator_spawn;
 		c.set("trenchspawns.spectator", spectator_spawn);
+	}
+	
+	public String getDb_ip() {
+		return db_ip;
+	}
+	
+	public String getDb_name() {
+		return db_name;
+	}
+	
+	public String getDb_user() {
+		return db_user;
+	}
+	
+	public String getDb_password() {
+		return db_password;
 	}
 
 }

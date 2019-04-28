@@ -21,14 +21,10 @@ public class GrenadeLauncherListener implements Listener {
 		Player p = e.getPlayer();
 		if(!(p.getInventory().getItemInMainHand().getType() == Material.QUARTZ)) return;
 		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Grenade Launcher"))) return;
-		TrenchPlayer t;
-		try {
 		
-			t = TeamManager.findTrenchPlayer(p);
+		TrenchPlayer t = TeamManager.findTrenchPlayer(p);
+		if(t == null) { return; }
 		
-		}catch(RuntimeException x) {
-			return;
-		}
 		if(!(t.getKitType() == TrenchKits.DEMOMAN)) return;
 		
 		int itemIndex = p.getInventory().first(Material.FIREWORK_ROCKET);
