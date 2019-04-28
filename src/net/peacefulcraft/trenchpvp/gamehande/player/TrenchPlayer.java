@@ -16,6 +16,9 @@ public class TrenchPlayer{
 	protected TrenchKits kitType;
 		public TrenchKits getKitType() {return kitType;}
 	
+	protected TrenchKit kitInstance;
+		public TrenchKit getKit() { return kitInstance; }
+		
 	public TrenchPlayer(Player user, TrenchTeams team){
 		this.user = user;
 		this.team = team;
@@ -24,6 +27,7 @@ public class TrenchPlayer{
 	
 	public void equipKit(TrenchKit k) {
 		dequipKits();
+		this.kitInstance = k;
 		this.kitType = k.getKitType();
 		k.equip(this);
 	}
