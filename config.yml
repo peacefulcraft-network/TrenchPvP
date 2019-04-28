@@ -5,7 +5,7 @@ trenchspawns:
   red_class: {}
   blue_class: {}
   spectator: {}
-  
+
 classes:
   demoman: true
   heavy: true
@@ -15,3 +15,9 @@ classes:
   sniper: true
   soldier: true
   spy: true
+
+database:
+    ip: "127.0.0.1"
+    name: "database name"
+    username: "user"
+    password: "super secret"

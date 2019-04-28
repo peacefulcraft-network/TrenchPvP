@@ -40,15 +40,11 @@ public class MediGunListener implements Listener {
 		if(!(e.getPlayer().getInventory().getItemInMainHand().getType() == Material.REDSTONE_BLOCK)) return;
 		if(!(e.getPlayer().getInventory().getItemInMainHand().getItemMeta().getDisplayName() == "Medi Gun")) return;
 
-		TrenchPlayer healer, healTarget;
-		try {
-			//Get trenchplayer reference location in array
-			healer = TeamManager.findTrenchPlayer(e.getPlayer());
-			healTarget = TeamManager.findTrenchPlayer((Player)e.getRightClicked());
-		} catch (RuntimeException x) {
-			//One or both players not in Trench so we don't care
-			return;
-		}
+		TrenchPlayer healer = TeamManager.findTrenchPlayer(e.getPlayer());
+		TrenchPlayer healTarget = TeamManager.findTrenchPlayer((Player) e.getRightClicked());
+		if(healer == null || healTarget == null) { return; }
+		
+		
 		//Check if sender is medic
 		if(!(healer.getKitType() == TrenchKits.MEDIC)) return;
 		//Check on same team

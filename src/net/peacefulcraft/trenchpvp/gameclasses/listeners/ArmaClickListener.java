@@ -37,12 +37,9 @@ public class ArmaClickListener implements Listener
 		//if(!(e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK)) return;
 		//Confirms location
 
-		TrenchPlayer t;
-		try {
-			t = TeamManager.findTrenchPlayer(p);
-		}catch(RuntimeException x) {
-			return;
-		}
+		TrenchPlayer t = TeamManager.findTrenchPlayer(p);
+		if(t == null) { return; }
+
 
 		if(!(t.getKitType() == TrenchKits.HEAVY)) return;
 

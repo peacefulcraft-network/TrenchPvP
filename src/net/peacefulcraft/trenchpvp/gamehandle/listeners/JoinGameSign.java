@@ -19,7 +19,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.Sign;//(Interface, not the class material)
 import org.bukkit.entity.Player;
 
-public class joinGameSign implements Listener {
+public class JoinGameSign implements Listener {
 	
 	@EventHandler
 	public void onSignClick(PlayerInteractEvent e){
@@ -30,10 +30,15 @@ public class joinGameSign implements Listener {
 			
 			Block block = e.getClickedBlock();
 			Sign sign = (Sign)block.getState();
-			if(sign.getLine(0).equalsIgnoreCase("[TRJOIN]")){
-				
-				GameManager.joinPlayer(e.getPlayer());
-				
+			if(sign.getLine(0).equalsIgnoreCase("[Trench]")){
+				if(sign.getLine(1).equalsIgnoreCase("Join")) {
+					if(TeamManager.findTrenchPlayer(e.getPlayer()) != null) {
+						e.getPlayer().sendMessage(TrenchPvP.CMD_PREFIX + ChatColor.RED + " You're already playing TrenchPvP!");
+						return;
+					}
+					
+					GameManager.joinPlayer(e.getPlayer());
+				}
 			}else{ return; }
 			
 		}else{ return; }

@@ -13,7 +13,7 @@ public class trLeave implements CommandExecutor{
 			
 			if(sender instanceof Player) {
 				
-				GameManager.quitPlayer((Player) sender);				
+				return GameManager.quitPlayer((Player) sender);
 				
 			}else {
 				

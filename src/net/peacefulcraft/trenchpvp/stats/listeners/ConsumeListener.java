@@ -21,10 +21,8 @@ public class ConsumeListener implements Listener
 		ItemStack food = e.getItem();
 		Player p = e.getPlayer();
 		
-		TrenchPlayer t;
-		try {
-			t = TeamManager.findTrenchPlayer(p);
-		} catch(RuntimeException x) {
+		TrenchPlayer t = TeamManager.findTrenchPlayer(p);
+		if(t == null) {
 			return;
 		}
 		
@@ -32,7 +30,7 @@ public class ConsumeListener implements Listener
 			TrenchPvP.getStatTracker().track(p.getUniqueId(), GeneralStat.player_bread_eaten, 1);
 		}
 		if(food.getType() == Material.POTION) {
-			TrenchPvP.getStatTracker().track(p.getUniqueId(), GeneralStat.player_health_potion_drank, 1);
+			TrenchPvP.getStatTracker().track(p.getUniqueId(), GeneralStat.player_health_potions_drank, 1);
 		}
 	}
 }

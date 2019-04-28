@@ -39,14 +39,10 @@ public class BigBerthaListener implements Listener
 		Player p = e.getPlayer();
 		if(!(p.getInventory().getItemInMainHand().getType() == Material.TNT)) return;
 		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Big Bertha's Embrace"))) return;
-		TrenchPlayer t;
-		try {
 		
-			t = TeamManager.findTrenchPlayer(p);
+		TrenchPlayer t = TeamManager.findTrenchPlayer(p);
+		if(t == null) { return; }
 		
-		}catch(RuntimeException x) {
-			return;
-		}
 		if(!(t.getKitType() == TrenchKits.DEMOMAN)) return;
 		
 		if(cooldown.containsKey(p.getUniqueId())) {

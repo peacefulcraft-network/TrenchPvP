@@ -34,12 +34,8 @@ public class SpeedShotListener implements Listener
 		if(!(p.getInventory().getItemInMainHand().getType() == Material.CHORUS_FLOWER)) return;
 		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Speed Shot"))) return;
 		
-		TrenchPlayer t;
-		try {
-			t = TeamManager.findTrenchPlayer(p);
-		}catch(RuntimeException x) {
-			return;
-		}
+		TrenchPlayer t = TeamManager.findTrenchPlayer(p);
+		if(t == null) { return; }
 		
 		if(!(t.getKitType() == TrenchKits.SPY)) return;
 		

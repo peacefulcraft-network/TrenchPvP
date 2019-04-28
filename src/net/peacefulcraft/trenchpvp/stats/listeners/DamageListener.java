@@ -32,12 +32,11 @@ public class DamageListener implements Listener
 			if(agent instanceof Player) {
 				Player damager = (Player) agent;
 				
-				TrenchPlayer t;
-				try {
-					t = TeamManager.findTrenchPlayer(damager);
-				} catch(RuntimeException x) {
+				TrenchPlayer t = TeamManager.findTrenchPlayer(damager);
+				if(t == null) {
 					return;
 				}
+				
 				TrenchKits kit = t.getKitType();
 				int damage = (int) e.getDamage();
 				

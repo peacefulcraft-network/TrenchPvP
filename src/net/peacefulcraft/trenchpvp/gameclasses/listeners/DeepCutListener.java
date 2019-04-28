@@ -30,12 +30,9 @@ public class DeepCutListener implements Listener
 		Player p = e.getPlayer();
 		if(!(p.getInventory().getItemInMainHand().getType() == Material.IRON_SWORD)) return;
 		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Deep Cut"))) return;
-		TrenchPlayer t;
-		try {
-			t = TeamManager.findTrenchPlayer(p);
-		}catch(RuntimeException x) {
-			return;
-		}
+		
+		TrenchPlayer t = TeamManager.findTrenchPlayer(p);
+		if(t == null) { return; }
 		
 		if(!(t.getKitType() == TrenchKits.SOLDIER)) return;
 		
