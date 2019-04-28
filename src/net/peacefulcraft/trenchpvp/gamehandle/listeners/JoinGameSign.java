@@ -19,7 +19,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.Sign;//(Interface, not the class material)
 import org.bukkit.entity.Player;
 
-public class joinGameSign implements Listener {
+public class JoinGameSign implements Listener {
 	
 	@EventHandler
 	public void onSignClick(PlayerInteractEvent e){

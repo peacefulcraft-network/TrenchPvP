@@ -28,7 +28,8 @@ import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.KitSignListener;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.PvPController;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.QuitGameListen;
-import net.peacefulcraft.trenchpvp.gamehandle.listeners.joinGameSign;
+import net.peacefulcraft.trenchpvp.gamehandle.listeners.JoinGameListen;
+import net.peacefulcraft.trenchpvp.gamehandle.listeners.JoinGameSign;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.respawningTeleport;
 import net.peacefulcraft.trenchpvp.gamehandle.tasks.Startgame;
 import net.peacefulcraft.trenchpvp.gamehandle.tasks.SyncStats;
@@ -94,8 +95,9 @@ public class TrenchPvP extends JavaPlugin{
 
 	private void loadEventListners(){
 		//gamehandle.listeners
-		getServer().getPluginManager().registerEvents(new joinGameSign(), this);
+		getServer().getPluginManager().registerEvents(new JoinGameSign(), this);
 		getServer().getPluginManager().registerEvents(new KitSignListener(), this);
+		getServer().getPluginManager().registerEvents(new JoinGameListen(), this);
 		getServer().getPluginManager().registerEvents(new QuitGameListen(), this);
 		getServer().getPluginManager().registerEvents(new respawningTeleport(), this);
 		getServer().getPluginManager().registerEvents(new PvPController(), this);
