@@ -19,6 +19,9 @@ public class KillStreakListener implements Listener
 	private HashMap<UUID, Integer> reference = new HashMap<UUID, Integer>();
 	@EventHandler
 	private void onKillEvent(PlayerDeathEvent e) {
+		
+		if( !(e.getEntity().getKiller() instanceof Player) ) { return; }
+		
 		Player killer = e.getEntity().getKiller();
 		
 		TrenchPlayer t = TeamManager.findTrenchPlayer(killer);

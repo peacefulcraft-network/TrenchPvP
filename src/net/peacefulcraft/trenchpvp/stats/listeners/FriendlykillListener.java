@@ -14,6 +14,9 @@ public class FriendlykillListener implements Listener
 {
 	@EventHandler
 	private void friendlyKill(PlayerDeathEvent e) {
+		
+		if( !(e.getEntity().getKiller() instanceof Player) ) { return; }
+		
 		Player agent = e.getEntity().getKiller();
 		Player victim = e.getEntity();
 		

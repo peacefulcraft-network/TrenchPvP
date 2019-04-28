@@ -26,6 +26,9 @@ public class KillListener implements Listener
 {
 	@EventHandler
 	private void onDeathEvent(PlayerDeathEvent e) {
+		
+		if( !(e.getEntity().getKiller() instanceof Player) ) { return; }
+		
 		Player killer = e.getEntity().getKiller();
 		
 		TrenchPlayer t = TeamManager.findTrenchPlayer(killer);
