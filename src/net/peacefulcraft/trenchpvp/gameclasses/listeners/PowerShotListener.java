@@ -37,12 +37,8 @@ public class PowerShotListener implements Listener
 		if(!(p.getInventory().getItemInMainHand().getType() == Material.PISTON)) return;
 		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Power Shot"))) return;
 		
-		TrenchPlayer t;
-		try {
-			t = TeamManager.findTrenchPlayer(p);
-		}catch(RuntimeException x) {
-			return;
-		}
+		TrenchPlayer t = TeamManager.findTrenchPlayer(p);
+		if(t == null) { return; }
 		
 		if(!(t.getKitType() == TrenchKits.SNIPER)) return;
 		

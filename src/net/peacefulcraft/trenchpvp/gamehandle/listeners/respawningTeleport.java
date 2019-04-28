@@ -14,9 +14,10 @@ public class respawningTeleport implements Listener{
 	@EventHandler
 	public void onPlayerRespawn(PlayerRespawnEvent e) {
 		
-		try {
-			
 			TrenchPlayer t = TeamManager.findTrenchPlayer(e.getPlayer());
+			if(t == null)
+				return;
+			
 			if(t.getPlayerTeam() == TrenchTeams.BLUE) {
 				e.setRespawnLocation(Teleports.getBlueSpawn());
 			}else {
@@ -25,10 +26,6 @@ public class respawningTeleport implements Listener{
 			
 			return;
 			
-		}catch(RuntimeException x) {
-			return;
-		}
-		
 	}
 	
 }

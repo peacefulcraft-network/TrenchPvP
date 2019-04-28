@@ -29,12 +29,9 @@ public class FlamethrowerListener implements Listener
 		
 		if(!(p.getInventory().getItemInMainHand().getType() == Material.BLAZE_ROD)) return;
 		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Flamethrower"))) return;
-		TrenchPlayer t;
-		try {
-			t = TeamManager.findTrenchPlayer(p);
-		}catch(RuntimeException x) {
-			return;
-		}
+		
+		TrenchPlayer t = TeamManager.findTrenchPlayer(p);
+		if(t == null) { return; }
 		
 		if(!(t.getKitType() == TrenchKits.PYRO)) return;
 		

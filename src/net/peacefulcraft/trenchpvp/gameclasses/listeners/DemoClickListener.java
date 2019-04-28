@@ -15,17 +15,12 @@ public class DemoClickListener implements Listener {
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent e){
 		Player p = e.getPlayer();
-		if(!(p.getItemInHand().getType() == Material.NETHER_BRICK)) return;
-		if(!(p.getItemInHand().getItemMeta().getDisplayName().equals("Grenade Launcher"))) return;
+		if(!(p.getInventory().getItemInMainHand().getType() == Material.NETHER_BRICK)) return;
+		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Grenade Launcher"))) return;
 		
-		try {
-		
-			TrenchPlayer player = TeamManager.findTrenchPlayer(p);
-			if(!(player.getKitType() == TrenchKits.DEMOMAN)) return;
-		
-		}catch(RuntimeException x) {
-			return;
-		}
+		TrenchPlayer t = TeamManager.findTrenchPlayer(p);
+		if(t == null) { return; }
+		if(!(t.getKitType() == TrenchKits.DEMOMAN)) return;
 		
 	}
 }

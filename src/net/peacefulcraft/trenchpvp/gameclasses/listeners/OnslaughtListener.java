@@ -28,12 +28,9 @@ public class OnslaughtListener implements Listener
 		String killed = e.getEntity().getName();
 		Player p = e.getEntity().getKiller();
 		
-		TrenchPlayer t;
-		try {
-			t = TeamManager.findTrenchPlayer(p);
-		} catch(RuntimeException x) {
-			return;
-		}
+		TrenchPlayer t = TeamManager.findTrenchPlayer(p);
+		if(t == null) { return; }
+		
 		if(!(t.getKitType() == TrenchKits.SOLDIER)) return;
 		
 		int itemIndex = p.getInventory().first(Material.REDSTONE);

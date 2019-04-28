@@ -6,6 +6,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
 import net.peacefulcraft.trenchpvp.gamehande.GameManager;
+import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 
 public class PvPController implements Listener{
 
@@ -21,6 +22,9 @@ public class PvPController implements Listener{
 			return;
 		}
 		
+		if(TeamManager.findTrenchPlayer((Player) e.getEntity()) == null || TeamManager.findTrenchPlayer((Player) e.getDamager()) == null){
+			return;
+		}
 		//GameManager doesn't allow PvP
 		if(!GameManager.isPvPAllowed()) {
 			e.setCancelled(true);

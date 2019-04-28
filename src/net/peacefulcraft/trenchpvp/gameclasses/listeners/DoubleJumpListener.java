@@ -45,12 +45,8 @@ public class DoubleJumpListener implements Listener
 	        
 		 if(p.getGameMode() == GameMode.CREATIVE || p.getGameMode() == GameMode.SPECTATOR) return;
 	        
-	     TrenchPlayer t;
-	     try {
-			t = TeamManager.findTrenchPlayer(p);
-		}catch(RuntimeException x) {
-			return;
-		}
+		TrenchPlayer t = TeamManager.findTrenchPlayer(p);
+		if(t == null) { return; }
 			
 		if(!(t.getKitType() == TrenchKits.SCOUT)) return;
 			

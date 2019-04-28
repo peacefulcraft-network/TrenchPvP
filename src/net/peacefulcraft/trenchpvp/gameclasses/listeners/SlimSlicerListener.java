@@ -22,12 +22,8 @@ public class SlimSlicerListener implements Listener
 	{
 		Player p = e.getPlayer();
 		
-		TrenchPlayer t;
-		try {
-			t = TeamManager.findTrenchPlayer(p);
-		}catch(RuntimeException x) {
-			return;
-		}
+		TrenchPlayer t = TeamManager.findTrenchPlayer(p);
+		if(t == null) { return; }
 		
 		if(!(t.getKitType() == TrenchKits.SCOUT)) return;
 		

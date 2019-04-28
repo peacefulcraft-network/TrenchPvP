@@ -23,12 +23,8 @@ public class SugarRushListener implements Listener
 		if(!(p.getInventory().getItemInMainHand().getType() == Material.SUGAR)) return;
 		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Sugar Rush"))) return;
 		
-		TrenchPlayer t;
-		try {
-			t = TeamManager.findTrenchPlayer(p);
-		}catch(RuntimeException x) {
-			return;
-		}
+		TrenchPlayer t = TeamManager.findTrenchPlayer(p);
+		if(t == null) { return; }
 		
 		if(!(t.getKitType() == TrenchKits.SPY)) return;
 	
