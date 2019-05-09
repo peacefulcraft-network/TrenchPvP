@@ -21,7 +21,7 @@ public class StartGameSign implements Listener {
 		TrenchPlayer t = TeamManager.findTrenchPlayer(e.getPlayer());
 		if(t == null) { return; }
 		
-		if(e.getClickedBlock().getType() == Material.SIGN || e.getClickedBlock().getType() == Material.WALL_SIGN) {
+		if(e.getClickedBlock().getType() == Material.OAK_SIGN || e.getClickedBlock().getType() == Material.OAK_WALL_SIGN) {
 			
 			Sign sign = (Sign) e.getClickedBlock().getState();
 			if(sign.getLine(0).equalsIgnoreCase("[Trench]")) {

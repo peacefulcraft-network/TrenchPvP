@@ -26,7 +26,7 @@ public class JoinGameSign implements Listener {
 		
 		if(e.getClickedBlock() == null){return;}
 		
-		if(e.getClickedBlock().getType() == Material.SIGN || e.getClickedBlock().getType() == Material.WALL_SIGN ){
+		if(e.getClickedBlock().getType() == Material.OAK_SIGN || e.getClickedBlock().getType() == Material.OAK_WALL_SIGN ){
 			
 			Block block = e.getClickedBlock();
 			Sign sign = (Sign)block.getState();
