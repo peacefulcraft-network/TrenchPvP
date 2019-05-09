@@ -1,6 +1,7 @@
 package net.peacefulcraft.trenchpvp.commands;
 
 import java.util.Hashtable;
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

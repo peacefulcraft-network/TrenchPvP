@@ -11,7 +11,6 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
-import net.peacefulcraft.trenchpvp.stats.StatTracker;
 import net.peacefulcraft.trenchpvp.stats.TrenchStats.GeneralStat;
 
 public class KillStreakListener implements Listener
