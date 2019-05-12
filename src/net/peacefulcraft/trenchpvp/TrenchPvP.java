@@ -20,20 +20,20 @@ import net.peacefulcraft.trenchpvp.gameclasses.listeners.HiddenBladeListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.InfernoTrapListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.MediGunListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.OnslaughtListener;
+import net.peacefulcraft.trenchpvp.gameclasses.listeners.PoisonRoundListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.PowerShotListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.SlimSlicerListener;
-import net.peacefulcraft.trenchpvp.gameclasses.listeners.PoisonRoundListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.SpeedShotListener;
 import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
-import net.peacefulcraft.trenchpvp.gamehandle.listeners.KitSignListener;
-import net.peacefulcraft.trenchpvp.gamehandle.listeners.LeaveGameSign;
-import net.peacefulcraft.trenchpvp.gamehandle.listeners.PvPController;
-import net.peacefulcraft.trenchpvp.gamehandle.listeners.QuitGameListen;
-import net.peacefulcraft.trenchpvp.gamehandle.listeners.StartGameSign;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.ChangeClassSign;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.JoinGameListen;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.JoinGameSign;
-import net.peacefulcraft.trenchpvp.gamehandle.listeners.respawningTeleport;
+import net.peacefulcraft.trenchpvp.gamehandle.listeners.KitSignListener;
+import net.peacefulcraft.trenchpvp.gamehandle.listeners.LeaveGameSign;
+import net.peacefulcraft.trenchpvp.gamehandle.listeners.PlayerRespawning;
+import net.peacefulcraft.trenchpvp.gamehandle.listeners.PvPController;
+import net.peacefulcraft.trenchpvp.gamehandle.listeners.QuitGameListen;
+import net.peacefulcraft.trenchpvp.gamehandle.listeners.StartGameSign;
 import net.peacefulcraft.trenchpvp.gamehandle.tasks.Startgame;
 import net.peacefulcraft.trenchpvp.gamehandle.tasks.SyncStats;
 import net.peacefulcraft.trenchpvp.stats.StatTracker;
@@ -42,7 +42,7 @@ import net.peacefulcraft.trenchpvp.stats.listeners.DamageListener;
 import net.peacefulcraft.trenchpvp.stats.listeners.FriendlykillListener;
 import net.peacefulcraft.trenchpvp.stats.listeners.KillListener;
 import net.peacefulcraft.trenchpvp.stats.listeners.KillStreakListener;
-//asfdasdfs
+
 public class TrenchPvP extends JavaPlugin{
 	//Prefix for all plugin -> player messages
 	public static final String CMD_PREFIX = ChatColor.DARK_RED + "[" + ChatColor.RED + "Trench" + ChatColor.DARK_RED + "]";
@@ -105,7 +105,7 @@ public class TrenchPvP extends JavaPlugin{
 		getServer().getPluginManager().registerEvents(new KitSignListener(), this);
 		getServer().getPluginManager().registerEvents(new JoinGameListen(), this);
 		getServer().getPluginManager().registerEvents(new QuitGameListen(), this);
-		getServer().getPluginManager().registerEvents(new respawningTeleport(), this);
+		getServer().getPluginManager().registerEvents(new PlayerRespawning(), this);
 		getServer().getPluginManager().registerEvents(new PvPController(), this);
 		
 		//gameclasses.listeners

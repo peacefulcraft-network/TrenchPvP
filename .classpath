@@ -6,6 +6,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/SpigotAPI"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/SpigotAPI-1.14"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

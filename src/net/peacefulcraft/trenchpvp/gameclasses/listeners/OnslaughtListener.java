@@ -17,7 +17,6 @@ import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
 import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
-import net.peacefulcraft.trenchpvp.stats.StatTracker;
 import net.peacefulcraft.trenchpvp.stats.TrenchStats.SoldierStat;
 
 public class OnslaughtListener implements Listener
@@ -25,6 +24,10 @@ public class OnslaughtListener implements Listener
 	private HashMap<UUID, Integer> killCount = new HashMap<UUID, Integer>();
 	@EventHandler
 	private void onslaughtEvent(PlayerDeathEvent e) {
+		
+		if( !(e.getEntity() instanceof Player)) { return; }
+		if( !(e.getEntity().getKiller() instanceof Player) ) { return; }
+		
 		String killed = e.getEntity().getName();
 		Player p = e.getEntity().getKiller();
 		
