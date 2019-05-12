@@ -44,12 +44,12 @@ public class SyncStats extends BukkitRunnable{
 			
 			try {
 
-				stmt_exists.setString(1, uuid.toString());
+				stmt_exists.setString(1, uuid.toString().replace("-", ""));
 				ResultSet res = stmt_exists.executeQuery();
 				
 				if(!res.next()) {
 					
-					stmt_insert.setString(1, uuid.toString());
+					stmt_insert.setString(1, uuid.toString().replace("-", ""));
 					stmt_insert.execute();
 					res = stmt_insert.getResultSet();
 					
@@ -73,7 +73,7 @@ public class SyncStats extends BukkitRunnable{
 				for(int i=1; i<=values.size(); i++) {
 					stmt_update.setInt(i, values.get(i-1));
 				}
-				stmt_update.setString(values.size()+1, uuid.toString());
+				stmt_update.setString(values.size()+1, uuid.toString().replace("-", ""));
 				System.out.println(stmt_update.toString());
 				stmt_update.execute();
 				

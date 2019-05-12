@@ -18,7 +18,7 @@ public class LeaveGameSign implements Listener {
 		
 		if(e.getClickedBlock() == null) { return; }
 		
-		if(e.getClickedBlock().getType() != Material.SIGN && e.getClickedBlock().getType() != Material.WALL_SIGN) { return; }
+		if(e.getClickedBlock().getType() != Material.OAK_SIGN && e.getClickedBlock().getType() != Material.OAK_WALL_SIGN) { return; }
 		
 		Sign sign = (Sign) e.getClickedBlock().getState();
 		

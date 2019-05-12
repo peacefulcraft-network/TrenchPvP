@@ -19,7 +19,7 @@ public class ChangeClassSign implements Listener {
 		
 		if(e.getClickedBlock() == null) { return; }
 		
-		if(e.getClickedBlock().getType() == Material.SIGN || e.getClickedBlock().getType() == Material.WALL_SIGN) {
+		if(e.getClickedBlock().getType() == Material.OAK_SIGN || e.getClickedBlock().getType() == Material.OAK_WALL_SIGN) {
 			
 			Sign sign = (Sign) e.getClickedBlock().getState();
 			

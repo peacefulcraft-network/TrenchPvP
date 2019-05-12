@@ -3,7 +3,6 @@ package net.peacefulcraft.trenchpvp.gamehandle.tasks;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gamehande.GameManager;
 
 public class Endgame extends BukkitRunnable{

@@ -9,7 +9,7 @@ import net.peacefulcraft.trenchpvp.gamehande.player.Teleports;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeams;
 
-public class respawningTeleport implements Listener{
+public class PlayerRespawning implements Listener{
 
 	@EventHandler
 	public void onPlayerRespawn(PlayerRespawnEvent e) {
@@ -18,6 +18,10 @@ public class respawningTeleport implements Listener{
 			if(t == null)
 				return;
 			
+			//Reset kit
+			t.equipKit(t.getKit());
+			
+			//Teleport player
 			if(t.getPlayerTeam() == TrenchTeams.BLUE) {
 				e.setRespawnLocation(Teleports.getBlueSpawn());
 			}else {
