@@ -42,7 +42,7 @@ import net.peacefulcraft.trenchpvp.stats.listeners.DamageListener;
 import net.peacefulcraft.trenchpvp.stats.listeners.FriendlykillListener;
 import net.peacefulcraft.trenchpvp.stats.listeners.KillListener;
 import net.peacefulcraft.trenchpvp.stats.listeners.KillStreakListener;
-
+//asfdasdfs
 public class TrenchPvP extends JavaPlugin{
 	//Prefix for all plugin -> player messages
 	public static final String CMD_PREFIX = ChatColor.DARK_RED + "[" + ChatColor.RED + "Trench" + ChatColor.DARK_RED + "]";
