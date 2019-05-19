@@ -1,4 +1,4 @@
-package net.peacefulcraft.trenchpvp.gamehande.player;
+package net.peacefulcraft.trenchpvp.gamehandle.player;
 
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;

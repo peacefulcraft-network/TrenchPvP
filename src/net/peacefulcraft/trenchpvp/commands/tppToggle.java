@@ -7,7 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import net.peacefulcraft.trenchpvp.TrenchPvP;
-import net.peacefulcraft.trenchpvp.gamehande.GameManager;
+import net.peacefulcraft.trenchpvp.gamehandle.GameManager;
 
 public class tppToggle implements CommandExecutor{
 

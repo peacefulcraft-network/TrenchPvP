@@ -1,4 +1,4 @@
-package net.peacefulcraft.trenchpvp.gamehande.player;
+package net.peacefulcraft.trenchpvp.gamehandle.player;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
