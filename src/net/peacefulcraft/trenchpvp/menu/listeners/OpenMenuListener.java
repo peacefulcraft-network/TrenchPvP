@@ -11,8 +11,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 import net.md_5.bungee.api.ChatColor;
-import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
-import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
+import net.peacefulcraft.trenchpvp.gamehandle.TeamManager;
+import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.menu.GameMenu;
 
 public class OpenMenuListener implements Listener
