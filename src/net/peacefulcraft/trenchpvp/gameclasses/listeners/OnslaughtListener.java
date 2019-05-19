@@ -82,12 +82,12 @@ public class OnslaughtListener implements Listener
 		int kills = killCount.get(p.getUniqueId());
 		for(int i = 0; i < kills; i++) {
 			if(i % 2 == 0) {
-				p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 99999, 1+i));
+				
 				if(kills >= 5) {
-					p.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, 99999, i-4));
+					p.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 99999, i-4));
 				}
 			} else {
-				p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 99999, 1+i));
+				p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 99999, 1+i));
 			}
 		}
 	}

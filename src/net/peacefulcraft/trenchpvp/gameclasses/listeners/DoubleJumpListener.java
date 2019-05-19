@@ -79,7 +79,7 @@ public class DoubleJumpListener implements Listener
 		       
 		     	Vector v = new Vector(p.getVelocity().getX(), p.getVelocity().getY(), p.getVelocity().getZ());
 		       	Vector forward = p.getLocation().getDirection().multiply(0.3);
-		        Vector jump = p.getLocation().getDirection().multiply(0.05).setY(1);
+		        Vector jump = p.getLocation().getDirection().multiply(0.04).setY(1);
 		        v.add(forward).add(jump);
 		        p.setVelocity(v);     
 			}

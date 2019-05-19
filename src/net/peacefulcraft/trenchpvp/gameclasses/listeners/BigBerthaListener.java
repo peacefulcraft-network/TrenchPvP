@@ -81,8 +81,10 @@ public class BigBerthaListener implements Listener
 				
 				TrenchPvP.getStatTracker().track(p.getUniqueId(), DemoStat.demoman_bethas_placed, 1);
 				
-				ItemStack bomb = p.getInventory().getItem(1); //Copies bomb stack and clears
-				p.getInventory().clear(1);
+				int index = p.getInventory().first(Material.TNT);
+				
+				ItemStack bomb = p.getInventory().getItem(index); //Copies bomb stack and clears
+				p.getInventory().clear(index);
 				
 				BukkitScheduler scheduler = Bukkit.getServer().getScheduler();//Delayed explosion; 5 seconds
 	            scheduler.scheduleSyncDelayedTask(TrenchPvP.getPluginInstance() , new Runnable() {

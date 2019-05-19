@@ -28,7 +28,7 @@ public class TrenchSniper extends TrenchKit{
 
 		//Create Bow / give enchantments
 		ItemStack primary = new ItemStack(Material.BOW, 1);
-		primary.addEnchantment(Enchantment.ARROW_KNOCKBACK, 2);
+		primary.addEnchantment(Enchantment.ARROW_KNOCKBACK, 1);
 		primary.addEnchantment(Enchantment.ARROW_DAMAGE, 1);
 		
 		//Get metadata / set bow name

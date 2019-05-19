@@ -56,6 +56,7 @@ public class TrenchDemoman extends TrenchKit{
 		
 		primaryUtil.setItemMeta(pMetaData);
 		
+		p.getInventory().setItem(0, melee);
 		p.getInventory().setItem(1, primary);
 		p.getInventory().setItem(3, primaryUtil);
 	}

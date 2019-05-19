@@ -36,7 +36,8 @@ public class TrenchSpy extends TrenchKit{
 		pMetaData.setDisplayName("Hidden Blade");
 		//Lore for item
 		ArrayList<String> pDesc = new ArrayList<String>();
-		pDesc.add("Right Click to Sneak Fast!");
+		pDesc.add("Right Click to Go Invisible!");
+		pDesc.add("Be Careful, You Can't Attack While Invisible!");
 		pDesc.add("Ability Time: 8 Seconds");
 		pDesc.add("Cooldown Time: 16 Seconds");
 		pMetaData.setLore(pDesc);
@@ -84,18 +85,13 @@ public class TrenchSpy extends TrenchKit{
 	}
 	@Override
 	protected void equipArmor(Player p) {
-		ItemStack[] armor = new ItemStack[4];
-		armor[3] = new ItemStack(Material.CHAINMAIL_HELMET,1);
-		
-		armor[2] = new ItemStack(Material.BAKED_POTATO, 1);
-		
-		armor[1] = new ItemStack(Material.CHAINMAIL_LEGGINGS, 1);
+		ItemStack[] armor = new ItemStack[1];
 		
 		armor[0] = new ItemStack(Material.CHAINMAIL_BOOTS, 1);
 		
-		ItemMeta enchantMeta = armor[1].getItemMeta();
+		ItemMeta enchantMeta = armor[0].getItemMeta();
 		enchantMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
-		armor[2].setItemMeta(enchantMeta);
+		armor[0].setItemMeta(enchantMeta);
 		
 		p.getInventory().setArmorContents(armor);
 	}
