@@ -2,6 +2,7 @@ package net.peacefulcraft.trenchpvp.gameclasses.classConfigurations;
 
 import java.util.ArrayList;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -65,8 +66,8 @@ public class TrenchSoldier extends TrenchKit{
 		pHealthMeta.addCustomEffect(instantHealth, true);
 				
 		health.setItemMeta(healthMeta);
-		p.getInventory().setItem(7, bread);
-		p.getInventory().setItem(8, (ItemStack) health);
+		p.getInventory().setItem(6, bread);
+		p.getInventory().setItem(7, (ItemStack) health);
 	}
 
 	@Override
@@ -83,5 +84,19 @@ public class TrenchSoldier extends TrenchKit{
 		armor[0].addEnchantment(Enchantment.PROTECTION_FALL, 1);
 		p.getInventory().setArmorContents(armor);
 	}
-
+	@Override
+	protected void equipMenu(Player p) {
+		ItemStack menu = new ItemStack(Material.EMERALD, 60);
+		ItemMeta menuMeta = menu.getItemMeta();
+		menuMeta.setDisplayName(ChatColor.AQUA + "Kit Menu");
+		
+		ArrayList<String> menuDesc = new ArrayList<String>();
+		menuDesc.add("Right Click to Open Kit Menu!");
+		menuDesc.add("Selection Cooldown: 1 Minute!");
+		
+		menuMeta.setLore(menuDesc);
+		menu.setItemMeta(menuMeta);
+		
+		p.getInventory().setItem(8, menu);
+	}
 }

@@ -4,6 +4,7 @@ package net.peacefulcraft.trenchpvp.gameclasses.listeners;
 
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -24,28 +25,21 @@ import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 
 public class DoubleJumpListener implements Listener
 {
-	HashMap<UUID, Integer> cooldown = new HashMap<UUID, Integer>();	
-	@EventHandler
-    public void onPlayerJoin(PlayerJoinEvent e){
-		Player p = e.getPlayer();
-		
-		p.setAllowFlight(true);
-		p.setFlying(false);
-    }
+	ArrayList<UUID> cooldown = new ArrayList<UUID>();	
 	@EventHandler
 	public void resetDoubleJump(PlayerMoveEvent e) {
 		 Player p = e.getPlayer();
 	        
-		 if(p.getGameMode() == GameMode.CREATIVE || p.getGameMode() == GameMode.SPECTATOR) return;
+		if(p.getGameMode() == GameMode.CREATIVE || p.getGameMode() == GameMode.SPECTATOR) return;
 	        
 		TrenchPlayer t = TeamManager.findTrenchPlayer(p);
 		if(t == null) { return; }
 			
 		if(!(t.getKitType() == TrenchKits.SCOUT)) return;
 			
-		if(cooldown.containsKey(p.getUniqueId())) {	
-			if(cooldown.get(p.getUniqueId()) == 1 && p.isOnGround()) {
-				cooldown.put(p.getUniqueId(), 0);
+		if(cooldown.contains(p.getUniqueId())) {	
+			if(p.isOnGround()) {
+				cooldown.remove(p.getUniqueId());
 			}
 		}
 	}
@@ -54,64 +48,42 @@ public class DoubleJumpListener implements Listener
     public void onPlayerDoubleJump(PlayerToggleFlightEvent e){
         Player p = e.getPlayer();
         
-        if(p.getGameMode() == GameMode.CREATIVE || p.getGameMode() == GameMode.SPECTATOR) return;
-        
-        TrenchPlayer t;
-		try {
-			t = TeamManager.findTrenchPlayer(p);
-		}catch(RuntimeException x) {
+        if(p.getGameMode() == GameMode.CREATIVE || p.getGameMode() == GameMode.SPECTATOR) {
+        	p.setFlying(false);
+        	e.setCancelled(true);        	
+        	return;
+        }
+
+        TrenchPlayer t = TeamManager.findTrenchPlayer(p);
+		if(t == null) { 
 			p.setFlying(false);
-			e.setCancelled(true);			
+			e.setCancelled(true);
 			return;
-		}
-		
+			}
+
 		if(!(t.getKitType() == TrenchKits.SCOUT)) 
 			{	
 				p.setFlying(false);
 				e.setCancelled(true);
 				return;
 			}
-		if(cooldown.containsKey(p.getUniqueId())) {
-			if(cooldown.get(p.getUniqueId()) == 0) {
-				if(p.getGameMode() != GameMode.CREATIVE) {
-					//Double Jump code
-					p.setFlying(false);
-					e.setCancelled(true);
-			       	
-				    Block b = p.getWorld().getBlockAt(p.getLocation().subtract(0,2,0));
-				    if(!b.getType().equals(Material.AIR)){
-				       
-				     	Vector v = new Vector(p.getVelocity().getX(), p.getVelocity().getY(), p.getVelocity().getZ());
-				       	Vector forward = p.getLocation().getDirection().multiply(0.3);
-				        Vector jump = p.getLocation().getDirection().multiply(0.05).setY(1);
-				        v.add(forward).add(jump);
-				        p.setVelocity(v);     
-				        
-				        cooldown.put(p.getUniqueId(), 1);
-				    }
-				}
-			} else if(cooldown.get(p.getUniqueId()) == 1){
-				p.setFlying(false);
-				e.setCancelled(true);
-				return;
-			}
-		} else {
-			if(p.getGameMode() != GameMode.CREATIVE) {
-				//Double Jump code
-				p.setFlying(false);
-				e.setCancelled(true);
-		       	
-			    Block b = p.getWorld().getBlockAt(p.getLocation().subtract(0,2,0));
-			    if(!b.getType().equals(Material.AIR)){
-			       
-			     	Vector v = new Vector(p.getVelocity().getX(), p.getVelocity().getY(), p.getVelocity().getZ());
-			       	Vector forward = p.getLocation().getDirection().multiply(0.3);
-			        Vector jump = p.getLocation().getDirection().multiply(0.07).setY(1);
-			        v.add(forward).add(jump);
-			        p.setVelocity(v);    
-			        
-			        cooldown.put(p.getUniqueId(), 1);
-			    }
+
+		if(cooldown.contains(p.getUniqueId())) {
+			p.setFlying(false);
+			e.setCancelled(true);
+		} else if(!cooldown.contains(p.getUniqueId())) {
+			//Double Jump code
+			p.setFlying(false);
+			e.setCancelled(true);
+	       	
+		    Block b = p.getWorld().getBlockAt(p.getLocation().subtract(0,2,0));
+		    if(!b.getType().equals(Material.AIR)){
+		       
+		     	Vector v = new Vector(p.getVelocity().getX(), p.getVelocity().getY(), p.getVelocity().getZ());
+		       	Vector forward = p.getLocation().getDirection().multiply(0.3);
+		        Vector jump = p.getLocation().getDirection().multiply(0.05).setY(1);
+		        v.add(forward).add(jump);
+		        p.setVelocity(v);     
 			}
 		}
     }

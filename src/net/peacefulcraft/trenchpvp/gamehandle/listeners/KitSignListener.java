@@ -55,6 +55,7 @@ public class KitSignListener implements Listener {
 							if(TrenchPvP.getTrenchCFG().isScoutEnabled()){
 								
 								t.equipKit(new TrenchScout());
+								e.getPlayer().setAllowFlight(true);
 								return;
 							
 							}else
