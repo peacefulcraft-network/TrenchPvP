@@ -6,8 +6,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
 import net.peacefulcraft.trenchpvp.TrenchPvP;
-import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
-import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
+import net.peacefulcraft.trenchpvp.gamehandle.TeamManager;
+import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.stats.TrenchStats.GeneralStat;
 
 public class FriendlykillListener implements Listener

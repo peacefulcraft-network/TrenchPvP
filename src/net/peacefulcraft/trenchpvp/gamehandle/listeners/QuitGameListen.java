@@ -4,7 +4,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-import net.peacefulcraft.trenchpvp.gamehande.GameManager;
+import net.peacefulcraft.trenchpvp.gamehandle.GameManager;
 
 public class QuitGameListen implements Listener {
 	@EventHandler

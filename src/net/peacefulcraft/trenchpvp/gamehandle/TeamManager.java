@@ -1,4 +1,4 @@
-package net.peacefulcraft.trenchpvp.gamehande;
+package net.peacefulcraft.trenchpvp.gamehandle;
 
 import java.util.HashMap;
 import java.util.Map.Entry;
@@ -12,8 +12,8 @@ import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.scoreboard.Team;
 
-import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
-import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeams;
+import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
+import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchTeams;
 
 public class TeamManager {
 	

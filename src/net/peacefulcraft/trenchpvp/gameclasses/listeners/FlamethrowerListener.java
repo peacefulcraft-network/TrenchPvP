@@ -15,8 +15,8 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.util.Vector;
 
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
-import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
-import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
+import net.peacefulcraft.trenchpvp.gamehandle.TeamManager;
+import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 
 public class FlamethrowerListener implements Listener
 {

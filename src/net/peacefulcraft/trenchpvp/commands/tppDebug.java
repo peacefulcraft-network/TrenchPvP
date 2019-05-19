@@ -5,10 +5,10 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import net.peacefulcraft.trenchpvp.gamehande.GameManager;
-import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
-import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
-import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeams;
+import net.peacefulcraft.trenchpvp.gamehandle.GameManager;
+import net.peacefulcraft.trenchpvp.gamehandle.TeamManager;
+import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
+import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchTeams;
 
 public class tppDebug implements CommandExecutor{
 

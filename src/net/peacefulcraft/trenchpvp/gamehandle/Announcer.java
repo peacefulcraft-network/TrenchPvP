@@ -1,10 +1,10 @@
-package net.peacefulcraft.trenchpvp.gamehande;
+package net.peacefulcraft.trenchpvp.gamehandle;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
-import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeams;
+import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
+import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchTeams;
 
 public abstract class Announcer {
 	

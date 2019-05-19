@@ -1,13 +1,13 @@
-package net.peacefulcraft.trenchpvp.gamehande;
+package net.peacefulcraft.trenchpvp.gamehandle;
 
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 
 import net.peacefulcraft.trenchpvp.TrenchPvP;
-import net.peacefulcraft.trenchpvp.gamehande.player.Teleports;
-import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
-import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeams;
+import net.peacefulcraft.trenchpvp.gamehandle.player.Teleports;
+import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
+import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchTeams;
 import net.peacefulcraft.trenchpvp.gamehandle.tasks.Endgame;
 import net.peacefulcraft.trenchpvp.gamehandle.tasks.Startgame;
 import net.peacefulcraft.trenchpvp.gamehandle.tasks.SyncStats;

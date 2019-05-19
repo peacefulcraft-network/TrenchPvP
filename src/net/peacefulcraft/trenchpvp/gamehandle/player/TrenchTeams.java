@@ -1,4 +1,4 @@
-package net.peacefulcraft.trenchpvp.gamehande.player;
+package net.peacefulcraft.trenchpvp.gamehandle.player;
 
 //Add get spawns from config later
 public enum TrenchTeams {
