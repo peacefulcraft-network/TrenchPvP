@@ -2,6 +2,7 @@ package net.peacefulcraft.trenchpvp.gamehandle.player;
 
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
 
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKit;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
@@ -27,13 +28,21 @@ public class TrenchPlayer{
 	
 	public void equipKit(TrenchKit k) {
 		dequipKits();
+		clearPotionEffects();
 		this.kitInstance = k;
 		this.kitType = k.getKitType();
 		k.equip(this);
 	}
 	
 	public void dequipKits() {
+		clearPotionEffects();
 		user.getInventory().clear();
 		user.getInventory().setArmorContents(new ItemStack[user.getInventory().getArmorContents().length]);
+	}
+	
+	public void clearPotionEffects() {
+		for(PotionEffect effect : user.getActivePotionEffects()) {
+			user.removePotionEffect(effect.getType());
+		}
 	}
 }

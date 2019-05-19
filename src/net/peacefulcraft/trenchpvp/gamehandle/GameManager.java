@@ -34,10 +34,11 @@ public class GameManager {
 				}
 				
 				t = TrenchPvP.getTeamManager().joinTeam(p);
+				t.clearPotionEffects();
 				t.dequipKits();
 				if(t.getPlayerTeam() == TrenchTeams.BLUE) {
 					p.teleport(Teleports.getBlueClassSpawn());
-					p.setGameMode(GameMode.SURVIVAL);
+					p.setGameMode(GameMode.ADVENTURE);
 					p.sendMessage(TrenchPvP.CMD_PREFIX + ChatColor.RED + "You have joined " + ChatColor.DARK_BLUE + "Blue" + ChatColor.RED + " team!");
 				}else {
 					p.teleport(Teleports.getRedClassSpawn());
@@ -72,7 +73,7 @@ public class GameManager {
 		
 		if(p.hasPermission("tpp.player")) {
 			
-			TeamManager.findTrenchPlayer(p).dequipKits();
+			t.dequipKits();
 			TrenchPvP.getTeamManager().leaveTeam(p);
 			p.setGameMode(GameMode.ADVENTURE);
 			p.teleport(Teleports.getQuitSpawn());
