@@ -153,6 +153,7 @@ public class KitSignListener implements Listener {
 						}else {
 							e.getPlayer().teleport(Teleports.getRedSpawn());
 						}
+						t.clearPotionEffects();
 						e.getPlayer().sendMessage("You are now type " + t.getKitType());
 						
 					}
