@@ -31,4 +31,8 @@ public class TrenchUndefined extends TrenchKit{
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	protected void equipMenu(Player p) {
+		
+	}
 }

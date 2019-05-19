@@ -15,6 +15,7 @@ public abstract class TrenchKit {
 		equipSecondary(t.getPlayer());
 		equipGenerics(t.getPlayer());
 		equipArmor(t.getPlayer());
+		equipMenu(t.getPlayer());
 		t.getPlayer().updateInventory();
 		
 	}
@@ -26,5 +27,7 @@ public abstract class TrenchKit {
 	protected abstract void equipGenerics(Player p);
 	
 	protected abstract void equipArmor(Player p);
+	
+	protected abstract void equipMenu(Player p);
 	
 }

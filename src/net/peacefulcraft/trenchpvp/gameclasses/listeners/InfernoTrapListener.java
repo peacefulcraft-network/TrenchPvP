@@ -11,10 +11,12 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventException;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
@@ -41,9 +43,9 @@ public class InfernoTrapListener implements Listener
 		
 		
 		Block lookingBlock = p.getTargetBlock((Set<Material>) null, 4);//Gets block within 4 block range
-		 if (lookingBlock != null && lookingBlock.getType().isBlock() && lookingBlock.getType() != Material.LIGHT_WEIGHTED_PRESSURE_PLATE) {
+		 if (lookingBlock != null && lookingBlock.getType().isBlock() && lookingBlock.getType() != Material.LIGHT_WEIGHTED_PRESSURE_PLATE && lookingBlock.getType() != Material.AIR) {
              Block upBlock = lookingBlock.getRelative(BlockFace.UP);
-             if (upBlock != null && upBlock.getType() == Material.AIR) {
+             if (upBlock != null && upBlock.getType() == Material.AIR && upBlock.getType() != Material.LIGHT_WEIGHTED_PRESSURE_PLATE) {
             	 int itemIndex = p.getInventory().first(Material.LIGHT_WEIGHTED_PRESSURE_PLATE);
             	 if(itemIndex >= 0) {
             		 ItemStack trap = p.getInventory().getItem(itemIndex);
@@ -84,9 +86,22 @@ public class InfernoTrapListener implements Listener
 		if(!(t.getKitType() == TrenchKits.PYRO)) return;
 		
 		if(trapCord.containsKey(p.getUniqueId())) {
-			int itemIndex = p.getInventory().first(Material.LIGHT_WEIGHTED_PRESSURE_PLATE);//Gets amount of traps and slot.
-			ItemStack trap = p.getInventory().getItem(itemIndex);
-			trap.setAmount(5);//Sets traps to 5 after each detonation
+			try {
+				int itemIndex = p.getInventory().first(Material.LIGHT_WEIGHTED_PRESSURE_PLATE);//Gets amount of traps and slot.
+				ItemStack trap = p.getInventory().getItem(itemIndex);
+				trap.setAmount(5);//Sets traps to 5 after each detonation
+			} catch(Exception x) {
+				ItemStack traps = new ItemStack(Material.LIGHT_WEIGHTED_PRESSURE_PLATE, 5);
+				ItemMeta trapMeta = traps.getItemMeta();
+				trapMeta.setDisplayName("Inferno Trap");
+				ArrayList<String> trapDesc = new ArrayList<String>();
+				trapDesc.add("Can Only Place 5 at a Time! Detonate to Get More!");
+				trapMeta.setLore(trapDesc);
+				traps.setItemMeta(trapMeta);
+				
+				int slot = p.getInventory().firstEmpty();
+				p.getInventory().setItem(slot, traps);
+			}
 			
 			ArrayList<Location> traps = trapCord.get(p.getUniqueId());
 			//Iterates through ArrayList to detonate each trap.
