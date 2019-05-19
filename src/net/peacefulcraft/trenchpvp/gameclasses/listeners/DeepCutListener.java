@@ -10,6 +10,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.potion.PotionEffect;
@@ -61,8 +62,15 @@ public class DeepCutListener implements Listener
 		return (System.currentTimeMillis() - lastTimeUsed) > timeToWait;
  	}
 	@EventHandler
-	private void abilityAction(EntityDamageEvent e) {
+	private void abilityAction(EntityDamageByEntityEvent e) {
 		if(abilityCase == false) return;
+		Entity damager = e.getDamager();
+		if(damager instanceof Player) {
+			Player soldier = (Player)damager;
+			if(!(soldier.getInventory().getItemInMainHand().getType() == Material.IRON_SWORD)) return;
+			if(!(soldier.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Deep Cut"))) return;
+		}
+		
 		Entity entity = e.getEntity();
 		if(entity instanceof Player) {
 			Player victim = (Player)entity;
