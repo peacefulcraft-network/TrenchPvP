@@ -18,6 +18,7 @@ import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchScout;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchSniper;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchSoldier;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchSpy;
+import net.peacefulcraft.trenchpvp.gameclasses.listeners.InfernoTrapListener;
 import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehande.player.Teleports;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
@@ -47,6 +48,7 @@ public class KitSignListener implements Listener {
 							return;
 						}
 
+						InfernoTrapListener.pyroTrapRemove(t);
 						
 						String signText = sign.getLine(2).toUpperCase();
 						switch(TrenchKits.valueOf(signText)){//Check which class was selected (based on 3rd line of class sign)

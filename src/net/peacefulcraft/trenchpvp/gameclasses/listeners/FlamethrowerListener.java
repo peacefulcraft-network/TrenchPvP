@@ -1,7 +1,11 @@
 package net.peacefulcraft.trenchpvp.gameclasses.listeners;
 
+import java.util.HashMap;
 import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
@@ -21,11 +25,14 @@ import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
 public class FlamethrowerListener implements Listener
 {
 	private int fireChance = 5;
+	private HashMap<UUID, Long> cooldown = new HashMap<UUID, Long>();
+	private final int COOLDOWN_TIME = 1;
 	
 	@EventHandler
 	public void onRightClick(PlayerInteractEvent e)
 	{
 		Player p = e.getPlayer();
+		UUID id = p.getUniqueId();
 		
 		if(!(p.getInventory().getItemInMainHand().getType() == Material.BLAZE_ROD)) return;
 		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Flamethrower"))) return;
@@ -35,8 +42,25 @@ public class FlamethrowerListener implements Listener
 		
 		if(!(t.getKitType() == TrenchKits.PYRO)) return;
 		
-		useFlamethrower(p);
+		if(cooldown.containsKey(id)) {
+			long timeLeft = ((cooldown.get(p.getUniqueId())/1000) + COOLDOWN_TIME) - (System.currentTimeMillis()/1000);
+			if(canUseAgain(p) == true) {
+				useFlamethrower(p);
+			} else if(canUseAgain(p) == false) {
+				p.sendMessage(ChatColor.RED + "Ability is on cooldown for " + timeLeft + " seconds!");
+			}
+		} else {
+			cooldown.put(id, System.currentTimeMillis());
+			useFlamethrower(p);
+			p.sendMessage(ChatColor.RED + "Ability is now on cooldown for " + COOLDOWN_TIME + " seconds.");
+		}
 	}
+	public boolean canUseAgain(Player player)
+	{
+		long lastTimeUsed = cooldown.get(player.getUniqueId());
+		long timeToWait = TimeUnit.SECONDS.toMillis(COOLDOWN_TIME);
+		return (System.currentTimeMillis() - lastTimeUsed) > timeToWait;
+ 	}
 	private void useFlamethrower(Player p)
 	{
 		shootFlames(p);//Add checks here
@@ -52,6 +76,7 @@ public class FlamethrowerListener implements Listener
 		        f.setVelocity(fireballVector.multiply(2));//Possibly remove because garbage
 		        f.setIsIncendiary(true);
 		        f.setYield(0);
+		        
 
         playerDirection.multiply(8); // Set length to 8 blocks out
 

@@ -14,6 +14,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventException;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -26,7 +27,7 @@ import net.peacefulcraft.trenchpvp.stats.TrenchStats.PyroStat;
 
 public class InfernoTrapListener implements Listener
 {
-	HashMap<UUID,ArrayList<Location>> trapCord = new HashMap<UUID,ArrayList<Location>>(); //HashMap for UUID and Location ArrayList
+	static HashMap<UUID,ArrayList<Location>> trapCord = new HashMap<UUID,ArrayList<Location>>(); //HashMap for UUID and Location ArrayList
 	ArrayList<Location> traps = new ArrayList<Location>(); //Creates ArrayList to contain Location of traps.
 	@EventHandler
 	public void trapRightClick(PlayerInteractEvent e)
@@ -109,6 +110,48 @@ public class InfernoTrapListener implements Listener
 				if(temp.getBlock().getType() == Material.LIGHT_WEIGHTED_PRESSURE_PLATE) {
 					temp.getWorld().createExplosion(temp.getX(), temp.getY(), temp.getZ(), 2.0f, true, false);
 					temp.getBlock().setType(Material.AIR);
+				}
+			}
+		}
+	}
+	@EventHandler
+	private void pyroDeathEvent(PlayerDeathEvent e) {
+		Player p = e.getEntity();
+		
+		TrenchPlayer t;
+		try {
+			t = TeamManager.findTrenchPlayer(p);
+		}catch(RuntimeException x) {
+			return;
+		}
+		
+		if(!(t.getKitType() == TrenchKits.PYRO)) return;
+		
+		if(trapCord.containsKey(p.getUniqueId())) {
+			ArrayList<Location> traps = trapCord.get(p.getUniqueId());
+			for(Location loc : traps) {
+				if(loc.getBlock().getType() == Material.LIGHT_WEIGHTED_PRESSURE_PLATE) {
+					loc.getBlock().setType(Material.AIR);
+				}
+			}
+		}
+	}
+
+	public static void pyroTrapRemove(TrenchPlayer t) {
+		Player p = t.getPlayer();
+		try {
+			t = TeamManager.findTrenchPlayer(p);
+		}catch(RuntimeException x) {
+			return;
+		}
+		
+		if(!(t.getKitType() == TrenchKits.PYRO)) return;
+		
+		if(trapCord.containsKey(p.getUniqueId())) {
+			ArrayList<Location> traps = trapCord.get(p.getUniqueId());
+			for(Location loc : traps) {
+				if(loc.getBlock().getType() == Material.LIGHT_WEIGHTED_PRESSURE_PLATE) {
+					loc.getBlock().setType(Material.AIR);
 				}
 			}
 		}
