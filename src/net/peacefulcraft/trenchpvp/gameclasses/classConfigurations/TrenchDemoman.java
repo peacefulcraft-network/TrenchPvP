@@ -27,7 +27,16 @@ public class TrenchDemoman extends TrenchKit{
 	 */
 	@Override
 	protected void equipPrimary(Player p) {
-		//Create Bow / give enchantments
+		ItemStack melee = new ItemStack(Material.IRON_AXE, 1);
+		ItemMeta meleeMeta = melee.getItemMeta();
+		meleeMeta.setDisplayName("Headless Horseless Headmans Axe");
+		
+		ArrayList<String> mDesc = new ArrayList<String>();
+		mDesc.add("The Legendary Axe of The Headless Horseless Headman");
+		meleeMeta.setLore(mDesc);
+		
+		melee.setItemMeta(meleeMeta);
+		
 		ItemStack primary = new ItemStack(Material.QUARTZ, 1);
 		ItemMeta pMetaData = primary.getItemMeta();
 		pMetaData.setDisplayName("Grenade Launcher");
@@ -47,8 +56,8 @@ public class TrenchDemoman extends TrenchKit{
 		
 		primaryUtil.setItemMeta(pMetaData);
 		
-		p.getInventory().setItem(0, primary);
-		p.getInventory().setItem(2, primaryUtil);
+		p.getInventory().setItem(1, primary);
+		p.getInventory().setItem(3, primaryUtil);
 	}
 	
 	/*Demoman - Stick Bomb Launcher - Launches Sticky Bombs (Fire Charges) On land, turns into pressure plate that explodes when right click with launcher
@@ -68,7 +77,7 @@ public class TrenchDemoman extends TrenchKit{
 		
 		secondary.setItemMeta(sMetaData);
 		
-		p.getInventory().setItem(1, secondary);
+		p.getInventory().setItem(2, secondary);
 	}
 	
 	@Override
