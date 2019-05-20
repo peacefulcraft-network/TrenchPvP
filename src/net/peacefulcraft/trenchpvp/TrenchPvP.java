@@ -9,10 +9,10 @@ import net.peacefulcraft.trenchpvp.commands.tppSet;
 import net.peacefulcraft.trenchpvp.commands.tppToggle;
 import net.peacefulcraft.trenchpvp.commands.trJoin;
 import net.peacefulcraft.trenchpvp.commands.trLeave;
-import net.peacefulcraft.trenchpvp.gameclasses.listeners.ArmaClickListener;
+import net.peacefulcraft.trenchpvp.gameclasses.listeners.AbsoluteDefenseListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.BigBerthaListener;
-import net.peacefulcraft.trenchpvp.gameclasses.listeners.DeepCutListener;
-import net.peacefulcraft.trenchpvp.gameclasses.listeners.DenseClickListener;
+import net.peacefulcraft.trenchpvp.gameclasses.listeners.WitherbringerListener;
+import net.peacefulcraft.trenchpvp.gameclasses.listeners.DuskEdgeListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.DoubleJumpListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.FlamethrowerListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.GrenadeLauncherListener;
@@ -22,7 +22,7 @@ import net.peacefulcraft.trenchpvp.gameclasses.listeners.MediGunListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.OnslaughtListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.PoisonRoundListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.PowerShotListener;
-import net.peacefulcraft.trenchpvp.gameclasses.listeners.SlimSlicerListener;
+import net.peacefulcraft.trenchpvp.gameclasses.listeners.WindsongBladeListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.SpeedShotListener;
 import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.ChangeClassSign;
@@ -113,12 +113,12 @@ public class TrenchPvP extends JavaPlugin{
 		
 		//gameclasses.listeners
 		getServer().getPluginManager().registerEvents(new MediGunListener(), this);
-		getServer().getPluginManager().registerEvents(new ArmaClickListener(), this);
-		getServer().getPluginManager().registerEvents(new DenseClickListener(), this);
+		getServer().getPluginManager().registerEvents(new AbsoluteDefenseListener(), this);
+		getServer().getPluginManager().registerEvents(new DuskEdgeListener(), this);
 		getServer().getPluginManager().registerEvents(new HiddenBladeListener(), this);
 		getServer().getPluginManager().registerEvents(new SpeedShotListener(), this);
 		getServer().getPluginManager().registerEvents(new DoubleJumpListener(), this);
-		getServer().getPluginManager().registerEvents(new SlimSlicerListener(), this);
+		getServer().getPluginManager().registerEvents(new WindsongBladeListener(), this);
 		getServer().getPluginManager().registerEvents(new FlamethrowerListener(), this);
 		getServer().getPluginManager().registerEvents(new InfernoTrapListener(), this);
 		getServer().getPluginManager().registerEvents(new PoisonRoundListener(), this);
@@ -126,7 +126,7 @@ public class TrenchPvP extends JavaPlugin{
 		getServer().getPluginManager().registerEvents(new GrenadeLauncherListener(), this);
 		getServer().getPluginManager().registerEvents(new BigBerthaListener(), this);
 		getServer().getPluginManager().registerEvents(new OnslaughtListener(), this);
-		getServer().getPluginManager().registerEvents(new DeepCutListener(), this);
+		getServer().getPluginManager().registerEvents(new WitherbringerListener(), this);
 		
 		//Stat listeners
 		getServer().getPluginManager().registerEvents(new ConsumeListener(), this);

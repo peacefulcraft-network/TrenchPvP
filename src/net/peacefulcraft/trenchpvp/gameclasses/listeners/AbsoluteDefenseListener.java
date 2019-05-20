@@ -19,7 +19,7 @@ import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.stats.TrenchStats.HeavyStat;
 
-public class ArmaClickListener implements Listener
+public class AbsoluteDefenseListener implements Listener
 {
 	private HashMap<UUID, Long> cooldown = new HashMap<UUID, Long>();//Creating cooldown
 	private final int COOLDOWN_TIME = 20;
@@ -31,7 +31,7 @@ public class ArmaClickListener implements Listener
 		//Checks item in main hand is Shell
 		if(!(p.getInventory().getItemInMainHand().getType() == Material.SHULKER_SHELL)) return;
 
-		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Armadillo Shell"))) return;
+		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Absolute Defense"))) return;
 		//if(!(e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK)) return;
 		//Confirms location
 
@@ -69,8 +69,8 @@ public class ArmaClickListener implements Listener
  	}
 	private void abilityEffects(Player p) {
 		p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 140, 4));
-		p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 140, 3));
-		p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 140, 5));
+		p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 140, 2));
+		p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 140, 4));
 		p.sendMessage(ChatColor.RED + "Ability is now on cooldown for " + COOLDOWN_TIME + " seconds.");
 		
 		TrenchPvP.getStatTracker().track(p.getUniqueId(), HeavyStat.heavy_armadillo_usage, 1);

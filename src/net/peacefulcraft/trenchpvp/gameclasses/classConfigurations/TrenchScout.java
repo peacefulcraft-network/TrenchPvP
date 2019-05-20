@@ -23,7 +23,7 @@ public class TrenchScout extends TrenchKit {
 		ItemStack primary = new ItemStack(Material.STONE_SWORD, 1);
 		
 		ItemMeta pMetaData = primary.getItemMeta();
-		pMetaData.setDisplayName("Slim Slicer");
+		pMetaData.setDisplayName("Windsong Blade");
 		
 		ArrayList<String> pDesc = new ArrayList<String>();
 		pDesc.add("Hold Blade for Increased Attack Speed!");
@@ -47,7 +47,7 @@ public class TrenchScout extends TrenchKit {
 		sDesc.add("Tag Your Foes to Help Your Team!");
 		pMetaData.setLore(sDesc);
 		
-		ItemStack pUtil = new ItemStack(Material.SPECTRAL_ARROW, 32);
+		ItemStack pUtil = new ItemStack(Material.SPECTRAL_ARROW, 64);
 		ItemMeta pUMetaData = pUtil.getItemMeta();
 		pUMetaData.setDisplayName("Tag Ammo");
 		pUtil.setItemMeta(pUMetaData);
@@ -104,7 +104,7 @@ public class TrenchScout extends TrenchKit {
 	}
 	@Override
 	protected void equipMenu(Player p) {
-		ItemStack menu = new ItemStack(Material.EMERALD, 60);
+		ItemStack menu = new ItemStack(Material.EMERALD, 1);
 		ItemMeta menuMeta = menu.getItemMeta();
 		menuMeta.setDisplayName(ChatColor.AQUA + "Kit Menu");
 		

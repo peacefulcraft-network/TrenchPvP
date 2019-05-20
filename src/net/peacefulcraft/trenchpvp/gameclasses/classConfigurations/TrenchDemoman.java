@@ -47,7 +47,7 @@ public class TrenchDemoman extends TrenchKit{
 
 		primary.setItemMeta(pMetaData);
 		
-		ItemStack primaryUtil = new ItemStack(Material.FIREWORK_ROCKET, 16);
+		ItemStack primaryUtil = new ItemStack(Material.FIREWORK_ROCKET, 32);
 		pMetaData = primaryUtil.getItemMeta();
 		pMetaData.setDisplayName("Grenades");
 
@@ -126,7 +126,7 @@ public class TrenchDemoman extends TrenchKit{
 	
 	@Override
 	protected void equipMenu(Player p) {
-		ItemStack menu = new ItemStack(Material.EMERALD, 60);
+		ItemStack menu = new ItemStack(Material.EMERALD, 1);
 		ItemMeta menuMeta = menu.getItemMeta();
 		menuMeta.setDisplayName(ChatColor.AQUA + "Kit Menu");
 		

@@ -6,9 +6,12 @@ import java.util.concurrent.TimeUnit;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -17,48 +20,40 @@ import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
 import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
 
-public class DenseClickListener implements Listener
+public class WitherbringerListener implements Listener
 {
 	private HashMap<UUID, Long> cooldown = new HashMap<UUID, Long>();//Creating cooldown
-	private final int COOLDOWN_TIME = 15;
-
+	private final int COOLDOWN_TIME = 25;
+	private boolean abilityCase = false;
+	
 	@EventHandler
-	public void onRightClick(PlayerInteractEvent e)
-	{
+	public void onRightClick(PlayerInteractEvent e) {
 		Player p = e.getPlayer();
-		//Checks item in main hand is Dense Axe
-		if(!(p.getInventory().getItemInMainHand().getType() == Material.IRON_AXE)) return;
-		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Dense Axe"))) return;
-
+		if(!(p.getInventory().getItemInMainHand().getType() == Material.IRON_SWORD)) return;
+		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Witherbringer"))) return;
+		
 		TrenchPlayer t = TeamManager.findTrenchPlayer(p);
 		if(t == null) { return; }
-
-		if(!(t.getKitType() == TrenchKits.HEAVY)) return;
-
-		if(cooldown.containsKey(p.getUniqueId()))
-		{
+		
+		if(!(t.getKitType() == TrenchKits.SOLDIER)) return;
+		
+		if(cooldown.containsKey(p.getUniqueId())) {
 			long timeLeft = ((cooldown.get(p.getUniqueId())/1000) + COOLDOWN_TIME) - (System.currentTimeMillis()/1000);
-			if(canUseAgain(p) == true)
-			{
-				p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 80, 3));
-				p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 80, 3));
-				p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 80, 3));
+			if(canUseAgain(p) == true) {
+				//Ability method here
+				abilityCase = true;
+				
 				p.sendMessage(ChatColor.RED + "Ability is now on cooldown for " + COOLDOWN_TIME + " seconds.");
-			}
-			else if(canUseAgain(p) == false)
-			{
+			} else if(canUseAgain(p) == false) {
+				abilityCase = false;
 				p.sendMessage(ChatColor.RED + "Ability is on cooldown for " + timeLeft + " seconds!");
 			}
-		}
-		else
-		{
+		} else {
 			cooldown.put(p.getUniqueId(), System.currentTimeMillis());
-			p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 80, 3));
-			p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 80, 3));
-			p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 80, 3));
+			//Ability method here
+			abilityCase = true;
 			p.sendMessage(ChatColor.RED + "Ability is now on cooldown for " + COOLDOWN_TIME + " seconds.");
 		}
-
 	}
 	private boolean canUseAgain(Player player)
 	{
@@ -66,5 +61,19 @@ public class DenseClickListener implements Listener
 		long timeToWait = TimeUnit.SECONDS.toMillis(COOLDOWN_TIME);
 		return (System.currentTimeMillis() - lastTimeUsed) > timeToWait;
  	}
-
+	@EventHandler
+	private void abilityAction(EntityDamageByEntityEvent e) {
+		if(abilityCase == false) return;
+		Entity damager = e.getDamager();
+		Entity victim = e.getEntity();
+		if(damager instanceof Player && victim instanceof Player) {
+			Player soldier = (Player)damager;
+			if(!(soldier.getInventory().getItemInMainHand().getType() == Material.IRON_SWORD)) return;
+			if(!(soldier.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Witherbringer"))) return;
+			
+			Player vic = (Player)victim;
+			vic.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 200, 1));
+		}
+		abilityCase = true; //Quick fix to continuous wither damage occurrence. Change?
+	}
 }

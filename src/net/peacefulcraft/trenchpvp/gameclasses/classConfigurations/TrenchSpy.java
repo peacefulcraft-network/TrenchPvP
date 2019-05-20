@@ -97,7 +97,7 @@ public class TrenchSpy extends TrenchKit{
 	}
 	@Override
 	protected void equipMenu(Player p) {
-		ItemStack menu = new ItemStack(Material.EMERALD, 60);
+		ItemStack menu = new ItemStack(Material.EMERALD, 1);
 		ItemMeta menuMeta = menu.getItemMeta();
 		menuMeta.setDisplayName(ChatColor.AQUA + "Kit Menu");
 		

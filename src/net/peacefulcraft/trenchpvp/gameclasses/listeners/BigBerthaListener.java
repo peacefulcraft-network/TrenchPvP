@@ -79,7 +79,7 @@ public class BigBerthaListener implements Listener
 				bombCord.get(p.getUniqueId()).add(upBlock.getLocation());
 				p.sendMessage(ChatColor.RED + "Fuse is lit!");
 				
-				TrenchPvP.getStatTracker().track(p.getUniqueId(), DemoStat.demoman_bethas_placed, 1);
+				TrenchPvP.getStatTracker().track(p.getUniqueId(), DemoStat.demoman_berthas_placed, 1);
 				
 				int index = p.getInventory().first(Material.TNT);
 				

@@ -25,7 +25,7 @@ import net.peacefulcraft.trenchpvp.stats.TrenchStats.SniperStat;
 public class PowerShotListener implements Listener
 {
 	private HashMap<UUID, Long> cooldown = new HashMap<UUID, Long>();//Creating cooldown
-	private final int COOLDOWN_TIME = 15;
+	private final int COOLDOWN_TIME = 20;
 
 	@EventHandler
 	public void onRightClick(PlayerInteractEvent e)
@@ -87,7 +87,7 @@ public class PowerShotListener implements Listener
                 public void run() {
                 	p.getInventory().setItem(itemIndex, rifle);
                 }
-            }, 100);
+            }, 160);
 		}
 	}
 }

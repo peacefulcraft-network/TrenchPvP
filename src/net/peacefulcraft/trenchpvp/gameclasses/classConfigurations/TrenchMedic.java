@@ -3,10 +3,12 @@ package net.peacefulcraft.trenchpvp.gameclasses.classConfigurations;
 import java.util.ArrayList;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -49,7 +51,7 @@ public class TrenchMedic extends TrenchKit{
 		ItemMeta sMeta = secondary.getItemMeta();
 		sMeta.setDisplayName("Syringe Gun");
 		secondary.setItemMeta(sMeta);
-		ItemStack secondaryyUtil = new ItemStack(Material.ARROW, 32);//give arrows for syringe gun
+		ItemStack secondaryyUtil = new ItemStack(Material.ARROW, 64);//give arrows for syringe gun
 		
 		p.getInventory().setItem(1, secondary);
 		p.getInventory().setItem(3, secondaryyUtil);
@@ -95,12 +97,24 @@ public class TrenchMedic extends TrenchKit{
 		
 		armor[0] = new ItemStack(Material.LEATHER_BOOTS, 1);
 		
+		LeatherArmorMeta metaH = (LeatherArmorMeta) armor[3].getItemMeta();
+		metaH.setColor(Color.WHITE);
+		armor[3].setItemMeta(metaH);
+		LeatherArmorMeta metaC = (LeatherArmorMeta) armor[2].getItemMeta();
+		metaH.setColor(Color.WHITE);
+		armor[2].setItemMeta(metaC);
+		LeatherArmorMeta metaL = (LeatherArmorMeta) armor[1].getItemMeta();
+		metaH.setColor(Color.WHITE);
+		armor[1].setItemMeta(metaL);
+		LeatherArmorMeta metaB = (LeatherArmorMeta) armor[0].getItemMeta();
+		metaH.setColor(Color.WHITE);
+		armor[0].setItemMeta(metaB);
 		p.getInventory().setArmorContents(armor);
 	
 	}
 	@Override
 	protected void equipMenu(Player p) {
-		ItemStack menu = new ItemStack(Material.EMERALD, 60);
+		ItemStack menu = new ItemStack(Material.EMERALD, 1);
 		ItemMeta menuMeta = menu.getItemMeta();
 		menuMeta.setDisplayName(ChatColor.AQUA + "Kit Menu");
 		

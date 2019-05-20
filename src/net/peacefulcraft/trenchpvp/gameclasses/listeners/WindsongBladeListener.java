@@ -12,7 +12,7 @@ import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
 import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
 
-public class SlimSlicerListener implements Listener
+public class WindsongBladeListener implements Listener
 {
 	@EventHandler
 	public void onPlayerMove(PlayerMoveEvent e)
@@ -26,7 +26,7 @@ public class SlimSlicerListener implements Listener
 		
 		if((p.getInventory().getItemInMainHand().getType() == Material.STONE_SWORD))
 		{
-			if((p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Slim Slicer")))
+			if((p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Windsong Blade")))
 			{
 				p.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, 99999, 3));
 				p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 99999, 1));
