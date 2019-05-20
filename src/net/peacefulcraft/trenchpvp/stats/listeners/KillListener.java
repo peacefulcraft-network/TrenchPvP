@@ -63,7 +63,7 @@ public class KillListener implements Listener
 		TrenchPvP.getStatTracker().track(heavy.getUniqueId(), HeavyStat.heavy_kills, 1);
 		if(heavy.getInventory().getItemInMainHand().getType() == Material.IRON_AXE) {
 			if(heavy.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Dense Axe")) {
-				TrenchPvP.getStatTracker().track(heavy.getUniqueId(), HeavyStat.heavy_dense_axe_kills, 1);
+				TrenchPvP.getStatTracker().track(heavy.getUniqueId(), HeavyStat.heavy_dusks_edge_kills, 1);
 			}
 		}
 	}
@@ -87,7 +87,7 @@ public class KillListener implements Listener
 		TrenchPvP.getStatTracker().track(scout.getUniqueId(), ScoutStat.scout_kills, 1);
 		if(scout.getInventory().getItemInMainHand().getType() == Material.STONE_SWORD) {
 			if(scout.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Slim Slicer")) {
-				TrenchPvP.getStatTracker().track(scout.getUniqueId(), ScoutStat.scout_slim_slicer_kills, 1);
+				TrenchPvP.getStatTracker().track(scout.getUniqueId(), ScoutStat.scout_windsong_blade_kills, 1);
 			}
 		} else if(scout.getInventory().getItemInMainHand().getType() == Material.BOW) {
 			if(scout.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Sling Shot")) {
@@ -113,7 +113,7 @@ public class KillListener implements Listener
 		TrenchPvP.getStatTracker().track(soldier.getUniqueId(), SoldierStat.soldier_kills, 1);
 		if(soldier.getInventory().getItemInMainHand().getType() == Material.IRON_SWORD) {
 			if(soldier.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Deep Cut")) {
-				TrenchPvP.getStatTracker().track(soldier.getUniqueId(), SoldierStat.soldier_deep_cut_kills, 1);
+				TrenchPvP.getStatTracker().track(soldier.getUniqueId(), SoldierStat.soldier_witherbringer_kills, 1);
 			}
 		}
 	}

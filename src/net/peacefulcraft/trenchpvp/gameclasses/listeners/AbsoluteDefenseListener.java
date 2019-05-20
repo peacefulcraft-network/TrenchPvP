@@ -73,6 +73,6 @@ public class AbsoluteDefenseListener implements Listener
 		p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 140, 4));
 		p.sendMessage(ChatColor.RED + "Ability is now on cooldown for " + COOLDOWN_TIME + " seconds.");
 		
-		TrenchPvP.getStatTracker().track(p.getUniqueId(), HeavyStat.heavy_armadillo_usage, 1);
+		TrenchPvP.getStatTracker().track(p.getUniqueId(), HeavyStat.heavy_absolute_defense_usage, 1);
 	}
 }
