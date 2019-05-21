@@ -61,12 +61,8 @@ public class OnslaughtListener implements Listener
 	@EventHandler
 	private void soldierDeathEvent(PlayerDeathEvent e) {
 		Player p = e.getEntity();
-		TrenchPlayer t;
-		try {
-			t = TeamManager.findTrenchPlayer(p);
-		} catch(RuntimeException x) {
-			return;
-		}
+		TrenchPlayer t = TeamManager.findTrenchPlayer(p);
+		if(t == null) { return; }
 		if(!(t.getKitType() == TrenchKits.SOLDIER)) return;
 		
 		if(killCount.containsKey(p.getUniqueId())) {
