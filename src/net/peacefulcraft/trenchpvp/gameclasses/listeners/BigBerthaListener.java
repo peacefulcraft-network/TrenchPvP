@@ -16,6 +16,7 @@ import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitScheduler;
@@ -30,8 +31,8 @@ import net.peacefulcraft.trenchpvp.stats.TrenchStats.DemoStat;
 public class BigBerthaListener implements Listener
 {
 	private HashMap<UUID, Long> cooldown = new HashMap<UUID, Long>();
-	private HashMap<UUID, ArrayList<Location>> bombCord = new HashMap<UUID,ArrayList<Location>>();
-	private ArrayList<Location> bombs = new ArrayList<Location>();
+	private static HashMap<UUID, ArrayList<Location>> bombCord = new HashMap<UUID,ArrayList<Location>>();
+	private ArrayList<Location> bombs = new ArrayList<Location>(); //ArraList of location type. Stores bomb locations
 	private final int COOLDOWN_TIME = 25;
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent e){
@@ -111,6 +112,34 @@ public class BigBerthaListener implements Listener
 	                }
 	            }, 300);
 	            
+			}
+		}
+	}
+	@EventHandler
+	private void demoDeathEvent(PlayerDeathEvent e) {
+		Player p = e.getEntity();
+		
+		TrenchPlayer t = TeamManager.findTrenchPlayer(p);
+		if(t == null) { return; }
+		
+		if(!(t.getKitType() == TrenchKits.DEMOMAN)) return;
+		
+		if(bombCord.containsKey(p.getUniqueId())) {
+			ArrayList<Location> b = bombCord.get(p.getUniqueId());
+			for(Location loc : b) {
+				if(loc.getBlock().getType() == Material.TNT) {
+					loc.getBlock().setType(Material.AIR);
+				}
+			}
+		}
+	}
+	public static void demoTrapRemove(Player p) {
+		if(bombCord.containsKey(p.getUniqueId())) {
+			ArrayList<Location> b = bombCord.get(p.getUniqueId());
+			for(Location loc : b) {
+				if(loc.getBlock().getType() == Material.TNT) {
+					loc.getBlock().setType(Material.AIR);
+				}
 			}
 		}
 	}

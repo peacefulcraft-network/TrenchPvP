@@ -21,7 +21,7 @@ import net.peacefulcraft.trenchpvp.stats.TrenchStats.SoldierStat;
 
 public class OnslaughtListener implements Listener
 {
-	private HashMap<UUID, Integer> killCount = new HashMap<UUID, Integer>();
+	private static HashMap<UUID, Integer> killCount = new HashMap<UUID, Integer>();
 	@EventHandler
 	private void onslaughtEvent(PlayerDeathEvent e) {
 		
@@ -70,21 +70,27 @@ public class OnslaughtListener implements Listener
 			onslaughtTracking(p);
 		}
 	}
+	public static void resetStreak(Player p) {
+		
+		if(killCount.containsKey(p.getUniqueId())) {
+			killCount.remove(p.getUniqueId());
+			if(p.hasPotionEffect(PotionEffectType.INCREASE_DAMAGE)) {
+				p.removePotionEffect(PotionEffectType.INCREASE_DAMAGE);
+			}
+		}
+	}
 	/*
 	 * Gives soldier alternating, increasing power level effects
 	 * based on killstreak
 	 */
 	private void onslaughtEffects(Player p) {
 		int kills = killCount.get(p.getUniqueId());
+		int x = 0;
 		for(int i = 0; i < kills; i++) {
-			if(i % 2 == 0) {
-				
-				if(kills >= 5) {
-					p.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 99999, i-4));
-				}
-			} else {
-				p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 99999, 1+i));
-			}
+			if(i % 3 == 0) {
+				x++;
+				p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 99999, 1+x));
+			} 
 		}
 	}
 	/*
