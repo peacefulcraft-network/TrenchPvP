@@ -1,8 +1,12 @@
 package net.peacefulcraft.trenchpvp.gamehandle;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gamehandle.player.Teleports;
@@ -20,7 +24,13 @@ public class GameManager {
 		
 	private static boolean allowPvP = true;
 		public static boolean isPvPAllowed() { return allowPvP; }
-		
+	
+	//Game tasks for general cleanup that should be run synchronously pre/post round
+	public static List<BukkitRunnable> preGameTasks = new LinkedList<BukkitRunnable>();
+	public static List<BukkitRunnable> postGameTasks = new LinkedList<BukkitRunnable>();
+		public static void registerPreGameTask(BukkitRunnable task) { preGameTasks.add(task); }
+		public static void registerPostGameTask(BukkitRunnable task) { postGameTasks.add(task); }
+	
 	public static boolean joinPlayer(Player p) {
 		
 		if(p.hasPermission("tpp.player")){
@@ -34,10 +44,11 @@ public class GameManager {
 				}
 				
 				t = TrenchPvP.getTeamManager().joinTeam(p);
+				t.clearPotionEffects();
 				t.dequipKits();
 				if(t.getPlayerTeam() == TrenchTeams.BLUE) {
 					p.teleport(Teleports.getBlueClassSpawn());
-					p.setGameMode(GameMode.SURVIVAL);
+					p.setGameMode(GameMode.ADVENTURE);
 					p.sendMessage(TrenchPvP.CMD_PREFIX + ChatColor.RED + "You have joined " + ChatColor.DARK_BLUE + "Blue" + ChatColor.RED + " team!");
 				}else {
 					p.teleport(Teleports.getRedClassSpawn());
@@ -72,7 +83,7 @@ public class GameManager {
 		
 		if(p.hasPermission("tpp.player")) {
 			
-			TeamManager.findTrenchPlayer(p).dequipKits();
+			t.dequipKits();
 			TrenchPvP.getTeamManager().leaveTeam(p);
 			p.setGameMode(GameMode.ADVENTURE);
 			p.teleport(Teleports.getQuitSpawn());
@@ -109,6 +120,11 @@ public class GameManager {
 		
 		allowPvP = true;
 		
+		//Execute registered start game tasks
+		for(BukkitRunnable task : preGameTasks) {
+			task.runTask(TrenchPvP.getPluginInstance());
+		}
+		
 		//Schedule Endgame proceedings for 10 minutes from now (in ticks)
 		(new Endgame(TrenchPvP.getPluginInstance())).runTaskLater(TrenchPvP.getPluginInstance(), 20 * 60 * 10);
 		
@@ -128,6 +144,10 @@ public class GameManager {
 		TrenchPvP.getStatTracker().clearStats();
 		sync.runTaskAsynchronously(TrenchPvP.getPluginInstance());
 		
+		//Execute registered post game tasks
+		for(BukkitRunnable task : postGameTasks) {
+			task.runTask(TrenchPvP.getPluginInstance());
+		}
 		
 		//Schedule new game for 10 seconds from now (in ticks)
 		(new Startgame(TrenchPvP.getPluginInstance())).runTaskLater(TrenchPvP.getPluginInstance(), 200);
