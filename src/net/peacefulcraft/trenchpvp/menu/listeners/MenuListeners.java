@@ -38,7 +38,7 @@ import net.peacefulcraft.trenchpvp.menu.GameMenu.onClick;
 public class MenuListeners implements Listener
 {
 	private HashMap<UUID, Long> cooldown = new HashMap<UUID, Long>();
-	private final int COOLDOWN_TIME = 45;
+	private final int COOLDOWN_TIME = 60;
 	
 	@EventHandler
 	public void onRightClick(PlayerInteractEvent e) {
@@ -75,24 +75,25 @@ public class MenuListeners implements Listener
  	}
 	private void menuOpen(Player p) {
 
-		GameMenu menu = new GameMenu("Kit Menu", 1, new onClick() {
+		GameMenu menu = new GameMenu("Kit Menu", 3, new onClick() {
 		    @Override
 		    public boolean click(Player p, GameMenu menu, Row row, int slot, ItemStack item) {
-		        if(row.getRow() == 0){
+		        if(row.getRow() == 0 || row.getRow() == 2){
 		            inventoryClick(p, item);
 		        }
 		        return true;
 		    }
 		});
 		menu.addButton(menu.getRow(0), 0, new ItemStack(Material.LEATHER_BOOTS), "Scout", "Click to Equip The Scout Class!");
-		menu.addButton(menu.getRow(0), 1, new ItemStack(Material.IRON_CHESTPLATE), "Soldier", "Click to Equip The Soldier Class!");
+		menu.addButton(menu.getRow(2), 0, new ItemStack(Material.IRON_CHESTPLATE), "Soldier", "Click to Equip The Soldier Class!");
 		menu.addButton(menu.getRow(0), 2, new ItemStack(Material.FIRE_CHARGE), "Pyro", "Click to Equip The Pyro Class!");
-		menu.addButton(menu.getRow(0), 3, new ItemStack(Material.ARROW), "Sniper", "Click to Equip The Sniper Class!");
+		menu.addButton(menu.getRow(2), 2, new ItemStack(Material.ARROW), "Sniper", "Click to Equip The Sniper Class!");
 		menu.addButton(menu.getRow(0), 4, new ItemStack(Material.TNT), "Demoman", "Click to Equip The Demoman Class!");
-		menu.addButton(menu.getRow(0), 5, new ItemStack(Material.ENCHANTED_GOLDEN_APPLE), "Medic", "Click to Equip The Medic Class!");
+		menu.addButton(menu.getRow(2), 4, new ItemStack(Material.ENCHANTED_GOLDEN_APPLE), "Medic", "Click to Equip The Medic Class!");
 		menu.addButton(menu.getRow(0), 6, new ItemStack(Material.ANVIL), "Heavy", "Click to Equip The Heavy Class!");
-		menu.addButton(menu.getRow(0), 7, new ItemStack(Material.CLOCK), "Spy", "Click to Equip The Spy Class!");
+		menu.addButton(menu.getRow(2), 6, new ItemStack(Material.CLOCK), "Spy", "Click to Equip The Spy Class!");
 		menu.addButton(menu.getRow(0), 8, new ItemStack(Material.RED_STAINED_GLASS_PANE), "Quit", "Click to Leave Trench!");
+		menu.addButton(menu.getRow(2), 8, new ItemStack(Material.BLUE_STAINED_GLASS_PANE), "Purchased Classes", "Click to Access Classes Purchased Through The Store!");
 		menu.open(p.getPlayer());
 	}
 	private void inventoryClick(Player p, ItemStack item) {
@@ -108,6 +109,7 @@ public class MenuListeners implements Listener
 			GameManager.quitPlayer(p);
 			cooldown.remove(p.getUniqueId());
 		}
+		
 		switch(TrenchKits.valueOf(itemText)){//Check which class was selected (based on 3rd line of class sign)
 		case SCOUT:
 
