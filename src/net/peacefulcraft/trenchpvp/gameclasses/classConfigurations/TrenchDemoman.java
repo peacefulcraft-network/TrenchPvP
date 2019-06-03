@@ -2,41 +2,45 @@ package net.peacefulcraft.trenchpvp.gameclasses.classConfigurations;
 
 import java.util.ArrayList;
 
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import net.peacefulcraft.trenchpvp.menu.GameMenu;
+import net.peacefulcraft.trenchpvp.gameclasses.abilities.BigBertha;
+import net.peacefulcraft.trenchpvp.gameclasses.abilities.GrenadeLauncher;
+import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 
 public class TrenchDemoman extends TrenchKit{
 
-	public TrenchDemoman() {
-		kitType = TrenchKits.DEMOMAN;
+	public TrenchDemoman(TrenchPlayer t) {
+		//Configure TrenchKit
+		super(t, TrenchKits.DEMOMAN);
+		
+		//Register special ability handlers
+		registerAbility(new GrenadeLauncher(this));
+		registerAbility(new BigBertha(this));
 	}
 	
-	/*Demoman - Grenade Launcher - Launches grenades(FireWork Charges x 16) that bounce and explode on impact
-	 * --Handled by GrenadeLauncher(class)
-	 * 
-	 *
+	/**
+	 * Give main inventory items
+	 * Primary - Grenade Launcher
+	 * Secondary - Big Bertha's Embrace
+	 * Util - Instant health && Bread
+	 * Melee - Iron Axe
 	 */
 	@Override
-	protected void equipPrimary(Player p) {
-		ItemStack melee = new ItemStack(Material.IRON_AXE, 1);
-		ItemMeta meleeMeta = melee.getItemMeta();
-		meleeMeta.setDisplayName("Headless Horseless Headmans Axe");
+	public void equipItems() {
 		
-		ArrayList<String> mDesc = new ArrayList<String>();
-		mDesc.add("The Legendary Axe of The Headless Horseless Headman");
-		meleeMeta.setLore(mDesc);
+		Inventory inv = this.getTrenchPlayer().getPlayer().getInventory();
 		
-		melee.setItemMeta(meleeMeta);
-		
+		/**
+		 * primary weapon
+		 */
 		ItemStack primary = new ItemStack(Material.QUARTZ, 1);
 		ItemMeta pMetaData = primary.getItemMeta();
 		pMetaData.setDisplayName("Grenade Launcher");
@@ -56,15 +60,12 @@ public class TrenchDemoman extends TrenchKit{
 		
 		primaryUtil.setItemMeta(pMetaData);
 		
-		p.getInventory().setItem(1, primary);
-		p.getInventory().setItem(3, primaryUtil);
-	}
+		inv.setItem(1, primary);
+		inv.setItem(3, primaryUtil);
 	
-	/*Demoman - Stick Bomb Launcher - Launches Sticky Bombs (Fire Charges) On land, turns into pressure plate that explodes when right click with launcher
-	 *--Handled by StickyLauncher(class)
-	 */
-	@Override
-	protected void equipSecondary(Player p) {
+		/**
+		 * Secondary Weapon
+		 */
 		ItemStack secondary = new ItemStack(Material.TNT, 1);
 		ItemMeta sMetaData = secondary.getItemMeta();
 		sMetaData.setDisplayName("Big Bertha's Embrace");
@@ -76,13 +77,26 @@ public class TrenchDemoman extends TrenchKit{
 		sMetaData.setLore(sDesc);
 		
 		secondary.setItemMeta(sMetaData);
+		inv.setItem(2, secondary);
 		
-		p.getInventory().setItem(2, secondary);
-	}
-	
-	@Override
-	protected void equipGenerics(Player p) {
+		/**
+		 * Melee Weapon
+		 */
+		ItemStack melee = new ItemStack(Material.IRON_AXE, 1);
+		ItemMeta meleeMeta = melee.getItemMeta();
+		meleeMeta.setDisplayName("Headless Horseless Headmans Axe");
 		
+		ArrayList<String> mDesc = new ArrayList<String>();
+		mDesc.add("The Legendary Axe of The Headless Horseless Headman");
+		meleeMeta.setLore(mDesc);
+		
+		melee.setItemMeta(meleeMeta);
+		
+		inv.setItem(9, melee);
+		
+		/**
+		 * Misc Utility Items
+		 */
 		//Bread for food
 		ItemStack bread = new ItemStack(Material.BREAD, 32);
 		
@@ -96,18 +110,18 @@ public class TrenchDemoman extends TrenchKit{
 		pHealthMeta.addCustomEffect(instantHealth, true);
 		
 		health.setItemMeta(healthMeta);
-		p.getInventory().setItem(6, bread);
-		p.getInventory().setItem(7, (ItemStack) health);
+		inv.setItem(6, bread);
+		inv.setItem(7, (ItemStack) health);
 		
 	}
-	
+
 	/*Leather Helment
 	 * Leather Chestplate : Projectile Protection 1
 	 * Leather Leggings
 	 * Leather Boots
 	 */
 	@Override
-	protected void equipArmor(Player p) {
+	public void equipArmor() {
 		
 		ItemStack[] armor = new ItemStack[4];
 		armor[3] = new ItemStack(Material.LEATHER_HELMET,1);
@@ -119,23 +133,7 @@ public class TrenchDemoman extends TrenchKit{
 		armor[1].addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 1);
 		
 		armor[0] = new ItemStack(Material.LEATHER_BOOTS, 1);
-		p.getInventory().setArmorContents(armor);
+		this.getTrenchPlayer().getPlayer().getInventory().setArmorContents(armor);
 		
-	}
-	
-	@Override
-	protected void equipMenu(Player p) {
-		ItemStack menu = new ItemStack(Material.EMERALD, 60);
-		ItemMeta menuMeta = menu.getItemMeta();
-		menuMeta.setDisplayName(ChatColor.AQUA + "Kit Menu");
-		
-		ArrayList<String> menuDesc = new ArrayList<String>();
-		menuDesc.add("Right Click to Open Kit Menu!");
-		menuDesc.add("Selection Cooldown: 1 Minute!");
-		
-		menuMeta.setLore(menuDesc);
-		menu.setItemMeta(menuMeta);
-		
-		p.getInventory().setItem(8, menu);
 	}
 }
