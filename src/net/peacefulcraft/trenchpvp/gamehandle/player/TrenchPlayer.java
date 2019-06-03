@@ -6,45 +6,41 @@ import org.bukkit.potion.PotionEffect;
 
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKit;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
+import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchUndefined;
 
 public class TrenchPlayer{
-	private Player user;
-		public Player getPlayer() {return this.user;}
+	private Player p;
+		public Player getPlayer() {return this.p;}
 	
 	private TrenchTeams team;
-		public TrenchTeams getPlayerTeam() {return this.team;}
-	
-	protected TrenchKits kitType;
-		public TrenchKits getKitType() {return kitType;}
+		public TrenchTeams getPlayerTeam() { return this.team; }
 	
 	protected TrenchKit kitInstance;
 		public TrenchKit getKit() { return kitInstance; }
+		public TrenchKits getKitType() { return kitInstance.getKitType(); }
 		
 	public TrenchPlayer(Player user, TrenchTeams team){
-		this.user = user;
+		this.p = user;
 		this.team = team;
-		this.kitType = TrenchKits.UNASSIGNED;
 	}
 	
 	public void equipKit(TrenchKit k) {
 		dequipKits();
 		clearPotionEffects();
 		this.kitInstance = k;
-		this.kitType = k.getKitType();
 		k.equip();
 	}
 	
 	public void dequipKits() {
 		clearPotionEffects();
-		user.getInventory().clear();
-		user.getInventory().setArmorContents(new ItemStack[user.getInventory().getArmorContents().length]);
-		this.kitInstance = null;
-		this.kitType = TrenchKits.UNASSIGNED;
+		p.getInventory().clear();
+		p.getInventory().setArmorContents(new ItemStack[p.getInventory().getArmorContents().length]);
+		this.kitInstance = new TrenchUndefined(this);
 	}
 	
 	public void clearPotionEffects() {
-		for(PotionEffect effect : user.getActivePotionEffects()) {
-			user.removePotionEffect(effect.getType());
+		for(PotionEffect effect : p.getActivePotionEffects()) {
+			p.removePotionEffect(effect.getType());
 		}
 	}
 }
