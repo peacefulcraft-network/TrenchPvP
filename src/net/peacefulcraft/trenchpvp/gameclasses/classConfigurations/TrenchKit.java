@@ -6,6 +6,8 @@ import java.util.List;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.event.player.PlayerInteractEntityEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -133,11 +135,21 @@ public abstract class TrenchKit implements TrenchKitInventory, TrenchKitClickAbi
 	/* (non-Javadoc)
 	 * @see net.peacefulcraft.trenchpvp.gameclasses.abilities.TrenchKitClickAbilityExecutor#executeClickAbilities()
 	 */
-	public void executeClickAbilities() {
+	public void executeClickAbilities(PlayerInteractEvent sourceEvent) {
 		
 		for(TrenchAbility ta : abilities) {
 			
-			ta.executeAbility();
+			ta.executeAbility(sourceEvent);
+			
+		}
+		
+	}
+	
+	public void executeClickAbilities(PlayerInteractEntityEvent sourceEvent) {
+		
+		for(TrenchAbility ta : abilities) {
+			
+			ta.executeAbility(sourceEvent);
 			
 		}
 		
