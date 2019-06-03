@@ -9,13 +9,11 @@ import net.peacefulcraft.trenchpvp.commands.tppSet;
 import net.peacefulcraft.trenchpvp.commands.tppToggle;
 import net.peacefulcraft.trenchpvp.commands.trJoin;
 import net.peacefulcraft.trenchpvp.commands.trLeave;
-import net.peacefulcraft.trenchpvp.gameclasses.listeners.ArmaClickListener;
-import net.peacefulcraft.trenchpvp.gameclasses.listeners.BigBerthaListener;
+import net.peacefulcraft.trenchpvp.gameclasses.listeners.AbilityClickListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.DeepCutListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.DenseClickListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.DoubleJumpListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.FlamethrowerListener;
-import net.peacefulcraft.trenchpvp.gameclasses.listeners.GrenadeLauncherListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.HiddenBladeListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.InfernoTrapListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.MediGunListener;
@@ -115,7 +113,6 @@ public class TrenchPvP extends JavaPlugin{
 		
 		//gameclasses.listeners
 		getServer().getPluginManager().registerEvents(new MediGunListener(), this);
-		getServer().getPluginManager().registerEvents(new ArmaClickListener(), this);
 		getServer().getPluginManager().registerEvents(new DenseClickListener(), this);
 		getServer().getPluginManager().registerEvents(new HiddenBladeListener(), this);
 		getServer().getPluginManager().registerEvents(new SpeedShotListener(), this);
@@ -125,10 +122,11 @@ public class TrenchPvP extends JavaPlugin{
 		getServer().getPluginManager().registerEvents(new InfernoTrapListener(), this);
 		getServer().getPluginManager().registerEvents(new PoisonRoundListener(), this);
 		getServer().getPluginManager().registerEvents(new PowerShotListener(), this);
-		getServer().getPluginManager().registerEvents(new GrenadeLauncherListener(), this);
-		getServer().getPluginManager().registerEvents(new BigBerthaListener(), this);
 		getServer().getPluginManager().registerEvents(new OnslaughtListener(), this);
 		getServer().getPluginManager().registerEvents(new DeepCutListener(), this);
+		
+		//new gameclasses.listeners
+		getServer().getPluginManager().registerEvents(new AbilityClickListener(), this);
 		
 		//Stat listeners
 		getServer().getPluginManager().registerEvents(new ConsumeListener(), this);

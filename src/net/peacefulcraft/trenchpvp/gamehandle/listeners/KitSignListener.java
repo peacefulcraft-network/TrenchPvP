@@ -93,7 +93,7 @@ public class KitSignListener implements Listener {
 							
 							if(TrenchPvP.getTrenchCFG().isDemomanEnabled()){
 								
-								t.equipKit(new TrenchDemoman());
+								t.equipKit(new TrenchDemoman(t));
 								return;
 							
 							}else

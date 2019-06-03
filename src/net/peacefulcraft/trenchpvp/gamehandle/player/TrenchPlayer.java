@@ -31,13 +31,15 @@ public class TrenchPlayer{
 		clearPotionEffects();
 		this.kitInstance = k;
 		this.kitType = k.getKitType();
-		k.equip(this);
+		k.equip();
 	}
 	
 	public void dequipKits() {
 		clearPotionEffects();
 		user.getInventory().clear();
 		user.getInventory().setArmorContents(new ItemStack[user.getInventory().getArmorContents().length]);
+		this.kitInstance = null;
+		this.kitType = TrenchKits.UNASSIGNED;
 	}
 	
 	public void clearPotionEffects() {
