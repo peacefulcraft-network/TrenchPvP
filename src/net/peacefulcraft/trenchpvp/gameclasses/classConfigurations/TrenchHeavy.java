@@ -2,37 +2,43 @@ package net.peacefulcraft.trenchpvp.gameclasses.classConfigurations;
 
 import java.util.ArrayList;
 
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.PotionMeta;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
+
+import net.peacefulcraft.trenchpvp.gameclasses.abilities.ArmadilloShell;
+import net.peacefulcraft.trenchpvp.gameclasses.abilities.DenseAxe;
+import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 
 public class TrenchHeavy extends TrenchKit{
 	
 	
-	public TrenchHeavy() {
-		kitType = TrenchKits.HEAVY;
+	public TrenchHeavy(TrenchPlayer t) {
+		super(t, TrenchKits.HEAVY);
+		
+		//Register special ability handlers
+		registerAbility(new DenseAxe(this));
+		registerAbility(new ArmadilloShell(this));
 	}
 
-	/*
-	 * Primary
-	 * Heavy - Dense Axe - Slows player and increases attack
-	 */
 	@Override
-	protected void equipPrimary(Player p) {
+	public void equipItems() {
 		
-		//Create Axe
+		Inventory inv = this.getTrenchPlayer().getPlayer().getInventory();
+		
+		/*
+		 * Primary
+		 * Heavy - Dense Axe - Slows player and increases attack
+		 */
 		ItemStack primary = new ItemStack(Material.IRON_AXE, 1);
 		
-		//Set axe name
 		ItemMeta pMetaData = primary.getItemMeta();
 		pMetaData.setDisplayName("Dense Axe");
-		//Set lore to axe
+		
+		
 		ArrayList<String> pDesc = new ArrayList<String>();
 		pDesc.add("Right Click to Increase Attack!");
 		pDesc.add("Ability Time: 4 Seconds");
@@ -42,17 +48,11 @@ public class TrenchHeavy extends TrenchKit{
 		
 		primary.setItemMeta(pMetaData);
 		
-		p.getInventory().setItem(0, primary);
 		
-	}
-
-	/*
-	 * Secondary
-	 * Heavy - Armadillo Shell - Slows, fatigues player increase defense
-	 */
-	@Override
-	protected void equipSecondary(Player p) {
-		
+		/*
+		 * Secondary
+		 * Heavy - Armadillo Shell - Slows, fatigues player increase defense
+		 */
 		ItemStack secondary = new ItemStack(Material.SHULKER_SHELL, 1);
 		
 		ItemMeta sMetaData = secondary.getItemMeta();
@@ -65,34 +65,11 @@ public class TrenchHeavy extends TrenchKit{
 		sMetaData.setLore(sDesc);
 		
 		secondary.setItemMeta(sMetaData);
-		
-		p.getInventory().setItem(1, secondary);
-		
-	}
 
-	/*
-	 * Assorted Inventory
-	 */
-	@Override
-	protected void equipGenerics(Player p) {
-		
-		//Food
-		ItemStack bread = new ItemStack(Material.BREAD, 32);
-		//Create PotionMeta ItemStack to set type of Instant Health 2. Overrides existing effects (true)
-		ItemStack health = new ItemStack(Material.POTION, 2);
-		ItemMeta healthMeta = health.getItemMeta();
-		healthMeta.setDisplayName("Instant Health");
-		PotionMeta pHealthMeta = (PotionMeta) healthMeta;
-		
-		PotionEffect instantHealth = new PotionEffect(PotionEffectType.HEAL, 1, 2);
-		pHealthMeta.addCustomEffect(instantHealth, true);
-		
-		health.setItemMeta(healthMeta);
-		
-		p.getInventory().setItem(6, bread);
-		p.getInventory().setItem(7, (ItemStack) health);
+		inv.setItem(0, primary);
+		inv.setItem(1, secondary);
 	}
-
+	
 	/*
 	 * Armor Set:
 	 * Iron Helmet
@@ -101,7 +78,9 @@ public class TrenchHeavy extends TrenchKit{
 	 * Leather Boots
 	 */
 	@Override
-	protected void equipArmor(Player p) {
+	public void equipArmor() {
+		
+		Player p = this.getTrenchPlayer().getPlayer();
 		
 		ItemStack[] armor = new ItemStack[4];
 		armor[3] = new ItemStack(Material.IRON_HELMET,1);
@@ -118,21 +97,6 @@ public class TrenchHeavy extends TrenchKit{
 		
 		p.getInventory().setArmorContents(armor);
 		
-	}
-	@Override
-	protected void equipMenu(Player p) {
-		ItemStack menu = new ItemStack(Material.EMERALD, 60);
-		ItemMeta menuMeta = menu.getItemMeta();
-		menuMeta.setDisplayName(ChatColor.AQUA + "Kit Menu");
-		
-		ArrayList<String> menuDesc = new ArrayList<String>();
-		menuDesc.add("Right Click to Open Kit Menu!");
-		menuDesc.add("Selection Cooldown: 1 Minute!");
-		
-		menuMeta.setLore(menuDesc);
-		menu.setItemMeta(menuMeta);
-		
-		p.getInventory().setItem(8, menu);
 	}
 
 }
