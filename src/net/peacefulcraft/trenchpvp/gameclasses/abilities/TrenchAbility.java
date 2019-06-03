@@ -1,5 +1,6 @@
 package net.peacefulcraft.trenchpvp.gameclasses.abilities;
 
+import net.peacefulcraft.trenchpvp.gamehandle.Announcer;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 
 /**
@@ -74,7 +75,9 @@ public abstract class TrenchAbility {
 	 * @param timeRemainer: How many seconds are left on the cooldown
 	 * @return Message to send user when plugin is on cooldown
 	 */
-	public abstract String abilityCooldownMessage(long timeRemaining);
+	public String abilityCooldownMessage(long timeRemaining) {
+		return Announcer.getTrenchPrefix() + " " + getClass() + " is on cooldown for " + timeRemaining;
+	}
 	
 }
 
