@@ -1,5 +1,8 @@
 package net.peacefulcraft.trenchpvp.gameclasses.abilities;
 
+import org.bukkit.event.player.PlayerInteractEntityEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
+
 public interface TrenchKitClickAbilityExecutor {
 	
 	/**
@@ -19,6 +22,8 @@ public interface TrenchKitClickAbilityExecutor {
 	/**
 	 * Loop through all registered abilities and attempt to trigger them 
 	 */
-	public void executeClickAbilities();
+	public void executeClickAbilities(PlayerInteractEvent e);
+	
+	public void executeClickAbilities(PlayerInteractEntityEvent e);
 	
 }

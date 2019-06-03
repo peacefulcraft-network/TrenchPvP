@@ -1,5 +1,7 @@
 package net.peacefulcraft.trenchpvp.gameclasses.abilities;
 
+import org.bukkit.event.Event;
+
 import net.peacefulcraft.trenchpvp.gamehandle.Announcer;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 
@@ -21,7 +23,13 @@ public abstract class TrenchAbility {
 		public long getCooldown() { return cooldown; }
 		public long getCooldownSeconds() { return cooldown / 1000;}
 		public void setCooldown(Long delay) { cooldown = delay; }
-	
+
+	/**
+	 * Get the most recent even which involved this ability instance
+	 */
+	private Event sourceEvent;
+		public Event getSourceEvent() { return sourceEvent; }
+		
 	/**
 	 * Set the cooldown time, in ms, between clicks
 	 * @param delay
@@ -51,7 +59,7 @@ public abstract class TrenchAbility {
 	public boolean canUseAbilitySilent() {
 		if(cooldown < System.currentTimeMillis()) {
 			return true;
-		}
+		}	
 		
 		return false;
 	}
@@ -64,9 +72,10 @@ public abstract class TrenchAbility {
 	}
 	
 	/**
-	 * Check if ability signature matches, then trigger the ability
+	 * @param sourceEvent
 	 */
-	public void executeAbility() {
+	public void executeAbility(Event sourceEvent) {
+		this.sourceEvent = sourceEvent;
 		if(abilitySignature() && canUseAbility()) {
 			markAbilityUsed();
 			triggerAbility();	
