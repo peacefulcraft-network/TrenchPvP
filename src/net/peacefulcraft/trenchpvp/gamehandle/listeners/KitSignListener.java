@@ -104,7 +104,7 @@ public class KitSignListener implements Listener {
 						case HEAVY:
 							if(TrenchPvP.getTrenchCFG().isHeavyEnabled()){
 							
-								t.equipKit(new TrenchHeavy());
+								t.equipKit(new TrenchHeavy(t));
 								return;
 							
 							}
@@ -127,7 +127,7 @@ public class KitSignListener implements Listener {
 						case MEDIC:
 							if(TrenchPvP.getTrenchCFG().isMedicEnabled()){
 								
-								t.equipKit(new TrenchMedic());
+								t.equipKit(new TrenchMedic(t));
 								return;
 							}
 							
