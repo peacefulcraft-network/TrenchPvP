@@ -16,7 +16,7 @@ import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 
 public abstract class TrenchKit implements TrenchKitInventory, TrenchKitClickAbilityExecutor{
 	
-	private TrenchPlayer t;
+	protected TrenchPlayer t;
 		public TrenchPlayer getTrenchPlayer() { return t; }
 	
 	private TrenchKits kitType;

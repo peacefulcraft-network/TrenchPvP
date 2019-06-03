@@ -12,7 +12,8 @@ import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 public abstract class TrenchAbility {
 	
 	//Time between allowed clicks
-	private TrenchPlayer t;
+	protected TrenchPlayer t;
+		public TrenchPlayer getTrenchPlayer() { return t; }
 	private long cooldowndelay;
 	
 	//Next time ability can be used
