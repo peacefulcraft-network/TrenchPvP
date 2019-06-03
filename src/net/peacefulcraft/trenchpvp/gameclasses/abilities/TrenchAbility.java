@@ -32,14 +32,27 @@ public abstract class TrenchAbility {
 	}
 	
 	/**
-	 * Check if ability is on cooldown
+	 * Check if ability is on cooldown, alert player if it is on cooldown.
+	 * @return T/F can use ability
 	 */
 	public boolean canUseAbility() {
-		if(cooldown < System.currentTimeMillis()) {
+		if(canUseAbilitySilent()) {
 			return true;
 		}
 		
 		t.getPlayer().sendMessage(abilityCooldownMessage((cooldown - System.currentTimeMillis())/1000));
+		return false;
+	}
+	
+	/**
+	 * Check if ability is on cooldown without alerting player
+	 * @return T/F can use ability
+	 */
+	public boolean canUseAbilitySilent() {
+		if(cooldown < System.currentTimeMillis()) {
+			return true;
+		}
+		
 		return false;
 	}
 	
