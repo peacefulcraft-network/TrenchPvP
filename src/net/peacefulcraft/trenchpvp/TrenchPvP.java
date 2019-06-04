@@ -24,7 +24,8 @@ import net.peacefulcraft.trenchpvp.gameclasses.listeners.PoisonRoundListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.PowerShotListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.WindsongBladeListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.SpeedShotListener;
-import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
+import net.peacefulcraft.trenchpvp.gamehandle.TeamManager;
+import net.peacefulcraft.trenchpvp.gamehandle.listeners.BlockIgnitionTimer;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.ChangeClassSign;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.ItemListener;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.JoinGameListen;
@@ -106,6 +107,7 @@ public class TrenchPvP extends JavaPlugin{
 		getServer().getPluginManager().registerEvents(new ChangeClassSign(), this);
 		getServer().getPluginManager().registerEvents(new KitSignListener(), this);
 		getServer().getPluginManager().registerEvents(new JoinGameListen(), this);
+		getServer().getPluginManager().registerEvents(new BlockIgnitionTimer(), this);
 		getServer().getPluginManager().registerEvents(new QuitGameListen(), this);
 		getServer().getPluginManager().registerEvents(new PlayerRespawning(), this);
 		getServer().getPluginManager().registerEvents(new PvPController(), this);

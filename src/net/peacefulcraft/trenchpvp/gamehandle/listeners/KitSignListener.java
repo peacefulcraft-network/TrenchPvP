@@ -18,13 +18,11 @@ import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchScout;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchSniper;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchSoldier;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchSpy;
-import net.peacefulcraft.trenchpvp.gameclasses.listeners.BigBerthaListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.InfernoTrapListener;
-import net.peacefulcraft.trenchpvp.gameclasses.listeners.OnslaughtListener;
-import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
-import net.peacefulcraft.trenchpvp.gamehande.player.Teleports;
-import net.peacefulcraft.trenchpvp.gamehande.player.TrenchPlayer;
-import net.peacefulcraft.trenchpvp.gamehande.player.TrenchTeams;
+import net.peacefulcraft.trenchpvp.gamehandle.TeamManager;
+import net.peacefulcraft.trenchpvp.gamehandle.player.Teleports;
+import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
+import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchTeams;
 
 public class KitSignListener implements Listener {
 	
@@ -50,10 +48,7 @@ public class KitSignListener implements Listener {
 							return;
 						}
 
-						InfernoTrapListener.pyroTrapRemove(t.getPlayer());
-						BigBerthaListener.demoTrapRemove(t.getPlayer());
-						OnslaughtListener.resetStreak(t.getPlayer());
-						
+						InfernoTrapListener.pyroTrapRemove(t);
 						
 						String signText = sign.getLine(2).toUpperCase();
 						switch(TrenchKits.valueOf(signText)){//Check which class was selected (based on 3rd line of class sign)
@@ -158,6 +153,7 @@ public class KitSignListener implements Listener {
 						}else {
 							e.getPlayer().teleport(Teleports.getRedSpawn());
 						}
+						t.clearPotionEffects();
 						e.getPlayer().sendMessage("You are now type " + t.getKitType());
 						
 					}

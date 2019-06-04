@@ -9,8 +9,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 import net.peacefulcraft.trenchpvp.TrenchPvP;
-import net.peacefulcraft.trenchpvp.gamehande.GameManager;
-import net.peacefulcraft.trenchpvp.gamehande.TeamManager;
+import net.peacefulcraft.trenchpvp.gamehandle.GameManager;
+import net.peacefulcraft.trenchpvp.gamehandle.TeamManager;
 
 public class JoinGameSign implements Listener {
 	
