@@ -22,6 +22,7 @@ public class TrenchPlayer{
 	public TrenchPlayer(Player user, TrenchTeams team){
 		this.p = user;
 		this.team = team;
+		kitInstance = new TrenchUndefined(this);
 	}
 	
 	public void equipKit(TrenchKit k) {

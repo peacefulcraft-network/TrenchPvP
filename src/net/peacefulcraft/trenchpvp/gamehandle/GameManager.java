@@ -45,10 +45,6 @@ public class GameManager {
 				}
 				
 				t = TrenchPvP.getTeamManager().joinTeam(p);
-				
-				//Equipping unassigned role will clear inventory and potion effects
-				t.equipKit(new TrenchUndefined(t));
-				
 				if(t.getPlayerTeam() == TrenchTeams.BLUE) {
 					p.teleport(Teleports.getBlueClassSpawn());
 					p.setGameMode(GameMode.ADVENTURE);
