@@ -12,8 +12,6 @@ import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import net.peacefulcraft.trenchpvp.menu.GameMenu;
-
 public class TrenchDemoman extends TrenchKit{
 
 	public TrenchDemoman() {
