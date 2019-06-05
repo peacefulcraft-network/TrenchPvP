@@ -11,15 +11,10 @@ import net.peacefulcraft.trenchpvp.commands.trJoin;
 import net.peacefulcraft.trenchpvp.commands.trLeave;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.AbilityClickListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.DeepCutListener;
-import net.peacefulcraft.trenchpvp.gameclasses.listeners.DenseClickListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.DoubleJumpListener;
-import net.peacefulcraft.trenchpvp.gameclasses.listeners.FlamethrowerListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.HiddenBladeListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.InfernoTrapListener;
-import net.peacefulcraft.trenchpvp.gameclasses.listeners.MediGunListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.OnslaughtListener;
-import net.peacefulcraft.trenchpvp.gameclasses.listeners.PoisonRoundListener;
-import net.peacefulcraft.trenchpvp.gameclasses.listeners.PowerShotListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.SlimSlicerListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.SpeedShotListener;
 import net.peacefulcraft.trenchpvp.gamehandle.TeamManager;
@@ -112,16 +107,11 @@ public class TrenchPvP extends JavaPlugin{
 		getServer().getPluginManager().registerEvents(new ItemListener(), this);
 		
 		//gameclasses.listeners
-		getServer().getPluginManager().registerEvents(new MediGunListener(), this);
-		getServer().getPluginManager().registerEvents(new DenseClickListener(), this);
 		getServer().getPluginManager().registerEvents(new HiddenBladeListener(), this);
 		getServer().getPluginManager().registerEvents(new SpeedShotListener(), this);
 		getServer().getPluginManager().registerEvents(new DoubleJumpListener(), this);
 		getServer().getPluginManager().registerEvents(new SlimSlicerListener(), this);
-		getServer().getPluginManager().registerEvents(new FlamethrowerListener(), this);
 		getServer().getPluginManager().registerEvents(new InfernoTrapListener(), this);
-		getServer().getPluginManager().registerEvents(new PoisonRoundListener(), this);
-		getServer().getPluginManager().registerEvents(new PowerShotListener(), this);
 		getServer().getPluginManager().registerEvents(new OnslaughtListener(), this);
 		getServer().getPluginManager().registerEvents(new DeepCutListener(), this);
 		
