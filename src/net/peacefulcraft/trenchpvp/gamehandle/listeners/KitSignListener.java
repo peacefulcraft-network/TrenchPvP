@@ -116,7 +116,7 @@ public class KitSignListener implements Listener {
 							
 							if(TrenchPvP.getTrenchCFG().isSniperEnabled()){
 								
-								t.equipKit(new TrenchSniper());
+								t.equipKit(new TrenchSniper(t));
 								return;
 							
 							}
