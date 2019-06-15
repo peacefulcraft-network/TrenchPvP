@@ -9,7 +9,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.Flamethrower;
-import net.peacefulcraft.trenchpvp.gameclasses.abilities.TrenchAbilityManager;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.TrenchAbilityType;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 

@@ -8,9 +8,9 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import net.peacefulcraft.trenchpvp.gameclasses.abilities.Witherbringer;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.Onslaught;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.TrenchAbilityType;
+import net.peacefulcraft.trenchpvp.gameclasses.abilities.Witherbringer;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 
 public class TrenchSoldier extends TrenchKit{
