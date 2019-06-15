@@ -38,6 +38,8 @@ public class InfernoTrapListener implements Listener
 		
 		if(!(t.getKitType() == TrenchKits.PYRO)) return;
 		
+		if(!(p.getInventory().getItemInMainHand().getType() == Material.LIGHT_WEIGHTED_PRESSURE_PLATE)) return;
+		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Inferno Trap"))) return;
 		
 		Block lookingBlock = p.getTargetBlock((Set<Material>) null, 4);//Gets block within 4 block range
 		 if (lookingBlock != null && lookingBlock.getType().isBlock() && lookingBlock.getType() != Material.LIGHT_WEIGHTED_PRESSURE_PLATE && lookingBlock.getType() != Material.AIR) {
