@@ -26,7 +26,7 @@ public class DoubleJump extends TrenchAbility{
 	
 		if(ev instanceof PlayerMoveEvent || ev instanceof PlayerToggleFlightEvent) { return true;}
 		
-		return true;
+		return false;
 		
 	}
 
@@ -44,6 +44,7 @@ public class DoubleJump extends TrenchAbility{
 		        p.setVelocity(v);     
 		        canDoubleJump = false;
 			}
+		    p.setFlying(false);
 			return;
 		}
 		
@@ -52,6 +53,7 @@ public class DoubleJump extends TrenchAbility{
 			if(p.isOnGround()) {
 				canDoubleJump = true;
 			}
+			p.setFlying(false);
 			return;
 		}
 		

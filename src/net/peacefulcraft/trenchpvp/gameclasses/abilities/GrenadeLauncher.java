@@ -25,7 +25,7 @@ public class GrenadeLauncher extends TrenchAbility{
 		if(!(p.getInventory().getItemInMainHand().getType() == Material.QUARTZ)) return false;
 		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Grenade Launcher"))) return false;
 		
-		return false;
+		return true;
 	}
 
 	@Override
