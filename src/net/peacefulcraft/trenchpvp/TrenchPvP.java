@@ -32,7 +32,7 @@ import net.peacefulcraft.trenchpvp.gamehandle.listeners.QuitGameListen;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.StartGameSign;
 import net.peacefulcraft.trenchpvp.gamehandle.tasks.Startgame;
 import net.peacefulcraft.trenchpvp.gamehandle.tasks.SyncStats;
-import net.peacefulcraft.trenchpvp.menu.listeners.MenuListeners;
+import net.peacefulcraft.trenchpvp.menu.listeners.KitMenu;
 import net.peacefulcraft.trenchpvp.stats.StatTracker;
 import net.peacefulcraft.trenchpvp.stats.listeners.ConsumeListener;
 import net.peacefulcraft.trenchpvp.stats.listeners.DamageListener;
@@ -126,7 +126,7 @@ public class TrenchPvP extends JavaPlugin{
 		getServer().getPluginManager().registerEvents(new KillStreakListener(), this);
 
 		//Menu listeners
-		getServer().getPluginManager().registerEvents(new MenuListeners(), this);
+		getServer().getPluginManager().registerEvents(new KitMenu(), this);
 	}
 
 	public static void logWarning(String msg) {

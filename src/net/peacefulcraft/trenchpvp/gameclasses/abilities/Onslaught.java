@@ -75,6 +75,7 @@ public class Onslaught extends TrenchAbility{
 						killer.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, 99999, healthBuff));
 					
 					redstone.setAmount(redstone.getAmount() + 1);
+					killer.getInventory().setItem(itemIndex, redstone);
 					killer.sendMessage(ChatColor.RED + "The Blood of " + killedName + "Has Been Added to Your Strength");					
 				
 					}
