@@ -84,6 +84,7 @@ public class GameManager {
 		TeamManager.ExecuteOnAllPlayers(
 			(TrenchPlayer t)->{
 				
+				t.equipKit(t.getKit());
 				if(t.getPlayerTeam() == TrenchTeams.RED) {
 					t.getPlayer().teleport(Teleports.getRedSpawn());
 				}else {
