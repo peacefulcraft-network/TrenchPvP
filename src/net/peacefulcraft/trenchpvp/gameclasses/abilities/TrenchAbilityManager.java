@@ -5,8 +5,6 @@ import java.util.HashMap;
 
 import org.bukkit.event.Event;
 
-import net.peacefulcraft.trenchpvp.TrenchPvP;
-
 public class TrenchAbilityManager{
 
 	private HashMap<TrenchAbilityType, ArrayList<TrenchAbility>> abilities = new HashMap<TrenchAbilityType, ArrayList<TrenchAbility>>();
@@ -26,7 +24,7 @@ public class TrenchAbilityManager{
 			}
 			
 			abilities.get(type).add(ability);			
-			
+			break;
 		}
 		
 	}
