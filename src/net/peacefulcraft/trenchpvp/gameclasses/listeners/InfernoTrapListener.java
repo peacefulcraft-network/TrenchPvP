@@ -116,12 +116,8 @@ public class InfernoTrapListener implements Listener
 	private void pyroDeathEvent(PlayerDeathEvent e) {
 		Player p = e.getEntity();
 		
-		TrenchPlayer t;
-		try {
-			t = TeamManager.findTrenchPlayer(p);
-		}catch(RuntimeException x) {
-			return;
-		}
+		TrenchPlayer t = TeamManager.findTrenchPlayer(p);
+		if(t == null) { return; }
 		
 		if(!(t.getKitType() == TrenchKits.PYRO)) return;
 		
@@ -135,15 +131,7 @@ public class InfernoTrapListener implements Listener
 		}
 	}
 
-	public static void pyroTrapRemove(TrenchPlayer t) {
-		Player p = t.getPlayer();
-		try {
-			t = TeamManager.findTrenchPlayer(p);
-		}catch(RuntimeException x) {
-			return;
-		}
-		
-		if(!(t.getKitType() == TrenchKits.PYRO)) return;
+	public static void pyroTrapRemove(Player p) {
 		
 		if(trapCord.containsKey(p.getUniqueId())) {
 			ArrayList<Location> traps = trapCord.get(p.getUniqueId());

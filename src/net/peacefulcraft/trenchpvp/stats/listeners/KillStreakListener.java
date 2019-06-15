@@ -54,13 +54,15 @@ public class KillStreakListener implements Listener
 		}
 		
 		if(TrenchPvP.getStatTracker().check(victim.getUniqueId(), GeneralStat.player_highest_kill_streak) == true) {
-			int streak = reference.get(victim.getUniqueId());
-			if(streak >= TrenchPvP.getStatTracker().getValue(victim.getUniqueId(), GeneralStat.player_highest_kill_streak)) {
-				TrenchPvP.getStatTracker().track(victim.getUniqueId(), GeneralStat.player_highest_kill_streak, streak);
-				reference.put(victim.getUniqueId(), 0);
-			} else {
-				reference.put(victim.getUniqueId(), 0);
-			}
+			if(reference.containsKey(victim.getUniqueId())) {
+				int streak = reference.get(victim.getUniqueId());
+				if(streak >= TrenchPvP.getStatTracker().getValue(victim.getUniqueId(), GeneralStat.player_highest_kill_streak)) {
+					TrenchPvP.getStatTracker().track(victim.getUniqueId(), GeneralStat.player_highest_kill_streak, streak);
+					reference.put(victim.getUniqueId(), 0);
+				} else {
+					reference.put(victim.getUniqueId(), 0);
+				}
+			} 
 		}
 	}
 }

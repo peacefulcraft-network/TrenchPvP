@@ -14,11 +14,11 @@ import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 public class TrenchMedic extends TrenchKit{
 
 	public TrenchMedic(TrenchPlayer t) {
-		super(t, TrenchKits.DEMOMAN);
-		
+		super(t, TrenchKits.MEDIC);
+
 		//Register special ability handlers
 		getAbilityManager().registerAbility(TrenchAbilityType.PLAYER_INTERACT, new MediGun(this));
-		
+
 	}
 
 
@@ -29,53 +29,53 @@ public class TrenchMedic extends TrenchKit{
 	 */
 	@Override
 	public void equipArmor() {
-			
+
 		ItemStack[] armor = new ItemStack[4];
 		armor[3] = new ItemStack(Material.LEATHER_HELMET,1);
-		
+
 		armor[2] = new ItemStack(Material.LEATHER_CHESTPLATE,1);
-		
+
 		armor[1] = new ItemStack(Material.LEATHER_LEGGINGS, 1);
-		
+
 		armor[0] = new ItemStack(Material.LEATHER_BOOTS, 1);
-		
+
 		t.getPlayer().getInventory().setArmorContents(armor);
-	
+
 	}
 
 	@Override
 	public void equipItems() {
-		
+
 		Inventory inv = t.getPlayer().getInventory();
-		
+
 		/*Medic - Medi Gun
 		 *Heal players ever 1.5 seconds (MediGun.java (class))
 		 */
 		//Create Bow / give enchantments
 		ItemStack primary = new ItemStack(Material.REDSTONE_BLOCK, 1);
-		
+
 		//Get metadata / set bow name
 		ItemMeta pMetaData = primary.getItemMeta();
 		pMetaData.setDisplayName("Medi Gun");
-		
+
 		ArrayList<String> pDesc = new ArrayList<String>();
 		pDesc.add("Right Click Your Teamates to Heal Them! (1.5 second cool down)");
 		pMetaData.setLore(pDesc);
-		
+
 		primary.setItemMeta(pMetaData);
 		inv.setItem(0, primary);
-		
+
 		/*Bow:Syringe Gun w/ 32 arrows
-		 * 
+		 *
 		 */
 		ItemStack secondary = new ItemStack(Material.BOW, 1);
 		ItemMeta sMeta = secondary.getItemMeta();
 		sMeta.setDisplayName("Syringe Gun");
 		secondary.setItemMeta(sMeta);
 		ItemStack secondaryyUtil = new ItemStack(Material.ARROW, 32);//give arrows for syringe gun
-		
+
 		inv.setItem(1, secondary);
 		inv.setItem(3, secondaryyUtil);
-		
+
 	}
 }

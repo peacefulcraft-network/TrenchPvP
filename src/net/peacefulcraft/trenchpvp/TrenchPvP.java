@@ -32,7 +32,7 @@ import net.peacefulcraft.trenchpvp.gamehandle.listeners.QuitGameListen;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.StartGameSign;
 import net.peacefulcraft.trenchpvp.gamehandle.tasks.Startgame;
 import net.peacefulcraft.trenchpvp.gamehandle.tasks.SyncStats;
-import net.peacefulcraft.trenchpvp.menu.listeners.OpenMenuListener;
+import net.peacefulcraft.trenchpvp.menu.listeners.MenuListeners;
 import net.peacefulcraft.trenchpvp.stats.StatTracker;
 import net.peacefulcraft.trenchpvp.stats.listeners.ConsumeListener;
 import net.peacefulcraft.trenchpvp.stats.listeners.DamageListener;
@@ -52,7 +52,7 @@ public class TrenchPvP extends JavaPlugin{
 
 	private static TrenchConfig config;
 		public static TrenchConfig getTrenchCFG() {return config;}
-		
+
 	private static StatTracker tracker;
 		public static StatTracker getStatTracker() {return tracker;}
 
@@ -73,7 +73,7 @@ public class TrenchPvP extends JavaPlugin{
 		tracker = new StatTracker();
 		SyncStats.onEnable();
 		this.getLogger().info("[TPP]Trench PvP Alpha 0.1 has been enabled!");
-		
+
 		//Trigger game start
 		(new Startgame(this)).runTask(this);
 	}
@@ -106,10 +106,10 @@ public class TrenchPvP extends JavaPlugin{
 		getServer().getPluginManager().registerEvents(new PlayerRespawning(), this);
 		getServer().getPluginManager().registerEvents(new PvPController(), this);
 		getServer().getPluginManager().registerEvents(new ItemListener(), this);
-		
+
 		//gameclasses.listeners
 		getServer().getPluginManager().registerEvents(new InfernoTrapListener(), this);
-		
+
 		//new gameclasses.listeners
 		getServer().getPluginManager().registerEvents(new AbilityClickListener(), this);
 		getServer().getPluginManager().registerEvents(new AbilityEntityDamageEntityListener(), this);
@@ -117,22 +117,22 @@ public class TrenchPvP extends JavaPlugin{
 		getServer().getPluginManager().registerEvents(new AbilityPlayerInteractEntity(), this);
 		getServer().getPluginManager().registerEvents(new AbilityPlayerMoveListener(), this);
 		getServer().getPluginManager().registerEvents(new AbilityPlayerToggleFlight(), this);
-		
+
 		//Stat listeners
 		getServer().getPluginManager().registerEvents(new ConsumeListener(), this);
 		getServer().getPluginManager().registerEvents(new DamageListener(), this);
 		getServer().getPluginManager().registerEvents(new FriendlykillListener(), this);
 		getServer().getPluginManager().registerEvents(new KillListener(), this);
 		getServer().getPluginManager().registerEvents(new KillStreakListener(), this);
-		
+
 		//Menu listeners
-		getServer().getPluginManager().registerEvents(new OpenMenuListener(), this);
+		getServer().getPluginManager().registerEvents(new MenuListeners(), this);
 	}
-	
+
 	public static void logWarning(String msg) {
 		getPluginInstance().getServer().getLogger().log(Level.WARNING, "[Trench]" + msg);
 	}
-	
+
 	public static void logErrors(String msg) {
 		getPluginInstance().getServer().getLogger().log(Level.SEVERE, "[Trench]" + msg);
 	}
