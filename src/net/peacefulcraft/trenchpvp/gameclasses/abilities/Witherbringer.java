@@ -3,7 +3,9 @@ package net.peacefulcraft.trenchpvp.gameclasses.abilities;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -13,11 +15,13 @@ import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKit;
 public class Witherbringer extends TrenchAbility{
 
 	private TrenchKit k;
+	private WitherbringerBuddy witherEnforcer;
 	
-	public Witherbringer(TrenchKit k) {
+	public Witherbringer(TrenchKit k, WitherbringerBuddy witherEnforcer) {
 		super(k.getTrenchPlayer(), 25000);
 		
 		this.k = k;
+		this.witherEnforcer = witherEnforcer;
 	}
 
 	@Override
@@ -26,6 +30,9 @@ public class Witherbringer extends TrenchAbility{
 		Player p = k.getTrenchPlayer().getPlayer();
 		if(!(p.getInventory().getItemInMainHand().getType() == Material.IRON_SWORD)) return false;
 		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Witherbringer"))) return false;
+
+		PlayerInteractEvent e = (PlayerInteractEvent) ev;
+		if(!(e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK))) { return false; }
 		
 		return true;
 	}
@@ -33,19 +40,8 @@ public class Witherbringer extends TrenchAbility{
 	@Override
 	public void triggerAbility(Event ev) {
 		
-		try{ 
-			//Make sure we can use this event.
-			EntityDamageByEntityEvent e = (EntityDamageByEntityEvent) ev;
-		
-			Player victim = (Player) e.getEntity();
-			victim.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 200, 1));
-			victim.sendMessage("You Are Bleeding!");
-		
-		}catch(ClassCastException ex) {
-			TrenchPvP.logWarning("Error Triggering Witherbringer event. Incompatible event loop " + ev.getClass());
-			return;
-		}
-		
+		//Make sure all the people we kill get withered
+		witherEnforcer.enableEnforce();		
 		
 	}
 	
