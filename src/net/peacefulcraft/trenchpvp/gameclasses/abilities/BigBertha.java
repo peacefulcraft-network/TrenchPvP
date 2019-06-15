@@ -55,8 +55,9 @@ public class BigBertha extends TrenchAbility{
 				
 				TrenchPvP.getStatTracker().track(p.getUniqueId(), DemoStat.demoman_berthas_placed, 1);
 				
-				ItemStack bomb = p.getInventory().getItem(1); //Copies bomb stack to give back later and clears
 				int itemIndex = p.getInventory().first(Material.TNT);
+				
+				ItemStack bomb = p.getInventory().getItem(itemIndex); //Copies bomb stack to give back later and clears
 				p.getInventory().clear(itemIndex);
 				
 				//Schedule explosion for 5 seconds from now
