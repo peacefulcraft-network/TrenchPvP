@@ -44,7 +44,7 @@ public class GrenadeLauncherListener implements Listener {
 		f.setVelocity(p.getLocation().getDirection().multiply(2));
 		f.setIsIncendiary(false);
 		f.setGravity(true);
-		f.setYield(2);
+		f.setYield(1);
 	}
 }
 

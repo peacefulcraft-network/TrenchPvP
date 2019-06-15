@@ -11,7 +11,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -20,7 +19,7 @@ import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
 import net.peacefulcraft.trenchpvp.gamehandle.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 
-public class DeepCutListener implements Listener
+public class WitherbringerListener implements Listener
 {
 	private HashMap<UUID, Long> cooldown = new HashMap<UUID, Long>();//Creating cooldown
 	private final int COOLDOWN_TIME = 25;
@@ -30,7 +29,7 @@ public class DeepCutListener implements Listener
 	public void onRightClick(PlayerInteractEvent e) {
 		Player p = e.getPlayer();
 		if(!(p.getInventory().getItemInMainHand().getType() == Material.IRON_SWORD)) return;
-		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Deep Cut"))) return;
+		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Witherbringer"))) return;
 		
 		TrenchPlayer t = TeamManager.findTrenchPlayer(p);
 		if(t == null) { return; }
@@ -65,17 +64,14 @@ public class DeepCutListener implements Listener
 	private void abilityAction(EntityDamageByEntityEvent e) {
 		if(abilityCase == false) return;
 		Entity damager = e.getDamager();
-		if(damager instanceof Player) {
+		Entity victim = e.getEntity();
+		if(damager instanceof Player && victim instanceof Player) {
 			Player soldier = (Player)damager;
 			if(!(soldier.getInventory().getItemInMainHand().getType() == Material.IRON_SWORD)) return;
-			if(!(soldier.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Deep Cut"))) return;
-		}
-		
-		Entity entity = e.getEntity();
-		if(entity instanceof Player) {
-			Player victim = (Player)entity;
-			victim.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 200, 1));
-			victim.sendMessage("You Are Bleeding!");
+			if(!(soldier.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Witherbringer"))) return;
+			
+			Player vic = (Player)victim;
+			vic.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 200, 1));
 		}
 		abilityCase = true; //Quick fix to continuous wither damage occurrence. Change?
 	}

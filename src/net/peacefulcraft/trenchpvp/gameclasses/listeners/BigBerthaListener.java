@@ -16,6 +16,7 @@ import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitScheduler;
@@ -30,8 +31,8 @@ import net.peacefulcraft.trenchpvp.stats.TrenchStats.DemoStat;
 public class BigBerthaListener implements Listener
 {
 	private HashMap<UUID, Long> cooldown = new HashMap<UUID, Long>();
-	private HashMap<UUID, ArrayList<Location>> bombCord = new HashMap<UUID,ArrayList<Location>>();
-	private ArrayList<Location> bombs = new ArrayList<Location>();
+	private static HashMap<UUID, ArrayList<Location>> bombCord = new HashMap<UUID,ArrayList<Location>>();
+	private ArrayList<Location> bombs = new ArrayList<Location>(); //ArraList of location type. Stores bomb locations
 	private final int COOLDOWN_TIME = 25;
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent e){
@@ -79,10 +80,12 @@ public class BigBerthaListener implements Listener
 				bombCord.get(p.getUniqueId()).add(upBlock.getLocation());
 				p.sendMessage(ChatColor.RED + "Fuse is lit!");
 				
-				TrenchPvP.getStatTracker().track(p.getUniqueId(), DemoStat.demoman_bethas_placed, 1);
+				TrenchPvP.getStatTracker().track(p.getUniqueId(), DemoStat.demoman_berthas_placed, 1);
 				
-				ItemStack bomb = p.getInventory().getItem(1); //Copies bomb stack and clears
-				p.getInventory().clear(1);
+				int index = p.getInventory().first(Material.TNT);
+				
+				ItemStack bomb = p.getInventory().getItem(index); //Copies bomb stack and clears
+				p.getInventory().clear(index);
 				
 				BukkitScheduler scheduler = Bukkit.getServer().getScheduler();//Delayed explosion; 5 seconds
 	            scheduler.scheduleSyncDelayedTask(TrenchPvP.getPluginInstance() , new Runnable() {
@@ -109,6 +112,34 @@ public class BigBerthaListener implements Listener
 	                }
 	            }, 300);
 	            
+			}
+		}
+	}
+	@EventHandler
+	private void demoDeathEvent(PlayerDeathEvent e) {
+		Player p = e.getEntity();
+		
+		TrenchPlayer t = TeamManager.findTrenchPlayer(p);
+		if(t == null) { return; }
+		
+		if(!(t.getKitType() == TrenchKits.DEMOMAN)) return;
+		
+		if(bombCord.containsKey(p.getUniqueId())) {
+			ArrayList<Location> b = bombCord.get(p.getUniqueId());
+			for(Location loc : b) {
+				if(loc.getBlock().getType() == Material.TNT) {
+					loc.getBlock().setType(Material.AIR);
+				}
+			}
+		}
+	}
+	public static void demoTrapRemove(Player p) {
+		if(bombCord.containsKey(p.getUniqueId())) {
+			ArrayList<Location> b = bombCord.get(p.getUniqueId());
+			for(Location loc : b) {
+				if(loc.getBlock().getType() == Material.TNT) {
+					loc.getBlock().setType(Material.AIR);
+				}
 			}
 		}
 	}

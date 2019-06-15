@@ -48,7 +48,7 @@ public class KitSignListener implements Listener {
 							return;
 						}
 
-						InfernoTrapListener.pyroTrapRemove(t);
+						InfernoTrapListener.pyroTrapRemove(t.getPlayer());
 						
 						String signText = sign.getLine(2).toUpperCase();
 						switch(TrenchKits.valueOf(signText)){//Check which class was selected (based on 3rd line of class sign)

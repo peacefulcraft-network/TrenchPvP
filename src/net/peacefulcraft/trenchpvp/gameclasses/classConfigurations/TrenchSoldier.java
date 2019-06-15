@@ -23,10 +23,10 @@ public class TrenchSoldier extends TrenchKit{
 		ItemStack primary = new ItemStack(Material.IRON_SWORD, 1);
 		ItemMeta pMetaData = primary.getItemMeta();
 		primary.addEnchantment(Enchantment.DAMAGE_ALL, 1);
-		pMetaData.setDisplayName("Deep Cut");
+		pMetaData.setDisplayName("Witherbringer");
 		
 		ArrayList<String> pDesc = new ArrayList<String>();
-		pDesc.add("Right Click to Activate Deep Cut!");
+		pDesc.add("Right Click to Activate The Wither Curse!");
 		pDesc.add("Ability Time: 10 Seconds");
 		pDesc.add("Cooldown Time: 25 Seconds");
 		pMetaData.setLore(pDesc);
@@ -86,7 +86,7 @@ public class TrenchSoldier extends TrenchKit{
 	}
 	@Override
 	protected void equipMenu(Player p) {
-		ItemStack menu = new ItemStack(Material.EMERALD, 60);
+		ItemStack menu = new ItemStack(Material.EMERALD, 1);
 		ItemMeta menuMeta = menu.getItemMeta();
 		menuMeta.setDisplayName(ChatColor.AQUA + "Kit Menu");
 		

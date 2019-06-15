@@ -22,7 +22,7 @@ public class TrenchPyro extends TrenchKit{
 		ItemStack primary = new ItemStack(Material.GOLDEN_AXE);
 		
 		ItemMeta pMetaData = primary.getItemMeta();
-		pMetaData.setDisplayName("Inferno Axe");
+		pMetaData.setDisplayName("Nether's Bite");
 		
 		ArrayList<String> pDesc = new ArrayList<String>();
 		pDesc.add("Just a Sharp Axe.");
@@ -109,7 +109,7 @@ public class TrenchPyro extends TrenchKit{
 	}
 	@Override
 	protected void equipMenu(Player p) {
-		ItemStack menu = new ItemStack(Material.EMERALD, 60);
+		ItemStack menu = new ItemStack(Material.EMERALD, 1);
 		ItemMeta menuMeta = menu.getItemMeta();
 		menuMeta.setDisplayName(ChatColor.AQUA + "Kit Menu");
 		

@@ -11,7 +11,6 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventException;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
@@ -118,12 +117,8 @@ public class InfernoTrapListener implements Listener
 	private void pyroDeathEvent(PlayerDeathEvent e) {
 		Player p = e.getEntity();
 		
-		TrenchPlayer t;
-		try {
-			t = TeamManager.findTrenchPlayer(p);
-		}catch(RuntimeException x) {
-			return;
-		}
+		TrenchPlayer t = TeamManager.findTrenchPlayer(p);
+		if(t == null) { return; }
 		
 		if(!(t.getKitType() == TrenchKits.PYRO)) return;
 		
@@ -137,15 +132,7 @@ public class InfernoTrapListener implements Listener
 		}
 	}
 
-	public static void pyroTrapRemove(TrenchPlayer t) {
-		Player p = t.getPlayer();
-		try {
-			t = TeamManager.findTrenchPlayer(p);
-		}catch(RuntimeException x) {
-			return;
-		}
-		
-		if(!(t.getKitType() == TrenchKits.PYRO)) return;
+	public static void pyroTrapRemove(Player p) {
 		
 		if(trapCord.containsKey(p.getUniqueId())) {
 			ArrayList<Location> traps = trapCord.get(p.getUniqueId());

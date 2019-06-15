@@ -13,37 +13,41 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
 import net.peacefulcraft.trenchpvp.gamehandle.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
+import net.peacefulcraft.trenchpvp.stats.TrenchStats.HeavyStat;
 
-public class DenseClickListener implements Listener
+public class AbsoluteDefenseListener implements Listener
 {
 	private HashMap<UUID, Long> cooldown = new HashMap<UUID, Long>();//Creating cooldown
-	private final int COOLDOWN_TIME = 15;
+	private final int COOLDOWN_TIME = 20;
 
 	@EventHandler
 	public void onRightClick(PlayerInteractEvent e)
 	{
 		Player p = e.getPlayer();
-		//Checks item in main hand is Dense Axe
-		if(!(p.getInventory().getItemInMainHand().getType() == Material.IRON_AXE)) return;
-		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Dense Axe"))) return;
+		//Checks item in main hand is Shell
+		if(!(p.getInventory().getItemInMainHand().getType() == Material.SHULKER_SHELL)) return;
+
+		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Absolute Defense"))) return;
+		//if(!(e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK)) return;
+		//Confirms location
 
 		TrenchPlayer t = TeamManager.findTrenchPlayer(p);
 		if(t == null) { return; }
 
+
 		if(!(t.getKitType() == TrenchKits.HEAVY)) return;
 
+		//Potion effects
 		if(cooldown.containsKey(p.getUniqueId()))
 		{
 			long timeLeft = ((cooldown.get(p.getUniqueId())/1000) + COOLDOWN_TIME) - (System.currentTimeMillis()/1000);
 			if(canUseAgain(p) == true)
 			{
-				p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 80, 3));
-				p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 80, 3));
-				p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 80, 3));
-				p.sendMessage(ChatColor.RED + "Ability is now on cooldown for " + COOLDOWN_TIME + " seconds.");
+				abilityEffects(p);
 			}
 			else if(canUseAgain(p) == false)
 			{
@@ -53,10 +57,7 @@ public class DenseClickListener implements Listener
 		else
 		{
 			cooldown.put(p.getUniqueId(), System.currentTimeMillis());
-			p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 80, 3));
-			p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 80, 3));
-			p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 80, 3));
-			p.sendMessage(ChatColor.RED + "Ability is now on cooldown for " + COOLDOWN_TIME + " seconds.");
+			abilityEffects(p);
 		}
 
 	}
@@ -66,5 +67,12 @@ public class DenseClickListener implements Listener
 		long timeToWait = TimeUnit.SECONDS.toMillis(COOLDOWN_TIME);
 		return (System.currentTimeMillis() - lastTimeUsed) > timeToWait;
  	}
-
+	private void abilityEffects(Player p) {
+		p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 140, 4));
+		p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 140, 2));
+		p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 140, 4));
+		p.sendMessage(ChatColor.RED + "Ability is now on cooldown for " + COOLDOWN_TIME + " seconds.");
+		
+		TrenchPvP.getStatTracker().track(p.getUniqueId(), HeavyStat.heavy_absolute_defense_usage, 1);
+	}
 }

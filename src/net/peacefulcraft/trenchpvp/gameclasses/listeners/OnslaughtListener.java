@@ -21,7 +21,7 @@ import net.peacefulcraft.trenchpvp.stats.TrenchStats.SoldierStat;
 
 public class OnslaughtListener implements Listener
 {
-	private HashMap<UUID, Integer> killCount = new HashMap<UUID, Integer>();
+	private static HashMap<UUID, Integer> killCount = new HashMap<UUID, Integer>();
 	@EventHandler
 	private void onslaughtEvent(PlayerDeathEvent e) {
 		
@@ -61,17 +61,22 @@ public class OnslaughtListener implements Listener
 	@EventHandler
 	private void soldierDeathEvent(PlayerDeathEvent e) {
 		Player p = e.getEntity();
-		TrenchPlayer t;
-		try {
-			t = TeamManager.findTrenchPlayer(p);
-		} catch(RuntimeException x) {
-			return;
-		}
+		TrenchPlayer t = TeamManager.findTrenchPlayer(p);
+		if(t == null) { return; }
 		if(!(t.getKitType() == TrenchKits.SOLDIER)) return;
 		
 		if(killCount.containsKey(p.getUniqueId())) {
 			killCount.remove(p.getUniqueId());
 			onslaughtTracking(p);
+		}
+	}
+	public static void resetStreak(Player p) {
+		
+		if(killCount.containsKey(p.getUniqueId())) {
+			killCount.remove(p.getUniqueId());
+			if(p.hasPotionEffect(PotionEffectType.INCREASE_DAMAGE)) {
+				p.removePotionEffect(PotionEffectType.INCREASE_DAMAGE);
+			}
 		}
 	}
 	/*
@@ -80,15 +85,12 @@ public class OnslaughtListener implements Listener
 	 */
 	private void onslaughtEffects(Player p) {
 		int kills = killCount.get(p.getUniqueId());
+		int x = 0;
 		for(int i = 0; i < kills; i++) {
-			if(i % 2 == 0) {
-				p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 99999, 1+i));
-				if(kills >= 5) {
-					p.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, 99999, i-4));
-				}
-			} else {
-				p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 99999, 1+i));
-			}
+			if(i % 3 == 0) {
+				x++;
+				p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 99999, 1+x));
+			} 
 		}
 	}
 	/*

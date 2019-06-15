@@ -5,7 +5,6 @@ package net.peacefulcraft.trenchpvp.gameclasses.listeners;
 
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.UUID;
 
 import org.bukkit.GameMode;
@@ -14,7 +13,6 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.util.Vector;
@@ -79,7 +77,7 @@ public class DoubleJumpListener implements Listener
 		       
 		     	Vector v = new Vector(p.getVelocity().getX(), p.getVelocity().getY(), p.getVelocity().getZ());
 		       	Vector forward = p.getLocation().getDirection().multiply(0.3);
-		        Vector jump = p.getLocation().getDirection().multiply(0.05).setY(1);
+		        Vector jump = p.getLocation().getDirection().multiply(0.04).setY(1);
 		        v.add(forward).add(jump);
 		        p.setVelocity(v);     
 			}

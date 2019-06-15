@@ -28,7 +28,7 @@ public class TrenchSniper extends TrenchKit{
 
 		//Create Bow / give enchantments
 		ItemStack primary = new ItemStack(Material.BOW, 1);
-		primary.addEnchantment(Enchantment.ARROW_KNOCKBACK, 2);
+		primary.addEnchantment(Enchantment.ARROW_KNOCKBACK, 1);
 		primary.addEnchantment(Enchantment.ARROW_DAMAGE, 1);
 		
 		//Get metadata / set bow name
@@ -41,7 +41,7 @@ public class TrenchSniper extends TrenchKit{
 		primary.setItemMeta(pMetaData);
 		
 		//Create arrows for sniper riffle
-		ItemStack primaryUtil = new ItemStack(Material.ARROW, 32);
+		ItemStack primaryUtil = new ItemStack(Material.ARROW, 64);
 		ItemMeta pUMetaData = primaryUtil.getItemMeta();
 		pUMetaData.setDisplayName("Bullets");
 		ArrayList<String> pUDesc = new ArrayList<String>();
@@ -57,8 +57,8 @@ public class TrenchSniper extends TrenchKit{
 		sUMeta.setDisplayName("Power Shot");
 		ArrayList<String> sUDesc = new ArrayList<String>();
 		sUDesc.add("Right Click to Boost Sniper Rifle Mk.II Damage!");
-		sUDesc.add("Ability Time: 5 Seconds");
-		sUDesc.add("Cooldown Time: 15 Seconds");
+		sUDesc.add("Ability Time: 8 Seconds");
+		sUDesc.add("Cooldown Time: 20 Seconds");
 		sUMeta.setLore(sUDesc);
 		
 		secondUtil.setItemMeta(sUMeta);
@@ -134,7 +134,7 @@ public class TrenchSniper extends TrenchKit{
 	}
 	@Override
 	protected void equipMenu(Player p) {
-		ItemStack menu = new ItemStack(Material.EMERALD, 60);
+		ItemStack menu = new ItemStack(Material.EMERALD, 1);
 		ItemMeta menuMeta = menu.getItemMeta();
 		menuMeta.setDisplayName(ChatColor.AQUA + "Kit Menu");
 		
