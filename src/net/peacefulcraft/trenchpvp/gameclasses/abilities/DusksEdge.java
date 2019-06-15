@@ -38,9 +38,15 @@ public class DusksEdge extends TrenchAbility{
 	public void triggerAbility(Event ev) {
 		
 		Player p = k.getTrenchPlayer().getPlayer();
+<<<<<<< HEAD
 		p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, EFFECT_TIME, 3));
 		p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, EFFECT_TIME, 3));
 		p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, EFFECT_TIME, 3));
+=======
+		p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 80, 3));
+		p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 80, 2));
+		p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 80, 1));
+>>>>>>> f179dba1bf613a229c91e7e4a53425ea659727a4
 		
 	}
 
