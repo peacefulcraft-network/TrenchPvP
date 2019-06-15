@@ -33,7 +33,7 @@ public abstract class Announcer {
 			TeamManager.ExecuteOnAllPlayers(
 				(TrenchPlayer t) -> {
 					if(team == null || t.getPlayerTeam() == team)
-						t.getPlayer().sendMessage(trench_prefix + message);
+						t.getPlayer().sendMessage(trench_prefix + " " + message);
 				}
 			);
 		}
