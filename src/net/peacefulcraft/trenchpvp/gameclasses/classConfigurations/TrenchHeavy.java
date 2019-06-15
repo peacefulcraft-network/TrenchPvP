@@ -11,6 +11,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.ArmadilloShell;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.DenseAxe;
+import net.peacefulcraft.trenchpvp.gameclasses.abilities.TrenchAbilityType;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 
 public class TrenchHeavy extends TrenchKit{
@@ -20,8 +21,8 @@ public class TrenchHeavy extends TrenchKit{
 		super(t, TrenchKits.HEAVY);
 		
 		//Register special ability handlers
-		registerAbility(new DenseAxe(this));
-		registerAbility(new ArmadilloShell(this));
+		getAbilityManager().registerAbility(TrenchAbilityType.PLAYER_INTERACT, new DenseAxe(this));
+		getAbilityManager().registerAbility(TrenchAbilityType.PLAYER_INTERACT, new ArmadilloShell(this));
 	}
 
 	@Override

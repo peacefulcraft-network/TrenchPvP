@@ -2,6 +2,7 @@ package net.peacefulcraft.trenchpvp.gameclasses.abilities;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -24,22 +25,21 @@ public class ArmadilloShell extends TrenchAbility{
 	 * @see net.peacefulcraft.trenchpvp.gameclasses.abilities.TrenchAbility#abilitySignature()
 	 */
 	@Override
-	public boolean abilitySignature() {
+	public boolean abilitySignature(Event ev) {
 		Player p = k.getTrenchPlayer().getPlayer();
+		
 		//Checks item in main hand is Armadillo Shell
 		if(!(p.getInventory().getItemInMainHand().getType() == Material.SHULKER_SHELL)) { return false; }
 		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Armadillo Shell"))) { return false; }
-				
-		return canUseAbility();	
+		
+		return true;	
 	}
 
 	/* (non-Javadoc)
 	 * @see net.peacefulcraft.trenchpvp.gameclasses.abilities.TrenchAbility#triggerAbility()
 	 */
 	@Override
-	public void triggerAbility() {
-		
-		markAbilityUsed();
+	public void triggerAbility(Event ev) {
 		
 		Player p = k.getTrenchPlayer().getPlayer();
 		p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 140, 4));

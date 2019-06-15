@@ -1,4 +1,4 @@
-package net.peacefulcraft.trenchpvp.gameclasses.abilities;
+package net.peacefulcraft.trenchpvp.gameclasses.classConfigurations;
 
 public interface TrenchKitInventory {
 
@@ -11,5 +11,10 @@ public interface TrenchKitInventory {
 	 * Equip player armor
 	 */
 	public void equipArmor();
+	
+	/**
+	 * Kit indetification
+	 */
+	public TrenchKits getKitType();
 	
 }
