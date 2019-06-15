@@ -55,7 +55,8 @@ public class BigBertha extends TrenchAbility{
 				TrenchPvP.getStatTracker().track(p.getUniqueId(), DemoStat.demoman_berthas_placed, 1);
 				
 				ItemStack bomb = p.getInventory().getItem(1); //Copies bomb stack to give back later and clears
-				p.getInventory().clear(1);
+				int itemIndex = p.getInventory().first(Material.TNT);
+				p.getInventory().clear(itemIndex);
 				
 				//Schedule explosion for 5 seconds from now
 				(new BerthaBomb(upBlock.getLocation())).runTaskLater(TrenchPvP.getPluginInstance(), 100);
@@ -63,7 +64,7 @@ public class BigBertha extends TrenchAbility{
 				//Schedule giving player another Bertha 25 seconds from now
 				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(TrenchPvP.getPluginInstance() , new Runnable() {
 	                public void run() {
-	                	p.getInventory().setItem(1, bomb);
+	                	p.getInventory().setItem(itemIndex, bomb);
 	                }
 	            }, 300);
 	            
