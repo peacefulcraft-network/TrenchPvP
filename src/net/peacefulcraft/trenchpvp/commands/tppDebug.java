@@ -24,7 +24,7 @@ public class tppDebug implements CommandExecutor{
 			user.sendMessage("Blue:");
 			TeamManager.ExecuteOnAllPlayers(
 					(TrenchPlayer t)->{
-						if(t.getPlayerTeam() == TrenchTeams.RED)
+						if(t.getPlayerTeam() == TrenchTeams.BLUE)
 							user.sendMessage(user.getPlayer().getDisplayName() + ":" + t.getKitType());
 					}
 				);		
