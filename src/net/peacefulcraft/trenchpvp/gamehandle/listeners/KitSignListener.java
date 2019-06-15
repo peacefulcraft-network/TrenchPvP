@@ -56,7 +56,7 @@ public class KitSignListener implements Listener {
 
 							if(TrenchPvP.getTrenchCFG().isScoutEnabled()){
 								
-								t.equipKit(new TrenchScout());
+								t.equipKit(new TrenchScout(t));
 								e.getPlayer().setAllowFlight(true);
 								return;
 							
@@ -69,7 +69,7 @@ public class KitSignListener implements Listener {
 							
 							if(TrenchPvP.getTrenchCFG().isSoldierEnabled()){
 								
-								t.equipKit(new TrenchSoldier());
+								t.equipKit(new TrenchSoldier(t));
 								return;
 							
 							}else
@@ -81,7 +81,7 @@ public class KitSignListener implements Listener {
 							
 							if(TrenchPvP.getTrenchCFG().isPyroEnabled()){
 								
-								t.equipKit(new TrenchPyro());
+								t.equipKit(new TrenchPyro(t));
 								return;
 							
 							}else
@@ -137,7 +137,7 @@ public class KitSignListener implements Listener {
 						case SPY:
 							if(TrenchPvP.getTrenchCFG().isSpyEnabled()) {
 								
-								t.equipKit(new TrenchSpy());
+								t.equipKit(new TrenchSpy(t));
 								return;
 							}
 							

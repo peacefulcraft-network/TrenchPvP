@@ -74,24 +74,22 @@ public abstract class TrenchAbility {
 	/**
 	 * @param sourceEvent
 	 */
-	public void executeAbility(Event sourceEvent) {
-		this.sourceEvent = sourceEvent;
-		if(abilitySignature() && canUseAbility()) {
-			markAbilityUsed();
-			triggerAbility();	
-		}
+	public void execute(Event ev) {
+		this.sourceEvent = ev;
+		markAbilityUsed();
+		triggerAbility(ev);	
 	}
 	
 	/**
 	 * Game conditions that must be met to trigger ability. Clicks, location, item in inventory, etc
 	 * @return T/F can trigger ability
 	 */
-	public abstract boolean abilitySignature();
+	public abstract boolean abilitySignature(Event ev);
 	
 	/**
 	 * Execute ability action.
 	 */
-	public abstract void triggerAbility();
+	public abstract void triggerAbility(Event ev);
 	
 	/**
 	 * 

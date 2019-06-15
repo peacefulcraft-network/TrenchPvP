@@ -1,5 +1,7 @@
 package net.peacefulcraft.trenchpvp;
 
+import java.util.logging.Level;
+
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -10,13 +12,12 @@ import net.peacefulcraft.trenchpvp.commands.tppToggle;
 import net.peacefulcraft.trenchpvp.commands.trJoin;
 import net.peacefulcraft.trenchpvp.commands.trLeave;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.AbilityClickListener;
-import net.peacefulcraft.trenchpvp.gameclasses.listeners.DeepCutListener;
-import net.peacefulcraft.trenchpvp.gameclasses.listeners.DoubleJumpListener;
-import net.peacefulcraft.trenchpvp.gameclasses.listeners.HiddenBladeListener;
+import net.peacefulcraft.trenchpvp.gameclasses.listeners.AbilityEntityDamageEntityListener;
+import net.peacefulcraft.trenchpvp.gameclasses.listeners.AbilityPlayerDeathListener;
+import net.peacefulcraft.trenchpvp.gameclasses.listeners.AbilityPlayerInteractEntity;
+import net.peacefulcraft.trenchpvp.gameclasses.listeners.AbilityPlayerMoveListener;
+import net.peacefulcraft.trenchpvp.gameclasses.listeners.AbilityPlayerToggleFlight;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.InfernoTrapListener;
-import net.peacefulcraft.trenchpvp.gameclasses.listeners.OnslaughtListener;
-import net.peacefulcraft.trenchpvp.gameclasses.listeners.SlimSlicerListener;
-import net.peacefulcraft.trenchpvp.gameclasses.listeners.SpeedShotListener;
 import net.peacefulcraft.trenchpvp.gamehandle.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.BlockIgnitionTimer;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.ChangeClassSign;
@@ -107,16 +108,15 @@ public class TrenchPvP extends JavaPlugin{
 		getServer().getPluginManager().registerEvents(new ItemListener(), this);
 		
 		//gameclasses.listeners
-		getServer().getPluginManager().registerEvents(new HiddenBladeListener(), this);
-		getServer().getPluginManager().registerEvents(new SpeedShotListener(), this);
-		getServer().getPluginManager().registerEvents(new DoubleJumpListener(), this);
-		getServer().getPluginManager().registerEvents(new SlimSlicerListener(), this);
 		getServer().getPluginManager().registerEvents(new InfernoTrapListener(), this);
-		getServer().getPluginManager().registerEvents(new OnslaughtListener(), this);
-		getServer().getPluginManager().registerEvents(new DeepCutListener(), this);
 		
 		//new gameclasses.listeners
 		getServer().getPluginManager().registerEvents(new AbilityClickListener(), this);
+		getServer().getPluginManager().registerEvents(new AbilityEntityDamageEntityListener(), this);
+		getServer().getPluginManager().registerEvents(new AbilityPlayerDeathListener(), this);
+		getServer().getPluginManager().registerEvents(new AbilityPlayerInteractEntity(), this);
+		getServer().getPluginManager().registerEvents(new AbilityPlayerMoveListener(), this);
+		getServer().getPluginManager().registerEvents(new AbilityPlayerToggleFlight(), this);
 		
 		//Stat listeners
 		getServer().getPluginManager().registerEvents(new ConsumeListener(), this);
@@ -127,6 +127,14 @@ public class TrenchPvP extends JavaPlugin{
 		
 		//Menu listeners
 		getServer().getPluginManager().registerEvents(new OpenMenuListener(), this);
+	}
+	
+	public static void logWarning(String msg) {
+		getPluginInstance().getServer().getLogger().log(Level.WARNING, "[Trench]" + msg);
+	}
+	
+	public static void logErrors(String msg) {
+		getPluginInstance().getServer().getLogger().log(Level.SEVERE, "[Trench]" + msg);
 	}
 
 }
