@@ -13,6 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.util.Vector;
 
 import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKit;
@@ -93,6 +94,7 @@ public class BigBertha extends TrenchAbility{
 			
 			//Spawn a fireball that (theoretically) explodes instantly
 			Fireball f = bomb.getWorld().spawn(bomb, Fireball.class);
+			f.setDirection(new Vector(0, -1, 0) );
 			f.setIsIncendiary(false);
 			f.setYield(3);
 			
