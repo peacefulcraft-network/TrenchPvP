@@ -22,9 +22,7 @@ import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchScout;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchSniper;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchSoldier;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchSpy;
-import net.peacefulcraft.trenchpvp.gameclasses.listeners.BigBerthaListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.InfernoTrapListener;
-import net.peacefulcraft.trenchpvp.gameclasses.listeners.OnslaughtListener;
 import net.peacefulcraft.trenchpvp.gamehandle.GameManager;
 import net.peacefulcraft.trenchpvp.gamehandle.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehandle.player.Teleports;
@@ -99,10 +97,6 @@ public class MenuListeners implements Listener
 		TrenchPlayer t = TeamManager.findTrenchPlayer(p);
 		if(t == null) { return; }
 		
-		InfernoTrapListener.pyroTrapRemove(t.getPlayer());
-		BigBerthaListener.demoTrapRemove(t.getPlayer());
-		OnslaughtListener.resetStreak(t.getPlayer());
-		
 		String itemText = item.getItemMeta().getDisplayName().toUpperCase();
 		if(itemText.equals("QUIT")) {
 			GameManager.quitPlayer(p);
@@ -114,7 +108,7 @@ public class MenuListeners implements Listener
 
 			if(TrenchPvP.getTrenchCFG().isScoutEnabled()){
 				
-				t.equipKit(new TrenchScout());
+				t.equipKit(new TrenchScout(t));
 				p.setAllowFlight(true);
 				teleportByTeam(t);
 				return;
@@ -128,7 +122,7 @@ public class MenuListeners implements Listener
 			
 			if(TrenchPvP.getTrenchCFG().isSoldierEnabled()){
 				
-				t.equipKit(new TrenchSoldier());
+				t.equipKit(new TrenchSoldier(t));
 				teleportByTeam(t);
 				return;
 			
@@ -141,7 +135,7 @@ public class MenuListeners implements Listener
 			
 			if(TrenchPvP.getTrenchCFG().isPyroEnabled()){
 				
-				t.equipKit(new TrenchPyro());
+				t.equipKit(new TrenchPyro(t));
 				teleportByTeam(t);
 				return;
 			
@@ -154,7 +148,7 @@ public class MenuListeners implements Listener
 			
 			if(TrenchPvP.getTrenchCFG().isDemomanEnabled()){
 				
-				t.equipKit(new TrenchDemoman());
+				t.equipKit(new TrenchDemoman(t));
 				teleportByTeam(t);
 				return;
 			
@@ -166,7 +160,7 @@ public class MenuListeners implements Listener
 		case HEAVY:
 			if(TrenchPvP.getTrenchCFG().isHeavyEnabled()){
 			
-				t.equipKit(new TrenchHeavy());
+				t.equipKit(new TrenchHeavy(t));
 				teleportByTeam(t);
 				return;
 			
@@ -179,7 +173,7 @@ public class MenuListeners implements Listener
 			
 			if(TrenchPvP.getTrenchCFG().isSniperEnabled()){
 				
-				t.equipKit(new TrenchSniper());
+				t.equipKit(new TrenchSniper(t));
 				teleportByTeam(t);
 				return;
 			
@@ -191,7 +185,7 @@ public class MenuListeners implements Listener
 		case MEDIC:
 			if(TrenchPvP.getTrenchCFG().isMedicEnabled()){
 				
-				t.equipKit(new TrenchMedic());
+				t.equipKit(new TrenchMedic(t));
 				teleportByTeam(t);
 				return;
 			}
@@ -202,7 +196,7 @@ public class MenuListeners implements Listener
 		case SPY:
 			if(TrenchPvP.getTrenchCFG().isSpyEnabled()) {
 				
-				t.equipKit(new TrenchSpy());
+				t.equipKit(new TrenchSpy(t));
 				teleportByTeam(t);
 				return;
 			}
