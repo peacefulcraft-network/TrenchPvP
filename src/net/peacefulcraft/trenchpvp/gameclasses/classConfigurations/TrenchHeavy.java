@@ -41,8 +41,8 @@ public class TrenchHeavy extends TrenchKit{
 		//Set lore to axe
 		ArrayList<String> pDesc = new ArrayList<String>();
 		pDesc.add("Right Click to Increase Attack!");
-		pDesc.add("Ability Time: 4 Seconds");
-		pDesc.add("Cooldwon Time: 15 Seconds");
+		pDesc.add("Ability Time: 10 Seconds");
+		pDesc.add("Cooldwon Time: 25 Seconds");
 
 		pMetaData.setLore(pDesc);
 
@@ -60,8 +60,8 @@ public class TrenchHeavy extends TrenchKit{
 
 		ArrayList<String> sDesc = new ArrayList<String>();
 		sDesc.add("Right Click to Engage Defensive Shell!");
-		sDesc.add("Ability Time: 7 Seconds");
-		sDesc.add("Cooldown Time: 20 Seconds");
+		sDesc.add("Ability Time: 15 Seconds");
+		sDesc.add("Cooldown Time: 30 Seconds");
 		sMetaData.setLore(sDesc);
 
 		secondary.setItemMeta(sMetaData);

@@ -14,9 +14,11 @@ public class AbsoluteDefense extends TrenchAbility{
 
 	private TrenchKit k;
 	
+	private final int EFFECT_TIME = 300;//Potion effect time in ticks. 20 per second
+	
 	public AbsoluteDefense(TrenchKit k) {
 		//Set cooldown time to 20 seconds
-		super(k.getTrenchPlayer(), 20000);
+		super(k.getTrenchPlayer(), 30000);
 		
 		this.k = k;
 	}
@@ -42,9 +44,9 @@ public class AbsoluteDefense extends TrenchAbility{
 	public void triggerAbility(Event ev) {
 		
 		Player p = k.getTrenchPlayer().getPlayer();
-		p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 140, 4));
-		p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 140, 3));
-		p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 140, 5));
+		p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, EFFECT_TIME, 4));
+		p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, EFFECT_TIME, 3));
+		p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, EFFECT_TIME, 5));
 		
 		TrenchPvP.getStatTracker().track(p.getUniqueId(), HeavyStat.heavy_absolute_defense_usage, 1);
 	}

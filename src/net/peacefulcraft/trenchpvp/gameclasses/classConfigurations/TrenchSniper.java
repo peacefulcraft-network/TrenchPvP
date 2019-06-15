@@ -81,8 +81,8 @@ public class TrenchSniper extends TrenchKit{
 		pUMetaData.setDisplayName("Bullets");
 		ArrayList<String> pUDesc = new ArrayList<String>();
 		pUDesc.add("Right Click to Switch to Poison Rounds!");
-		pUDesc.add("Ability Time: 5 Seconds");
-		pUDesc.add("Cooldown Time: 12 Seconds");
+		pUDesc.add("Ability Time: 10 Seconds");
+		pUDesc.add("Cooldown Time: 20 Seconds");
 		pUMetaData.setLore(pUDesc);
 
 		primaryUtil.setItemMeta(pUMetaData);

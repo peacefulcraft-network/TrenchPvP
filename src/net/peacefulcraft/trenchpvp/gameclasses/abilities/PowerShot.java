@@ -11,14 +11,18 @@ import org.bukkit.scheduler.BukkitScheduler;
 
 import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKit;
+import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
+import net.peacefulcraft.trenchpvp.gamehandle.TeamManager;
+import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.stats.TrenchStats.SniperStat;
 
 public class PowerShot extends TrenchAbility{
 
 	private TrenchKit k;
+	private final int EFFECT_TIME = 200;
 	
 	public PowerShot(TrenchKit k) {
-		super(k.getTrenchPlayer(), 15000);
+		super(k.getTrenchPlayer(), 20000);
 		
 		this.k = k;
 	}
@@ -42,7 +46,7 @@ public class PowerShot extends TrenchAbility{
 			ItemStack rifle = p.getInventory().getItem(itemIndex);
 			
 			ItemStack shotR = new ItemStack(Material.BOW);
-			shotR.addEnchantment(Enchantment.ARROW_KNOCKBACK, 3);
+			shotR.addEnchantment(Enchantment.ARROW_KNOCKBACK, 2);
 			shotR.addEnchantment(Enchantment.ARROW_DAMAGE, 2);
 			
 			ItemMeta meta = shotR.getItemMeta();
@@ -57,9 +61,12 @@ public class PowerShot extends TrenchAbility{
             scheduler.scheduleSyncDelayedTask(TrenchPvP.getPluginInstance() , new Runnable() {
                 //@Override
                 public void run() {
+                	TrenchPlayer t = TeamManager.findTrenchPlayer(p);
+                	if(!(t.getKitType() != TrenchKits.SNIPER)) {return;}
+                	
                 	p.getInventory().setItem(itemIndex, rifle);
                 }
-            }, 100);
+            }, EFFECT_TIME);
 		}
 		
 	}

@@ -12,14 +12,16 @@ import org.bukkit.scheduler.BukkitScheduler;
 
 import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKit;
+import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
 import net.peacefulcraft.trenchpvp.stats.TrenchStats.SniperStat;
 
 public class PoisonRound extends TrenchAbility{
 	
 	private TrenchKit k;
+	private final int EFFECT_TIME = 200;
 	
 	public PoisonRound(TrenchKit k) {
-		super(k.getTrenchPlayer(), 12000);
+		super(k.getTrenchPlayer(), 20000);
 		
 		this.k = k;
 	}
@@ -57,11 +59,13 @@ public class PoisonRound extends TrenchAbility{
             scheduler.scheduleSyncDelayedTask(TrenchPvP.getPluginInstance() , new Runnable() {
                 //@Override
                 public void run() {
+                	if(!(t.getKitType() != TrenchKits.SNIPER)) {return;}
+                	
                 	ItemStack t = p.getInventory().getItem(itemIndex);
                 	arrows.setAmount(t.getAmount());
                 	p.getInventory().setItem(itemIndex, arrows);
                 }
-            }, 100);
+            }, EFFECT_TIME);
 		}
 		
 	}
