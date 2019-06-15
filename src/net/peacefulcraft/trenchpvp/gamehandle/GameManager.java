@@ -133,6 +133,14 @@ public class GameManager {
 		allowPvP = false;
 		Announcer.messageAll("Game over! Trench is going down for maintenenace.");
 		
+		TeamManager.ExecuteOnAllPlayers(
+			(TrenchPlayer t)->{
+				
+				GameManager.quitPlayer(t.getPlayer());
+				
+			}
+		);
+		
 		SyncStats sync = new SyncStats();
 		sync.commitStats(TrenchPvP.getStatTracker().getStatData());
 		TrenchPvP.getStatTracker().clearStats();
@@ -143,12 +151,6 @@ public class GameManager {
 			task.runTask(TrenchPvP.getPluginInstance());
 		}
 		
-		TeamManager.ExecuteOnAllPlayers(
-			(TrenchPlayer t)->{
-				
-				GameManager.quitPlayer(t.getPlayer());
-				
-			}
-		);
+		
 	}
 }
