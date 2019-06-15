@@ -5,6 +5,7 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 
@@ -18,7 +19,6 @@ import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchScout;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchSniper;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchSoldier;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchSpy;
-import net.peacefulcraft.trenchpvp.gameclasses.listeners.InfernoTrapListener;
 import net.peacefulcraft.trenchpvp.gamehandle.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehandle.player.Teleports;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
@@ -26,7 +26,7 @@ import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchTeams;
 
 public class KitSignListener implements Listener {
 	
-	@EventHandler
+	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onSignClick(PlayerInteractEvent e) {
 		
 		if(e.getClickedBlock() == null){return;}
