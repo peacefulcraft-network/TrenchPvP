@@ -93,7 +93,7 @@ public class TrenchDemoman extends TrenchKit{
 
 		melee.setItemMeta(meleeMeta);
 
-		inv.setItem(9, melee);
+		inv.setItem(0, melee);
 	}
 
 	/*Leather Helment
