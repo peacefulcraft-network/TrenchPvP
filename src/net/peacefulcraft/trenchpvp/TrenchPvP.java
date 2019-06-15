@@ -18,6 +18,7 @@ import net.peacefulcraft.trenchpvp.gameclasses.listeners.AbilityPlayerInteractEn
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.AbilityPlayerMoveListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.AbilityPlayerToggleFlight;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.InfernoTrapListener;
+import net.peacefulcraft.trenchpvp.gamehandle.GameManager;
 import net.peacefulcraft.trenchpvp.gamehandle.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.BlockIgnitionTimer;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.ChangeClassSign;
@@ -79,6 +80,9 @@ public class TrenchPvP extends JavaPlugin{
 	}
 
 	public void onDisable(){
+		//End game
+		GameManager.closeGame();
+		
 		this.saveConfig();
 		SyncStats.onDisable();
 		this.getLogger().info("[TPP]Trench PvP Alpha 0.1 has been disabled!");

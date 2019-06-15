@@ -79,27 +79,13 @@ public class GameManager {
 			return false;
 		}
 		
-		if(p.hasPermission("tpp.player")) {
-			
-			t.dequipKits();
-			TrenchPvP.getTeamManager().leaveTeam(p);
-			p.setGameMode(GameMode.ADVENTURE);
-			p.teleport(Teleports.getQuitSpawn());
-			p.sendMessage("You've left Trench!");
-			return true;
-			
-		}else {
-			
-			p.sendMessage(TrenchPvP.CMD_PREFIX + ChatColor.RED + "You do not have access to this command");
-			return false;
-			
-		}
+		t.dequipKits();
+		TrenchPvP.getTeamManager().leaveTeam(p);
+		p.setGameMode(GameMode.ADVENTURE);
+		p.teleport(Teleports.getQuitSpawn());
+		p.sendMessage("You've left Trench!");
+		return true;			
 		
-	}
-	
-	public static void kickPlayer(TrenchPlayer t, String reason) {
-		Announcer.messagePlayer(t.getPlayer(), reason);
-		t.getPlayer().teleport(Teleports.getQuitSpawn());
 	}
 	
 	public static void startGame() {
@@ -128,7 +114,6 @@ public class GameManager {
 		
 	}
 	
-	//TODO: This will be called by gamehandle.taks.endGame which is Async
 	// We should somehow pass all the player stats for the game back to that object / thread
 	// And comitt it async'ly to the DB
 	public static void endGame() {
@@ -150,5 +135,29 @@ public class GameManager {
 		//Schedule new game for 10 seconds from now (in ticks)
 		(new Startgame(TrenchPvP.getPluginInstance())).runTaskLater(TrenchPvP.getPluginInstance(), 200);
 		
+	}
+	
+	public static void closeGame() {
+		
+		allowPvP = false;
+		Announcer.messageAll("Game over! Trench is going down for maintenenace.");
+		
+		SyncStats sync = new SyncStats();
+		sync.commitStats(TrenchPvP.getStatTracker().getStatData());
+		TrenchPvP.getStatTracker().clearStats();
+		sync.runTaskAsynchronously(TrenchPvP.getPluginInstance());
+		
+		//Execute registered post game tasks
+		for(BukkitRunnable task : postGameTasks) {
+			task.runTask(TrenchPvP.getPluginInstance());
+		}
+		
+		TeamManager.ExecuteOnAllPlayers(
+			(TrenchPlayer t)->{
+				
+				GameManager.quitPlayer(t.getPlayer());
+				
+			}
+		);
 	}
 }
