@@ -1,13 +1,9 @@
 package net.peacefulcraft.trenchpvp.gameclasses.classConfigurations;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.event.player.PlayerInteractEntityEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -15,12 +11,10 @@ import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import net.peacefulcraft.trenchpvp.gameclasses.abilities.TrenchAbility;
-import net.peacefulcraft.trenchpvp.gameclasses.abilities.TrenchKitClickAbilityExecutor;
-import net.peacefulcraft.trenchpvp.gameclasses.abilities.TrenchKitInventory;
+import net.peacefulcraft.trenchpvp.gameclasses.abilities.TrenchAbilityManager;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 
-public abstract class TrenchKit implements TrenchKitInventory, TrenchKitClickAbilityExecutor{
+public abstract class TrenchKit implements TrenchKitInventory{
 	
 	protected TrenchPlayer t;
 		public TrenchPlayer getTrenchPlayer() { return t; }
@@ -28,8 +22,9 @@ public abstract class TrenchKit implements TrenchKitInventory, TrenchKitClickAbi
 	private TrenchKits kitType;
 		public TrenchKits getKitType() {return kitType;}
 	
-	private List<TrenchAbility> abilities = new LinkedList<TrenchAbility>();
-	
+	private TrenchAbilityManager abilities;
+		public TrenchAbilityManager getAbilityManager() { return abilities; }
+		
 	public TrenchKit(TrenchPlayer t, TrenchKits kitType) {
 		this.t = t;
 		this.kitType = kitType;
@@ -96,63 +91,4 @@ public abstract class TrenchKit implements TrenchKitInventory, TrenchKitClickAbi
 			
 			return menu;
 		}
-	
-	/* (non-Javadoc)
-	 * @see net.peacefulcraft.trenchpvp.gameclasses.abilities.TrenchKitClickAbilityExecutor#registerAbility(net.peacefulcraft.trenchpvp.gameclasses.abilities.TrenchAbility)
-	 */
-	public void registerAbility(TrenchAbility ability) throws IllegalStateException{
-		
-		for(TrenchAbility ta : abilities) {
-			
-			if(ta.getClass().toString().equals(ability.getClass().toString())) {
-				throw new IllegalStateException("TrenchAbility child " + ability.getClass() + " is already registered with this executor");	
-			}
-			
-			abilities.add(ability);			
-			
-		}
-		
-	}
-	
-	/* (non-Javadoc)
-	 * @see net.peacefulcraft.trenchpvp.gameclasses.abilities.TrenchKitClickAbilityExecutor#unregisterAbility(java.lang.String)
-	 */
-	public void unregisterAbility(String abilityClassName) throws RuntimeException{
-		
-		for(TrenchAbility ta : abilities) {
-			
-			if(ta.getClass().toString().equals(abilityClassName)) {
-				abilities.remove(ta);
-				return;
-			}
-			
-		}
-		
-		throw new RuntimeException("Ability " + abilityClassName + " was not registered with this ability executor");
-		
-	}
-	
-	/* (non-Javadoc)
-	 * @see net.peacefulcraft.trenchpvp.gameclasses.abilities.TrenchKitClickAbilityExecutor#executeClickAbilities()
-	 */
-	public void executeClickAbilities(PlayerInteractEvent sourceEvent) {
-		
-		for(TrenchAbility ta : abilities) {
-			
-			ta.executeAbility(sourceEvent);
-			
-		}
-		
-	}
-	
-	public void executeClickAbilities(PlayerInteractEntityEvent sourceEvent) {
-		
-		for(TrenchAbility ta : abilities) {
-			
-			ta.executeAbility(sourceEvent);
-			
-		}
-		
-	}
-	
 }
