@@ -12,6 +12,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.HiddenBlade;
+import net.peacefulcraft.trenchpvp.gameclasses.abilities.HiddenBladeBlock;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.TrenchAbilityType;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 
@@ -22,6 +23,7 @@ public class TrenchSpy extends TrenchKit{
 
 		//Register ability listeners
 		getAbilityManager().registerAbility(TrenchAbilityType.PLAYER_INTERACT, new HiddenBlade(this));
+		getAbilityManager().registerAbility(TrenchAbilityType.PLAYER_INTERACT_ENTITY, new HiddenBladeBlock(this));
 	}
 
 	@Override
@@ -69,11 +71,8 @@ public class TrenchSpy extends TrenchKit{
 	@Override
 	public void equipArmor() {
 		ItemStack[] armor = new ItemStack[4];
-		armor[3] = new ItemStack(Material.CHAINMAIL_HELMET,1);
 
 		armor[2] = new ItemStack(Material.BAKED_POTATO, 1);
-
-		armor[1] = new ItemStack(Material.CHAINMAIL_LEGGINGS, 1);
 
 		armor[0] = new ItemStack(Material.CHAINMAIL_BOOTS, 1);
 

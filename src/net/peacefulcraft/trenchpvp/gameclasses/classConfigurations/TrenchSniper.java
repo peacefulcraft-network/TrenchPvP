@@ -92,7 +92,7 @@ public class TrenchSniper extends TrenchKit{
 		sUMeta.setDisplayName("Power Shot");
 		ArrayList<String> sUDesc = new ArrayList<String>();
 		sUDesc.add("Right Click to Boost Sniper Rifle Mk.II Damage!");
-		sUDesc.add("Ability Time: 8 Seconds");
+		sUDesc.add("Ability Time: 10 Seconds");
 		sUDesc.add("Cooldown Time: 20 Seconds");
 		sUMeta.setLore(sUDesc);
 

@@ -12,7 +12,9 @@ import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKit;
 
 public class HiddenBlade extends TrenchAbility{
-
+	
+	private final int EFFECT_TIME = 200;
+	
 	public HiddenBlade(TrenchKit k) {
 		super(k.getTrenchPlayer(), 16000);
 		// TODO Auto-generated constructor stub
@@ -45,8 +47,8 @@ public class HiddenBlade extends TrenchAbility{
 			PlayerInteractEvent e = (PlayerInteractEvent) ev;
 			Player p = e.getPlayer();
 			
-			p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100, 3)); 
-			p.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 160, 2)); 
+			p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, EFFECT_TIME - 40, 3)); 
+			p.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, EFFECT_TIME, 2)); 
 			p.sendMessage(ChatColor.RED + "Ability is now on cooldown for 16 seconds.");
 			
 		}catch(ClassCastException ex) {
