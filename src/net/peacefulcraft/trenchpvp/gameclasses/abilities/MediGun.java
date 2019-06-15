@@ -32,9 +32,7 @@ public class MediGun extends TrenchAbility{
 		
 		Player p = k.getTrenchPlayer().getPlayer();
 		
-		//Check that it's a relevant click event
-		if(!(this.getSourceEvent() instanceof PlayerInteractEntityEvent)) { return false; }	
-		PlayerInteractEntityEvent e = (PlayerInteractEntityEvent) this.getSourceEvent();
+		PlayerInteractEntityEvent e = (PlayerInteractEntityEvent) ev;
 		
 		//Check if clicked player
 		if(!(e.getRightClicked() instanceof Player)) return false;
@@ -54,9 +52,7 @@ public class MediGun extends TrenchAbility{
 	@Override
 	public void triggerAbility(Event ev) {
 		
-		//Requires a target so triggering offhand is not a good idea.
-		if(!(this.getSourceEvent() instanceof PlayerInteractEntityEvent)) { return; }
-		PlayerInteractEntityEvent e = (PlayerInteractEntityEvent) this.getSourceEvent();
+		PlayerInteractEntityEvent e = (PlayerInteractEntityEvent) ev;
 		
 		Location tLoc = e.getRightClicked().getLocation();
 		Vector vec = new Vector(tLoc.getX(), tLoc.getY(), tLoc.getZ());

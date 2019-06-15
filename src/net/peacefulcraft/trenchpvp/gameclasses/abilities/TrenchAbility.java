@@ -23,12 +23,6 @@ public abstract class TrenchAbility {
 		public long getCooldown() { return cooldown; }
 		public long getCooldownSeconds() { return cooldown / 1000;}
 		public void setCooldown(Long delay) { cooldown = delay; }
-
-	/**
-	 * Get the most recent even which involved this ability instance
-	 */
-	private Event sourceEvent;
-		public Event getSourceEvent() { return sourceEvent; }
 		
 	/**
 	 * Set the cooldown time, in ms, between clicks
@@ -75,7 +69,6 @@ public abstract class TrenchAbility {
 	 * @param sourceEvent
 	 */
 	public void execute(Event ev) {
-		this.sourceEvent = ev;
 		markAbilityUsed();
 		triggerAbility(ev);	
 	}
