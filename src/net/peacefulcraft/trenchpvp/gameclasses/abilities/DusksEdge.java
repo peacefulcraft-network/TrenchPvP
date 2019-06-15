@@ -8,11 +8,11 @@ import org.bukkit.potion.PotionEffectType;
 
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKit;
 
-public class DenseAxe extends TrenchAbility{
+public class DusksEdge extends TrenchAbility{
 
 	private TrenchKit k;
 	
-	public DenseAxe(TrenchKit k) {
+	public DusksEdge(TrenchKit k) {
 		super(k.getTrenchPlayer(), 15000);
 		
 		this.k = k;
@@ -23,7 +23,7 @@ public class DenseAxe extends TrenchAbility{
 		Player p = k.getTrenchPlayer().getPlayer();
 		//Checks item in main hand is Dense Axe
 		if(!(p.getInventory().getItemInMainHand().getType() == Material.IRON_AXE)) return false;
-		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Dense Axe"))) return false;
+		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Dusk's Edge"))) return false;
 		
 		return true;
 	}

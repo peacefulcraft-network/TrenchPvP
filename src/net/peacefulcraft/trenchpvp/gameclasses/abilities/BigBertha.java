@@ -52,7 +52,7 @@ public class BigBertha extends TrenchAbility{
 				upBlock.setType(Material.TNT); //Places Big Bertha
 				p.sendMessage(ChatColor.RED + "Fuse is lit!");
 				
-				TrenchPvP.getStatTracker().track(p.getUniqueId(), DemoStat.demoman_bethas_placed, 1);
+				TrenchPvP.getStatTracker().track(p.getUniqueId(), DemoStat.demoman_berthas_placed, 1);
 				
 				ItemStack bomb = p.getInventory().getItem(1); //Copies bomb stack to give back later and clears
 				p.getInventory().clear(1);

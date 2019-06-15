@@ -8,7 +8,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import net.peacefulcraft.trenchpvp.gameclasses.abilities.DeepCut;
+import net.peacefulcraft.trenchpvp.gameclasses.abilities.Witherbringer;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.Onslaught;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.TrenchAbilityType;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
@@ -19,7 +19,7 @@ public class TrenchSoldier extends TrenchKit{
 		super(t, TrenchKits.SOLDIER);
 
 		//Register ability handlers
-		getAbilityManager().registerAbility(TrenchAbilityType.ENTITY_DAMAGE_ENTITY, new DeepCut(this));
+		getAbilityManager().registerAbility(TrenchAbilityType.ENTITY_DAMAGE_ENTITY, new Witherbringer(this));
 		getAbilityManager().registerAbility(TrenchAbilityType.PLAYER_DEATH, new Onslaught(this));
 	}
 

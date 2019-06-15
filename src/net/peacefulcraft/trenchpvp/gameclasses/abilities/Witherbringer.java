@@ -10,11 +10,11 @@ import org.bukkit.potion.PotionEffectType;
 import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKit;
 
-public class DeepCut extends TrenchAbility{
+public class Witherbringer extends TrenchAbility{
 
 	private TrenchKit k;
 	
-	public DeepCut(TrenchKit k) {
+	public Witherbringer(TrenchKit k) {
 		super(k.getTrenchPlayer(), 25000);
 		
 		this.k = k;
@@ -25,7 +25,7 @@ public class DeepCut extends TrenchAbility{
 		
 		Player p = k.getTrenchPlayer().getPlayer();
 		if(!(p.getInventory().getItemInMainHand().getType() == Material.IRON_SWORD)) return false;
-		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Deep Cut"))) return false;
+		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Witherbringer"))) return false;
 		
 		return true;
 	}
@@ -36,17 +36,13 @@ public class DeepCut extends TrenchAbility{
 		try{ 
 			//Make sure we can use this event.
 			EntityDamageByEntityEvent e = (EntityDamageByEntityEvent) ev;
-			
-			Player soldier = (Player) e.getDamager();
-			if(!(soldier.getInventory().getItemInMainHand().getType() == Material.IRON_SWORD)) return;
-			if(!(soldier.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Deep Cut"))) return;
 		
 			Player victim = (Player) e.getEntity();
 			victim.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 200, 1));
 			victim.sendMessage("You Are Bleeding!");
 		
 		}catch(ClassCastException ex) {
-			TrenchPvP.logWarning("Error Triggering DeepCut event. Incompatible event loop " + ev.getClass());
+			TrenchPvP.logWarning("Error Triggering Witherbringer event. Incompatible event loop " + ev.getClass());
 			return;
 		}
 		

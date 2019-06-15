@@ -10,11 +10,11 @@ import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKit;
 import net.peacefulcraft.trenchpvp.stats.TrenchStats.HeavyStat;
 
-public class ArmadilloShell extends TrenchAbility{
+public class AbsoluteDefense extends TrenchAbility{
 
 	private TrenchKit k;
 	
-	public ArmadilloShell(TrenchKit k) {
+	public AbsoluteDefense(TrenchKit k) {
 		//Set cooldown time to 20 seconds
 		super(k.getTrenchPlayer(), 20000);
 		
@@ -30,7 +30,7 @@ public class ArmadilloShell extends TrenchAbility{
 		
 		//Checks item in main hand is Armadillo Shell
 		if(!(p.getInventory().getItemInMainHand().getType() == Material.SHULKER_SHELL)) { return false; }
-		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Armadillo Shell"))) { return false; }
+		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Absolute Defense"))) { return false; }
 		
 		return true;	
 	}
@@ -46,7 +46,7 @@ public class ArmadilloShell extends TrenchAbility{
 		p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 140, 3));
 		p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 140, 5));
 		
-		TrenchPvP.getStatTracker().track(p.getUniqueId(), HeavyStat.heavy_armadillo_usage, 1);
+		TrenchPvP.getStatTracker().track(p.getUniqueId(), HeavyStat.heavy_absolute_defense_usage, 1);
 	}
 
 }
