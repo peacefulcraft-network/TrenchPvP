@@ -64,22 +64,6 @@ public class TrenchSpy extends TrenchKit{
 
 		inv.setItem(1, secondary);
 
-		//Food
-		ItemStack bread = new ItemStack(Material.BREAD, 32);
-		//Create PotionMeta ItemStack to set type of Instant Health 2. Overrides existing effects (true)
-		ItemStack health = new ItemStack(Material.POTION, 2);
-		ItemMeta healthMeta = health.getItemMeta();
-		healthMeta.setDisplayName("Instant Health");
-		PotionMeta pHealthMeta = (PotionMeta) healthMeta;
-
-		PotionEffect instantHealth = new PotionEffect(PotionEffectType.HEAL, 1, 2);
-		pHealthMeta.addCustomEffect(instantHealth, true);
-
-		health.setItemMeta(healthMeta);
-
-		inv.setItem(6, bread);
-		inv.setItem(7, (ItemStack) health);
-
 	}
 
 	@Override
