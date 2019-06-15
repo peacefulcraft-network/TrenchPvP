@@ -80,7 +80,7 @@ public abstract class TrenchKit implements TrenchKitInventory{
 		 * @return Emerald with meta for class selection menu
 		 */
 		private ItemStack item_classSelectionMenu() {
-			ItemStack menu = new ItemStack(Material.EMERALD, 60);
+			ItemStack menu = new ItemStack(Material.EMERALD, 1);
 			ItemMeta menuMeta = menu.getItemMeta();
 			menuMeta.setDisplayName(ChatColor.AQUA + "Kit Menu");
 			
