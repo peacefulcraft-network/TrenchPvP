@@ -26,7 +26,7 @@ public class DoubleJump extends TrenchAbility{
 	
 		if(ev instanceof PlayerMoveEvent || ev instanceof PlayerToggleFlightEvent) { return true;}
 		
-		return true;
+		return false;
 		
 	}
 
