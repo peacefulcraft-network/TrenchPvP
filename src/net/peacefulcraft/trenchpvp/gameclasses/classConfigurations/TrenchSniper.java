@@ -12,6 +12,7 @@ import org.bukkit.inventory.meta.LeatherArmorMeta;
 
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.PoisonRound;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.PowerShot;
+import net.peacefulcraft.trenchpvp.gameclasses.abilities.TrenchAbilityType;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 
 public class TrenchSniper extends TrenchKit{
@@ -20,8 +21,8 @@ public class TrenchSniper extends TrenchKit{
 		super(t, TrenchKits.SNIPER);
 		
 		//Register special ability handlers
-		registerAbility(new PowerShot(this));
-		registerAbility(new PoisonRound(this));
+		getAbilityManager().registerAbility(TrenchAbilityType.PLAYER_INTERACT, new PowerShot(this));
+		getAbilityManager().registerAbility(TrenchAbilityType.PLAYER_INTERACT, new PoisonRound(this));
 	}
 
 	/*Leather Helment

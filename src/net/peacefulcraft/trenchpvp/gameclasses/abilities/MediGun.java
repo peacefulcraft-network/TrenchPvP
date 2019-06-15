@@ -5,6 +5,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Snowball;
+import org.bukkit.event.Event;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -27,7 +28,7 @@ public class MediGun extends TrenchAbility{
 	}
 
 	@Override
-	public boolean abilitySignature() {
+	public boolean abilitySignature(Event ev) {
 		
 		Player p = k.getTrenchPlayer().getPlayer();
 		
@@ -46,12 +47,12 @@ public class MediGun extends TrenchAbility{
 		if(healTarget == null) { return false; }
 		if(!(k.getTrenchPlayer().getPlayerTeam() == healTarget.getPlayerTeam())) { return false; }
 		
-		return canUseAbility();		
+		return true;		
 		
 	}
 
 	@Override
-	public void triggerAbility() {
+	public void triggerAbility(Event ev) {
 		
 		//Requires a target so triggering offhand is not a good idea.
 		if(!(this.getSourceEvent() instanceof PlayerInteractEntityEvent)) { return; }

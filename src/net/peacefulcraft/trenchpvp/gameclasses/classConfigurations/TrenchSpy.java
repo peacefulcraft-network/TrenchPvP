@@ -2,29 +2,33 @@ package net.peacefulcraft.trenchpvp.gameclasses.classConfigurations;
 
 import java.util.ArrayList;
 
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import net.peacefulcraft.trenchpvp.gameclasses.abilities.HiddenBlade;
+import net.peacefulcraft.trenchpvp.gameclasses.abilities.TrenchAbilityType;
+import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
+
 public class TrenchSpy extends TrenchKit{
 	
-	public TrenchSpy() {
-		kitType = TrenchKits.SPY;
+	public TrenchSpy(TrenchPlayer t) {
+		super(t, TrenchKits.SPY);
+		
+		//Register ability listeners
+		getAbilityManager().registerAbility(TrenchAbilityType.PLAYER_INTERACT, new HiddenBlade(this));
 	}
-	
-	/*
-	 * Primary
-	 * Spy - Hidden Blade - Speed and Invisibility
-	 */
-	@Override
-	protected void equipPrimary(Player p) {
 
+	@Override
+	public void equipItems() {
+		
+		Inventory inv = this.getTrenchPlayer().getPlayer().getInventory();
+		
 		//Creates sword
 		ItemStack primary = new ItemStack(Material.GOLDEN_SWORD, 1);
 		ItemMeta enchantMeta = primary.getItemMeta();
@@ -43,11 +47,8 @@ public class TrenchSpy extends TrenchKit{
 		
 		primary.setItemMeta(pMetaData);
 		
-		p.getInventory().setItem(0, primary);
+		inv.setItem(0, primary);
 		
-	}
-	@Override
-	protected void equipSecondary(Player p) {
 		ItemStack secondary = new ItemStack(Material.CHORUS_FLOWER, 1);
 		ItemMeta sMetaData = secondary.getItemMeta();
 		sMetaData.setDisplayName("Speed Shot");
@@ -60,11 +61,8 @@ public class TrenchSpy extends TrenchKit{
 		
 		secondary.setItemMeta(sMetaData);
 		
-		p.getInventory().setItem(1, secondary);
+		inv.setItem(1, secondary);
 		
-	}
-	@Override
-	protected void equipGenerics(Player p) {
 		//Food
 		ItemStack bread = new ItemStack(Material.BREAD, 32);
 		//Create PotionMeta ItemStack to set type of Instant Health 2. Overrides existing effects (true)
@@ -78,12 +76,13 @@ public class TrenchSpy extends TrenchKit{
 			
 		health.setItemMeta(healthMeta);
 			
-		p.getInventory().setItem(6, bread);
-		p.getInventory().setItem(7, (ItemStack) health);
+		inv.setItem(6, bread);
+		inv.setItem(7, (ItemStack) health);
 		
 	}
+
 	@Override
-	protected void equipArmor(Player p) {
+	public void equipArmor() {
 		ItemStack[] armor = new ItemStack[4];
 		armor[3] = new ItemStack(Material.CHAINMAIL_HELMET,1);
 		
@@ -97,21 +96,6 @@ public class TrenchSpy extends TrenchKit{
 		enchantMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
 		armor[2].setItemMeta(enchantMeta);
 		
-		p.getInventory().setArmorContents(armor);
-	}
-	@Override
-	protected void equipMenu(Player p) {
-		ItemStack menu = new ItemStack(Material.EMERALD, 60);
-		ItemMeta menuMeta = menu.getItemMeta();
-		menuMeta.setDisplayName(ChatColor.AQUA + "Kit Menu");
-		
-		ArrayList<String> menuDesc = new ArrayList<String>();
-		menuDesc.add("Right Click to Open Kit Menu!");
-		menuDesc.add("Selection Cooldown: 1 Minute!");
-		
-		menuMeta.setLore(menuDesc);
-		menu.setItemMeta(menuMeta);
-		
-		p.getInventory().setItem(8, menu);
+		this.getTrenchPlayer().getPlayer().getInventory().setArmorContents(armor);
 	}
 }

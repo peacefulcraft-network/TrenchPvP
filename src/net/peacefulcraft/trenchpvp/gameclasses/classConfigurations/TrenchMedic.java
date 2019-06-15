@@ -8,6 +8,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.MediGun;
+import net.peacefulcraft.trenchpvp.gameclasses.abilities.TrenchAbilityType;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 
 public class TrenchMedic extends TrenchKit{
@@ -16,7 +17,7 @@ public class TrenchMedic extends TrenchKit{
 		super(t, TrenchKits.DEMOMAN);
 		
 		//Register special ability handlers
-		registerAbility(new MediGun(this));
+		getAbilityManager().registerAbility(TrenchAbilityType.PLAYER_INTERACT, new MediGun(this));
 		
 	}
 

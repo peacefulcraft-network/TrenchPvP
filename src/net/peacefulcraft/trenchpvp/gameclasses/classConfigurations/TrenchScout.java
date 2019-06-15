@@ -1,11 +1,10 @@
 package net.peacefulcraft.trenchpvp.gameclasses.classConfigurations;
 import java.util.ArrayList;
 
-import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
@@ -13,13 +12,31 @@ import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import net.peacefulcraft.trenchpvp.gameclasses.abilities.DoubleJump;
+import net.peacefulcraft.trenchpvp.gameclasses.abilities.SpeedShot;
+import net.peacefulcraft.trenchpvp.gameclasses.abilities.TrenchAbilityType;
+import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
+
 public class TrenchScout extends TrenchKit {
-	public TrenchScout() {
-		kitType = TrenchKits.SCOUT;
+	public TrenchScout(TrenchPlayer t) {
+		super(t, TrenchKits.SCOUT);
+		
+		//Register Abilities
+		getAbilityManager().registerAbility(TrenchAbilityType.PLAYER_INTERACT_ENTITY, new SpeedShot(this));
+		
+		//Listens for two events so they need to share
+		DoubleJump dj = new DoubleJump(this);
+		getAbilityManager().registerAbility(TrenchAbilityType.PLAYER_MOVE, dj);
+		getAbilityManager().registerAbility(TrenchAbilityType.PLAYER_TOGGLE_FLIGHT, dj);
 	}
 	
 	@Override
-	protected void equipPrimary(Player p) {
+	public void equipItems() {
+		Inventory inv = this.getTrenchPlayer().getPlayer().getInventory();
+		
+		/**
+		 * primary weapon
+		 */
 		ItemStack primary = new ItemStack(Material.STONE_SWORD, 1);
 		
 		ItemMeta pMetaData = primary.getItemMeta();
@@ -31,33 +48,32 @@ public class TrenchScout extends TrenchKit {
 		
 		primary.setItemMeta(pMetaData);
 		
-		p.getInventory().setItem(0, primary);		
-	}
-
-	@Override
-	protected void equipSecondary(Player p) {
-		ItemStack primary = new ItemStack(Material.BOW, 1);
-		primary.addEnchantment(Enchantment.ARROW_KNOCKBACK, 1);
+		inv.setItem(0, primary);		
 		
-		ItemMeta pMetaData = primary.getItemMeta();
-		pMetaData.setDisplayName("Sling Shot");
-		primary.setItemMeta(pMetaData);
+		
+		/**
+		 * Secondary Weapon
+		 */
+		ItemStack arrows = new ItemStack(Material.BOW, 1);
+		arrows.addEnchantment(Enchantment.ARROW_KNOCKBACK, 1);
+		
+		ItemMeta arrowMetaData = arrows.getItemMeta();
+		arrowMetaData.setDisplayName("Sling Shot");
+		arrows.setItemMeta(arrowMetaData);
 		
 		ArrayList<String> sDesc = new ArrayList<String>();
 		sDesc.add("Tag Your Foes to Help Your Team!");
-		pMetaData.setLore(sDesc);
+		arrowMetaData.setLore(sDesc);
 		
 		ItemStack pUtil = new ItemStack(Material.SPECTRAL_ARROW, 32);
 		ItemMeta pUMetaData = pUtil.getItemMeta();
 		pUMetaData.setDisplayName("Tag Ammo");
 		pUtil.setItemMeta(pUMetaData);
 		
-		p.getInventory().setItem(1, primary);
-		p.getInventory().setItem(2, pUtil);
-	}
-
-	@Override
-	protected void equipGenerics(Player p) {
+		inv.setItem(1, arrows);
+		inv.setItem(2, pUtil);
+		
+		
 		ItemStack bread = new ItemStack(Material.BREAD, 32);
 		
 		//Create PotionMeta ItemStack to set type of Instant Health 2. Overrides existing effects (true)
@@ -71,13 +87,13 @@ public class TrenchScout extends TrenchKit {
 		
 		health.setItemMeta(pHealthMeta);
 		
-		p.getInventory().setItem(6, bread);
-		p.getInventory().setItem(7, (ItemStack) health);
+		inv.setItem(6, bread);
+		inv.setItem(7, (ItemStack) health);
 		
 	}
 
 	@Override
-	protected void equipArmor(Player p) {
+	public void equipArmor() {
 		ItemStack[] armor = new ItemStack[4];
 		armor[3] = new ItemStack(Material.LEATHER_HELMET,1);
 		
@@ -100,21 +116,6 @@ public class TrenchScout extends TrenchKit {
 		metaS.setColor(Color.BLACK);
 		armor[0].setItemMeta(metaS);
 		
-		p.getInventory().setArmorContents(armor);
-	}
-	@Override
-	protected void equipMenu(Player p) {
-		ItemStack menu = new ItemStack(Material.EMERALD, 60);
-		ItemMeta menuMeta = menu.getItemMeta();
-		menuMeta.setDisplayName(ChatColor.AQUA + "Kit Menu");
-		
-		ArrayList<String> menuDesc = new ArrayList<String>();
-		menuDesc.add("Right Click to Open Kit Menu!");
-		menuDesc.add("Selection Cooldown: 1 Minute!");
-		
-		menuMeta.setLore(menuDesc);
-		menu.setItemMeta(menuMeta);
-		
-		p.getInventory().setItem(8, menu);
+		this.getTrenchPlayer().getPlayer().getInventory().setArmorContents(armor);
 	}
 }

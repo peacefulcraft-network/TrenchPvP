@@ -13,6 +13,7 @@ import org.bukkit.potion.PotionEffectType;
 
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.BigBertha;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.GrenadeLauncher;
+import net.peacefulcraft.trenchpvp.gameclasses.abilities.TrenchAbilityType;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 
 public class TrenchDemoman extends TrenchKit{
@@ -22,8 +23,8 @@ public class TrenchDemoman extends TrenchKit{
 		super(t, TrenchKits.DEMOMAN);
 		
 		//Register special ability handlers
-		registerAbility(new GrenadeLauncher(this));
-		registerAbility(new BigBertha(this));
+		getAbilityManager().registerAbility(TrenchAbilityType.PLAYER_INTERACT, new GrenadeLauncher(this));
+		getAbilityManager().registerAbility(TrenchAbilityType.PLAYER_INTERACT, new BigBertha(this));
 	}
 	
 	/**

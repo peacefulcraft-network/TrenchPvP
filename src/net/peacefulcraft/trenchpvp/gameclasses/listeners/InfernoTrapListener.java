@@ -11,7 +11,6 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventException;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
@@ -33,9 +32,6 @@ public class InfernoTrapListener implements Listener
 	public void trapRightClick(PlayerInteractEvent e)
 	{
 		Player p = e.getPlayer();
-		
-		if(!(p.getInventory().getItemInMainHand().getType() == Material.LIGHT_WEIGHTED_PRESSURE_PLATE)) return;
-		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Inferno Trap"))) return;
 		
 		TrenchPlayer t = TeamManager.findTrenchPlayer(p);
 		if(t == null) { return; }
@@ -70,6 +66,7 @@ public class InfernoTrapListener implements Listener
              }
          }
 	}
+	
 	@EventHandler
 	public void detonateRightClick(PlayerInteractEvent e)
 	{
@@ -114,6 +111,7 @@ public class InfernoTrapListener implements Listener
 			}
 		}
 	}
+	
 	@EventHandler
 	private void pyroDeathEvent(PlayerDeathEvent e) {
 		Player p = e.getEntity();

@@ -3,6 +3,7 @@ package net.peacefulcraft.trenchpvp.gameclasses.abilities;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionData;
@@ -24,16 +25,16 @@ public class PoisonRound extends TrenchAbility{
 	}
 
 	@Override
-	public boolean abilitySignature() {
+	public boolean abilitySignature(Event ev) {
 		Player p = k.getTrenchPlayer().getPlayer();
 		if(!(p.getInventory().getItemInMainHand().getType() == Material.ARROW)) return false;
 		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Bullets"))) return false;
 		
-		return canUseAbility();
+		return true;
 	}
 
 	@Override
-	public void triggerAbility() {
+	public void triggerAbility(Event ev) {
 		Player p = k.getTrenchPlayer().getPlayer();
 		
 		int itemIndex = p.getInventory().first(Material.ARROW);

@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
 import org.bukkit.inventory.ItemStack;
 
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKit;
@@ -19,18 +20,16 @@ public class GrenadeLauncher extends TrenchAbility{
 	}
 
 	@Override
-	public boolean abilitySignature() {
+	public boolean abilitySignature(Event ev) {
 		Player p = k.getTrenchPlayer().getPlayer();
 		if(!(p.getInventory().getItemInMainHand().getType() == Material.QUARTZ)) return false;
 		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Grenade Launcher"))) return false;
 		
-		return canUseAbility();
+		return false;
 	}
 
 	@Override
-	public void triggerAbility() {
-		
-		markAbilityUsed();
+	public void triggerAbility(Event ev) {
 		
 		Player p = k.getTrenchPlayer().getPlayer();
 		int itemIndex = p.getInventory().first(Material.FIREWORK_ROCKET);

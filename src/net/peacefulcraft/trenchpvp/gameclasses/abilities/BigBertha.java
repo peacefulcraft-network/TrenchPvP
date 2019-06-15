@@ -10,6 +10,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -28,18 +29,18 @@ public class BigBertha extends TrenchAbility{
 	}
 
 	@Override
-	public boolean abilitySignature() {
+	public boolean abilitySignature(Event ev) {
 		
 		Player p = k.getTrenchPlayer().getPlayer();
 		
 		if(!(p.getInventory().getItemInMainHand().getType() == Material.TNT)) return false;
 		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Big Bertha's Embrace"))) return false;
 		
-		return false;
+		return true;
 	}
 
 	@Override
-	public void triggerAbility() {
+	public void triggerAbility(Event ev) {
 		
 		Player p = k.getTrenchPlayer().getPlayer();
 		

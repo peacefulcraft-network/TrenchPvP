@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitScheduler;
@@ -23,18 +24,16 @@ public class PowerShot extends TrenchAbility{
 	}
 
 	@Override
-	public boolean abilitySignature() {
+	public boolean abilitySignature(Event ev) {
 		Player p = k.getTrenchPlayer().getPlayer();
 		if(!(p.getInventory().getItemInMainHand().getType() == Material.PISTON)) return false;
 		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Power Shot"))) return false;
 		
-		return canUseAbility();
+		return true;
 	}
 
 	@Override
-	public void triggerAbility() {
-		
-		markAbilityUsed();
+	public void triggerAbility(Event ev) {
 		
 		Player p = k.getTrenchPlayer().getPlayer();
 		
