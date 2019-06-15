@@ -5,11 +5,19 @@ import java.util.HashMap;
 
 import org.bukkit.event.Event;
 
+import net.peacefulcraft.trenchpvp.TrenchPvP;
+
 public class TrenchAbilityManager{
 
-	private HashMap<TrenchAbilityType, ArrayList<TrenchAbility>> abilities;
+	private HashMap<TrenchAbilityType, ArrayList<TrenchAbility>> abilities = new HashMap<TrenchAbilityType, ArrayList<TrenchAbility>>();
 	
 	public void registerAbility(TrenchAbilityType type, TrenchAbility ability) throws IllegalStateException{
+		
+		if(abilities.get(type) == null) {
+			abilities.put(type, new ArrayList<TrenchAbility>());
+			abilities.get(type).add(ability);
+			return;
+		}
 		
 		for(TrenchAbility ta : abilities.get(type)) {
 			
@@ -25,6 +33,11 @@ public class TrenchAbilityManager{
 	
 	public void abilityExecuteLoop(TrenchAbilityType type, Event ev) {
 	
+		if(abilities.get(type) == null) {
+			TrenchPvP.logErrors("Attempted to execute event loop type " + type + " before it was initilized!");
+			return;
+		}
+		
 		for(TrenchAbility ability : abilities.get(type)) {
 			
 			if(ability.abilitySignature(ev) && ability.canUseAbility()) {

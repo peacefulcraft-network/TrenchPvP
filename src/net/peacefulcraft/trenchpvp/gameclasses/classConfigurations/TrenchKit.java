@@ -28,6 +28,7 @@ public abstract class TrenchKit implements TrenchKitInventory{
 	public TrenchKit(TrenchPlayer t, TrenchKits kitType) {
 		this.t = t;
 		this.kitType = kitType;
+		this.abilities = new TrenchAbilityManager();
 	}
 	
 	/**
