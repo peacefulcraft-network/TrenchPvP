@@ -47,8 +47,6 @@ public class KitSignListener implements Listener {
 							e.getPlayer().sendMessage(TrenchPvP.CMD_PREFIX + ChatColor.RED + " You must be playing TrenchPvP to use this sign!");
 							return;
 						}
-
-						InfernoTrapListener.pyroTrapRemove(t);
 						
 						String signText = sign.getLine(2).toUpperCase();
 						switch(TrenchKits.valueOf(signText)){//Check which class was selected (based on 3rd line of class sign)

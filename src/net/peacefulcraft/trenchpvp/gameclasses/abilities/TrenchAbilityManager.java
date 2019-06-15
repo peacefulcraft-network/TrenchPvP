@@ -34,7 +34,6 @@ public class TrenchAbilityManager{
 	public void abilityExecuteLoop(TrenchAbilityType type, Event ev) {
 	
 		if(abilities.get(type) == null) {
-			TrenchPvP.logErrors("Attempted to execute event loop type " + type + " before it was initilized!");
 			return;
 		}
 		
