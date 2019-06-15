@@ -12,7 +12,7 @@ public abstract class Announcer {
 		public static String getTrenchPrefix() { return trench_prefix; }
 	
 	public static void messagePlayer(Player p, String message) {
-		p.sendMessage(trench_prefix + message);
+		p.sendMessage(trench_prefix + ChatColor.WHITE + " " + message);
 	}
 	
 		

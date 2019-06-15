@@ -14,36 +14,37 @@ public class tppDebug implements CommandExecutor{
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-		if(command.getName().equalsIgnoreCase("tppDebug")){
-			Player user = (Player) sender;
-			user.sendMessage("Trench is currently running: " + GameManager.isRunning());
-			user.sendMessage("There are currently " + TeamManager.getPlayers().size() + " playing TrenchPvP.");
 			
-			
-			//Print all blue players
-			user.sendMessage("Blue:");
-			TeamManager.ExecuteOnAllPlayers(
-					(TrenchPlayer t)->{
-						if(t.getPlayerTeam() == TrenchTeams.BLUE)
-							user.sendMessage(user.getPlayer().getDisplayName() + ":" + t.getKitType());
-					}
-				);		
+		if(!(command.getName().equalsIgnoreCase("tppDebug"))) { return false; }
 		
-			//Print all red players
-			user.sendMessage("Red:");
-			TeamManager.ExecuteOnAllPlayers(
+		Player p = (Player) sender;
+		
+		if(!(p.isOp())) { return false; }
+		
+		p.sendMessage("Trench is currently running: " + GameManager.isRunning());
+		p.sendMessage("There are currently " + TeamManager.getPlayers().size() + " playing TrenchPvP.");
+		
+		
+		//Print all blue players
+		p.sendMessage("Blue:");
+		TeamManager.ExecuteOnAllPlayers(
 				(TrenchPlayer t)->{
-					if(t.getPlayerTeam() == TrenchTeams.RED)
-						user.sendMessage(user.getPlayer().getDisplayName() + ":" + t.getKitType());
+					if(t.getPlayerTeam() == TrenchTeams.BLUE)
+						p.sendMessage(p.getPlayer().getDisplayName() + ":" + t.getKitType());
 				}
-			);			
-			
-			return true;
+			);		
 	
-		}
+		//Print all red players
+		p.sendMessage("Red:");
+		TeamManager.ExecuteOnAllPlayers(
+			(TrenchPlayer t)->{
+				if(t.getPlayerTeam() == TrenchTeams.RED)
+					p.sendMessage(p.getPlayer().getDisplayName() + ":" + t.getKitType());
+			}
+		);			
 		
-		return false;
-	
+		return true;
+
 	}
 
 }

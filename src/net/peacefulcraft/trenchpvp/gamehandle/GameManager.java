@@ -33,8 +33,6 @@ public class GameManager {
 	
 	public static boolean joinPlayer(Player p) {
 		
-		if(p.hasPermission("tpp.player")){
-			
 			if(GameManager.isRunning()) {
 							
 				TrenchPlayer t = TeamManager.findTrenchPlayer(p);
@@ -62,13 +60,6 @@ public class GameManager {
 				return false;
 				
 			}
-	
-		}else{
-			
-			p.sendMessage(TrenchPvP.CMD_PREFIX + ChatColor.RED + "You do not have access to this command");
-			return false;
-		
-		}
 		
 	}	
 	
