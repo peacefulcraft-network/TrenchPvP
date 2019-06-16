@@ -64,7 +64,7 @@ public class MediGun extends TrenchAbility{
 			e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 1, 16), true);
 			TrenchPvP.getStatTracker().track(k.getTrenchPlayer().getPlayer().getUniqueId(), MedicStat.medic_damage_healed, 4);
 		}else{
-			patient.setHealth((patient.getHealth() + 2));
+			patient.setHealth((patient.getHealth() + 8));
 			TrenchPvP.getStatTracker().track(k.getTrenchPlayer().getPlayer().getUniqueId(), MedicStat.medic_damage_healed, 2);
 		}
 		
