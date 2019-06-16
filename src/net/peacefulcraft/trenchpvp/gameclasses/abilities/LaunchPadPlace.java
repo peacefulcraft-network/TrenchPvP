@@ -1,6 +1,5 @@
 package net.peacefulcraft.trenchpvp.gameclasses.abilities;
 
-import java.util.ArrayList;
 import java.util.Set;
 
 import org.bukkit.Bukkit;
@@ -23,14 +22,11 @@ public class LaunchPadPlace extends TrenchAbility
 {
 	private TrenchKit k;
 	
-	private ArrayList<Location> pads;
-	
 	public LaunchPadPlace(TrenchKit k) {
 		super(k.getTrenchPlayer(), 0);
 		
 		this.k = k;
 		
-		pads = new ArrayList<Location>();
 	}
 
 	@Override
@@ -61,7 +57,7 @@ public class LaunchPadPlace extends TrenchAbility
 					
 					upBlock.setType(Material.HEAVY_WEIGHTED_PRESSURE_PLATE);//Places launch pad
 						
-					pads.add(upBlock.getLocation());
+					Location padLoc = upBlock.getLocation();
 					p.getInventory().clear(itemIndex);
 					p.sendMessage(ChatColor.RED + "Launch Pad Has Been Placed. Jump Away!");
 					
@@ -70,6 +66,7 @@ public class LaunchPadPlace extends TrenchAbility
 							TrenchPlayer t = TeamManager.findTrenchPlayer(p);
 		                	if(!(t.getKitType() != TrenchKits.ADRENALINE_JUNKIE)) {return;}
 		                	
+		                	padLoc.getBlock().setType(Material.AIR);
 		                	p.getInventory().setItem(itemIndex, pad);
 						}
 					}, 300);

@@ -97,6 +97,9 @@ public class TrenchAdrenalineJunkie extends TrenchKit
 		LeatherArmorMeta metaC = (LeatherArmorMeta) armor[2].getItemMeta();
 		metaC.setColor(Color.GREEN);
 		armor[2].setItemMeta(metaC);
+		LeatherArmorMeta metaB = (LeatherArmorMeta) armor[2].getItemMeta();
+		metaB.setColor(Color.BLACK);
+		armor[2].setItemMeta(metaB);
 		
 		ItemMeta MetaH = armor[0].getItemMeta();
 		MetaH.addEnchant(Enchantment.PROTECTION_EXPLOSIONS, 2, true);

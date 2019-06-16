@@ -103,7 +103,7 @@ public class BigBertha extends TrenchAbility{
 			Fireball f = bomb.getWorld().spawn(bomb, Fireball.class);
 			f.setDirection(new Vector(0, -1, 0) );
 			f.setIsIncendiary(false);
-			f.setYield(3);
+			f.setYield(5);
 			
 		}
 	
