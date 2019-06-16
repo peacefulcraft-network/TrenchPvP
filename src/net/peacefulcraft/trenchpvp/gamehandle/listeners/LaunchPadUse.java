@@ -30,7 +30,7 @@ public class LaunchPadUse implements Listener
 		if(e.getClickedBlock().getType() == Material.HEAVY_WEIGHTED_PRESSURE_PLATE) {
 			Vector v = new Vector(p.getVelocity().getX(), p.getVelocity().getY(), p.getVelocity().getZ());
 			Vector forward = p.getLocation().getDirection().multiply(2.5);
-			Vector jump = p.getLocation().getDirection().multiply(1.5).setY(1);
+			Vector jump = p.getLocation().getDirection().multiply(10).setY(1);
 			
 			v.add(forward).add(jump);
 			p.setVelocity(v);
