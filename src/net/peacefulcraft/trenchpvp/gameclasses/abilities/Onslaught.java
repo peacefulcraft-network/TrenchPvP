@@ -33,10 +33,8 @@ public class Onslaught extends TrenchAbility{
 			
 			PlayerDeathEvent e = (PlayerDeathEvent) ev;
 			TrenchPlayer trenchKiller = TeamManager.findTrenchPlayer(e.getEntity().getKiller());
-			TrenchPlayer trenchDead = TeamManager.findTrenchPlayer(e.getEntity());
 			
 			if(!(trenchKiller.getKitType() == TrenchKits.SOLDIER)) { return false; }
-			if(!(trenchDead.getKitType() == TrenchKits.SOLDIER)) { return false; }
 			
 			return true;
 			
@@ -65,6 +63,10 @@ public class Onslaught extends TrenchAbility{
 					ItemStack redstone = killer.getInventory().getItem(itemIndex);
 					killCount++;
 					
+					redstone.setAmount(redstone.getAmount() + 1);
+					killer.getInventory().setItem(itemIndex, redstone);
+					killer.sendMessage(ChatColor.RED + "The Blood of " + killedName + "Has Been Added to Your Strength");					
+					
 					int damageBuff = killCount / 2;								//Every even kill
 					int healthBuff = (damageBuff > 4)? killCount - 4 : 0;		//Every kill after 4th kill
 					
@@ -73,10 +75,6 @@ public class Onslaught extends TrenchAbility{
 					
 					if(healthBuff > 0)
 						killer.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, 99999, healthBuff));
-					
-					redstone.setAmount(redstone.getAmount() + 1);
-					killer.getInventory().setItem(itemIndex, redstone);
-					killer.sendMessage(ChatColor.RED + "The Blood of " + killedName + "Has Been Added to Your Strength");					
 				
 					}
 				
