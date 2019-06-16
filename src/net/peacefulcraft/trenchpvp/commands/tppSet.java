@@ -8,6 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import net.peacefulcraft.trenchpvp.TrenchPvP;
+import net.peacefulcraft.trenchpvp.gamehandle.Announcer;
 
 public class tppSet implements CommandExecutor{
 
@@ -16,6 +17,8 @@ public class tppSet implements CommandExecutor{
 		
 		if(!(sender instanceof Player)) { return false; }
 		Player player = (Player) sender;
+		
+		if(!player.isOp()) { return false; }
 		
 		if(command.getName().equalsIgnoreCase("tppSet")) {
 			
@@ -27,42 +30,42 @@ public class tppSet implements CommandExecutor{
 			if(args[0].equalsIgnoreCase("blueSpawn")) {
 			
 				blueSpawn(player);
-				player.sendMessage("Blue Game Spawn set to your location");
+				Announcer.messagePlayer(player, "Blue Game Spawn set to your location");
 				return true;
 			
 			}else if(args[0].equalsIgnoreCase("blueClassSpawn")){
 			
 				blueClassSpawn(player);
-				player.sendMessage("Blue Class Room set to your location");
+				Announcer.messagePlayer(player, "Blue Class Room set to your location");
 				return true;
 			
 			}else if(args[0].equalsIgnoreCase("redSpawn")){
 			
 				redSpawn(player);
-				player.sendMessage("Red Game Spawn set to your location");
+				Announcer.messagePlayer(player, "Red Game Spawn set to your location");
 				return true;
 			
 			}else if(args[0].equalsIgnoreCase("redClassSpawn")){
 				
 				redClassSpawn(player);
-				player.sendMessage("Red Class Room set to your location");
+				Announcer.messagePlayer(player, "Red Class Room set to your location");
 				return true;
 			
 			}else if(args[0].equalsIgnoreCase("spectatorSpawn")) {
 				
 				spectatorSpawn(player);
-				player.sendMessage("Spectator Spawn set to your location");
+				Announcer.messagePlayer(player, "Spectator Spawn set to your location");
 				return true;
 				
 			}else if(args[0].equalsIgnoreCase("quitSpawn")){
 				
 				quitSpawn(player);
-				player.sendMessage("Quit Spawn set to your location");
+				Announcer.messagePlayer(player, "Quit Spawn set to your location");
 				return true;
 				
 			}else {
 				
-				player.sendMessage("Invalid Argument");
+				Announcer.messagePlayer(player, "Invalid Argument");
 				return true;
 			
 			}
