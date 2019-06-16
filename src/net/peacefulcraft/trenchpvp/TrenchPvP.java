@@ -18,7 +18,9 @@ import net.peacefulcraft.trenchpvp.gameclasses.listeners.AbilityPlayerInteractEn
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.AbilityPlayerMoveListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.AbilityPlayerToggleFlight;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.InfernoTrapListener;
+import net.peacefulcraft.trenchpvp.gamehandle.GameManager;
 import net.peacefulcraft.trenchpvp.gamehandle.TeamManager;
+import net.peacefulcraft.trenchpvp.gamehandle.listeners.ArrowImpactListener;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.BlockIgnitionTimer;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.ChangeClassSign;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.ItemListener;
@@ -79,6 +81,9 @@ public class TrenchPvP extends JavaPlugin{
 	}
 
 	public void onDisable(){
+		//End game
+		GameManager.closeGame();
+		
 		this.saveConfig();
 		SyncStats.onDisable();
 		this.getLogger().info("[TPP]Trench PvP Alpha 0.1 has been disabled!");
@@ -106,7 +111,8 @@ public class TrenchPvP extends JavaPlugin{
 		getServer().getPluginManager().registerEvents(new PlayerRespawning(), this);
 		getServer().getPluginManager().registerEvents(new PvPController(), this);
 		getServer().getPluginManager().registerEvents(new ItemListener(), this);
-
+		getServer().getPluginManager().registerEvents(new ArrowImpactListener(), this);
+		
 		//gameclasses.listeners
 		getServer().getPluginManager().registerEvents(new InfernoTrapListener(), this);
 

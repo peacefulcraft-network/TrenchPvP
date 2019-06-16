@@ -33,8 +33,10 @@ public class DoubleJump extends TrenchAbility{
 	@Override
 	public void triggerAbility(Event ev) {
 	
-		if(ev instanceof PlayerToggleFlightEvent)
+		if(ev instanceof PlayerToggleFlightEvent) {
 			((PlayerToggleFlightEvent) ev).getPlayer().setFlying(false);
+			((PlayerToggleFlightEvent) ev).setCancelled(true);
+		}
 		
 		if(canDoubleJump && ev instanceof PlayerToggleFlightEvent) {
 			Player p = ((PlayerToggleFlightEvent)ev).getPlayer();
@@ -46,6 +48,7 @@ public class DoubleJump extends TrenchAbility{
 		        v.add(forward).add(jump);
 		        p.setVelocity(v);     
 		        canDoubleJump = false;
+		        p.setAllowFlight(false);
 			}
 			return;
 		}
@@ -54,6 +57,7 @@ public class DoubleJump extends TrenchAbility{
 			Player p = ((PlayerMoveEvent) ev).getPlayer();
 			if(p.isOnGround()) {
 				canDoubleJump = true;
+				p.setAllowFlight(true);
 			}
 			return;
 		}

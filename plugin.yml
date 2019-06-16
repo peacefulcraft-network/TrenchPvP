@@ -26,16 +26,3 @@ commands:
     tppSet:
       description: Configured Trench Settings
       usage: "/<command> [ blueSpawn | blueClassSpawn | redSpawn | redClassSpawn | quitSpawn | spectatorSpawn ]"
-
-permissions:
-    tpp.admin.*:
-      description: Trench PvP Admin Commands
-      children:
-        tpp.admin.tppToggle: true
-        tpp.admin.tppGetGameState: true
-    tpp.admin.tppToggle:
-      description: Trench PvP Admin Command. Toggle Trench Game State
-    tpp.admin.getGameState:
-      description: Trench PvP Admin Command. Get Trench Game State
-    tpp.player:
-      description: Trench PvP General User Commands.
