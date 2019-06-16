@@ -2,10 +2,12 @@ package net.peacefulcraft.trenchpvp.gameclasses.classConfigurations;
 
 import java.util.ArrayList;
 
+import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.LeatherArmorMeta;
 
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.MediGun;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.TrenchAbilityType;
@@ -38,9 +40,21 @@ public class TrenchMedic extends TrenchKit{
 		armor[1] = new ItemStack(Material.LEATHER_LEGGINGS, 1);
 
 		armor[0] = new ItemStack(Material.LEATHER_BOOTS, 1);
-
+		
+		LeatherArmorMeta metaH = (LeatherArmorMeta) armor[3].getItemMeta();
+		metaH.setColor(Color.WHITE);
+		armor[3].setItemMeta(metaH);
+		LeatherArmorMeta metaC = (LeatherArmorMeta) armor[2].getItemMeta();
+		metaC.setColor(Color.WHITE);
+		armor[2].setItemMeta(metaC);
+		LeatherArmorMeta metaL = (LeatherArmorMeta) armor[1].getItemMeta();
+		metaL.setColor(Color.WHITE);
+		armor[1].setItemMeta(metaL);
+		LeatherArmorMeta metaB = (LeatherArmorMeta) armor[0].getItemMeta();
+		metaB.setColor(Color.BLACK);
+		armor[0].setItemMeta(metaB);
+		
 		t.getPlayer().getInventory().setArmorContents(armor);
-
 	}
 
 	@Override

@@ -24,7 +24,7 @@ public class LaunchPadUse implements Listener
 		if(t == null) { return; }
 		
 		if(t.getKitType() == TrenchKits.UNASSIGNED) { return; }
-		if(e.getAction().equals(Action.PHYSICAL)) { return; }
+		if(!(e.getAction().equals(Action.PHYSICAL))) { return; }
 		
 		Player p = e.getPlayer();
 		if(p.getLocation().getBlock().getRelative(BlockFace.DOWN).getType() == Material.HEAVY_WEIGHTED_PRESSURE_PLATE) {
