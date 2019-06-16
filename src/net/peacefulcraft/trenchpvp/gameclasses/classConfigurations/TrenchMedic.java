@@ -17,7 +17,7 @@ public class TrenchMedic extends TrenchKit{
 		super(t, TrenchKits.MEDIC);
 
 		//Register special ability handlers
-		getAbilityManager().registerAbility(TrenchAbilityType.PLAYER_INTERACT, new MediGun(this));
+		getAbilityManager().registerAbility(TrenchAbilityType.PLAYER_INTERACT_ENTITY, new MediGun(this));
 
 	}
 
