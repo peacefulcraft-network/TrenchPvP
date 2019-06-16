@@ -2,6 +2,10 @@ package net.peacefulcraft.trenchpvp.gameclasses.abilities;
 
 import org.bukkit.event.Event;
 
+import net.md_5.bungee.api.ChatColor;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.BaseComponent;
+import net.md_5.bungee.api.chat.TextComponent;
 import net.peacefulcraft.trenchpvp.gamehandle.Announcer;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 
@@ -42,7 +46,10 @@ public abstract class TrenchAbility {
 			return true;
 		}
 		
-		t.getPlayer().sendMessage(abilityCooldownMessage((cooldown - System.currentTimeMillis())/1000));
+		BaseComponent base = new TextComponent(abilityCooldownMessage((cooldown - System.currentTimeMillis())/1000));
+		base.setColor(ChatColor.RED);
+		t.getPlayer().spigot().sendMessage(ChatMessageType.ACTION_BAR, base);
+		//t.getPlayer().sendMessage(abilityCooldownMessage((cooldown - System.currentTimeMillis())/1000));
 		return false;
 	}
 	
