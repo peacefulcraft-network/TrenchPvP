@@ -32,6 +32,8 @@ public class TrenchPyro extends TrenchKit{
 		super(t, TrenchKits.PYRO);
 		this.t = t;
 
+		resetInfernoTraps();
+		
 		//Register special ability handlers
 		infernoTrapRemover = new InfernoTrapRemover(this);
 		getAbilityManager().registerAbility(TrenchAbilityType.PLAYER_INTERACT, new Flamethrower(this));
@@ -59,7 +61,10 @@ public class TrenchPyro extends TrenchKit{
 
 	@Override
 	public void equipItems() {
-
+		
+		//Remove all Inferno Traps from old kit if it exists
+		infernoTrapRemover.removeInfernoTraps();
+		
 		Inventory inv = t.getPlayer().getInventory();
 
 		ItemStack primary = new ItemStack(Material.GOLDEN_AXE);

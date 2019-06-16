@@ -6,6 +6,7 @@ import org.bukkit.potion.PotionEffect;
 
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKit;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
+import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchPyro;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchUndefined;
 
 public class TrenchPlayer{
@@ -33,6 +34,12 @@ public class TrenchPlayer{
 	}
 	
 	public void dequipKits() {
+		//Dirty way to remove all inferno traps
+		//TODO: Standardize dequip tasks for all Kits
+		if(kitInstance instanceof TrenchPyro) {
+			((TrenchPyro) kitInstance).infernoTrapRemover.removeInfernoTraps();
+		}
+		
 		clearPotionEffects();
 		p.getInventory().clear();
 		p.getInventory().setArmorContents(new ItemStack[p.getInventory().getArmorContents().length]);
