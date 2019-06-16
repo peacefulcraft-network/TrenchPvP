@@ -4,9 +4,14 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import net.md_5.bungee.api.ChatColor;
+import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchAdrenalineJunkie;
+import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchSoldier;
 import net.peacefulcraft.trenchpvp.gamehandle.GameManager;
 import net.peacefulcraft.trenchpvp.gamehandle.TeamManager;
+import net.peacefulcraft.trenchpvp.gamehandle.player.Teleports;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
+import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchTeams;
 import net.peacefulcraft.trenchpvp.menu.GameMenu;
 import net.peacefulcraft.trenchpvp.menu.GameMenu.Row;
 import net.peacefulcraft.trenchpvp.menu.GameMenu.onClick;
@@ -50,12 +55,22 @@ public class PurchasedMenu
 		}
 		switch(PurchasedKits.valueOf(itemText)) {
 		case ADRENALINE_JUNKIE:
-			
+			t.equipKit(new TrenchAdrenalineJunkie(t));
+			teleportByTeam(t);
+			return;
 		}
-		
 	}
 	
 	public void menuOpen(Player p) {
 		menu.open(p);
+	}
+	
+	private void teleportByTeam(TrenchPlayer t) {
+		if(TeamManager.findTrenchPlayer(t.getPlayer()).getPlayerTeam() == TrenchTeams.BLUE) {
+			t.getPlayer().teleport(Teleports.getBlueSpawn());
+		}else {
+			t.getPlayer().teleport(Teleports.getRedSpawn());
+		}
+		t.getPlayer().sendMessage(ChatColor.AQUA + "You are now type " + ChatColor.RED + t.getKitType());
 	}
 }
