@@ -16,6 +16,7 @@ public class PurchasedMenu
 	private enum PurchasedKits {
 		ADRENALINE_JUNKIE;
 	}
+	
 	private GameMenu menu = new GameMenu("Purchased Menu", 3, new onClick() {
 	    @Override
 	    public boolean click(Player p, GameMenu menu, Row row, int slot, ItemStack item) {
@@ -47,6 +48,11 @@ public class PurchasedMenu
 			menu.close(p);
 			kitMenu.menuOpen(p);
 		}
+		switch(PurchasedKits.valueOf(itemText)) {
+		case ADRENALINE_JUNKIE:
+			
+		}
+		
 	}
 	
 	public void menuOpen(Player p) {

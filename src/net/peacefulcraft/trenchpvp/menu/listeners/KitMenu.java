@@ -112,7 +112,7 @@ public class KitMenu implements Listener
 			GameManager.quitPlayer(p);
 			cooldown.remove(p.getUniqueId());
 		}
-		if(itemText.equals("Purchased Classes")) {
+		if(itemText.equals("PURCHASED CLASSES")) {
 			PurchasedMenu purchasedMenu = new PurchasedMenu();
 			menu.close(p);
 			purchasedMenu.menuOpen(p);
