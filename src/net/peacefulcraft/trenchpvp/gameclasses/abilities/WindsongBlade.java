@@ -40,7 +40,7 @@ public class WindsongBlade extends TrenchAbility{
 			
 		}
 		
-		return false;
+		return true;
 		
 	}
 
