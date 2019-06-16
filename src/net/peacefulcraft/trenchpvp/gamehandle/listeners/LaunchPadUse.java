@@ -2,6 +2,7 @@ package net.peacefulcraft.trenchpvp.gamehandle.listeners;
 
 import org.bukkit.GameMode;
 import org.bukkit.Material;
+import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -26,7 +27,7 @@ public class LaunchPadUse implements Listener
 		if(e.getAction().equals(Action.PHYSICAL)) { return; }
 		
 		Player p = e.getPlayer();
-		if(e.getMaterial() == Material.HEAVY_WEIGHTED_PRESSURE_PLATE) {
+		if(p.getLocation().getBlock().getRelative(BlockFace.DOWN).getType() == Material.HEAVY_WEIGHTED_PRESSURE_PLATE) {
 			Vector v = new Vector(p.getVelocity().getX(), p.getVelocity().getY(), p.getVelocity().getZ());
 			Vector forward = p.getLocation().getDirection().multiply(0.6);
 			Vector jump = p.getLocation().getDirection().multiply(0.05).setY(1);
