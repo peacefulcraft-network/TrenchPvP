@@ -12,6 +12,7 @@ import org.bukkit.inventory.meta.LeatherArmorMeta;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.DoubleJump;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.SpeedShot;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.TrenchAbilityType;
+import net.peacefulcraft.trenchpvp.gameclasses.abilities.WindsongBlade;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 
 public class TrenchScout extends TrenchKit {
@@ -20,6 +21,7 @@ public class TrenchScout extends TrenchKit {
 		
 		//Register Abilities
 		getAbilityManager().registerAbility(TrenchAbilityType.PLAYER_INTERACT_ENTITY, new SpeedShot(this));
+		getAbilityManager().registerAbility(TrenchAbilityType.PLAYER_MOVE, new WindsongBlade(this));
 
 		//Listens for two events so they need to share
 		DoubleJump dj = new DoubleJump(this);
