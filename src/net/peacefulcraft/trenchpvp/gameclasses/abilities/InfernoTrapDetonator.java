@@ -1,9 +1,13 @@
 package net.peacefulcraft.trenchpvp.gameclasses.abilities;
 
+import java.util.ArrayList;
+
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchPyro;
 
@@ -37,6 +41,22 @@ public class InfernoTrapDetonator extends TrenchAbility{
 				temp.getWorld().createExplosion(temp.getX(), temp.getY(), temp.getZ(), 2.0f, true, false);
 				temp.getBlock().setType(Material.AIR);
 			}
+		}
+		Player p = k.getTrenchPlayer().getPlayer();
+		if(p.getInventory().contains(Material.LIGHT_WEIGHTED_PRESSURE_PLATE)) {
+			int itemIndex = p.getInventory().first(Material.LIGHT_WEIGHTED_PRESSURE_PLATE);
+			p.getInventory().getItem(itemIndex).setAmount(5);
+		} else {
+			ItemStack trapAmmo = new ItemStack(Material.LIGHT_WEIGHTED_PRESSURE_PLATE, 5);
+			ItemMeta tAMeta = trapAmmo.getItemMeta();
+			tAMeta.setDisplayName("Inferno Trap");
+
+			ArrayList<String> aDesc = new ArrayList<String>();
+			aDesc.add("Can Only Place 5 at a Time! Detonate to Get More!");
+			tAMeta.setLore(aDesc);
+
+			trapAmmo.setItemMeta(tAMeta);
+			p.getInventory().addItem(trapAmmo);
 		}
 		
 		k.resetInfernoTraps();

@@ -6,7 +6,8 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.block.Action;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.util.Vector;
 
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
@@ -16,13 +17,14 @@ import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 public class LaunchPadUse implements Listener
 {
 	@EventHandler
-	private void LaunchPadLaunch(PlayerMoveEvent e) {
+	private void LaunchPadLaunch(PlayerInteractEvent e) {
 		if(e.getPlayer().getGameMode() != GameMode.ADVENTURE) { return; }
 		
 		TrenchPlayer t = TeamManager.findTrenchPlayer(e.getPlayer());
 		if(t == null) { return; }
 		
 		if(t.getKitType() == TrenchKits.UNASSIGNED) { return; }
+		if(e.getAction() != Action.PHYSICAL) { return; }
 		
 		Player p = e.getPlayer();
 		if(p.getLocation().getBlock().getRelative(BlockFace.DOWN).getType() == Material.HEAVY_WEIGHTED_PRESSURE_PLATE) {
