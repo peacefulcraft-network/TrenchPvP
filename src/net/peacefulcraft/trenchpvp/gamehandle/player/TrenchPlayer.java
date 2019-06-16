@@ -1,5 +1,6 @@
 package net.peacefulcraft.trenchpvp.gamehandle.player;
 
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
@@ -31,6 +32,7 @@ public class TrenchPlayer{
 		clearPotionEffects();
 		this.kitInstance = k;
 		k.equip();
+		p.setGameMode(GameMode.ADVENTURE);
 	}
 	
 	public void dequipKits() {
@@ -43,6 +45,8 @@ public class TrenchPlayer{
 		clearPotionEffects();
 		p.getInventory().clear();
 		p.getInventory().setArmorContents(new ItemStack[p.getInventory().getArmorContents().length]);
+		p.setFlying(false);
+		p.setAllowFlight(false);
 		this.kitInstance = new TrenchUndefined(this);
 	}
 	
