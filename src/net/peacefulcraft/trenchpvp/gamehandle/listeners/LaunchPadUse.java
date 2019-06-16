@@ -26,7 +26,6 @@ public class LaunchPadUse implements Listener
 		if(!(e.getAction().equals(Action.PHYSICAL))) { return; }
 		
 		Player p = e.getPlayer();
-		p.sendMessage("1");
 		if(e.getClickedBlock().getType() == Material.HEAVY_WEIGHTED_PRESSURE_PLATE) {
 			Vector v = new Vector(p.getVelocity().getX(), p.getVelocity().getY(), p.getVelocity().getZ());
 			Vector forward = p.getLocation().getDirection().multiply(2.5);
