@@ -29,11 +29,11 @@ public class LaunchPadUse implements Listener
 		
 		Player p = e.getPlayer();
 		if(e.getClickedBlock().getType() == Material.HEAVY_WEIGHTED_PRESSURE_PLATE) {
-			p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 60, 5));
+			p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 100, 5));
 			
 			Vector v = new Vector(p.getVelocity().getX(), p.getVelocity().getY(), p.getVelocity().getZ());
-			Vector forward = p.getLocation().getDirection().multiply(2.5);
-			Vector jump = new Vector(0, 10, 0);
+			Vector forward = p.getLocation().getDirection().multiply(2.7);
+			Vector jump = new Vector(0, 8, 0);
 			v.add(forward).add(jump);
 			
 			p.setVelocity(v);
