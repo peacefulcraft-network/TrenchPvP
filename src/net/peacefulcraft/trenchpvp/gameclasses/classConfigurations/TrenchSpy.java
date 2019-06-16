@@ -20,7 +20,7 @@ public class TrenchSpy extends TrenchKit{
 
 		//Register ability listeners
 		getAbilityManager().registerAbility(TrenchAbilityType.PLAYER_INTERACT, new HiddenBlade(this));
-		getAbilityManager().registerAbility(TrenchAbilityType.PLAYER_INTERACT_ENTITY, new HiddenBladeBlock(this));
+		getAbilityManager().registerAbility(TrenchAbilityType.ENTITY_DAMAGE_ENTITY, new HiddenBladeBlock(this));
 	}
 
 	@Override
