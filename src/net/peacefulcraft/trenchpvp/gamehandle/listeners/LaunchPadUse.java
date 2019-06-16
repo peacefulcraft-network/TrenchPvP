@@ -30,7 +30,7 @@ public class LaunchPadUse implements Listener
 		Player p = e.getPlayer();
 		if(e.getClickedBlock().getType() == Material.HEAVY_WEIGHTED_PRESSURE_PLATE) {
 			if(t.getKitType() == TrenchKits.ADRENALINE_JUNKIE) {
-				p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 160, 5));
+				p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 200, 5));
 			}
 			
 			Vector v = new Vector(p.getVelocity().getX(), p.getVelocity().getY(), p.getVelocity().getZ());
