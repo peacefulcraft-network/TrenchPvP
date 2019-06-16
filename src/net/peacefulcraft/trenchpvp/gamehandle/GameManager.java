@@ -142,15 +142,15 @@ public class GameManager {
 			}
 		);
 		
-		SyncStats sync = new SyncStats();
-		sync.commitStats(TrenchPvP.getStatTracker().getStatData());
-		TrenchPvP.getStatTracker().clearStats();
-		sync.runTaskAsynchronously(TrenchPvP.getPluginInstance());
+		//SyncStats sync = new SyncStats();
+		//sync.commitStats(TrenchPvP.getStatTracker().getStatData());
+		//TrenchPvP.getStatTracker().clearStats();
+		//sync.runTaskAsynchronously(TrenchPvP.getPluginInstance());
 		
 		//Execute registered post game tasks
-		for(BukkitRunnable task : postGameTasks) {
-			task.runTask(TrenchPvP.getPluginInstance());
-		}
+		//for(BukkitRunnable task : postGameTasks) {
+		//	task.runTask(TrenchPvP.getPluginInstance());
+		//}
 		
 		
 	}

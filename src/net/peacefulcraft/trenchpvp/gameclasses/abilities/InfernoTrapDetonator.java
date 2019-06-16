@@ -1,0 +1,46 @@
+package net.peacefulcraft.trenchpvp.gameclasses.abilities;
+
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
+
+import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchPyro;
+
+public class InfernoTrapDetonator extends TrenchAbility{
+
+	private TrenchPyro k;
+	
+	public InfernoTrapDetonator(TrenchPyro k) {
+		super(k.getTrenchPlayer(), 0);
+		
+		this.k = k;
+	}
+
+	@Override
+	public boolean abilitySignature(Event ev) {
+		
+		Player p = k.getTrenchPlayer().getPlayer();
+		
+		if(!(p.getInventory().getItemInMainHand().getType() == Material.TRIPWIRE_HOOK)) { return false; }
+		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Inferno Trap Detonator"))) { return false; } 
+		
+		return true;
+	}
+
+	@Override
+	public void triggerAbility(Event ev) {
+		
+		//Iterates through ArrayList to detonate each trap.
+		for(Location temp : k.getInfernoTraps()) {
+			if(temp.getBlock().getType() == Material.LIGHT_WEIGHTED_PRESSURE_PLATE) {
+				temp.getWorld().createExplosion(temp.getX(), temp.getY(), temp.getZ(), 2.0f, true, false);
+				temp.getBlock().setType(Material.AIR);
+			}
+		}
+		
+		k.resetInfernoTraps();
+		
+	}
+
+}

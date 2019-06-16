@@ -14,20 +14,17 @@ import org.bukkit.inventory.ItemStack;
 
 import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKit;
+import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchPyro;
 import net.peacefulcraft.trenchpvp.stats.TrenchStats.PyroStat;
 
-public class InfernoTrapPlace extends TrenchAbility{
+public class InfernoTrapPlacer extends TrenchAbility{
 
-	private TrenchKit k;
+	private TrenchPyro k;
 	
-	private ArrayList<Location> traps;
-	
-	public InfernoTrapPlace(TrenchKit k) {
+	public InfernoTrapPlacer(TrenchPyro k) {
 		super(k.getTrenchPlayer(), 0);
 		
 		this.k = k;
-		
-		traps = new ArrayList<Location>();
 	}
 
 	@Override
@@ -35,8 +32,8 @@ public class InfernoTrapPlace extends TrenchAbility{
 		
 		Player p = k.getTrenchPlayer().getPlayer();
 		
-		if(!(p.getInventory().getItemInMainHand().getType() == Material.LIGHT_WEIGHTED_PRESSURE_PLATE)) return false;
-		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Inferno Trap"))) return false;
+		if(!(p.getInventory().getItemInMainHand().getType() == Material.LIGHT_WEIGHTED_PRESSURE_PLATE)) { return false; }
+		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Inferno Trap"))) { return false; } 
 		
 		return true;
 	}
@@ -59,13 +56,13 @@ public class InfernoTrapPlace extends TrenchAbility{
            		 if(trap.getAmount() <= 1) {
            			 upBlock.setType(Material.LIGHT_WEIGHTED_PRESSURE_PLATE);//"Places" trap
            			 //Adds location of trap to ArrayList HashMap
-           			 traps.add(upBlock.getLocation());
+           			 k.getInfernoTraps().add(upBlock.getLocation());
            			 p.getInventory().clear(itemIndex);//Clears item slot
            			 p.sendMessage(ChatColor.RED + "Out of Inferno Traps! Time to Detonate!");
            		 } else {
            			 upBlock.setType(Material.LIGHT_WEIGHTED_PRESSURE_PLATE);
            			 //Adds location of trap to ArrayList HashMap
-           			 traps.add(upBlock.getLocation());
+           			 k.getInfernoTraps().add(upBlock.getLocation());
            			 trap.setAmount(trap.getAmount() - 1);
            		 }
            	 }

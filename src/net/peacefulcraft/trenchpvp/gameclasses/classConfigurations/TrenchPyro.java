@@ -2,6 +2,7 @@ package net.peacefulcraft.trenchpvp.gameclasses.classConfigurations;
 
 import java.util.ArrayList;
 
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.Inventory;
@@ -9,6 +10,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.Flamethrower;
+import net.peacefulcraft.trenchpvp.gameclasses.abilities.InfernoTrapDetonator;
+import net.peacefulcraft.trenchpvp.gameclasses.abilities.InfernoTrapPlacer;
+import net.peacefulcraft.trenchpvp.gameclasses.abilities.InfernoTrapRemover;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.TrenchAbilityType;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 
@@ -18,12 +22,22 @@ public class TrenchPyro extends TrenchKit{
 	private TrenchKits k = TrenchKits.PYRO;
 		public TrenchKits getKitType() { return k; }
 
+	
+	public ArrayList<Location> infernoTraps;
+		public ArrayList<Location> getInfernoTraps() { return infernoTraps; }
+		public void resetInfernoTraps(){ infernoTraps = new ArrayList<Location>(); }
+	public InfernoTrapRemover infernoTrapRemover;
+		
 	public TrenchPyro(TrenchPlayer t) {
 		super(t, TrenchKits.PYRO);
 		this.t = t;
 
 		//Register special ability handlers
+		infernoTrapRemover = new InfernoTrapRemover(this);
 		getAbilityManager().registerAbility(TrenchAbilityType.PLAYER_INTERACT, new Flamethrower(this));
+		getAbilityManager().registerAbility(TrenchAbilityType.PLAYER_INTERACT, new InfernoTrapPlacer(this));
+		getAbilityManager().registerAbility(TrenchAbilityType.PLAYER_INTERACT, new InfernoTrapDetonator(this));
+		getAbilityManager().registerAbility(TrenchAbilityType.PLAYER_DEATH, infernoTrapRemover);
 	}
 
 	@Override
