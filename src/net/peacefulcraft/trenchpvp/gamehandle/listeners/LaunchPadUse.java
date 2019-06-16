@@ -2,7 +2,6 @@ package net.peacefulcraft.trenchpvp.gamehandle.listeners;
 
 import org.bukkit.GameMode;
 import org.bukkit.Material;
-import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -24,7 +23,7 @@ public class LaunchPadUse implements Listener
 		if(t == null) { return; }
 		
 		if(t.getKitType() == TrenchKits.UNASSIGNED) { return; }
-		if(e.getAction() != Action.PHYSICAL) { return; }
+		if(e.getAction().equals(Action.PHYSICAL)) { return; }
 		
 		Player p = e.getPlayer();
 		if(e.getMaterial() == Material.HEAVY_WEIGHTED_PRESSURE_PLATE) {
