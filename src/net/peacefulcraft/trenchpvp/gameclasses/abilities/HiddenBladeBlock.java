@@ -39,10 +39,6 @@ public class HiddenBladeBlock extends TrenchAbility
 			if(spy.hasPotionEffect(PotionEffectType.INVISIBILITY)) {
 				e.setCancelled(true);
 			}
-		}
-		
+		}	
 	}
-	
-	
-
 }

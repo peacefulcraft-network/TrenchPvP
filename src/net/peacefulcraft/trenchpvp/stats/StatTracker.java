@@ -49,6 +49,8 @@ public class StatTracker
 	}
 	public int getValue(UUID id, TrenchStat stat) {
 		HashMap<TrenchStat, Integer> temp = statMap.get(id);
+		if(!(temp.containsKey(stat))) { return 0; }
+		
 		int value = temp.get(stat);
 		return value;
 	}
