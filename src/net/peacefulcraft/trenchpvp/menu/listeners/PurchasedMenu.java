@@ -53,7 +53,7 @@ public class PurchasedMenu
 			menu.close(p);
 			kitMenu.menuOpen(p);
 		}
-		itemText.replaceAll(" ", "_");
+		itemText = itemText.replaceAll(" ", "_");
 		switch(PurchasedKits.valueOf(itemText)) {
 		case ADRENALINE_JUNKIE:
 			t.equipKit(new TrenchAdrenalineJunkie(t));
