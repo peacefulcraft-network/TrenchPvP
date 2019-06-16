@@ -62,7 +62,7 @@ public class PowerShot extends TrenchAbility{
                 //@Override
                 public void run() {
                 	TrenchPlayer t = TeamManager.findTrenchPlayer(p);
-                	if(!(t.getKitType() != TrenchKits.SNIPER)) {return;}
+                	if(!(t.getKitType() == TrenchKits.SNIPER)) {return;}
                 	
                 	p.getInventory().setItem(itemIndex, rifle);
                 }

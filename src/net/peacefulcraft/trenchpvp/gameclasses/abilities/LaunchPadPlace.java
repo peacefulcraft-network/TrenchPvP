@@ -64,7 +64,7 @@ public class LaunchPadPlace extends TrenchAbility
 					Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(TrenchPvP.getPluginInstance(), new Runnable() {
 						public void run() {
 							TrenchPlayer t = TeamManager.findTrenchPlayer(p);
-		                	if(!(t.getKitType() != TrenchKits.ADRENALINE_JUNKIE)) {return;}
+		                	if(!(t.getKitType() == TrenchKits.ADRENALINE_JUNKIE)) {return;}
 		                	
 		                	padLoc.getBlock().setType(Material.AIR);
 		                	p.getInventory().setItem(itemIndex, pad);

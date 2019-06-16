@@ -70,7 +70,7 @@ public class BigBertha extends TrenchAbility{
 				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(TrenchPvP.getPluginInstance() , new Runnable() {
 	                public void run() {
 	                	TrenchPlayer t = TeamManager.findTrenchPlayer(p);
-	                	if(!(t.getKitType() != TrenchKits.DEMOMAN)) {return;}
+	                	if(!(t.getKitType() == TrenchKits.DEMOMAN)) {return;}
 	                		                	
 	                	p.getInventory().setItem(itemIndex, bomb);
 	                }

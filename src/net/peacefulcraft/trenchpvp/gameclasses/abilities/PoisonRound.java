@@ -59,7 +59,7 @@ public class PoisonRound extends TrenchAbility{
             scheduler.scheduleSyncDelayedTask(TrenchPvP.getPluginInstance() , new Runnable() {
                 //@Override
                 public void run() {
-                	if(!(t.getKitType() != TrenchKits.SNIPER)) {return;}
+                	if(!(t.getKitType() == TrenchKits.SNIPER)) {return;}
                 	
                 	ItemStack t = p.getInventory().getItem(itemIndex);
                 	arrows.setAmount(t.getAmount());
