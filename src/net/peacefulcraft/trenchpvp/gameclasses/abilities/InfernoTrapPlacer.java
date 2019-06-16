@@ -1,10 +1,8 @@
 package net.peacefulcraft.trenchpvp.gameclasses.abilities;
 
-import java.util.ArrayList;
 import java.util.Set;
 
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -13,7 +11,6 @@ import org.bukkit.event.Event;
 import org.bukkit.inventory.ItemStack;
 
 import net.peacefulcraft.trenchpvp.TrenchPvP;
-import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKit;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchPyro;
 import net.peacefulcraft.trenchpvp.stats.TrenchStats.PyroStat;
 

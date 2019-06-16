@@ -17,7 +17,6 @@ import net.peacefulcraft.trenchpvp.gameclasses.listeners.AbilityPlayerDeathListe
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.AbilityPlayerInteractEntity;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.AbilityPlayerMoveListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.AbilityPlayerToggleFlight;
-import net.peacefulcraft.trenchpvp.gameclasses.listeners.InfernoTrapListener;
 import net.peacefulcraft.trenchpvp.gamehandle.GameManager;
 import net.peacefulcraft.trenchpvp.gamehandle.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.ArrowImpactListener;
