@@ -12,7 +12,7 @@ public class InfernoTrapDetonator extends TrenchAbility{
 	private TrenchPyro k;
 	
 	public InfernoTrapDetonator(TrenchPyro k) {
-		super(k.getTrenchPlayer(), 0);
+		super(k.getTrenchPlayer(), -1);
 		
 		this.k = k;
 	}

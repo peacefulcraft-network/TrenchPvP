@@ -80,10 +80,10 @@ public class TrenchPvP extends JavaPlugin{
 	}
 
 	public void onDisable(){
+		this.saveConfig();
 		//End game
 		GameManager.closeGame();
 		
-		this.saveConfig();
 		//SyncStats.onDisable();
 		this.getLogger().info("[TPP]Trench PvP Alpha 0.1 has been disabled!");
 	}

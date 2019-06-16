@@ -11,7 +11,7 @@ public class InfernoTrapRemover extends TrenchAbility{
 	private TrenchPyro k;
 	
 	public InfernoTrapRemover(TrenchPyro k) {
-		super(k.getTrenchPlayer(), 0);
+		super(k.getTrenchPlayer(), -1);
 		
 		this.k = k;
 	}
@@ -33,9 +33,7 @@ public class InfernoTrapRemover extends TrenchAbility{
 	
 	public void removeInfernoTraps() {
 		for(Location loc : k.getInfernoTraps()) {
-			if(loc.getBlock().getType() == Material.LIGHT_WEIGHTED_PRESSURE_PLATE) {
-				loc.getBlock().setType(Material.AIR);
-			}
+			loc.getBlock().setType(Material.AIR);
 		}
 		k.resetInfernoTraps();
 	}

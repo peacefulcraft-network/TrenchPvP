@@ -29,7 +29,7 @@ public class Flamethrower extends TrenchAbility {
 		Player p = k.getTrenchPlayer().getPlayer();
 		if(!(p.getInventory().getItemInMainHand().getType() == Material.BLAZE_ROD)) return false;
 		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Flamethrower"))) return false;
-		
+				
 		return true;
 	}
 
