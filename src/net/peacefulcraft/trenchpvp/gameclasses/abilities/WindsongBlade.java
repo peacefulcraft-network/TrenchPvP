@@ -17,7 +17,7 @@ public class WindsongBlade extends TrenchAbility{
 	private TrenchKit k;
 	
 	public WindsongBlade(TrenchKit k) {
-		super(k.getTrenchPlayer(), 0);
+		super(k.getTrenchPlayer(), -1);
 		
 		this.k = k;
 	}
@@ -30,8 +30,8 @@ public class WindsongBlade extends TrenchAbility{
 			PlayerMoveEvent e = (PlayerMoveEvent) ev;
 			TrenchPlayer t = TeamManager.findTrenchPlayer(e.getPlayer());
 			
-			if(!(t.getPlayer().getInventory().getItemInMainHand().getType() == Material.STONE_SWORD)) { return false; }
-			if(!(t.getPlayer().getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Windsong Blade"))) { return false; }
+			//if(!(t.getPlayer().getInventory().getItemInMainHand().getType() == Material.STONE_SWORD)) { return false; }
+			//if(!(t.getPlayer().getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Windsong Blade"))) { return false; }
 		
 		}catch(ClassCastException ex) {
 			
@@ -53,7 +53,7 @@ public class WindsongBlade extends TrenchAbility{
 			Player p = e.getPlayer();
 					
 			if((p.getInventory().getItemInMainHand().getType() == Material.STONE_SWORD)){
-				if((p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Slim Slicer"))){
+				if((p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Windsong Blade"))){
 					p.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, 99999, 3));
 					p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 99999, 1));
 				}
