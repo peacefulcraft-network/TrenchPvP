@@ -85,7 +85,7 @@ public class TrenchPvP extends JavaPlugin{
 		GameManager.closeGame();
 		
 		this.saveConfig();
-		SyncStats.onDisable();
+		//SyncStats.onDisable();
 		this.getLogger().info("[TPP]Trench PvP Alpha 0.1 has been disabled!");
 	}
 
@@ -112,9 +112,6 @@ public class TrenchPvP extends JavaPlugin{
 		getServer().getPluginManager().registerEvents(new PvPController(), this);
 		getServer().getPluginManager().registerEvents(new ItemListener(), this);
 		getServer().getPluginManager().registerEvents(new ArrowImpactListener(), this);
-		
-		//gameclasses.listeners
-		getServer().getPluginManager().registerEvents(new InfernoTrapListener(), this);
 
 		//new gameclasses.listeners
 		getServer().getPluginManager().registerEvents(new AbilityClickListener(), this);
