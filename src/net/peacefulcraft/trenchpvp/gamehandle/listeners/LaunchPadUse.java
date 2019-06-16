@@ -7,6 +7,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
@@ -30,8 +32,9 @@ public class LaunchPadUse implements Listener
 			Vector v = new Vector(p.getVelocity().getX(), p.getVelocity().getY(), p.getVelocity().getZ());
 			Vector forward = p.getLocation().getDirection().multiply(2.5);
 			Vector jump = new Vector(0, 10, 0);
-			
 			v.add(forward).add(jump);
+			
+			p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 60, 5));
 			p.setVelocity(v);
 		}
 		return;

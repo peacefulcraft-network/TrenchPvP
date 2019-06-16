@@ -110,7 +110,7 @@ public class TrenchAdrenalineJunkie extends TrenchKit
 		armor[2].setItemMeta(MetaC);
 		
 		ItemMeta MetaB = armor[0].getItemMeta();
-		MetaB.addEnchant(Enchantment.PROTECTION_FALL, 3, true);
+		MetaB.addEnchant(Enchantment.PROTECTION_FALL, 4, true);
 		armor[0].setItemMeta(MetaB);
 		
 		p.getInventory().setArmorContents(armor);
