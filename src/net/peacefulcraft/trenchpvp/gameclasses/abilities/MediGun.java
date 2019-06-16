@@ -39,7 +39,7 @@ public class MediGun extends TrenchAbility{
 
 		//Check if clicked with medi gun item
 		if(!(p.getInventory().getItemInMainHand().getType() == Material.REDSTONE_BLOCK)) { return false; }
-		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName() == "Medi Gun")) { return false; }
+		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Medi Gun"))) { return false; }
 		
 		TrenchPlayer healTarget = TeamManager.findTrenchPlayer((Player) e.getRightClicked());
 		if(healTarget == null) { return false; }
