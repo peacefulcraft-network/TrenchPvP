@@ -25,7 +25,6 @@ import net.peacefulcraft.trenchpvp.gamehandle.listeners.ChangeClassSign;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.ItemListener;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.JoinGameListen;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.JoinGameSign;
-import net.peacefulcraft.trenchpvp.gamehandle.listeners.KitSignListener;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.LaunchPadUse;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.LeaveGameSign;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.PlayerRespawning;
@@ -104,7 +103,6 @@ public class TrenchPvP extends JavaPlugin{
 		getServer().getPluginManager().registerEvents(new LeaveGameSign(), this);
 		getServer().getPluginManager().registerEvents(new StartGameSign(), this);
 		getServer().getPluginManager().registerEvents(new ChangeClassSign(), this);
-		getServer().getPluginManager().registerEvents(new KitSignListener(), this);
 		getServer().getPluginManager().registerEvents(new JoinGameListen(), this);
 		getServer().getPluginManager().registerEvents(new BlockIgnitionTimer(), this);
 		getServer().getPluginManager().registerEvents(new QuitGameListen(), this);

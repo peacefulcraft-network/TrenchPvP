@@ -1,12 +1,8 @@
 package net.peacefulcraft.trenchpvp.gameclasses.abilities;
 
-import java.util.Set;
-
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
-import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
@@ -43,8 +39,8 @@ public class Flamethrower extends TrenchAbility {
 		Vector fireballVector = playerDirection.clone();
 		        
 	        Fireball f = p.launchProjectile(Fireball.class);
-	        f.setVelocity(fireballVector.multiply(2));//Possibly remove because garbage
-	        f.setIsIncendiary(true);
+	        f.setVelocity(fireballVector.multiply(2));
+	        f.setIsIncendiary(false);
 	        f.setYield(0);
 		        
 
@@ -61,18 +57,6 @@ public class Flamethrower extends TrenchAbility {
         for (int i = 0; i < 5; i++) { //Amount of flames shot. Change here.
             shootSingleFlame(p, playerDirection, particleLocation);
         }
-
-        //int fireTimer = 4000;
-        
-        if (Math.random() < 5) { // Light fire to block one fifth of the time
-            Block lookingBlock = p.getTargetBlock((Set<Material>) null, 15); // Get target block in 15 block range
-            if (lookingBlock != null && lookingBlock.getType().isBlock()) {
-                Block upBlock = lookingBlock.getRelative(BlockFace.UP);
-                if (upBlock != null && upBlock.getType() == Material.AIR) {
-                	upBlock.setType(Material.FIRE);
-                }
-            }
-        }
         
 	}
 	
@@ -82,7 +66,7 @@ public class Flamethrower extends TrenchAbility {
 	        particlePath.add(new Vector(Math.random() - Math.random(), Math.random() - Math.random(), Math.random() - Math.random())); // Add some randomness
 	
 	        Location offsetLocation = particlePath.toLocation(p.getWorld());
-	
+
 	        p.getWorld().spawnParticle(Particle.FLAME, particleLocation, 0, offsetLocation.getX(), offsetLocation.getY(), offsetLocation.getZ(), 0.1); // Count of zero, to respect 'speed'
 	    }
 
