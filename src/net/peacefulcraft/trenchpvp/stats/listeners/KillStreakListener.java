@@ -16,6 +16,7 @@ import net.peacefulcraft.trenchpvp.stats.TrenchStats.GeneralStat;
 public class KillStreakListener implements Listener
 {
 	private HashMap<UUID, Integer> reference = new HashMap<UUID, Integer>();
+	
 	@EventHandler
 	private void onKillEvent(PlayerDeathEvent e) {
 		
@@ -38,6 +39,7 @@ public class KillStreakListener implements Listener
 			reference.put(killer.getUniqueId(), 1);
 		}
 	}
+	
 	/*
 	 * Compares killstreak to reference on death of player
 	 */
@@ -45,10 +47,8 @@ public class KillStreakListener implements Listener
 	private void onDeathEvent(PlayerDeathEvent e) {
 		Player victim = e.getEntity().getPlayer();
 		
-		TrenchPlayer t;
-		try {
-			t = TeamManager.findTrenchPlayer(victim);
-		} catch(RuntimeException x) {
+		TrenchPlayer t = TeamManager.findTrenchPlayer(victim);
+		if(t == null) {
 			return;
 		}
 		
