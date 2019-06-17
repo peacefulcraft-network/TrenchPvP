@@ -20,11 +20,14 @@ public class KillStreakListener implements Listener
 	private void onKillEvent(PlayerDeathEvent e) {
 		
 		if( !(e.getEntity().getKiller() instanceof Player) ) { return; }
+		if( !(e.getEntity() instanceof Player)) { return; }
 		
 		Player killer = e.getEntity().getKiller();
+		Player victim = e.getEntity();
 		
-		TrenchPlayer t = TeamManager.findTrenchPlayer(killer);
-		if(t == null) {
+		TrenchPlayer vt = TeamManager.findTrenchPlayer(victim);
+		TrenchPlayer kt = TeamManager.findTrenchPlayer(killer);
+		if(kt == null || vt == null) {
 			return;
 		}
 		
