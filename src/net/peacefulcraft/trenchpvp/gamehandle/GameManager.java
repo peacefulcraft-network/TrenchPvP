@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import net.peacefulcraft.trenchpvp.TrenchPvP;
+import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchUndefined;
 import net.peacefulcraft.trenchpvp.gamehandle.player.Teleports;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchTeams;
@@ -42,6 +43,7 @@ public class GameManager {
 				}
 				
 				t = TrenchPvP.getTeamManager().joinTeam(p);
+				t.equipKit(new TrenchUndefined(t));
 				if(t.getPlayerTeam() == TrenchTeams.BLUE) {
 					p.teleport(Teleports.getBlueClassSpawn());
 					p.setGameMode(GameMode.ADVENTURE);
