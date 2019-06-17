@@ -43,8 +43,8 @@ public class Flamethrower extends TrenchAbility {
 		Vector fireballVector = playerDirection.clone();
 		        
 	        Fireball f = p.launchProjectile(Fireball.class);
-	        f.setVelocity(fireballVector.multiply(2));//Possibly remove because garbage
-	        f.setIsIncendiary(true);
+	        f.setVelocity(fireballVector.multiply(2));
+	        f.setIsIncendiary(false);
 	        f.setYield(0);
 		        
 
@@ -82,7 +82,7 @@ public class Flamethrower extends TrenchAbility {
 	        particlePath.add(new Vector(Math.random() - Math.random(), Math.random() - Math.random(), Math.random() - Math.random())); // Add some randomness
 	
 	        Location offsetLocation = particlePath.toLocation(p.getWorld());
-	
+
 	        p.getWorld().spawnParticle(Particle.FLAME, particleLocation, 0, offsetLocation.getX(), offsetLocation.getY(), offsetLocation.getZ(), 0.1); // Count of zero, to respect 'speed'
 	    }
 
