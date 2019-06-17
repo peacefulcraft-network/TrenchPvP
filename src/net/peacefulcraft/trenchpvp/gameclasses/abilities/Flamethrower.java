@@ -61,18 +61,6 @@ public class Flamethrower extends TrenchAbility {
         for (int i = 0; i < 5; i++) { //Amount of flames shot. Change here.
             shootSingleFlame(p, playerDirection, particleLocation);
         }
-
-        //int fireTimer = 4000;
-        
-        if (Math.random() < 5) { // Light fire to block one fifth of the time
-            Block lookingBlock = p.getTargetBlock((Set<Material>) null, 15); // Get target block in 15 block range
-            if (lookingBlock != null && lookingBlock.getType().isBlock()) {
-                Block upBlock = lookingBlock.getRelative(BlockFace.UP);
-                if (upBlock != null && upBlock.getType() == Material.AIR) {
-                	upBlock.setType(Material.FIRE);
-                }
-            }
-        }
         
 	}
 	
