@@ -6,16 +6,6 @@ trenchspawns:
   blue_class: {}
   spectator: {}
 
-classes:
-  demoman: true
-  heavy: true
-  medic: true
-  pyro: true
-  scout: true
-  sniper: true
-  soldier: true
-  spy: true
-
 database:
     ip: "127.0.0.1"
     name: "database name"

@@ -16,6 +16,9 @@ public class AbilityClickListener implements Listener {
 	@EventHandler
 	public void onPlayerClick(PlayerInteractEvent ev) {
 		
+		//Ignore left clicks
+		if(!(ev.getAction().equals(Action.RIGHT_CLICK_AIR) || ev.getAction().equals(Action.RIGHT_CLICK_BLOCK))) {return;}
+		
 		//Ignore clicks not from Trench players
 		TrenchPlayer t = TeamManager.findTrenchPlayer(ev.getPlayer());
 		if(t == null) { return; }
@@ -27,11 +30,12 @@ public class AbilityClickListener implements Listener {
 		
 		t.getKit().getAbilityManager().abilityExecuteLoop(TrenchAbilityType.PLAYER_INTERACT, ev);
 		
+		
 	}
 	
 	@EventHandler
 	public void onPlayerClick(PlayerInteractEntityEvent ev) {
-		
+
 		//Ignore clicks not from Trench players
 		TrenchPlayer t = TeamManager.findTrenchPlayer(ev.getPlayer());
 		if(t == null) { return; }

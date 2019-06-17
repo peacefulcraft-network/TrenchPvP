@@ -120,106 +120,42 @@ public class KitMenu implements Listener
 		
 		switch(TrenchKits.valueOf(itemText)){//Check which class was selected (based on 3rd line of class sign)	
 		case SCOUT:
-
-			if(TrenchPvP.getTrenchCFG().isScoutEnabled()){
 				
-				t.equipKit(new TrenchScout(t));
-				p.setAllowFlight(true);
-				teleportByTeam(t);
-				return;
+			t.equipKit(new TrenchScout(t));
+			p.setAllowFlight(true);
 			
-			}else
+		break;case SOLDIER:
 			
-			p.sendMessage("Sorry, the Scout class is currently not avalible for use. Please select another class.");
-			return;
+			t.equipKit(new TrenchSoldier(t));
 			
-		case SOLDIER:
-			
-			if(TrenchPvP.getTrenchCFG().isSoldierEnabled()){
+		break;case PYRO:
 				
-				t.equipKit(new TrenchSoldier(t));
-				teleportByTeam(t);
-				return;
+			t.equipKit(new TrenchPyro(t));
 			
-			}else
+		break;case DEMOMAN:
 			
-			p.sendMessage("Sorry, the Soldier class is currently not avalible for use. Please select another class.");
-			return;
+			t.equipKit(new TrenchDemoman(t));
 			
-		case PYRO:
+		break;case HEAVY:
 			
-			if(TrenchPvP.getTrenchCFG().isPyroEnabled()){
-				
-				t.equipKit(new TrenchPyro(t));
-				teleportByTeam(t);
-				return;
-			
-			}else
-			
-			p.sendMessage("Sorry, the Pyro class is currently not avalible for use. Please select another class.");
-			return;
-			
-		case DEMOMAN:
-			
-			if(TrenchPvP.getTrenchCFG().isDemomanEnabled()){
-				
-				t.equipKit(new TrenchDemoman(t));
-				teleportByTeam(t);
-				return;
-			
-			}else
-			
-			p.sendMessage("Sorry, the Demoman class is currently not avalible for use. Please select another class.");
-			return;
-			
-		case HEAVY:
-			if(TrenchPvP.getTrenchCFG().isHeavyEnabled()){
-			
-				t.equipKit(new TrenchHeavy(t));
-				teleportByTeam(t);
-				return;
-			
-			}
-			
-			p.sendMessage("Sorry, the Heavy class is currently not avalible for use. Please select another class.");
-			return;
-			
-		case SNIPER:
-			
-			if(TrenchPvP.getTrenchCFG().isSniperEnabled()){
-				
-				t.equipKit(new TrenchSniper(t));
-				teleportByTeam(t);
-				return;
-			
-			}
-			
-			p.sendMessage("Sorry, the Sniper class is currently not avalible for use. Please select another class.");
-			return;
-			
-		case MEDIC:
-			if(TrenchPvP.getTrenchCFG().isMedicEnabled()){
-				
-				t.equipKit(new TrenchMedic(t));
-				teleportByTeam(t);
-				return;
-			}
-			
-			p.sendMessage("Sorry, the Medic class is currently not avalible for use. Please select another class");
-			return;
-			
-		case SPY:
-			if(TrenchPvP.getTrenchCFG().isSpyEnabled()) {
-				
-				t.equipKit(new TrenchSpy(t));
-				teleportByTeam(t);
-				return;
-			}
-			
-			p.sendMessage("Sorry, the Medic class is currently not avalible for use. Please select another class");
-			return;
+			t.equipKit(new TrenchHeavy(t));
 		
-		default:
+		break;case SNIPER:
+		
+			t.equipKit(new TrenchSniper(t));
+			
+		break;case MEDIC:
+			
+			t.equipKit(new TrenchMedic(t));
+		
+		break;case SPY:
+			
+			t.equipKit(new TrenchSpy(t));
+		
+		break;default:
+			
+			TrenchPvP.logErrors("User attempted to select invalid Trench class " + itemText);
+			return;
 			
 		}
 		
@@ -231,12 +167,5 @@ public class KitMenu implements Listener
 		p.sendMessage(ChatColor.AQUA + "You are now type " + ChatColor.RED + t.getKitType());
 		
 	}
-	private void teleportByTeam(TrenchPlayer t) {
-		if(TeamManager.findTrenchPlayer(t.getPlayer()).getPlayerTeam() == TrenchTeams.BLUE) {
-			t.getPlayer().teleport(Teleports.getBlueSpawn());
-		}else {
-			t.getPlayer().teleport(Teleports.getRedSpawn());
-		}
-		t.getPlayer().sendMessage(ChatColor.AQUA + "You are now type " + ChatColor.RED + t.getKitType());
-	}
+	
 }
