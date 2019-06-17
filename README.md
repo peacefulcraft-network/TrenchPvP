@@ -1,2 +1,2 @@
 # TrenchPvP
-PeacefulCraft Networks Trench Kit PvP
+PeacefulCraft Networks Trench Kit PvP++

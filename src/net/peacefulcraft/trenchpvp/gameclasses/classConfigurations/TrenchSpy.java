@@ -2,28 +2,33 @@ package net.peacefulcraft.trenchpvp.gameclasses.classConfigurations;
 
 import java.util.ArrayList;
 
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.PotionMeta;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
+
+import net.peacefulcraft.trenchpvp.gameclasses.abilities.HiddenBlade;
+import net.peacefulcraft.trenchpvp.gameclasses.abilities.HiddenBladeBlock;
+import net.peacefulcraft.trenchpvp.gameclasses.abilities.SpeedShot;
+import net.peacefulcraft.trenchpvp.gameclasses.abilities.TrenchAbilityType;
+import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 
 public class TrenchSpy extends TrenchKit{
-	
-	public TrenchSpy() {
-		kitType = TrenchKits.SPY;
+
+	public TrenchSpy(TrenchPlayer t) {
+		super(t, TrenchKits.SPY);
+
+		//Register ability listeners
+		getAbilityManager().registerAbility(TrenchAbilityType.PLAYER_INTERACT, new HiddenBlade(this));
+		getAbilityManager().registerAbility(TrenchAbilityType.ENTITY_DAMAGE_ENTITY, new HiddenBladeBlock(this));
+		getAbilityManager().registerAbility(TrenchAbilityType.PLAYER_INTERACT_ENTITY, new SpeedShot(this));
 	}
-	
-	/*
-	 * Primary
-	 * Spy - Hidden Blade - Speed and Invisibility
-	 */
+
 	@Override
-	protected void equipPrimary(Player p) {
+	public void equipItems() {
+
+		Inventory inv = this.getTrenchPlayer().getPlayer().getInventory();
 
 		//Creates sword
 		ItemStack primary = new ItemStack(Material.GOLDEN_SWORD, 1);
@@ -41,73 +46,39 @@ public class TrenchSpy extends TrenchKit{
 		pDesc.add("Ability Time: 8 Seconds");
 		pDesc.add("Cooldown Time: 16 Seconds");
 		pMetaData.setLore(pDesc);
-		
+
 		primary.setItemMeta(pMetaData);
-		
-		p.getInventory().setItem(0, primary);
-		
-	}
-	@Override
-	protected void equipSecondary(Player p) {
+
+		inv.setItem(0, primary);
+
 		ItemStack secondary = new ItemStack(Material.CHORUS_FLOWER, 1);
 		ItemMeta sMetaData = secondary.getItemMeta();
 		sMetaData.setDisplayName("Speed Shot");
-		
+
 		ArrayList<String> sDesc = new ArrayList<String>();
 		sDesc.add("Right Click Your Teammate to Give Them a Boost!");
 		sDesc.add("Ability Time: 7 Seconds");
 		sDesc.add("Cooldown Time: 16 Seconds");
 		sMetaData.setLore(sDesc);
-		
+
 		secondary.setItemMeta(sMetaData);
-		
-		p.getInventory().setItem(1, secondary);
-		
+
+		inv.setItem(1, secondary);
+
 	}
+
 	@Override
-	protected void equipGenerics(Player p) {
-		//Food
-		ItemStack bread = new ItemStack(Material.BREAD, 32);
-		//Create PotionMeta ItemStack to set type of Instant Health 2. Overrides existing effects (true)
-		ItemStack health = new ItemStack(Material.POTION, 2);
-		ItemMeta healthMeta = health.getItemMeta();
-		healthMeta.setDisplayName("Instant Health");
-		PotionMeta pHealthMeta = (PotionMeta) healthMeta;
-			
-		PotionEffect instantHealth = new PotionEffect(PotionEffectType.HEAL, 1, 2);
-		pHealthMeta.addCustomEffect(instantHealth, true);
-			
-		health.setItemMeta(healthMeta);
-			
-		p.getInventory().setItem(6, bread);
-		p.getInventory().setItem(7, (ItemStack) health);
-		
-	}
-	@Override
-	protected void equipArmor(Player p) {
-		ItemStack[] armor = new ItemStack[1];
-		
+	public void equipArmor() {
+		ItemStack[] armor = new ItemStack[4];
+
+		armor[2] = new ItemStack(Material.BAKED_POTATO, 1);
+
 		armor[0] = new ItemStack(Material.CHAINMAIL_BOOTS, 1);
-		
+
 		ItemMeta enchantMeta = armor[0].getItemMeta();
 		enchantMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
 		armor[0].setItemMeta(enchantMeta);
-		
-		p.getInventory().setArmorContents(armor);
-	}
-	@Override
-	protected void equipMenu(Player p) {
-		ItemStack menu = new ItemStack(Material.EMERALD, 1);
-		ItemMeta menuMeta = menu.getItemMeta();
-		menuMeta.setDisplayName(ChatColor.AQUA + "Kit Menu");
-		
-		ArrayList<String> menuDesc = new ArrayList<String>();
-		menuDesc.add("Right Click to Open Kit Menu!");
-		menuDesc.add("Selection Cooldown: 1 Minute!");
-		
-		menuMeta.setLore(menuDesc);
-		menu.setItemMeta(menuMeta);
-		
-		p.getInventory().setItem(8, menu);
+
+		this.getTrenchPlayer().getPlayer().getInventory().setArmorContents(armor);
 	}
 }
