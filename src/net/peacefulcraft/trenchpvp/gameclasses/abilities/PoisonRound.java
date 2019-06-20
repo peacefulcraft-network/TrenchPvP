@@ -21,7 +21,7 @@ public class PoisonRound extends TrenchAbility{
 	private final int EFFECT_TIME = 200;
 	
 	public PoisonRound(TrenchKit k) {
-		super(k.getTrenchPlayer(), 20000);
+		super(k.getTrenchPlayer(), 20000, "Poison Round");
 		
 		this.k = k;
 	}

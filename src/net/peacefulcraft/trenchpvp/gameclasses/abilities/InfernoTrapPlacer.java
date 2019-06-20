@@ -19,7 +19,7 @@ public class InfernoTrapPlacer extends TrenchAbility{
 	private TrenchPyro k;
 	
 	public InfernoTrapPlacer(TrenchPyro k) {
-		super(k.getTrenchPlayer(), -1);
+		super(k.getTrenchPlayer(), -1, "Inferno Trap");
 		
 		this.k = k;
 	}

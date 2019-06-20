@@ -27,14 +27,18 @@ public abstract class TrenchAbility {
 		public long getCooldown() { return cooldown; }
 		public long getCooldownSeconds() { return cooldown / 1000;}
 		public void setCooldown(Long delay) { cooldown = delay; }
+	
+	private String abilityName;
+		public String getAbilityName() {return abilityName; }
 		
 	/**
 	 * Set the cooldown time, in ms, between clicks
 	 * @param delay
 	 */
-	public TrenchAbility(TrenchPlayer t, long delay) {
+	public TrenchAbility(TrenchPlayer t, long delay, String abilityName) {
 		this.t= t;
 		cooldowndelay = delay;
+		this.abilityName = abilityName;
 	}
 	
 	/**
@@ -97,7 +101,7 @@ public abstract class TrenchAbility {
 	 * @return Message to send user when plugin is on cooldown
 	 */
 	public String abilityCooldownMessage(long timeRemaining) {
-		return Announcer.getTrenchPrefix() + " " + getClass() + " is on cooldown for " + timeRemaining;
+		return Announcer.getTrenchPrefix() + abilityName + " is on cooldown for " + timeRemaining + " seconds.";
 	}
 	
 }

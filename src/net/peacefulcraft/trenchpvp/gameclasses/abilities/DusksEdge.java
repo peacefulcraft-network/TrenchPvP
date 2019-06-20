@@ -16,7 +16,7 @@ public class DusksEdge extends TrenchAbility{
 	private final int EFFECT_TIME = 200;//Potion effect time in ticks. 20 per second
 	
 	public DusksEdge(TrenchKit k) {
-		super(k.getTrenchPlayer(), 25000);
+		super(k.getTrenchPlayer(), 25000, "Dusks Edge");
 		
 		this.k = k;
 	}

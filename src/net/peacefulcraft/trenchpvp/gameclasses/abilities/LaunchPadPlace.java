@@ -23,7 +23,7 @@ public class LaunchPadPlace extends TrenchAbility
 	private TrenchKit k;
 	
 	public LaunchPadPlace(TrenchKit k) {
-		super(k.getTrenchPlayer(), 0);
+		super(k.getTrenchPlayer(), 0, "Launch Pad");
 		
 		this.k = k;
 		

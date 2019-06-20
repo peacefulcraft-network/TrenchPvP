@@ -26,7 +26,7 @@ public class WitherbringerBuddy extends TrenchAbility{
 	private long expiration = System.currentTimeMillis();
 		
 	public WitherbringerBuddy(TrenchKit k) {
-		super(k.getTrenchPlayer(), 0);
+		super(k.getTrenchPlayer(), -1, "Wither Bringer");
 		
 		this.k = k;
 	}

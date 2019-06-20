@@ -17,7 +17,7 @@ public class HiddenBlade extends TrenchAbility{
 	private final int EFFECT_TIME = 200;
 	
 	public HiddenBlade(TrenchKit k) {
-		super(k.getTrenchPlayer(), 16000);
+		super(k.getTrenchPlayer(), 16000, "Hidden Blade");
 		// TODO Auto-generated constructor stub
 	}
 
