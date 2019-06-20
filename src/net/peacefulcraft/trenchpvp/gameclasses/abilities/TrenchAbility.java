@@ -1,11 +1,13 @@
 package net.peacefulcraft.trenchpvp.gameclasses.abilities;
 
 import org.bukkit.event.Event;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.TextComponent;
+import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gamehandle.Announcer;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 
@@ -50,12 +52,36 @@ public abstract class TrenchAbility {
 			return true;
 		}
 		
-		BaseComponent base = new TextComponent(abilityCooldownMessage((cooldown - System.currentTimeMillis())/1000));
-		base.setColor(ChatColor.RED);
-		t.getPlayer().spigot().sendMessage(ChatMessageType.ACTION_BAR, base);
-		//t.getPlayer().sendMessage(abilityCooldownMessage((cooldown - System.currentTimeMillis())/1000));
+		(new CooldownMessage(3)).runTaskTimer(TrenchPvP.getPluginInstance(), 0L, 20L);
 		return false;
 	}
+	
+		/**
+		 * Actionbar messages only display for 1 second so we have to send the same thing
+		 * once a second for 3 seconds to make the message appear for 3 seconds.
+		 */
+		private class CooldownMessage extends BukkitRunnable {
+			
+			private int seconds;
+			
+			public CooldownMessage(int seconds) {
+				this.seconds = seconds;
+			}
+			
+			@Override
+			public void run() {
+				
+				BaseComponent base = new TextComponent(abilityCooldownMessage((cooldown - System.currentTimeMillis())/1000));
+				base.setColor(ChatColor.RED);
+				t.getPlayer().spigot().sendMessage(ChatMessageType.ACTION_BAR, base);
+				
+				seconds--;
+				if(seconds < 1)
+					this.cancel();
+				
+			}
+			
+		}
 	
 	/**
 	 * Check if ability is on cooldown without alerting player
