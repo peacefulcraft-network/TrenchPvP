@@ -16,7 +16,7 @@ public class DoubleJump extends TrenchAbility{
 	private boolean canDoubleJump = true;;
 	
 	public DoubleJump(TrenchKit k) {
-		super(k.getTrenchPlayer(), 0);
+		super(k.getTrenchPlayer(), -1, "Double Jump");
 		
 		this.k = k;
 	}

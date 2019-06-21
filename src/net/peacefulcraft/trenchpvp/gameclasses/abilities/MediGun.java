@@ -22,7 +22,7 @@ public class MediGun extends TrenchAbility{
 	private TrenchKit k;
 	
 	public MediGun(TrenchKit k){
-		super(k.getTrenchPlayer(), 3000);
+		super(k.getTrenchPlayer(), 3000, "Medigun");
 		
 		this.k = k;
 	}

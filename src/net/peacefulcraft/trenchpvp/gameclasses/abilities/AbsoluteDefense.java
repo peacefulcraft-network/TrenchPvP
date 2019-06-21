@@ -18,7 +18,7 @@ public class AbsoluteDefense extends TrenchAbility{
 	
 	public AbsoluteDefense(TrenchKit k) {
 		//Set cooldown time to 20 seconds
-		super(k.getTrenchPlayer(), 30000);
+		super(k.getTrenchPlayer(), 30000, "Absolute Defense");
 		
 		this.k = k;
 	}

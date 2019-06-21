@@ -22,7 +22,7 @@ public class PowerShot extends TrenchAbility{
 	private final int EFFECT_TIME = 200;
 	
 	public PowerShot(TrenchKit k) {
-		super(k.getTrenchPlayer(), 20000);
+		super(k.getTrenchPlayer(), 20000, "Powershot");
 		
 		this.k = k;
 	}

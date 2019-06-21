@@ -18,12 +18,12 @@ import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
 import net.peacefulcraft.trenchpvp.gamehandle.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 
-public class LaunchPadPlace extends TrenchAbility
+public class LaunchPad extends TrenchAbility
 {
 	private TrenchKit k;
 	
-	public LaunchPadPlace(TrenchKit k) {
-		super(k.getTrenchPlayer(), 0);
+	public LaunchPad(TrenchKit k) {
+		super(k.getTrenchPlayer(), 0, "Launch Pad");
 		
 		this.k = k;
 		

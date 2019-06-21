@@ -27,7 +27,7 @@ public class BigBertha extends TrenchAbility{
 	private TrenchKit k;
 	
 	public BigBertha(TrenchKit k) {
-		super(k.getTrenchPlayer(), 0);
+		super(k.getTrenchPlayer(), -1, "Big Bertha");
 		
 		this.k = k;
 	}

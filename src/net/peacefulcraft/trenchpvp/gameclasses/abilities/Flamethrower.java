@@ -15,7 +15,7 @@ public class Flamethrower extends TrenchAbility {
 	private TrenchKit k;
 	
 	public Flamethrower(TrenchKit k) {
-		super(k.getTrenchPlayer(), 1000);
+		super(k.getTrenchPlayer(), 1000, "Flamethrower");
 
 		this.k = k;
 	}
