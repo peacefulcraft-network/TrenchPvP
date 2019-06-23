@@ -34,7 +34,7 @@ public class LaunchPadUse implements Listener
 			}
 			
 			Vector v = new Vector(p.getVelocity().getX(), p.getVelocity().getY(), p.getVelocity().getZ());
-			Vector forward = p.getLocation().getDirection().multiply(2.7);
+			Vector forward = p.getLocation().getDirection().multiply(2.4);
 			Vector jump = new Vector(0, 8, 0);
 			v.add(forward).add(jump);
 			

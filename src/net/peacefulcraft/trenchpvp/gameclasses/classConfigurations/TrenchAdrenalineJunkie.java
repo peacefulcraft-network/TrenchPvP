@@ -11,7 +11,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 
-import net.peacefulcraft.trenchpvp.gameclasses.abilities.LaunchPadPlace;
+import net.peacefulcraft.trenchpvp.gameclasses.abilities.LaunchPadPlacer;
+import net.peacefulcraft.trenchpvp.gameclasses.abilities.SyrumHigh;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.TrenchAbilityType;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 
@@ -23,7 +24,8 @@ public class TrenchAdrenalineJunkie extends TrenchKit
 		super(t, TrenchKits.ADRENALINE_JUNKIE);
 		
 		//Register special ability handlers
-		getAbilityManager().registerAbility(TrenchAbilityType.PLAYER_INTERACT, new LaunchPadPlace(this));
+		getAbilityManager().registerAbility(TrenchAbilityType.PLAYER_INTERACT, new LaunchPadPlacer(this));
+		getAbilityManager().registerAbility(TrenchAbilityType.PLAYER_INTERACT, new SyrumHigh(this));
 		
 	}
 
