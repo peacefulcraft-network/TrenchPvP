@@ -10,6 +10,9 @@ import net.peacefulcraft.trenchpvp.gamehandle.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchTeams;
 
+/**
+ * Admin command used to get game parameters for debug
+ */
 public class tppDebug implements CommandExecutor{
 
 	@Override

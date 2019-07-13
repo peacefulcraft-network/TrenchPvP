@@ -10,6 +10,9 @@ import org.bukkit.entity.Player;
 import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gamehandle.Announcer;
 
+/**
+ * Admin setup comamnd used to set teleport points in the arena
+ */
 public class tppSet implements CommandExecutor{
 
 	@Override
