@@ -19,7 +19,7 @@ public class SpeedShot extends TrenchAbility{
 	private TrenchKit k;
 	
 	public SpeedShot(TrenchKit k) {
-		super(k.getTrenchPlayer(), 16000);
+		super(k.getTrenchPlayer(), 16000, "Speed Shot");
 		 
 		this.k = k;
 	}

@@ -21,7 +21,7 @@ public class Onslaught extends TrenchAbility{
 	private int killCount = 0;	
 	
 	public Onslaught(TrenchKit k) {
-		super(k.getTrenchPlayer(), 0);
+		super(k.getTrenchPlayer(), 0, "Onslaught");
 		
 		this.k = k;
 	}

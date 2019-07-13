@@ -7,6 +7,9 @@ import org.bukkit.entity.Player;
 
 import net.peacefulcraft.trenchpvp.gamehandle.GameManager;
 
+/**
+ * User command for leaving Trench
+ */
 public class trLeave implements CommandExecutor{
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		

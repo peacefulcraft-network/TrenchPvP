@@ -17,7 +17,7 @@ public class WindsongBlade extends TrenchAbility{
 	private TrenchKit k;
 	
 	public WindsongBlade(TrenchKit k) {
-		super(k.getTrenchPlayer(), -1);
+		super(k.getTrenchPlayer(), -1, "Windsong Blade");
 		
 		this.k = k;
 	}
