@@ -14,7 +14,7 @@ public class GrenadeLauncher extends TrenchAbility{
 	private TrenchKit k;
 	
 	public GrenadeLauncher(TrenchKit k) {
-		super(k.getTrenchPlayer(), 100, "Grenade Launcer");
+		super(k.getTrenchPlayer(), 1000, "Grenade Launcer");
 		
 		this.k = k;
 	}

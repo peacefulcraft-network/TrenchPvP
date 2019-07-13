@@ -73,12 +73,6 @@ public class TrenchSpy extends TrenchKit{
 
 		armor[2] = new ItemStack(Material.BAKED_POTATO, 1);
 
-		armor[0] = new ItemStack(Material.CHAINMAIL_BOOTS, 1);
-
-		ItemMeta enchantMeta = armor[0].getItemMeta();
-		enchantMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
-		armor[0].setItemMeta(enchantMeta);
-
 		this.getTrenchPlayer().getPlayer().getInventory().setArmorContents(armor);
 	}
 }

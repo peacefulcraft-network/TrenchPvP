@@ -76,7 +76,7 @@ public class GameManager {
 		TrenchPvP.getTeamManager().leaveTeam(p);
 		p.setGameMode(GameMode.ADVENTURE);
 		p.teleport(Teleports.getQuitSpawn());
-		p.sendMessage("You've left Trench!");
+		p.sendMessage(TrenchPvP.CMD_PREFIX + ChatColor.RED + "You've left Trench!");
 		return true;			
 		
 	}
