@@ -65,9 +65,14 @@ public class Onslaught extends TrenchAbility{
 					
 					redstone.setAmount(redstone.getAmount() + 1);
 					killer.getInventory().setItem(itemIndex, redstone);
+					
+					if(redstone.getAmount() > 4) {
+						return;
+					}
+					
 					killer.sendMessage(ChatColor.RED + "The Blood of " + killedName + "Has Been Added to Your Strength");					
 					
-					int damageBuff = killCount / 2;								//Every even kill
+					int damageBuff = killCount / 4;								//Every even kill
 					int healthBuff = (damageBuff > 4)? killCount - 4 : 0;		//Every kill after 4th kill
 					
 					if(damageBuff > 0)
