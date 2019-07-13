@@ -8,6 +8,7 @@ public class TrenchConfig {
 
 	private FileConfiguration c;
 	
+	//Teleport Points
 	private Map<String, Object> quit_spawn;
 	private Map<String, Object> red_spawn;
 	private Map<String, Object> blue_spawn;
@@ -15,11 +16,16 @@ public class TrenchConfig {
 	private Map<String, Object> blue_class_spawn;
 	private Map<String, Object> spectator_spawn;
 	
+	//Database Information
 	private String db_ip = "";
 	private String db_name = "";
 	private String db_user = "";
 	private String db_password = "";
 	
+	/**
+	 * Loads all settings values from disk
+	 * @param c Configuration file resource
+	 */
 	public TrenchConfig(FileConfiguration c) {
 		
 		this.c = c;
@@ -38,6 +44,10 @@ public class TrenchConfig {
 		
 	}
 
+	/*
+	 * Various getters for all the Trench settings
+	 */
+	
 	public Map<String, Object> getQuit_spawn() {
 		return quit_spawn;
 	}

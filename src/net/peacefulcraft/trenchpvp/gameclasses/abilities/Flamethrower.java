@@ -10,6 +10,11 @@ import org.bukkit.util.Vector;
 
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKit;
 
+/**
+ * Trench Ability - Pyro
+ * Triggers on material click
+ * Launches a fireball where the user is looking
+ */
 public class Flamethrower extends TrenchAbility {
 
 	private TrenchKit k;

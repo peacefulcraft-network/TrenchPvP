@@ -10,9 +10,16 @@ import org.bukkit.util.Vector;
 
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKit;
 
+/**
+ * Trench Ability - Scout
+ * Triggers on toggle of flight ("double click") - User must have .allowFlight(true) for this ability to work.
+ * Watches for flight toggles so double press of space can be detected, intercepts the event, cancels flight, and then redirects the users vector
+ */
 public class DoubleJump extends TrenchAbility{
 
 	private TrenchKit k;
+	
+	//Used to track if user has already used the second jump. Needs to land on ground to "recharge"
 	private boolean canDoubleJump = true;;
 	
 	public DoubleJump(TrenchKit k) {
@@ -30,35 +37,49 @@ public class DoubleJump extends TrenchAbility{
 		
 	}
 
+	
+	/**
+	 * Registered for PlayerToggleFlightEvent loop & PlayerMoveEvent loop
+	 */
 	@Override
 	public void triggerAbility(Event ev) {
 	
-		if(ev instanceof PlayerToggleFlightEvent) {
-			((PlayerToggleFlightEvent) ev).getPlayer().setFlying(false);
-			((PlayerToggleFlightEvent) ev).setCancelled(true);
-		}
-		
-		if(canDoubleJump && ev instanceof PlayerToggleFlightEvent) {
-			Player p = ((PlayerToggleFlightEvent)ev).getPlayer();
-			Block b = p.getWorld().getBlockAt(p.getLocation().subtract(0,2,0));
-		    if(!b.getType().equals(Material.AIR)){
-		     	Vector v = new Vector(p.getVelocity().getX(), p.getVelocity().getY(), p.getVelocity().getZ());
-		       	Vector forward = p.getLocation().getDirection().multiply(0.3);
-		        Vector jump = p.getLocation().getDirection().multiply(0.05).setY(1);
-		        v.add(forward).add(jump);
-		        p.setVelocity(v);     
-		        canDoubleJump = false;
-		        p.setAllowFlight(false);
-			}
-			return;
-		}
-		
+		//Check if player is on ground; reset double jump tracking if they are.
 		if(!canDoubleJump && ev instanceof PlayerMoveEvent) {
 			Player p = ((PlayerMoveEvent) ev).getPlayer();
 			if(p.isOnGround()) {
 				canDoubleJump = true;
 				p.setAllowFlight(true);
 			}
+			return;
+		}
+		
+		//Make sure the player doesn't actually start flying
+		if(ev instanceof PlayerToggleFlightEvent) {
+			((PlayerToggleFlightEvent) ev).getPlayer().setFlying(false);
+			((PlayerToggleFlightEvent) ev).setCancelled(true);
+		}
+		
+		//Double jump logic
+		if(canDoubleJump && ev instanceof PlayerToggleFlightEvent) {
+			Player p = ((PlayerToggleFlightEvent)ev).getPlayer();
+			Block b = p.getWorld().getBlockAt(p.getLocation().subtract(0,2,0));
+			
+			//Check that the user is actually jumping
+		    if(!b.getType().equals(Material.AIR)){
+		    	
+		    	//"Boost" their movement vector to simulate a double jump
+		     	Vector v = new Vector(p.getVelocity().getX(), p.getVelocity().getY(), p.getVelocity().getZ());
+		       	Vector forward = p.getLocation().getDirection().multiply(0.3);
+		        Vector jump = p.getLocation().getDirection().multiply(0.05).setY(1);
+		        v.add(forward).add(jump);
+		        p.setVelocity(v);
+		        
+		        //Disable flight / jump until they touch the ground.
+		        canDoubleJump = false;
+		        p.setAllowFlight(false);
+			
+		    }
 			return;
 		}
 		

@@ -7,6 +7,9 @@ import org.bukkit.entity.Player;
 
 import net.peacefulcraft.trenchpvp.gamehandle.GameManager;
 
+/**
+ * User command for joining Trench
+ */
 public class trJoin implements CommandExecutor{
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 			

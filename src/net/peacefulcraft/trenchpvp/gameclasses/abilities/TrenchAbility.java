@@ -59,6 +59,7 @@ public abstract class TrenchAbility {
 		/**
 		 * Actionbar messages only display for 1 second so we have to send the same thing
 		 * once a second for 3 seconds to make the message appear for 3 seconds.
+		 * Because we are resending, it will update with the new cooldown time each second
 		 */
 		private class CooldownMessage extends BukkitRunnable {
 			
@@ -71,10 +72,25 @@ public abstract class TrenchAbility {
 			@Override
 			public void run() {
 				
-				BaseComponent base = new TextComponent(abilityCooldownMessage((cooldown - System.currentTimeMillis())/1000));
+				//Make sure users has not disconnected
+				if(t == null || t.getPlayer() == null) {
+					this.cancel();
+					return;
+				}
+				
+				//Make sure cooldown has not expired
+				long timeRem = (cooldown - System.currentTimeMillis())/1000;
+				if(timeRem < 0) {
+					this.cancel();
+					return;
+				}
+				
+				//Construct Text object to send
+				BaseComponent base = new TextComponent(abilityCooldownMessage(timeRem));
 				base.setColor(ChatColor.RED);
 				t.getPlayer().spigot().sendMessage(ChatMessageType.ACTION_BAR, base);
 				
+				//Decriment and see if this needs to run again
 				seconds--;
 				if(seconds < 1)
 					this.cancel();
