@@ -69,8 +69,11 @@ public class TrenchPvP extends JavaPlugin{
 
 		//Load all plugin commands from ~.commands.CommandLoader.java
 		this.loadCommands();
+		
+		//Load all plugin event listeners
 		this.loadEventListners();
 
+		//Initialize game resources
 		teamManager = new TeamManager();
 		tracker = new StatTracker();
 		SyncStats.onEnable();
@@ -88,7 +91,10 @@ public class TrenchPvP extends JavaPlugin{
 		//SyncStats.onDisable();
 		this.getLogger().info("[TPP]Trench PvP Alpha 0.1 has been disabled!");
 	}
-
+	
+	/**
+	 * Register all commands with the server
+	 */
 	private void loadCommands(){
 		this.getCommand("tppToggle").setExecutor(new tppToggle());
 		this.getCommand("tppGetGameState").setExecutor(new tppGetGameState());
@@ -97,7 +103,10 @@ public class TrenchPvP extends JavaPlugin{
 		this.getCommand("tppdebug").setExecutor(new tppDebug());;
 		this.getCommand("tppSet").setExecutor(new tppSet());
 	}
-
+	
+	/**
+	 * Register all event listeners with the server
+	 */
 	private void loadEventListners(){
 		//gamehandle.listeners
 		getServer().getPluginManager().registerEvents(new JoinGameSign(), this);
@@ -134,10 +143,18 @@ public class TrenchPvP extends JavaPlugin{
 		getServer().getPluginManager().registerEvents(new KitMenu(), this);
 	}
 
+	/**
+	 * Record warning with logger
+	 * @param msg: The warning message to log
+	 */
 	public static void logWarning(String msg) {
 		getPluginInstance().getServer().getLogger().log(Level.WARNING, "[Trench]" + msg);
 	}
-
+	
+	/**
+	 * Record error message with logger
+	 * @param msg: The error to log
+	 */
 	public static void logErrors(String msg) {
 		getPluginInstance().getServer().getLogger().log(Level.SEVERE, "[Trench]" + msg);
 	}

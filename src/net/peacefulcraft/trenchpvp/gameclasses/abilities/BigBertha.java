@@ -22,12 +22,18 @@ import net.peacefulcraft.trenchpvp.gamehandle.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.stats.TrenchStats.DemoStat;
 
+/**
+ * Trench Ability - Demoman
+ * Trigers on material click
+ * Timed explosive charge that can be "placed"
+ * 
+ */
 public class BigBertha extends TrenchAbility{
 
 	private TrenchKit k;
 	
 	public BigBertha(TrenchKit k) {
-		super(k.getTrenchPlayer(), 0);
+		super(k.getTrenchPlayer(), -1, "Big Bertha");
 		
 		this.k = k;
 	}

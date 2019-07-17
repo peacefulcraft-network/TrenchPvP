@@ -8,6 +8,9 @@ import org.bukkit.entity.Player;
 import net.peacefulcraft.trenchpvp.gamehandle.Announcer;
 import net.peacefulcraft.trenchpvp.gamehandle.GameManager;
 
+/**
+ * Admin command used to see if Trench is running
+ */
 public class tppGetGameState implements CommandExecutor{
 
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {

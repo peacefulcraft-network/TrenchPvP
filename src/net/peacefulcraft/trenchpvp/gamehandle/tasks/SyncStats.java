@@ -104,7 +104,7 @@ public class SyncStats extends BukkitRunnable{
 		try {
 			mysql = DriverManager.getConnection(dbUrl, username, password);
 		} catch (SQLException e) {
-			
+			e.printStackTrace();
 		}
 	}
 	

@@ -10,6 +10,11 @@ import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKit;
 import net.peacefulcraft.trenchpvp.stats.TrenchStats.HeavyStat;
 
+/**
+ * Trench Ability - Heavy
+ * Triggers on material right click
+ * Provides resistence at the expense of speed
+ */
 public class AbsoluteDefense extends TrenchAbility{
 
 	private TrenchKit k;
@@ -18,7 +23,7 @@ public class AbsoluteDefense extends TrenchAbility{
 	
 	public AbsoluteDefense(TrenchKit k) {
 		//Set cooldown time to 20 seconds
-		super(k.getTrenchPlayer(), 30000);
+		super(k.getTrenchPlayer(), 30000, "Absolute Defense");
 		
 		this.k = k;
 	}

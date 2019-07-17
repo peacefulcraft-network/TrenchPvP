@@ -21,7 +21,7 @@ public class Onslaught extends TrenchAbility{
 	private int killCount = 0;	
 	
 	public Onslaught(TrenchKit k) {
-		super(k.getTrenchPlayer(), 0);
+		super(k.getTrenchPlayer(), 0, "Onslaught");
 		
 		this.k = k;
 	}
@@ -65,6 +65,11 @@ public class Onslaught extends TrenchAbility{
 					
 					redstone.setAmount(redstone.getAmount() + 1);
 					killer.getInventory().setItem(itemIndex, redstone);
+					
+					if(redstone.getAmount() > 4) {
+						return;
+					}
+					
 					killer.sendMessage(ChatColor.RED + "The Blood of " + killedName + "Has Been Added to Your Strength");					
 					
 					int damageBuff = killCount / 3;								//Every third kill

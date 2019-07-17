@@ -14,7 +14,7 @@ public class Witherbringer extends TrenchAbility{
 	private WitherbringerBuddy witherEnforcer;
 	
 	public Witherbringer(TrenchKit k, WitherbringerBuddy witherEnforcer) {
-		super(k.getTrenchPlayer(), 25000);
+		super(k.getTrenchPlayer(), 25000, "Wither Bringer");
 		
 		this.k = k;
 		this.witherEnforcer = witherEnforcer;
