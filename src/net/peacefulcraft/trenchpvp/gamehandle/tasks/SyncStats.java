@@ -27,6 +27,20 @@ public class SyncStats extends BukkitRunnable{
 	@Override
 	public void run() {
 		
+		//Mkae sure we have a fresh database connection
+		//Lingering old ones have probably gone away.
+		try {
+			if(!mysql.isClosed()) {
+				onDisable();
+			}
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		//Reconnect to database
+		onEnable();
+		
 		PreparedStatement stmt_exists, stmt_insert;
 		try {
 			
@@ -91,6 +105,9 @@ public class SyncStats extends BukkitRunnable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		//We just need to terminate the database connection
+		onDisable();
 		
 	}
 	
