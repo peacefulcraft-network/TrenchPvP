@@ -41,7 +41,7 @@ public class TrenchSpy extends TrenchKit{
 		pMetaData.setDisplayName("Hidden Blade");
 		//Lore for item
 		ArrayList<String> pDesc = new ArrayList<String>();
-		pDesc.add("Right Click to Go Invisible!");
+		pDesc.add("Right Click to Go Invisible And Get Attack Bonus!");
 		pDesc.add("Be Careful, You Can't Attack While Invisible!");
 		pDesc.add("Ability Time: 8 Seconds");
 		pDesc.add("Cooldown Time: 16 Seconds");

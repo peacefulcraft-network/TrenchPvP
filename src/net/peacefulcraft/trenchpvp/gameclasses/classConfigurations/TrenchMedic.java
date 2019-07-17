@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.bukkit.Color;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -61,7 +62,23 @@ public class TrenchMedic extends TrenchKit{
 	public void equipItems() {
 
 		Inventory inv = t.getPlayer().getInventory();
-
+		
+		ItemStack melee = new ItemStack(Material.IRON_SWORD, 1);
+		
+		ItemMeta meleeMeta = melee.getItemMeta();
+		meleeMeta.setDisplayName("Scalpel");
+		
+		ArrayList<String> mDesc = new ArrayList<String>();
+		mDesc.add("Extra Sharp, Extra Cut");
+		meleeMeta.setLore(mDesc);
+		
+		meleeMeta.addEnchant(Enchantment.DAMAGE_ALL, 4, true);
+		meleeMeta.addEnchant(Enchantment.KNOCKBACK, 1, true);
+		
+		melee.setItemMeta(meleeMeta);
+		
+		inv.setItem(1, melee);		
+		
 		/*Medic - Medi Gun
 		 *Heal players ever 1.5 seconds (MediGun.java (class))
 		 */
@@ -88,7 +105,7 @@ public class TrenchMedic extends TrenchKit{
 		secondary.setItemMeta(sMeta);
 		ItemStack secondaryyUtil = new ItemStack(Material.ARROW, 32);//give arrows for syringe gun
 
-		inv.setItem(1, secondary);
+		inv.setItem(2, secondary);
 		inv.setItem(3, secondaryyUtil);
 
 	}

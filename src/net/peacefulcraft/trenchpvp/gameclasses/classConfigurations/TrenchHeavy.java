@@ -45,10 +45,9 @@ public class TrenchHeavy extends TrenchKit{
 		pDesc.add("Cooldwon Time: 25 Seconds");
 
 		pMetaData.setLore(pDesc);
-
+		
 		primary.setItemMeta(pMetaData);
-
-
+		
 		/*
 		 * Secondary
 		 * Heavy - Armadillo Shell - Slows, fatigues player increase defense

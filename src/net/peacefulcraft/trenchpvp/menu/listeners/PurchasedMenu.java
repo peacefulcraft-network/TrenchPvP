@@ -6,6 +6,8 @@ import org.bukkit.inventory.ItemStack;
 
 import net.md_5.bungee.api.ChatColor;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchAdrenalineJunkie;
+import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchNthEntity;
+import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchPigKing;
 import net.peacefulcraft.trenchpvp.gamehandle.GameManager;
 import net.peacefulcraft.trenchpvp.gamehandle.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehandle.player.Teleports;
@@ -18,7 +20,7 @@ import net.peacefulcraft.trenchpvp.menu.GameMenu.onClick;
 public class PurchasedMenu
 {
 	private enum PurchasedKits {
-		ADRENALINE_JUNKIE;
+		ADRENALINE_JUNKIE, PIG_KING, NTH_ENTITY;
 	}
 	
 	private GameMenu menu = new GameMenu("Purchased Menu", 3, new onClick() {
@@ -33,6 +35,8 @@ public class PurchasedMenu
 	
 	public PurchasedMenu() {
 		menu.addButton(menu.getRow(0), 0, new ItemStack(Material.GLASS_BOTTLE), "Adrenaline Junkie", "Click to Equip The Adrenaline Junkie Class!");
+		menu.addButton(menu.getRow(0), 8, new ItemStack(Material.PORKCHOP), "Pig King", "Click to Equip The Pig King Class!");
+		menu.addButton(menu.getRow(1), 0, new ItemStack(Material.WHITE_BANNER), "Nth Entity", "Click to Equip The Nth Entity Class!");
 		
 		menu.addButton(menu.getRow(0), 8, new ItemStack(Material.RED_STAINED_GLASS_PANE), "Quit", "Click to Leave Trench!");
 		menu.addButton(menu.getRow(2), 8, new ItemStack(Material.BLUE_STAINED_GLASS_PANE), "Regular Classes", "Click to Return to Regular Class Selection!");
@@ -56,6 +60,14 @@ public class PurchasedMenu
 		switch(PurchasedKits.valueOf(itemText)) {
 		case ADRENALINE_JUNKIE:
 			t.equipKit(new TrenchAdrenalineJunkie(t));
+			teleportByTeam(t);
+			return;
+		case PIG_KING:
+			t.equipKit(new TrenchPigKing(t));
+			teleportByTeam(t);
+			return;
+		case NTH_ENTITY:
+			t.equals(new TrenchNthEntity(t));
 			teleportByTeam(t);
 			return;
 		}

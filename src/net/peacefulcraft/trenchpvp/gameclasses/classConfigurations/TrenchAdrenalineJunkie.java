@@ -11,7 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 
-import net.peacefulcraft.trenchpvp.gameclasses.abilities.LaunchPadPlacer;
+import net.peacefulcraft.trenchpvp.gameclasses.abilities.LaunchPadPlace;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.SyrumHigh;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.TrenchAbilityType;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
@@ -24,7 +24,7 @@ public class TrenchAdrenalineJunkie extends TrenchKit
 		super(t, TrenchKits.ADRENALINE_JUNKIE);
 		
 		//Register special ability handlers
-		getAbilityManager().registerAbility(TrenchAbilityType.PLAYER_INTERACT, new LaunchPadPlacer(this));
+		getAbilityManager().registerAbility(TrenchAbilityType.PLAYER_INTERACT, new LaunchPadPlace(this));
 		getAbilityManager().registerAbility(TrenchAbilityType.PLAYER_INTERACT, new SyrumHigh(this));
 		
 	}
@@ -103,9 +103,9 @@ public class TrenchAdrenalineJunkie extends TrenchKit
 		metaB.setColor(Color.BLACK);
 		armor[0].setItemMeta(metaB);
 		
-		ItemMeta MetaH = armor[2].getItemMeta();
+		ItemMeta MetaH = armor[3].getItemMeta();
 		MetaH.addEnchant(Enchantment.PROTECTION_EXPLOSIONS, 2, true);
-		armor[2].setItemMeta(MetaH);	
+		armor[3].setItemMeta(MetaH);	
 		
 		ItemMeta MetaC = armor[2].getItemMeta();
 		MetaC.addEnchant(Enchantment.THORNS, 2, true);
