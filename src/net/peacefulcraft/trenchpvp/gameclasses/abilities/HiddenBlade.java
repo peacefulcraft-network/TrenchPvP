@@ -58,7 +58,7 @@ public class HiddenBlade extends TrenchAbility{
 				public void run() {
 					p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, EFFECT_TIME, 3));
 				}
-			}, EFFECT_TIME / 20);
+			}, EFFECT_TIME);
 			
 		}catch(ClassCastException ex) {
 			TrenchPvP.logWarning("Error Triggering " + this.getClass() + " event. Incompatible event loop " + ev.getClass());

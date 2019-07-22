@@ -1,6 +1,7 @@
 package net.peacefulcraft.trenchpvp.gameclasses.abilities;
 
 import java.util.List;
+import java.util.Random;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -40,13 +41,19 @@ public class NthExplosion extends TrenchAbility
 		TrenchPlayer t = k.getTrenchPlayer();
 		Player p = t.getPlayer();
 		
+		Random rand = new Random();
+		
 		List<Entity> list = p.getNearbyEntities(7, 7, 7);
 		for(Entity e : list) {
 			if(e instanceof Player) {
-				Player vic = (Player)e;
+				Player vic = (Player) e;
 				if(TeamManager.findTrenchPlayer(vic).getPlayerTeam() != t.getPlayerTeam()) {
-					Location loc = vic.getLocation();
-					loc.getWorld().createExplosion(loc.getX(), loc.getY(), loc.getZ(), 3.0f, false, false);
+					if(rand.nextBoolean()) {
+						
+						Location loc = vic.getLocation();
+						loc.getWorld().createExplosion(loc.getX(), loc.getY(), loc.getZ(), 1.0f, false, false);
+				
+					}
 				}
 			}
 		}

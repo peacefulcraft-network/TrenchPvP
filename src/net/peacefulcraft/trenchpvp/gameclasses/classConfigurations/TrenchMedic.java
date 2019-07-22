@@ -73,7 +73,7 @@ public class TrenchMedic extends TrenchKit{
 		
 		ItemStack melee = new ItemStack(Material.IRON_SWORD, 1);
 		ItemMeta meleeMeta = melee.getItemMeta();
-		meleeMeta.setDisplayName("MELEE_NAME");
+		meleeMeta.setDisplayName(MELEE_NAME);
 		
 		ArrayList<String> mDesc = new ArrayList<String>();
 		mDesc.add("Extra Sharp, Extra Cut");

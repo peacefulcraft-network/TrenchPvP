@@ -55,7 +55,7 @@ public class WindsongBlade extends TrenchAbility{
 			if((p.getInventory().getItemInMainHand().getType() == Material.STONE_SWORD)){
 				if((p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Windsong Blade"))){
 					p.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, 99999, 3));
-					p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 99999, 1));
+					p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 99999, 2));
 				}
 			}else{
 				p.removePotionEffect(PotionEffectType.FAST_DIGGING);

@@ -6,6 +6,8 @@ import org.bukkit.inventory.ItemStack;
 
 import net.md_5.bungee.api.ChatColor;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchAdrenalineJunkie;
+import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchElementalist;
+import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchJuniorCommunityManager;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchNthEntity;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchPigKing;
 import net.peacefulcraft.trenchpvp.gamehandle.GameManager;
@@ -20,7 +22,8 @@ import net.peacefulcraft.trenchpvp.menu.GameMenu.onClick;
 public class PurchasedMenu
 {
 	private enum PurchasedKits {
-		ADRENALINE_JUNKIE, PIG_KING, NTH_ENTITY;
+		ADRENALINE_JUNKIE, PIG_KING, NTH_ENTITY, 
+		JUNIOR_COMMUNITY_MANAGER, ELEMENTALIST, ;
 	}
 	
 	private GameMenu menu = new GameMenu("Purchased Menu", 3, new onClick() {
@@ -35,8 +38,10 @@ public class PurchasedMenu
 	
 	public PurchasedMenu() {
 		menu.addButton(menu.getRow(0), 0, new ItemStack(Material.GLASS_BOTTLE), "Adrenaline Junkie", "Click to Equip The Adrenaline Junkie Class!");
-		menu.addButton(menu.getRow(0), 8, new ItemStack(Material.PORKCHOP), "Pig King", "Click to Equip The Pig King Class!");
-		menu.addButton(menu.getRow(1), 0, new ItemStack(Material.WHITE_BANNER), "Nth Entity", "Click to Equip The Nth Entity Class!");
+		menu.addButton(menu.getRow(2), 0, new ItemStack(Material.PORKCHOP), "Pig King", "Click to Equip The Pig King Class!");
+		menu.addButton(menu.getRow(0), 2, new ItemStack(Material.GRAY_BANNER), "Nth Entity", "Click to Equip The Nth Entity Class!");
+		menu.addButton(menu.getRow(2), 2, new ItemStack(Material.TURTLE_EGG), "Junior Community Manager", "Click to Equip The Junior Community Manager Class!");
+		menu.addButton(menu.getRow(0), 4, new ItemStack(Material.DARK_OAK_SAPLING), "Elementalist", "Click to Equip The Elementalist Class!");
 		
 		menu.addButton(menu.getRow(0), 8, new ItemStack(Material.RED_STAINED_GLASS_PANE), "Quit", "Click to Leave Trench!");
 		menu.addButton(menu.getRow(2), 8, new ItemStack(Material.BLUE_STAINED_GLASS_PANE), "Regular Classes", "Click to Return to Regular Class Selection!");
@@ -67,7 +72,15 @@ public class PurchasedMenu
 			teleportByTeam(t);
 			return;
 		case NTH_ENTITY:
-			t.equals(new TrenchNthEntity(t));
+			t.equipKit(new TrenchNthEntity(t));
+			teleportByTeam(t);
+			return;
+		case JUNIOR_COMMUNITY_MANAGER:
+			t.equipKit(new TrenchJuniorCommunityManager(t));
+			teleportByTeam(t);
+			return;
+		case ELEMENTALIST:
+			t.equipKit(new TrenchElementalist(t));
 			teleportByTeam(t);
 			return;
 		}

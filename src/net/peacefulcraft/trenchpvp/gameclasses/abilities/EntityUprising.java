@@ -17,7 +17,7 @@ public class EntityUprising extends TrenchAbility
 {
 	private TrenchKit k;
 	
-	private final int EFFECT_TIME = 200; //20 tickes per second
+	private final int EFFECT_TIME = 200; //20 ticks per second
 	
 	public EntityUprising(TrenchKit k)
 	{

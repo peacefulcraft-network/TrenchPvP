@@ -48,7 +48,8 @@ public class SacraficialCannon extends TrenchAbility
 		Player p = k.getTrenchPlayer().getPlayer();
 		
 		Block lookingBlock = p.getTargetBlock((Set<Material>) null, 4);
-		Location loc = lookingBlock.getLocation();
+		Location loc = lookingBlock.getLocation().add(0, 1, 0);
+		
 		Random rand = new Random();
 		int add = rand.nextInt(2);
 		ArrayList<Pig> pigs = new ArrayList<Pig>();

@@ -49,7 +49,7 @@ public class TrenchSoldier extends TrenchKit{
 		final String SECONDARY_NAME = "Onslaught";
 		
 		addItemName(PRIMARY_NAME, 1);
-		addItemName(SECONDARY_NAME, 1);		
+		addItemName(SECONDARY_NAME, 2);		
 		
 		ItemStack primary = new ItemStack(Material.IRON_SWORD, 1);
 		ItemMeta pMetaData = primary.getItemMeta();

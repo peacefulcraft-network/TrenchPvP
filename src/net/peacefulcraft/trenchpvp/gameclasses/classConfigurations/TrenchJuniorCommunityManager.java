@@ -12,15 +12,13 @@ import org.bukkit.inventory.meta.ItemMeta;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.BuildTimer;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.LonelyMansMic;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.TrenchAbilityType;
+import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 
 public class TrenchJuniorCommunityManager extends TrenchKit
 {
-	private TrenchKit k;
-	public TrenchJuniorCommunityManager(TrenchKit k)
+	public TrenchJuniorCommunityManager(TrenchPlayer t)
 	{
-		super(k.getTrenchPlayer(), TrenchKits.JUNIOR_COMMUNITY_MANAGER);
-		
-		this.k=k;
+		super(t, TrenchKits.JUNIOR_COMMUNITY_MANAGER);
 		
 		getAbilityManager().registerAbility(TrenchAbilityType.PLAYER_INTERACT, new LonelyMansMic(this));
 		getAbilityManager().registerAbility(TrenchAbilityType.PLAYER_INTERACT, new BuildTimer(this));

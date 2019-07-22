@@ -36,7 +36,7 @@ public class TrenchScout extends TrenchKit {
 		final String PRIMARY_NAME = "Windsong Blade";
 		final String SECONDARY_NAME = "Sling Shot";
 		
-		addItemName(PRIMARY_NAME, 1);
+		addItemName(PRIMARY_NAME, 2);
 		addItemName(SECONDARY_NAME, 1);	
 		
 		/**

@@ -64,7 +64,7 @@ public class TrenchSniper extends TrenchKit{
 		final String SECOND_UTIL_NAME = "Power Shot";
 		
 		addItemName(MELEE_NAME, 2);
-		addItemName(PRIMARY_NAME, 1);
+		addItemName(PRIMARY_NAME, 2);
 		addItemName(FIRST_UTIL_NAME, 1);
 		addItemName(SECOND_UTIL_NAME, 1);
 		
