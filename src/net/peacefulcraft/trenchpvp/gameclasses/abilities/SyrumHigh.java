@@ -1,6 +1,5 @@
 package net.peacefulcraft.trenchpvp.gameclasses.abilities;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 import org.bukkit.Material;
@@ -19,7 +18,7 @@ public class SyrumHigh extends TrenchAbility
 	private final int EFFECT_TIME = 300;
 	
 	public SyrumHigh(TrenchKit k) {
-		super(k.getTrenchPlayer(), 25000);
+		super(k.getTrenchPlayer(), 25000, "Syrum High");
 		this.k = k;
 	}
 

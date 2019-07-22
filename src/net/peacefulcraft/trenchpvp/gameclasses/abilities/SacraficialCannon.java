@@ -23,7 +23,7 @@ public class SacraficialCannon extends TrenchAbility
 	private TrenchKit k;
 	
 	public SacraficialCannon(TrenchKit k) {
-		super(k.getTrenchPlayer(), 30000);
+		super(k.getTrenchPlayer(), 30000, "Sacraficial Cannon");
 		
 		this.k = k;
 	}

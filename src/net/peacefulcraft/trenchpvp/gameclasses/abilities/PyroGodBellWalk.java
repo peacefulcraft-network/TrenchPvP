@@ -21,7 +21,7 @@ public class PyroGodBellWalk extends TrenchAbility
 		public void disableEnforce() { enforce = false; }
 	
 		public PyroGodBellWalk(TrenchKit k) {
-			super(k.getTrenchPlayer(), 0);
+			super(k.getTrenchPlayer(), 0, "Bell of The Pyro God");
 			
 			this.k = k;
 		}

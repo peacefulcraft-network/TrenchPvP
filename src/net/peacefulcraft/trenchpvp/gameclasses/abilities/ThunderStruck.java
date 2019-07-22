@@ -15,7 +15,7 @@ public class ThunderStruck extends TrenchAbility
 	private TrenchKit k;
 	
 	public ThunderStruck(TrenchKit k) {
-		super(k.getTrenchPlayer(), 0);
+		super(k.getTrenchPlayer(), 0, "Thunderstruck");
 		
 		this.k = k;
 	}

@@ -63,10 +63,17 @@ public class TrenchMedic extends TrenchKit{
 
 		Inventory inv = t.getPlayer().getInventory();
 		
-		ItemStack melee = new ItemStack(Material.IRON_SWORD, 1);
+		final String MELEE_NAME = "Scalpel";
+		final String PRIMARY_NAME = "Medi Gun";
+		final String SECONDARY_NAME = "Syringe Gun";
 		
+		addItemName(MELEE_NAME, 2);
+		addItemName(PRIMARY_NAME, 1);
+		addItemName(SECONDARY_NAME, 2);	
+		
+		ItemStack melee = new ItemStack(Material.IRON_SWORD, 1);
 		ItemMeta meleeMeta = melee.getItemMeta();
-		meleeMeta.setDisplayName("Scalpel");
+		meleeMeta.setDisplayName("MELEE_NAME");
 		
 		ArrayList<String> mDesc = new ArrayList<String>();
 		mDesc.add("Extra Sharp, Extra Cut");
@@ -87,7 +94,7 @@ public class TrenchMedic extends TrenchKit{
 
 		//Get metadata / set bow name
 		ItemMeta pMetaData = primary.getItemMeta();
-		pMetaData.setDisplayName("Medi Gun");
+		pMetaData.setDisplayName(PRIMARY_NAME);
 
 		ArrayList<String> pDesc = new ArrayList<String>();
 		pDesc.add("Right Click Your Teamates to Heal Them! (1.5 second cool down)");
@@ -101,7 +108,7 @@ public class TrenchMedic extends TrenchKit{
 		 */
 		ItemStack secondary = new ItemStack(Material.BOW, 1);
 		ItemMeta sMeta = secondary.getItemMeta();
-		sMeta.setDisplayName("Syringe Gun");
+		sMeta.setDisplayName(SECONDARY_NAME);
 		secondary.setItemMeta(sMeta);
 		ItemStack secondaryyUtil = new ItemStack(Material.ARROW, 32);//give arrows for syringe gun
 

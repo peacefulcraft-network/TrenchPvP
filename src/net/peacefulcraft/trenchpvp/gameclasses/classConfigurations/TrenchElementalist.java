@@ -15,10 +15,10 @@ import net.peacefulcraft.trenchpvp.gameclasses.abilities.ThunderStruck;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.TrenchAbilityType;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 
-public class Elementalist extends TrenchKit
+public class TrenchElementalist extends TrenchKit
 {
 
-	public Elementalist(TrenchPlayer t)
+	public TrenchElementalist(TrenchPlayer t)
 	{
 		super(t, TrenchKits.ELEMENTALIST);
 		
@@ -34,10 +34,22 @@ public class Elementalist extends TrenchKit
 	{
 		Inventory inv = this.getTrenchPlayer().getPlayer().getInventory();
 		
-		ItemStack melee = new ItemStack(Material.DIAMOND_AXE, 1);
+		final String MELEE_NAME = "Thunderstruck";
+		final String PRIMARY_NAME = "Bell of The Pyro God";
+		final String SECONDARY_NAME = "Terra Wall";
+		final String PASSIVE_NAME = "Grassy Life Drain";
 		
+		addItemName(MELEE_NAME, 2);
+		addItemName(PRIMARY_NAME, 1);
+		addItemName(SECONDARY_NAME, 1);	
+		addItemName(PASSIVE_NAME, 2);
+		
+		/*
+		 * Melee Item
+		 */
+		ItemStack melee = new ItemStack(Material.DIAMOND_AXE, 1);
 		ItemMeta meleeMeta = melee.getItemMeta();
-		meleeMeta.setDisplayName("Thunderstruck");
+		meleeMeta.setDisplayName(MELEE_NAME);
 		
 		meleeMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
 		
@@ -51,7 +63,7 @@ public class Elementalist extends TrenchKit
 		ItemStack primary = new ItemStack(Material.BELL, 1);
 		
 		ItemMeta pMeta = primary.getItemMeta();
-		pMeta.setDisplayName("Bell of The Pyro God");
+		pMeta.setDisplayName(PRIMARY_NAME);
 		
 		ArrayList<String> pDesc = new ArrayList<String>();
 		pDesc.add("Right Click to Bring Out The Power of The Pyro God");
@@ -66,7 +78,7 @@ public class Elementalist extends TrenchKit
 		ItemStack secondary = new ItemStack(Material.EMERALD_ORE, 1);
 		
 		ItemMeta sMeta = secondary.getItemMeta();
-		sMeta.setDisplayName("Terra Wall");
+		sMeta.setDisplayName(SECONDARY_NAME);
 		
 		ArrayList<String> sDesc = new ArrayList<String>();
 		sDesc.add("Right Click to Create Earthen Walls of Defense!");
@@ -81,7 +93,7 @@ public class Elementalist extends TrenchKit
 		ItemStack passive = new ItemStack(Material.GRASS, 1);
 		
 		ItemMeta paMeta = passive.getItemMeta();
-		paMeta.setDisplayName("Grassy Life Drain");
+		paMeta.setDisplayName(PASSIVE_NAME);
 		
 		ArrayList<String> paDesc = new ArrayList<String>();
 		paDesc.add("Passive: Regenerate Health While Standing On Grass!");

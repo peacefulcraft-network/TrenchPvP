@@ -15,7 +15,7 @@ public class TerraWall extends TrenchAbility
 	private TrenchKit k;
 	
 	public TerraWall(TrenchKit k) {
-		super(k.getTrenchPlayer(), 25000);
+		super(k.getTrenchPlayer(), 25000, "Terra Wall");
 		
 		this.k = k;
 	}

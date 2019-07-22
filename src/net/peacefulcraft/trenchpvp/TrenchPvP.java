@@ -23,6 +23,7 @@ import net.peacefulcraft.trenchpvp.gamehandle.listeners.ArrowImpactListener;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.BlockIgnitionTimer;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.ChangeClassSign;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.ItemListener;
+import net.peacefulcraft.trenchpvp.gamehandle.listeners.ItemSwitchListener;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.JoinGameListen;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.JoinGameSign;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.LaunchPadUse;
@@ -121,6 +122,7 @@ public class TrenchPvP extends JavaPlugin{
 		getServer().getPluginManager().registerEvents(new ItemListener(), this);
 		getServer().getPluginManager().registerEvents(new ArrowImpactListener(), this);
 		getServer().getPluginManager().registerEvents(new TNTIgnition(), this);
+		getServer().getPluginManager().registerEvents(new ItemSwitchListener(), this);
 
 		//new gameclasses.listeners
 		getServer().getPluginManager().registerEvents(new AbilityClickListener(), this);

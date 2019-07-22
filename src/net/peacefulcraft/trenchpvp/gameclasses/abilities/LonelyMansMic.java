@@ -15,7 +15,7 @@ public class LonelyMansMic extends TrenchAbility
 	private TrenchKit k;
 	public LonelyMansMic(TrenchKit k)
 	{
-		super(k.getTrenchPlayer(), 15000);
+		super(k.getTrenchPlayer(), 15000, "Lonely Mans Mic");
 		
 		this.k=k;
 	}

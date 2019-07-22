@@ -31,11 +31,19 @@ public class TrenchJuniorCommunityManager extends TrenchKit
 	{
 		Inventory inv = this.getTrenchPlayer().getPlayer().getInventory();
 		
+		final String MELEE_NAME = "Bitch Stick";
+		final String PRIMARY_NAME = "Lonely Mans Mic";
+		final String SECONDARY_NAME = "Build Timer";
+		
+		addItemName(MELEE_NAME, 2);
+		addItemName(PRIMARY_NAME, 1);
+		addItemName(SECONDARY_NAME, 1);	
+		
 		//Melee
 		ItemStack melee = new ItemStack(Material.STICK, 1);
 		ItemMeta meleeMeta = melee.getItemMeta();
 		
-		meleeMeta.setDisplayName("Bitch Stick");
+		meleeMeta.setDisplayName(MELEE_NAME);
 		
 		ArrayList<String> mDesc = new ArrayList<String>();
 		mDesc.add("Literally Just A Stick");
@@ -47,7 +55,7 @@ public class TrenchJuniorCommunityManager extends TrenchKit
 		ItemStack primary = new ItemStack(Material.LEVER, 1);
 		ItemMeta pMeta = primary.getItemMeta();
 		
-		pMeta.setDisplayName("Lonely Mans Mic");
+		pMeta.setDisplayName(PRIMARY_NAME);
 		
 		ArrayList<String> pDesc = new ArrayList<String>();
 		pDesc.add("Right Click To Deep Throat Your Mic And Embrace Your Lonlieness");
@@ -60,7 +68,7 @@ public class TrenchJuniorCommunityManager extends TrenchKit
 		ItemStack secondary = new ItemStack(Material.CLOCK, 1);
 		ItemMeta sMeta = secondary.getItemMeta();
 		
-		sMeta.setDisplayName("Build Timer");
+		sMeta.setDisplayName(SECONDARY_NAME);
 		
 		ArrayList<String> sDesc = new ArrayList<String>();
 		sDesc.add("Right Click To Make All Nearby Players Experience How Long It Takes To Complete A Build!");

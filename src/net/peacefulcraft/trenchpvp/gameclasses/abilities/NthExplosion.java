@@ -18,7 +18,7 @@ public class NthExplosion extends TrenchAbility
 	
 	public NthExplosion(TrenchKit k)
 	{
-		super(k.getTrenchPlayer(), 25000);
+		super(k.getTrenchPlayer(), 25000, "Nth Explosion");
 		
 		this.k=k;
 	}

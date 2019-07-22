@@ -12,7 +12,7 @@ public class CatastrophicRapier extends TrenchAbility
 	private TrenchKit k;
 	
 	public CatastrophicRapier(TrenchKit k) {
-		super(k.getTrenchPlayer(), 40);
+		super(k.getTrenchPlayer(), 40, "Catastrophic Rapier");
 		
 		this.k = k;
 	}

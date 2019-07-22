@@ -29,7 +29,13 @@ public class TrenchHeavy extends TrenchKit{
 	public void equipItems() {
 
 		Inventory inv = this.getTrenchPlayer().getPlayer().getInventory();
-
+		
+		final String PRIMARY_NAME = "Dusk's Edge";
+		final String SECONDARY_NAME = "Absolute Defense";
+		
+		addItemName(PRIMARY_NAME, 1);
+		addItemName(SECONDARY_NAME, 1);	
+		
 		/*
 		 * Primary
 		 * Heavy - Dense Axe - Slows player and increases attack
@@ -37,7 +43,7 @@ public class TrenchHeavy extends TrenchKit{
 		ItemStack primary = new ItemStack(Material.IRON_AXE, 1);
 
 		ItemMeta pMetaData = primary.getItemMeta();
-		pMetaData.setDisplayName("Dusk's Edge");
+		pMetaData.setDisplayName(PRIMARY_NAME);
 		//Set lore to axe
 		ArrayList<String> pDesc = new ArrayList<String>();
 		pDesc.add("Right Click to Increase Attack!");
@@ -55,7 +61,7 @@ public class TrenchHeavy extends TrenchKit{
 		ItemStack secondary = new ItemStack(Material.SHULKER_SHELL, 1);
 
 		ItemMeta sMetaData = secondary.getItemMeta();
-		sMetaData.setDisplayName("Absolute Defense");
+		sMetaData.setDisplayName(SECONDARY_NAME);
 
 		ArrayList<String> sDesc = new ArrayList<String>();
 		sDesc.add("Right Click to Engage Defensive Shell!");

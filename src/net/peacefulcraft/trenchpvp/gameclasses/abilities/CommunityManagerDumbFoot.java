@@ -18,7 +18,7 @@ public class CommunityManagerDumbFoot extends TrenchAbility
 	
 	public CommunityManagerDumbFoot(TrenchKit k)
 	{
-		super(k.getTrenchPlayer(), 0);
+		super(k.getTrenchPlayer(), 0, "Community Manager's Dumb Foot");
 		
 		this.k=k;
 	}

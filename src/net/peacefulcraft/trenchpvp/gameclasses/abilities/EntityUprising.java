@@ -21,7 +21,7 @@ public class EntityUprising extends TrenchAbility
 	
 	public EntityUprising(TrenchKit k)
 	{
-		super(k.getTrenchPlayer(), 20000);
+		super(k.getTrenchPlayer(), 20000, "Entity Uprising");
 		
 		this.k = k;
 	}

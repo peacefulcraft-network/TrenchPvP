@@ -31,11 +31,17 @@ public class TrenchPigKing extends TrenchKit
 	{
 		Inventory inv = this.getTrenchPlayer().getPlayer().getInventory();
 		
+		final String MELEE_NAME = "Pork CHOP";
+		final String PRIMARY_NAME = "Sacraficial Cannon";
+		
+		addItemName(MELEE_NAME, 2);
+		addItemName(PRIMARY_NAME, 1);
+		
 		//Melee Weapon
 		ItemStack melee = new ItemStack(Material.PORKCHOP, 1);
 		
 		ItemMeta meleeMeta = melee.getItemMeta();
-		meleeMeta.setDisplayName("Pork CHOP");
+		meleeMeta.setDisplayName(MELEE_NAME);
 		
 		ArrayList<String> mDesc = new ArrayList<String>();
 		mDesc.add("Smack Down Your Foes With The Blood of Your Fallen");
@@ -47,7 +53,7 @@ public class TrenchPigKing extends TrenchKit
 		ItemStack primary = new ItemStack(Material.COOKED_PORKCHOP, 1);
 		
 		ItemMeta pMeta = primary.getItemMeta();
-		pMeta.setDisplayName("Sacraficial Cannon");
+		pMeta.setDisplayName(PRIMARY_NAME);
 		
 		ArrayList<String> pDesc = new ArrayList<String>();
 		pDesc.add("Right Click On Ground to Summon Explosive Pigs!");

@@ -66,11 +66,20 @@ public class TrenchPyro extends TrenchKit{
 		infernoTrapRemover.removeInfernoTraps();
 		
 		Inventory inv = t.getPlayer().getInventory();
+		
+		final String MELEE_NAME = "Nether's Bite";
+		final String PRIMARY_NAME = "Flamethrower";
+		final String SECONDARY_NAME = "Inferno Trap Detonator";
+		final String SECONDARYUTIL_NAME = "Inferno Trap";
+		
+		addItemName(MELEE_NAME, 2);
+		addItemName(PRIMARY_NAME, 1);
+		addItemName(SECONDARY_NAME, 1);	
+		addItemName(SECONDARYUTIL_NAME, 1);
 
 		ItemStack primary = new ItemStack(Material.GOLDEN_AXE);
-
 		ItemMeta pMetaData = primary.getItemMeta();
-		pMetaData.setDisplayName("Nether's Bite");
+		pMetaData.setDisplayName(MELEE_NAME);
 
 		ArrayList<String> pDesc = new ArrayList<String>();
 		pDesc.add("Just a Sharp Axe.");
@@ -80,7 +89,7 @@ public class TrenchPyro extends TrenchKit{
 
 		ItemStack pUtil = new ItemStack(Material.BLAZE_ROD);
 		ItemMeta pUMeta = pUtil.getItemMeta();
-		pUMeta.setDisplayName("Flamethrower");
+		pUMeta.setDisplayName(PRIMARY_NAME);
 
 		ArrayList<String> pUDesc = new ArrayList<String>();
 		pUDesc.add("Right Click to Shoot Flames!");
@@ -96,7 +105,7 @@ public class TrenchPyro extends TrenchKit{
 		 */
 		ItemStack secondary = new ItemStack(Material.TRIPWIRE_HOOK, 1);
 		ItemMeta sMeta = secondary.getItemMeta();
-		sMeta.setDisplayName("Inferno Trap Detonator");
+		sMeta.setDisplayName(SECONDARY_NAME);
 
 		ArrayList<String> sDesc = new ArrayList<String>();
 		sDesc.add("Right Click to Detonate Inferno Traps!");
@@ -106,7 +115,7 @@ public class TrenchPyro extends TrenchKit{
 
 		ItemStack trapAmmo = new ItemStack(Material.LIGHT_WEIGHTED_PRESSURE_PLATE, 5);
 		ItemMeta tAMeta = trapAmmo.getItemMeta();
-		tAMeta.setDisplayName("Inferno Trap");
+		tAMeta.setDisplayName(SECONDARYUTIL_NAME);
 
 		ArrayList<String> aDesc = new ArrayList<String>();
 		aDesc.add("Can Only Place 5 at a Time! Detonate to Get More!");

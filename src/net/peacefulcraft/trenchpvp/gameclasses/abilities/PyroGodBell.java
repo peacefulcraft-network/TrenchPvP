@@ -22,7 +22,7 @@ public class PyroGodBell extends TrenchAbility
 	private final int EFFECT_TIME = 400;
 	
 	public PyroGodBell(TrenchKit k, PyroGodBellWalk walkEnforcer) {
-		super(k.getTrenchPlayer(), 35000);
+		super(k.getTrenchPlayer(), 35000, "Bell of The Pyro God");
 		
 		this.k = k;
 		this.walkEnforcer = walkEnforcer;

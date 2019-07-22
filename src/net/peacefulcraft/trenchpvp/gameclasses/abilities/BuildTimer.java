@@ -22,7 +22,7 @@ public class BuildTimer extends TrenchAbility
 	
 	public BuildTimer(TrenchKit k)
 	{
-		super(k.getTrenchPlayer(), 20000);
+		super(k.getTrenchPlayer(), 20000, "Build Timer");
 		
 		this.k=k;
 	}

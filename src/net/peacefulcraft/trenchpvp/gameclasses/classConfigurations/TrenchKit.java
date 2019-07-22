@@ -1,6 +1,8 @@
 package net.peacefulcraft.trenchpvp.gameclasses.classConfigurations;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Set;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -25,10 +27,22 @@ public abstract class TrenchKit implements TrenchKitInventory{
 	private TrenchAbilityManager abilities;
 		public TrenchAbilityManager getAbilityManager() { return abilities; }
 		
+	private HashMap<String, Integer> itemNames;
+		public Set<String> getItemNamesSet() { return itemNames.keySet(); }
+		/*
+		 * int encodes side of ability click.
+		 * 0 left, 1 right, 2 neither
+		 */
+		public void addItemName(String name, int side) { 
+			itemNames.put(name, side);
+		}
+		public HashMap<String, Integer> getItemNames() { return itemNames; }
+		
 	public TrenchKit(TrenchPlayer t, TrenchKits kitType) {
 		this.t = t;
 		this.kitType = kitType;
 		this.abilities = new TrenchAbilityManager();
+		this.itemNames = new HashMap<String, Integer>();
 	}
 	
 	/**

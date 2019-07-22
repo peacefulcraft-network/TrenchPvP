@@ -12,7 +12,7 @@ public class PorkChop extends TrenchAbility
 	
 	public PorkChop(TrenchKit k)
 	{
-		super(k.getTrenchPlayer(), 30000);
+		super(k.getTrenchPlayer(), 30000, "Pork Chop");
 		
 		this.k = k;
 	}

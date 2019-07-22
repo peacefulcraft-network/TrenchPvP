@@ -34,11 +34,19 @@ public class TrenchNthEntity extends TrenchKit
 	{
 		Inventory inv = this.getTrenchPlayer().getPlayer().getInventory();
 		
+		final String MELEE_NAME = "Catastrophic Rapier";
+		final String PRIMARY_NAME = "Entity Uprising";
+		final String SECONDARY_NAME = "Nth Explosion";
+		
+		addItemName(MELEE_NAME, 1);
+		addItemName(PRIMARY_NAME, 1);
+		addItemName(SECONDARY_NAME, 1);	
+		
 		//Melee Weapon
 		ItemStack melee = new ItemStack(Material.DIAMOND_SWORD, 1);
 		
 		ItemMeta meleeMeta = melee.getItemMeta();
-		meleeMeta.setDisplayName("Catastrophic Rapier");
+		meleeMeta.setDisplayName(MELEE_NAME);
 		
 		ArrayList<String> mDesc = new ArrayList<String>();
 		mDesc.add("Strike Down Your Foes With Frightening Power");
@@ -54,7 +62,7 @@ public class TrenchNthEntity extends TrenchKit
 		ItemStack primary = new ItemStack(Material.WHITE_STAINED_GLASS, 1);
 		
 		ItemMeta pMeta = primary.getItemMeta();
-		pMeta.setDisplayName("Entity Uprising");
+		pMeta.setDisplayName(PRIMARY_NAME);
 		
 		ArrayList<String> pDesc = new ArrayList<String>();
 		pDesc.add("Right Click To Cause Your Enemies To Levitate!");
@@ -68,7 +76,7 @@ public class TrenchNthEntity extends TrenchKit
 		ItemStack secondary = new ItemStack(Material.TNT, 1);
 		
 		ItemMeta sMeta = secondary.getItemMeta();
-		sMeta.setDisplayName("Nth Explosion");
+		sMeta.setDisplayName(SECONDARY_NAME);
 		
 		ArrayList<String> sDesc = new ArrayList<String>();
 		sDesc.add("Right Click To Cause Nearby Enemies To Explode!");
