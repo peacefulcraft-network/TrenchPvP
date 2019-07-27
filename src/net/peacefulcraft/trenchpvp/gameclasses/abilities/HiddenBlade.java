@@ -1,5 +1,6 @@
 package net.peacefulcraft.trenchpvp.gameclasses.abilities;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -50,8 +51,14 @@ public class HiddenBlade extends TrenchAbility{
 			Player p = e.getPlayer();
 			
 			p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, EFFECT_TIME - 40, 3)); 
-			p.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, EFFECT_TIME, 2)); 
+			p.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, EFFECT_TIME, 2));
 			p.sendMessage(ChatColor.RED + "Ability is now on cooldown for 16 seconds.");
+			
+			Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(TrenchPvP.getPluginInstance(), new Runnable() {
+				public void run() {
+					p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, EFFECT_TIME, 3));
+				}
+			}, EFFECT_TIME);
 			
 		}catch(ClassCastException ex) {
 			TrenchPvP.logWarning("Error Triggering " + this.getClass() + " event. Incompatible event loop " + ev.getClass());

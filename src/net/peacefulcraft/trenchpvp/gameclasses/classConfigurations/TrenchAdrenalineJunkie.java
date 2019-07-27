@@ -12,6 +12,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.LaunchPad;
+import net.peacefulcraft.trenchpvp.gameclasses.abilities.SyrumHigh;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.TrenchAbilityType;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 
@@ -24,6 +25,7 @@ public class TrenchAdrenalineJunkie extends TrenchKit
 		
 		//Register special ability handlers
 		getAbilityManager().registerAbility(TrenchAbilityType.PLAYER_INTERACT, new LaunchPad(this));
+		getAbilityManager().registerAbility(TrenchAbilityType.PLAYER_INTERACT, new SyrumHigh(this));
 		
 	}
 
@@ -32,11 +34,19 @@ public class TrenchAdrenalineJunkie extends TrenchKit
 	{
 		Inventory inv = this.getTrenchPlayer().getPlayer().getInventory();
 		
+		final String MELEE_NAME = "The Bird";
+		final String PRIMARY_NAME = "Syrum High";
+		final String SECONDARY_NAME = "Launch Pad";
+		
+		addItemName(MELEE_NAME, 2);
+		addItemName(PRIMARY_NAME, 1);
+		addItemName(SECONDARY_NAME, 1);		
+		
 		//Melee Weapon
 		ItemStack melee = new ItemStack(Material.IRON_SWORD, 1);
 		
 		ItemMeta meleeMeta = melee.getItemMeta();
-		meleeMeta.setDisplayName("The Bird");
+		meleeMeta.setDisplayName(MELEE_NAME);
 		
 		ArrayList<String> mDesc = new ArrayList<String>();
 		mDesc.add("Flip 'em The Bird!");
@@ -47,7 +57,7 @@ public class TrenchAdrenalineJunkie extends TrenchKit
 		ItemStack primary = new ItemStack(Material.GLASS_BOTTLE, 1);
 		
 		ItemMeta pMeta = primary.getItemMeta();
-		pMeta.setDisplayName("Syrum High");
+		pMeta.setDisplayName(PRIMARY_NAME);
 		
 		ArrayList<String> pDesc = new ArrayList<String>();
 		pDesc.add("Right Click to Inject the Syrum!");
@@ -61,7 +71,7 @@ public class TrenchAdrenalineJunkie extends TrenchKit
 		ItemStack secondary = new ItemStack(Material.HEAVY_WEIGHTED_PRESSURE_PLATE, 1);
 		
 		ItemMeta sMeta = secondary.getItemMeta();
-		sMeta.setDisplayName("Launch Pad");
+		sMeta.setDisplayName(SECONDARY_NAME);
 		
 		ArrayList<String> sDesc = new ArrayList<String>();
 		sDesc.add("Right Click the Ground to Place a Launch Pad!");
@@ -101,9 +111,9 @@ public class TrenchAdrenalineJunkie extends TrenchKit
 		metaB.setColor(Color.BLACK);
 		armor[0].setItemMeta(metaB);
 		
-		ItemMeta MetaH = armor[2].getItemMeta();
+		ItemMeta MetaH = armor[3].getItemMeta();
 		MetaH.addEnchant(Enchantment.PROTECTION_EXPLOSIONS, 2, true);
-		armor[2].setItemMeta(MetaH);	
+		armor[3].setItemMeta(MetaH);	
 		
 		ItemMeta MetaC = armor[2].getItemMeta();
 		MetaC.addEnchant(Enchantment.THORNS, 2, true);

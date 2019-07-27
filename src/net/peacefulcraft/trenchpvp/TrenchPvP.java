@@ -23,6 +23,7 @@ import net.peacefulcraft.trenchpvp.gamehandle.listeners.ArrowImpactListener;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.BlockIgnitionTimer;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.ChangeClassSign;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.ItemListener;
+import net.peacefulcraft.trenchpvp.gamehandle.listeners.ItemSwitchListener;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.JoinGameListen;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.JoinGameSign;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.LaunchPadUse;
@@ -31,6 +32,7 @@ import net.peacefulcraft.trenchpvp.gamehandle.listeners.PlayerRespawning;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.PvPController;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.QuitGameListen;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.StartGameSign;
+import net.peacefulcraft.trenchpvp.gamehandle.listeners.TNTIgnition;
 import net.peacefulcraft.trenchpvp.gamehandle.tasks.Startgame;
 import net.peacefulcraft.trenchpvp.gamehandle.tasks.SyncStats;
 import net.peacefulcraft.trenchpvp.menu.listeners.KitMenu;
@@ -119,6 +121,8 @@ public class TrenchPvP extends JavaPlugin{
 		getServer().getPluginManager().registerEvents(new PvPController(), this);
 		getServer().getPluginManager().registerEvents(new ItemListener(), this);
 		getServer().getPluginManager().registerEvents(new ArrowImpactListener(), this);
+		getServer().getPluginManager().registerEvents(new TNTIgnition(), this);
+		getServer().getPluginManager().registerEvents(new ItemSwitchListener(), this);
 
 		//new gameclasses.listeners
 		getServer().getPluginManager().registerEvents(new AbilityClickListener(), this);

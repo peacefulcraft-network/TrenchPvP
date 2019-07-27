@@ -32,14 +32,20 @@ public class TrenchScout extends TrenchKit {
 	@Override
 	public void equipItems() {
 		Inventory inv = this.getTrenchPlayer().getPlayer().getInventory();
-
+		
+		final String PRIMARY_NAME = "Windsong Blade";
+		final String SECONDARY_NAME = "Sling Shot";
+		
+		addItemName(PRIMARY_NAME, 2);
+		addItemName(SECONDARY_NAME, 1);	
+		
 		/**
 		 * primary weapon
 		 */
 		ItemStack primary = new ItemStack(Material.STONE_SWORD, 1);
 
 		ItemMeta pMetaData = primary.getItemMeta();
-		pMetaData.setDisplayName("Windsong Blade");
+		pMetaData.setDisplayName(PRIMARY_NAME);
 
 		ArrayList<String> pDesc = new ArrayList<String>();
 		pDesc.add("Hold Blade for Increased Attack Speed!");
@@ -57,7 +63,7 @@ public class TrenchScout extends TrenchKit {
 		arrows.addEnchantment(Enchantment.ARROW_KNOCKBACK, 1);
 
 		ItemMeta arrowMetaData = arrows.getItemMeta();
-		arrowMetaData.setDisplayName("Sling Shot");
+		arrowMetaData.setDisplayName(SECONDARY_NAME);
 		arrows.setItemMeta(arrowMetaData);
 
 		ArrayList<String> sDesc = new ArrayList<String>();

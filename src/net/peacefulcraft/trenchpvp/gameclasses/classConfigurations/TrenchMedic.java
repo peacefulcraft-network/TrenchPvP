@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.bukkit.Color;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -61,7 +62,30 @@ public class TrenchMedic extends TrenchKit{
 	public void equipItems() {
 
 		Inventory inv = t.getPlayer().getInventory();
-
+		
+		final String MELEE_NAME = "Scalpel";
+		final String PRIMARY_NAME = "Medi Gun";
+		final String SECONDARY_NAME = "Syringe Gun";
+		
+		addItemName(MELEE_NAME, 2);
+		addItemName(PRIMARY_NAME, 1);
+		addItemName(SECONDARY_NAME, 2);	
+		
+		ItemStack melee = new ItemStack(Material.IRON_SWORD, 1);
+		ItemMeta meleeMeta = melee.getItemMeta();
+		meleeMeta.setDisplayName(MELEE_NAME);
+		
+		ArrayList<String> mDesc = new ArrayList<String>();
+		mDesc.add("Extra Sharp, Extra Cut");
+		meleeMeta.setLore(mDesc);
+		
+		meleeMeta.addEnchant(Enchantment.DAMAGE_ALL, 4, true);
+		meleeMeta.addEnchant(Enchantment.KNOCKBACK, 1, true);
+		
+		melee.setItemMeta(meleeMeta);
+		
+		inv.setItem(1, melee);		
+		
 		/*Medic - Medi Gun
 		 *Heal players ever 1.5 seconds (MediGun.java (class))
 		 */
@@ -70,7 +94,7 @@ public class TrenchMedic extends TrenchKit{
 
 		//Get metadata / set bow name
 		ItemMeta pMetaData = primary.getItemMeta();
-		pMetaData.setDisplayName("Medi Gun");
+		pMetaData.setDisplayName(PRIMARY_NAME);
 
 		ArrayList<String> pDesc = new ArrayList<String>();
 		pDesc.add("Right Click Your Teamates to Heal Them! (1.5 second cool down)");
@@ -84,11 +108,11 @@ public class TrenchMedic extends TrenchKit{
 		 */
 		ItemStack secondary = new ItemStack(Material.BOW, 1);
 		ItemMeta sMeta = secondary.getItemMeta();
-		sMeta.setDisplayName("Syringe Gun");
+		sMeta.setDisplayName(SECONDARY_NAME);
 		secondary.setItemMeta(sMeta);
 		ItemStack secondaryyUtil = new ItemStack(Material.ARROW, 32);//give arrows for syringe gun
 
-		inv.setItem(1, secondary);
+		inv.setItem(2, secondary);
 		inv.setItem(3, secondaryyUtil);
 
 	}

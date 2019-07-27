@@ -39,9 +39,12 @@ public class TrenchDemoman extends TrenchKit{
 		/**
 		 * primary weapon
 		 */
+		final String PRIMARY_NAME = "Grenade Launcher";
+		final String UTIL_NAME = "Grenades";
+		
 		ItemStack primary = new ItemStack(Material.QUARTZ, 1);
 		ItemMeta pMetaData = primary.getItemMeta();
-		pMetaData.setDisplayName("Grenade Launcher");
+		pMetaData.setDisplayName(PRIMARY_NAME);
 
 		ArrayList<String> pDesc = new ArrayList<String>();
 		pDesc.add("Left Click to Launch Grenades!");
@@ -51,7 +54,7 @@ public class TrenchDemoman extends TrenchKit{
 
 		ItemStack primaryUtil = new ItemStack(Material.FIREWORK_ROCKET, 32);
 		pMetaData = primaryUtil.getItemMeta();
-		pMetaData.setDisplayName("Grenades");
+		pMetaData.setDisplayName(UTIL_NAME);
 
 		pDesc.set(0, "Ammunition for Grenade Launcher");
 		pMetaData.setLore(pDesc);
@@ -60,13 +63,18 @@ public class TrenchDemoman extends TrenchKit{
 
 		inv.setItem(1, primary);
 		inv.setItem(3, primaryUtil);
+		
+		addItemName(PRIMARY_NAME, 1);
+		addItemName(UTIL_NAME, 2);
 
 		/**
 		 * Secondary Weapon
 		 */
+		final String SECONDARY_NAME = "Big Bertha's Embrace";
+		
 		ItemStack secondary = new ItemStack(Material.TNT, 1);
 		ItemMeta sMetaData = secondary.getItemMeta();
-		sMetaData.setDisplayName("Big Bertha's Embrace");
+		sMetaData.setDisplayName(SECONDARY_NAME);
 
 		ArrayList<String> sDesc = new ArrayList<String>();
 		sDesc.add("Left Click to Place Big Bertha's Embrace!");
@@ -76,13 +84,17 @@ public class TrenchDemoman extends TrenchKit{
 
 		secondary.setItemMeta(sMetaData);
 		inv.setItem(2, secondary);
+		
+		addItemName(SECONDARY_NAME, 1);
 
 		/**
 		 * Melee Weapon
 		 */
+		final String MELEE_NAME = "Headless Horseless Headmans Axe";
+		
 		ItemStack melee = new ItemStack(Material.IRON_AXE, 1);
 		ItemMeta meleeMeta = melee.getItemMeta();
-		meleeMeta.setDisplayName("Headless Horseless Headmans Axe");
+		meleeMeta.setDisplayName(MELEE_NAME);
 
 		ArrayList<String> mDesc = new ArrayList<String>();
 		mDesc.add("The Legendary Axe of The Headless Horseless Headman");
@@ -91,6 +103,8 @@ public class TrenchDemoman extends TrenchKit{
 		melee.setItemMeta(meleeMeta);
 
 		inv.setItem(0, melee);
+		
+		addItemName(MELEE_NAME, 2);
 	}
 
 	/*Leather Helment

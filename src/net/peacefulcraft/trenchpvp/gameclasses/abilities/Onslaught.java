@@ -72,8 +72,8 @@ public class Onslaught extends TrenchAbility{
 					
 					killer.sendMessage(ChatColor.RED + "The Blood of " + killedName + "Has Been Added to Your Strength");					
 					
-					int damageBuff = killCount / 4;								//Every even kill
-					int healthBuff = (damageBuff > 4)? killCount - 4 : 0;		//Every kill after 4th kill
+					int damageBuff = killCount / 3;								//Every third kill
+					int healthBuff = (damageBuff > 6)? killCount - 6 : 0;		//Every kill after 6th kill
 					
 					if(damageBuff > 0)
 						killer.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 99999, damageBuff));

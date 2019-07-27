@@ -57,7 +57,17 @@ public class TrenchSniper extends TrenchKit{
 	public void equipItems() {
 
 		Inventory inv = this.getTrenchPlayer().getPlayer().getInventory();
-
+		
+		final String MELEE_NAME = "Kukiri";
+		final String PRIMARY_NAME = "Component Rifle Mk.II";
+		final String FIRST_UTIL_NAME = "Bullets";
+		final String SECOND_UTIL_NAME = "Power Shot";
+		
+		addItemName(MELEE_NAME, 2);
+		addItemName(PRIMARY_NAME, 2);
+		addItemName(FIRST_UTIL_NAME, 1);
+		addItemName(SECOND_UTIL_NAME, 1);
+		
 		/**
 		 * Sniper Bow & Arrows
 		 */
@@ -68,7 +78,7 @@ public class TrenchSniper extends TrenchKit{
 
 		//Get metadata / set bow name
 		ItemMeta pMetaData = primary.getItemMeta();
-		pMetaData.setDisplayName("Component Rifle Mk.II");
+		pMetaData.setDisplayName(PRIMARY_NAME);
 		ArrayList<String> pDesc = new ArrayList<String>();
 		pDesc.add("Equipped With Upgradable Components!");
 		pMetaData.setLore(pDesc);
@@ -78,7 +88,7 @@ public class TrenchSniper extends TrenchKit{
 		//Create arrows for sniper riffle
 		ItemStack primaryUtil = new ItemStack(Material.ARROW, 64);
 		ItemMeta pUMetaData = primaryUtil.getItemMeta();
-		pUMetaData.setDisplayName("Bullets");
+		pUMetaData.setDisplayName(FIRST_UTIL_NAME);
 		ArrayList<String> pUDesc = new ArrayList<String>();
 		pUDesc.add("Right Click to Switch to Poison Rounds!");
 		pUDesc.add("Ability Time: 10 Seconds");
@@ -89,7 +99,7 @@ public class TrenchSniper extends TrenchKit{
 
 		ItemStack secondUtil = new ItemStack(Material.PISTON, 1);
 		ItemMeta sUMeta = secondUtil.getItemMeta();
-		sUMeta.setDisplayName("Power Shot");
+		sUMeta.setDisplayName(SECOND_UTIL_NAME);
 		ArrayList<String> sUDesc = new ArrayList<String>();
 		sUDesc.add("Right Click to Boost Sniper Rifle Mk.II Damage!");
 		sUDesc.add("Ability Time: 10 Seconds");
@@ -107,7 +117,7 @@ public class TrenchSniper extends TrenchKit{
 		 */
 		ItemStack secondary = new ItemStack(Material.STONE_SWORD, 1);
 		ItemMeta sMeta = secondary.getItemMeta();
-		sMeta.setDisplayName("Kukri");
+		sMeta.setDisplayName(MELEE_NAME);
 		secondary.setItemMeta(sMeta);
 		secondary.addEnchantment(Enchantment.SWEEPING_EDGE, 1);
 

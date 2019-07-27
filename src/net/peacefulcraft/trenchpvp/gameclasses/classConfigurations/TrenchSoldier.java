@@ -45,10 +45,16 @@ public class TrenchSoldier extends TrenchKit{
 	public void equipItems() {
 		Inventory inv = this.getTrenchPlayer().getPlayer().getInventory();
 
+		final String PRIMARY_NAME = "Witherbringer";
+		final String SECONDARY_NAME = "Onslaught";
+		
+		addItemName(PRIMARY_NAME, 1);
+		addItemName(SECONDARY_NAME, 2);		
+		
 		ItemStack primary = new ItemStack(Material.IRON_SWORD, 1);
 		ItemMeta pMetaData = primary.getItemMeta();
 		primary.addEnchantment(Enchantment.DAMAGE_ALL, 1);
-		pMetaData.setDisplayName("Witherbringer");
+		pMetaData.setDisplayName(PRIMARY_NAME);
 
 		ArrayList<String> pDesc = new ArrayList<String>();
 		pDesc.add("Right Click to Activate The Wither Curse!");
@@ -62,7 +68,7 @@ public class TrenchSoldier extends TrenchKit{
 
 		ItemStack secondary = new ItemStack(Material.REDSTONE, 1);
 		ItemMeta sMetaData = secondary.getItemMeta();
-		sMetaData.setDisplayName("Onslaught");
+		sMetaData.setDisplayName(SECONDARY_NAME);
 
 		ArrayList<String> sDesc = new ArrayList<String>();
 		sDesc.add("Each Kill Adds the Blood of Your Enemies to Your Strength");
