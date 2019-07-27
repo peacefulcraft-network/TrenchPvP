@@ -11,6 +11,7 @@ import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
 import net.peacefulcraft.trenchpvp.gamehandle.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
+import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchTeams;
 import net.peacefulcraft.trenchpvp.stats.TrenchStats.DemoStat;
 import net.peacefulcraft.trenchpvp.stats.TrenchStats.GeneralStat;
 import net.peacefulcraft.trenchpvp.stats.TrenchStats.HeavyStat;
@@ -37,6 +38,12 @@ public class KillListener implements Listener
 		TrenchKits kit = t.getKitType();
 		
 		TrenchPvP.getStatTracker().track(killer.getUniqueId(), GeneralStat.player_kills, 1);
+		
+		if(t.getPlayerTeam() == TrenchTeams.BLUE) {
+			TrenchPvP.getTeamManager().getScoreboard().registerBlueKill();
+		}else {
+			TrenchPvP.getTeamManager().getScoreboard().registerBlueKill();
+		}
 		
 		if(kit == TrenchKits.DEMOMAN) {
 			demoKill(killer);

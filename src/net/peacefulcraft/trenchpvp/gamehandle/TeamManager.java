@@ -5,11 +5,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.UUID;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-import org.bukkit.scoreboard.Scoreboard;
-import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.scoreboard.Team;
 
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
@@ -19,36 +15,19 @@ public class TeamManager {
 	
 	private static HashMap<UUID, TrenchPlayer> players;
 		public static Set<UUID> getPlayers(){return players.keySet();}
-		
-	private static ScoreboardManager sbm;
-	private static Scoreboard sb;
-	private static Team red;
-	private static Team blue;
+
+	private static TrenchScoreboard scoreboard;
+	public static TrenchScoreboard getScoreboard() { return scoreboard; }
 	
 	public TeamManager() {
 		players = new HashMap<UUID, TrenchPlayer>();
-		sbm = Bukkit.getScoreboardManager();
-		sb = sbm.getMainScoreboard();
-
-		if(sb.getTeam("Red") != null) {
-			sb.getTeam("Red").unregister();
-		}
-		
-		if(sb.getTeam("Blue") != null) {
-			sb.getTeam("Blue").unregister();
-		}
-		
-		red = sb.registerNewTeam("Red");
-			red.setAllowFriendlyFire(false);
-			red.setColor(ChatColor.RED);
-		
-		blue = sb.registerNewTeam("Blue");
-			blue.setAllowFriendlyFire(false);
-			blue.setColor(ChatColor.BLUE);
-		System.out.println("Teams Initialized");
+		scoreboard = new TrenchScoreboard();
 	}
 	
 	public TrenchPlayer joinTeam(Player p) {
+		
+		Team red = scoreboard.getRedTeam();
+		Team blue = scoreboard.getBlueTeam();
 		
 		if(findTrenchPlayer(p) != null) 
 			throw new RuntimeException("Command executor is already playing Trench");
@@ -58,6 +37,7 @@ public class TeamManager {
 			//Add to red team
 			TrenchPlayer t = new TrenchPlayer(p, TrenchTeams.RED);
 			red.addEntry(p.getName());
+			scoreboard.registerRedPlayer();
 			players.put(p.getUniqueId(), t);
 			return t;
 			
@@ -66,6 +46,7 @@ public class TeamManager {
 			//Add to blue team
 			TrenchPlayer t = new TrenchPlayer(p, TrenchTeams.BLUE);
 			blue.addEntry(p.getName());
+			scoreboard.registerBluePlayer();
 			players.put(p.getUniqueId(), t);
 			return t;
 		}
@@ -79,10 +60,15 @@ public class TeamManager {
 			throw new RuntimeException("Command executor is not playing Trench");
 		}
 		
-		if(t.getPlayerTeam() == TrenchTeams.RED)
+		if(t.getPlayerTeam() == TrenchTeams.RED) {
+			Team red = scoreboard.getRedTeam();
 			red.removeEntry(p.getName());
-		else
+			scoreboard.unregisterRedPlayer();
+		}else {
+			Team blue = scoreboard.getBlueTeam();
 			blue.removeEntry(p.getName());
+			scoreboard.unregisterBluePlayer();
+		}
 		
 		players.remove(p.getUniqueId());
 		
