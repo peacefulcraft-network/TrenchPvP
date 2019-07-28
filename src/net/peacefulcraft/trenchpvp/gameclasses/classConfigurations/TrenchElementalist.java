@@ -26,7 +26,7 @@ public class TrenchElementalist extends TrenchKit
 		PyroGodBellWalk walkEnforcer = new PyroGodBellWalk(this);
 		getAbilityManager().registerAbility(TrenchAbilityType.ENTITY_DAMAGE_ENTITY, new ThunderStruck(this));
 		getAbilityManager().registerAbility(TrenchAbilityType.PLAYER_INTERACT, new PyroGodBell(this, walkEnforcer));
-		getAbilityManager().registerAbility(TrenchAbilityType.ENTITY_DAMAGE_ENTITY, walkEnforcer);
+		getAbilityManager().registerAbility(TrenchAbilityType.PLAYER_MOVE, walkEnforcer);
 	}
 
 	@Override

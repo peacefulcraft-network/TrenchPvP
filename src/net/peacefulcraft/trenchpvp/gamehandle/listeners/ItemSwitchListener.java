@@ -23,12 +23,15 @@ public class ItemSwitchListener implements Listener
 	public void switchEvent(PlayerItemHeldEvent e) {
 		
 		TrenchPlayer t = TeamManager.findTrenchPlayer(e.getPlayer());
+		if(t == null) {return;}
+		
 		TrenchKit k = t.getKit();
 		Player p = t.getPlayer();
 		
 		if(p.getInventory().getItemInMainHand().getType().equals(Material.AIR) || p.getInventory().getItemInMainHand().getType().equals(null)) {
 			return;
 		}
+		//TODO:Null Pointer fix
 		int index = e.getNewSlot();
 		if(k.getItemNamesSet().contains(p.getInventory().getItem(index).getItemMeta().getDisplayName())) {
 			Announcer.messagePlayerActionBar(p, message(k, p.getInventory().getItem(index).getItemMeta().getDisplayName()));
@@ -42,7 +45,6 @@ public class ItemSwitchListener implements Listener
 			return getLeftPrefix() + ChatColor.AQUA + "None" + ChatColor.WHITE + "  |  " + ChatColor.AQUA + name + getRightPrefix();
 		} else {
 			return getLeftPrefix() + ChatColor.AQUA + "None" + ChatColor.WHITE + "  |  " + ChatColor.AQUA + "None" + getRightPrefix();
-	
 		}
 	}
 }
