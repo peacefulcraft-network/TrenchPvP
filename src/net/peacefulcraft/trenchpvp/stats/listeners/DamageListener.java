@@ -42,7 +42,7 @@ public class DamageListener implements Listener
 				TrenchPvP.getStatTracker().track(damager.getUniqueId(), GeneralStat.player_damage, damage);
 				
 				if(kit == TrenchKits.DEMOMAN) {
-					TrenchPvP.getStatTracker().track(damager.getUniqueId(), DemoStat.demoman_daamage_dealt, damage);
+					TrenchPvP.getStatTracker().track(damager.getUniqueId(), DemoStat.demoman_damage_dealt, damage);
 				} else if(kit == TrenchKits.HEAVY) {
 					TrenchPvP.getStatTracker().track(damager.getUniqueId(), HeavyStat.heavy_damage_dealt, damage);
 				} else if(kit == TrenchKits.MEDIC) {

@@ -13,7 +13,7 @@ public class TrenchStats {
 		player_friendly_kills
 	}
 	public enum DemoStat implements TrenchStat {
-		demoman_kills, demoman_daamage_dealt, demoman_berthas_placed 
+		demoman_kills, demoman_damage_dealt, demoman_berthas_placed 
 	}
 	public enum HeavyStat implements TrenchStat {
 		heavy_kills, heavy_damage_dealt, heavy_dusks_edge_kills, heavy_absolute_defense_usage
