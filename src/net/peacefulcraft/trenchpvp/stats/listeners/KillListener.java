@@ -42,7 +42,7 @@ public class KillListener implements Listener
 		if(t.getPlayerTeam() == TrenchTeams.BLUE) {
 			TrenchPvP.getTeamManager().getScoreboard().registerBlueKill();
 		}else {
-			TrenchPvP.getTeamManager().getScoreboard().registerBlueKill();
+			TrenchPvP.getTeamManager().getScoreboard().registerRedKill();
 		}
 		
 		if(kit == TrenchKits.DEMOMAN) {

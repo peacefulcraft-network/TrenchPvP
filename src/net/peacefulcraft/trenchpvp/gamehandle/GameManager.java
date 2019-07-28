@@ -53,6 +53,7 @@ public class GameManager {
 					p.sendMessage(TrenchPvP.CMD_PREFIX + ChatColor.RED + "You have joined " + ChatColor.DARK_RED + "Red" + ChatColor.RED + " team!");
 				}
 
+				TrenchPvP.getKitMenu().menuOpen(p);
 				
 				return true;
 
