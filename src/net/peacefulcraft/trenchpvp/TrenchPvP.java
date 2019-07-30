@@ -18,6 +18,7 @@ import net.peacefulcraft.trenchpvp.gameclasses.listeners.AbilityPlayerInteractEn
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.AbilityPlayerMoveListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.AbilityPlayerToggleFlight;
 import net.peacefulcraft.trenchpvp.gamehandle.GameManager;
+import net.peacefulcraft.trenchpvp.gamehandle.PartyManager;
 import net.peacefulcraft.trenchpvp.gamehandle.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.ArrowImpactListener;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.BlockIgnitionTimer;
@@ -62,6 +63,9 @@ public class TrenchPvP extends JavaPlugin{
 	private static KitMenu kitMenu;
 		public static KitMenu getKitMenu() { return kitMenu; }
 		
+	private static PartyManager partyManager;
+		public static PartyManager getPartyManager() {return partyManager;}
+		
 	public TrenchPvP(){
 		main = this;
 		config = new TrenchConfig(getConfig());
@@ -80,6 +84,7 @@ public class TrenchPvP extends JavaPlugin{
 		//Initialize game resources
 		teamManager = new TeamManager();
 		tracker = new StatTracker();
+		partyManager = new PartyManager();
 		SyncStats.onEnable();
 		this.getLogger().info("[TPP]Trench PvP Alpha 0.1 has been enabled!");
 

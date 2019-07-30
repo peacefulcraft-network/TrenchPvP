@@ -21,10 +21,34 @@ public class TrenchPlayer{
 		public TrenchKit getKit() { return kitInstance; }
 		public TrenchKits getKitType() { return kitInstance.getKitType(); }
 		
+	private String partyName;
+		public String getPartyName() { return partyName; }
+		public void setPartyName(String name) {
+			this.partyName = name;
+			//TODO: update file
+		}
+	private String lastInvite;
+		public String getLastInvite() { return lastInvite; }
+		public void setLastInvite(String invite) {
+			this.lastInvite = invite;
+			//TODO: update file
+		}
+		
 	public TrenchPlayer(Player user, TrenchTeams team){
 		this.p = user;
 		this.team = team;
 		kitInstance = new TrenchUndefined(this);
+		
+		partyName = "";
+		lastInvite = "";
+	}
+	
+	public Boolean isInParty() {
+		if(partyName.equals("")) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 	
 	public void equipKit(TrenchKit k) {
