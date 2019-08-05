@@ -4,6 +4,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -27,7 +28,11 @@ public class DusksEdge extends TrenchAbility{
 		//Checks item in main hand is Dense Axe
 		if(!(p.getInventory().getItemInMainHand().getType() == Material.IRON_AXE)) return false;
 		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Dusk's Edge"))) return false;
+		
+		if(ev instanceof PlayerInteractEntityEvent) { return false; }
+		
 		PlayerInteractEvent e = (PlayerInteractEvent) ev;
+		
 		if(!(e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK))) {return false;}
 		
 		
