@@ -1,5 +1,11 @@
 package net.peacefulcraft.trenchpvp.gamehandle;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Random;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.scoreboard.DisplaySlot;
@@ -13,25 +19,38 @@ import org.bukkit.scoreboard.Team;
  * - The object instance lives in TeamManager
  */
 public class TrenchScoreboard {
-
+	
 	private Team red;
 		public Team getRedTeam() { return red; }
 	private Team blue;
 		public Team getBlueTeam() { return blue; }
 	
+	private Scoreboard sb;
 	private Objective trenchStats;
+<<<<<<< HEAD
 	private Objective redPlayers;
 	private Objective redKills;
 	private Objective bluePlayers;
 	private Objective blueKills;
 	
+	private ScoreboardManager smb;
+		public ScoreboardManager getScoreboardManager() { return smb; }
+	private Scoreboard sb;
+		public Scoreboard getScoreboard() { return sb; }
+=======
+	private String time = "10:00";
+>>>>>>> 8163ba828370bc66e5cd96f82be7052fef98950f
 	/**
 	 * Reset / Create Scoreboard Teams and Objectives
 	 */
 	public TrenchScoreboard() {
 		
+<<<<<<< HEAD
+		smb = Bukkit.getScoreboardManager();
+=======
 		ScoreboardManager smb = Bukkit.getScoreboardManager();
-		Scoreboard sb = smb.getMainScoreboard(); 
+>>>>>>> 8163ba828370bc66e5cd96f82be7052fef98950f
+		sb = smb.getMainScoreboard(); 
 		
 		if(sb.getTeam("Red") != null) {
 			sb.getTeam("Red").unregister();
@@ -140,6 +159,18 @@ public class TrenchScoreboard {
 		trenchStats.getScore(ChatColor.BLUE + "Kills:").setScore(
 			trenchStats.getScore(ChatColor.BLUE + "Kills:").getScore() + 1
 		);
+		
+	}
+	
+	/**
+	 * Change (decrement) timer on scoreboard
+	 * @param time: Time as a string (0:00)
+	 */
+	public void setTimerTime(String time) {
+		
+		sb.resetScores(this.time);
+		trenchStats.getScore(time).setScore(15);
+		this.time = time;
 		
 	}
 	

@@ -9,7 +9,6 @@ import org.bukkit.event.player.PlayerMoveEvent;
 
 import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKit;
-import net.peacefulcraft.trenchpvp.gamehandle.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 
 public class CommunityManagerDumbFoot extends TrenchAbility
@@ -28,7 +27,7 @@ public class CommunityManagerDumbFoot extends TrenchAbility
 		try {
 			
 			PlayerMoveEvent e = (PlayerMoveEvent) ev;
-			TrenchPlayer t = TeamManager.findTrenchPlayer(e.getPlayer());
+			TrenchPlayer t = TrenchPvP.getTrenchManager().findTrenchPlayer(e.getPlayer());
 			
 		}catch(ClassCastException ex) {
 			

@@ -8,6 +8,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 
 import net.md_5.bungee.api.ChatColor;
 import net.peacefulcraft.trenchpvp.TrenchPvP;
+import net.peacefulcraft.trenchpvp.gamehandle.TeamManager.PlayerWideExecutor;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 
 public class TrenchParty
@@ -130,4 +131,11 @@ public class TrenchParty
 		
 		updateParty();
 	}
+	
+	public void ExecuteOnAllMembers(PlayerWideExecutor ex) {
+		for(TrenchPlayer t : getMembers()) {
+			ex.execute(t);
+		}
+	}
+	
 }

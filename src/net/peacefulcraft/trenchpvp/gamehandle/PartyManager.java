@@ -2,6 +2,8 @@ package net.peacefulcraft.trenchpvp.gamehandle;
 
 import java.util.HashMap;
 
+import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
+
 public class PartyManager
 {
 	private HashMap<String, TrenchParty> parties = new HashMap<String, TrenchParty>();
@@ -46,6 +48,5 @@ public class PartyManager
 		}
 		return ret;
 	}
-	
 	
 }

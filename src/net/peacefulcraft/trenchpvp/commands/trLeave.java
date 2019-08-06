@@ -5,7 +5,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import net.peacefulcraft.trenchpvp.gamehandle.GameManager;
+import net.peacefulcraft.trenchpvp.TrenchPvP;
+import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 
 /**
  * User command for leaving Trench
@@ -17,7 +18,13 @@ public class trLeave implements CommandExecutor{
 			
 			if(sender instanceof Player) {
 				
-				return GameManager.quitPlayer((Player) sender);
+				TrenchPlayer t = TrenchPvP.getTrenchManager().findTrenchPlayer((Player) sender);
+				if(t == null)
+					return true;
+				
+				t.getArena().playerLeave((Player) sender);
+				
+				return true;
 				
 			}else {
 				

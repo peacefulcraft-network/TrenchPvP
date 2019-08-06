@@ -8,9 +8,9 @@ import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.inventory.ItemStack;
 
 import net.md_5.bungee.api.ChatColor;
+import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKit;
 import net.peacefulcraft.trenchpvp.gamehandle.Announcer;
-import net.peacefulcraft.trenchpvp.gamehandle.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 
 public class ItemSwitchListener implements Listener
@@ -23,7 +23,7 @@ public class ItemSwitchListener implements Listener
 	@EventHandler
 	public void switchEvent(PlayerItemHeldEvent e) {
 		
-		TrenchPlayer t = TeamManager.findTrenchPlayer(e.getPlayer());
+		TrenchPlayer t = TrenchPvP.getTrenchManager().findTrenchPlayer(e.getPlayer());
 		if(t == null)
 			return;
 		

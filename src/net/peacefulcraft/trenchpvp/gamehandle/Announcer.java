@@ -9,7 +9,7 @@ import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
-import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchTeams;
+import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchTeam;
 
 public abstract class Announcer {
 	
@@ -53,21 +53,33 @@ public abstract class Announcer {
 	}
 	
 	public static void messageRedTeam(String message) {
-		messageTarget(message, TrenchTeams.RED);
+		messageTarget(message, TrenchTeam.RED);
 	}
 	
 	public static void messageBlueTeam(String message) {
-		messageTarget(message, TrenchTeams.BLUE);
+		messageTarget(message, TrenchTeam.BLUE);
 	}
 	
-		private static void messageTarget(String message, TrenchTeams team) {
+<<<<<<< HEAD
+	private static void messageTarget(String message, TrenchTeams team) {
 			
-			TeamManager.ExecuteOnAllPlayers(
+		TeamManager.ExecuteOnAllPlayers(
+			(TrenchPlayer t) -> {
+				if(team == null || t.getPlayerTeam() == team)
+					t.getPlayer().sendMessage(trench_prefix + " " + message);
+			}
+		);
+	}
+=======
+		private static void messageTarget(String message, TrenchTeam team) {
+			
+			TrenchPvP.getTrenchManager().getCurrentArena().executeOnAllPlayers(
 				(TrenchPlayer t) -> {
 					if(team == null || t.getPlayerTeam() == team)
 						t.getPlayer().sendMessage(trench_prefix + " " + message);
 				}
 			);
 		}
+>>>>>>> 8163ba828370bc66e5cd96f82be7052fef98950f
 
 }

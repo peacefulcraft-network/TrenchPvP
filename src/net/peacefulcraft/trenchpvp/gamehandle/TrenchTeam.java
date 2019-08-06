@@ -1,5 +1,7 @@
 package net.peacefulcraft.trenchpvp.gamehandle;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 
 import org.bukkit.Bukkit;
@@ -11,7 +13,13 @@ import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchTeams;
 
 public abstract class TrenchTeam {
-
+	
+	private ArrayList<TrenchPlayer> playerList = new ArrayList<TrenchPlayer>();
+		public ArrayList<TrenchPlayer> getPlayerList() { return playerList; }
+		
+	public TrenchTeam() {
+		playerList = new ArrayList<TrenchPlayer>();
+	}
 	/**
 	 * Teleport player to trench spawn based on TrenchPlayer.getPlayerTeam()
 	 * @param p: TrenchPlayer to teleport

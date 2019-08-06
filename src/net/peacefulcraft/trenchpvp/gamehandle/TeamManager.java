@@ -8,6 +8,7 @@ import java.util.UUID;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.Team;
 
+import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchTeams;
 
@@ -19,9 +20,10 @@ public class TeamManager {
 	private static TrenchScoreboard scoreboard;
 	public static TrenchScoreboard getScoreboard() { return scoreboard; }
 	
+	
+	
 	public TeamManager() {
 		players = new HashMap<UUID, TrenchPlayer>();
-		scoreboard = new TrenchScoreboard();
 	}
 	
 	public TrenchPlayer joinTeam(Player p) {
