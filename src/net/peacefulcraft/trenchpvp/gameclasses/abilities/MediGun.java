@@ -13,7 +13,6 @@ import org.bukkit.util.Vector;
 
 import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKit;
-import net.peacefulcraft.trenchpvp.gamehandle.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.stats.TrenchStats.MedicStat;
 
@@ -41,7 +40,7 @@ public class MediGun extends TrenchAbility{
 		if(!(p.getInventory().getItemInMainHand().getType() == Material.REDSTONE_BLOCK)) { return false; }
 		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Medi Gun"))) { return false; }
 		
-		TrenchPlayer healTarget = TeamManager.findTrenchPlayer((Player) e.getRightClicked());
+		TrenchPlayer healTarget = TrenchPvP.getTrenchManager().findTrenchPlayer((Player) e.getRightClicked());
 		if(healTarget == null) { return false; }
 		if(!(k.getTrenchPlayer().getPlayerTeam() == healTarget.getPlayerTeam())) { return false; }
 		

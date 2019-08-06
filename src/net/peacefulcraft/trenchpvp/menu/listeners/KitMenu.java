@@ -23,11 +23,9 @@ import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchScout;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchSniper;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchSoldier;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchSpy;
-import net.peacefulcraft.trenchpvp.gamehandle.GameManager;
-import net.peacefulcraft.trenchpvp.gamehandle.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehandle.player.Teleports;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
-import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchTeams;
+import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchTeam;
 import net.peacefulcraft.trenchpvp.menu.GameMenu;
 import net.peacefulcraft.trenchpvp.menu.GameMenu.Row;
 import net.peacefulcraft.trenchpvp.menu.GameMenu.onClick;
@@ -69,7 +67,7 @@ public class KitMenu implements Listener
 		
 		if(!(e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK)) return;
 		
-		TrenchPlayer t = TeamManager.findTrenchPlayer(p);
+		TrenchPlayer t = TrenchPvP.getTrenchManager().findTrenchPlayer(p);
 		if(t == null) { return; }
 
 		if(cooldown.containsKey(p.getUniqueId())) {
@@ -107,12 +105,14 @@ public class KitMenu implements Listener
 	}
 	
 	private void inventoryClick(Player p, ItemStack item) {
-		TrenchPlayer t = TeamManager.findTrenchPlayer(p);
+		TrenchPlayer t = TrenchPvP.getTrenchManager().findTrenchPlayer(p);
 		if(t == null) { return; }
 		
 		String itemText = item.getItemMeta().getDisplayName().toUpperCase();
 		if(itemText.equals("QUIT")) {
-			GameManager.quitPlayer(p);
+			
+			t.getArena().playerLeave(p);
+			
 			cooldown.remove(p.getUniqueId());
 			return;
 		}
@@ -163,7 +163,7 @@ public class KitMenu implements Listener
 			
 		}
 		
-		if(TeamManager.findTrenchPlayer(p).getPlayerTeam() == TrenchTeams.BLUE) {
+		if(TrenchPvP.getTrenchManager().findTrenchPlayer(p).getPlayerTeam() == TrenchTeam.BLUE) {
 			p.teleport(Teleports.getBlueSpawn());
 		}else {
 			p.teleport(Teleports.getRedSpawn());

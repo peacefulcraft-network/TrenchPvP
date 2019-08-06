@@ -9,17 +9,22 @@ import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKit;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchPyro;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchUndefined;
+import net.peacefulcraft.trenchpvp.gamehandle.TrenchArena;
 
 public class TrenchPlayer{
 	private Player p;
 		public Player getPlayer() {return this.p;}
 	
-	private TrenchTeams team;
-		public TrenchTeams getPlayerTeam() { return this.team; }
+	private TrenchTeam team;
+		public TrenchTeam getPlayerTeam() { return this.team; }
 	
 	protected TrenchKit kitInstance;
 		public TrenchKit getKit() { return kitInstance; }
 		public TrenchKits getKitType() { return kitInstance.getKitType(); }
+	
+	private TrenchArena arena;
+		public TrenchArena getArena() { return arena; }
+		public void setArena(TrenchArena arena) { this.arena = arena; }
 		
 	private String partyName;
 		public String getPartyName() { return partyName; }
@@ -34,8 +39,9 @@ public class TrenchPlayer{
 			//TODO: update file
 		}
 		
-	public TrenchPlayer(Player user, TrenchTeams team){
+	public TrenchPlayer(Player user, TrenchArena arena, TrenchTeam team){
 		this.p = user;
+		this.arena = arena;
 		this.team = team;
 		kitInstance = new TrenchUndefined(this);
 		

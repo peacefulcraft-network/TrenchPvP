@@ -9,8 +9,8 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 
+import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKit;
-import net.peacefulcraft.trenchpvp.gamehandle.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 
 public class NthExplosion extends TrenchAbility
@@ -47,7 +47,7 @@ public class NthExplosion extends TrenchAbility
 		for(Entity e : list) {
 			if(e instanceof Player) {
 				Player vic = (Player) e;
-				if(TeamManager.findTrenchPlayer(vic).getPlayerTeam() != t.getPlayerTeam()) {
+				if(TrenchPvP.getTrenchManager().findTrenchPlayer(vic).getPlayerTeam() != t.getPlayerTeam()) {
 					if(rand.nextBoolean()) {
 						
 						Location loc = vic.getLocation();

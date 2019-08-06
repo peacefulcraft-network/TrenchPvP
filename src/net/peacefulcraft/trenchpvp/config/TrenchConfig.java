@@ -1,4 +1,4 @@
-package net.peacefulcraft.trenchpvp;
+package net.peacefulcraft.trenchpvp.config;
 
 import java.util.Map;
 

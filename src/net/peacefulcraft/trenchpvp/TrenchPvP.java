@@ -5,21 +5,18 @@ import java.util.logging.Level;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import net.peacefulcraft.trenchpvp.commands.tppDebug;
-import net.peacefulcraft.trenchpvp.commands.tppGetGameState;
 import net.peacefulcraft.trenchpvp.commands.tppSet;
-import net.peacefulcraft.trenchpvp.commands.tppToggle;
 import net.peacefulcraft.trenchpvp.commands.trJoin;
 import net.peacefulcraft.trenchpvp.commands.trLeave;
+import net.peacefulcraft.trenchpvp.config.TrenchConfig;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.AbilityClickListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.AbilityEntityDamageEntityListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.AbilityPlayerDeathListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.AbilityPlayerInteractEntity;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.AbilityPlayerMoveListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.AbilityPlayerToggleFlight;
-import net.peacefulcraft.trenchpvp.gamehandle.GameManager;
 import net.peacefulcraft.trenchpvp.gamehandle.PartyManager;
-import net.peacefulcraft.trenchpvp.gamehandle.TeamManager;
+import net.peacefulcraft.trenchpvp.gamehandle.TrenchManager;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.ArrowImpactListener;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.BlockIgnitionTimer;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.ChangeClassSign;
@@ -30,11 +27,9 @@ import net.peacefulcraft.trenchpvp.gamehandle.listeners.JoinGameSign;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.LaunchPadUse;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.LeaveGameSign;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.PlayerRespawning;
-import net.peacefulcraft.trenchpvp.gamehandle.listeners.PvPController;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.QuitGameListen;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.StartGameSign;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.TNTIgnition;
-import net.peacefulcraft.trenchpvp.gamehandle.tasks.Startgame;
 import net.peacefulcraft.trenchpvp.gamehandle.tasks.SyncStats;
 import net.peacefulcraft.trenchpvp.menu.listeners.KitMenu;
 import net.peacefulcraft.trenchpvp.stats.StatTracker;
@@ -48,8 +43,8 @@ public class TrenchPvP extends JavaPlugin{
 	//Prefix for all plugin -> player messages
 	public static final String CMD_PREFIX = ChatColor.DARK_RED + "[" + ChatColor.RED + "Trench" + ChatColor.DARK_RED + "]";
 
-	private static TeamManager teamManager;
-		public static TeamManager getTeamManager() {return teamManager;}
+	private static TrenchManager trenchManager;
+		public static TrenchManager getTrenchManager() {return trenchManager;}
 
 	private static TrenchPvP main;
 		public static TrenchPvP getPluginInstance(){return main;}
@@ -82,21 +77,18 @@ public class TrenchPvP extends JavaPlugin{
 		this.loadEventListners();
 
 		//Initialize game resources
-		teamManager = new TeamManager();
+		trenchManager = new TrenchManager();
 		tracker = new StatTracker();
 		partyManager = new PartyManager();
 		SyncStats.onEnable();
 		this.getLogger().info("[TPP]Trench PvP Alpha 0.1 has been enabled!");
 
 		//Trigger game start
-		(new Startgame(this)).runTask(this);
+		//TODO: NEW START SEQUENCE
 	}
 
 	public void onDisable(){
-		this.saveConfig();
-		//End game
-		GameManager.closeGame();
-		
+		this.saveConfig();		
 		//SyncStats.onDisable();
 		this.getLogger().info("[TPP]Trench PvP Alpha 0.1 has been disabled!");
 	}
@@ -105,11 +97,8 @@ public class TrenchPvP extends JavaPlugin{
 	 * Register all commands with the server
 	 */
 	private void loadCommands(){
-		this.getCommand("tppToggle").setExecutor(new tppToggle());
-		this.getCommand("tppGetGameState").setExecutor(new tppGetGameState());
 		this.getCommand("trjoin").setExecutor(new trJoin());
 		this.getCommand("trleave").setExecutor(new trLeave());
-		this.getCommand("tppdebug").setExecutor(new tppDebug());;
 		this.getCommand("tppSet").setExecutor(new tppSet());
 	}
 	
@@ -126,7 +115,6 @@ public class TrenchPvP extends JavaPlugin{
 		getServer().getPluginManager().registerEvents(new BlockIgnitionTimer(), this);
 		getServer().getPluginManager().registerEvents(new QuitGameListen(), this);
 		getServer().getPluginManager().registerEvents(new PlayerRespawning(), this);
-		getServer().getPluginManager().registerEvents(new PvPController(), this);
 		getServer().getPluginManager().registerEvents(new ItemListener(), this);
 		getServer().getPluginManager().registerEvents(new ArrowImpactListener(), this);
 		getServer().getPluginManager().registerEvents(new TNTIgnition(), this);

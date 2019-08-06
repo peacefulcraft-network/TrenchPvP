@@ -5,16 +5,15 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import net.md_5.bungee.api.ChatColor;
+import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchAdrenalineJunkie;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchElementalist;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchJuniorCommunityManager;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchNthEntity;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchPigKing;
-import net.peacefulcraft.trenchpvp.gamehandle.GameManager;
-import net.peacefulcraft.trenchpvp.gamehandle.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehandle.player.Teleports;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
-import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchTeams;
+import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchTeam;
 import net.peacefulcraft.trenchpvp.menu.GameMenu;
 import net.peacefulcraft.trenchpvp.menu.GameMenu.Row;
 import net.peacefulcraft.trenchpvp.menu.GameMenu.onClick;
@@ -48,12 +47,12 @@ public class PurchasedMenu
 	}
 	
 	private void inventoryClick(Player p, ItemStack item) {
-		TrenchPlayer t = TeamManager.findTrenchPlayer(p);
+		TrenchPlayer t = TrenchPvP.getTrenchManager().findTrenchPlayer(p);
 		if(t == null) { return; }
 		
 		String itemText = item.getItemMeta().getDisplayName().toUpperCase();
 		if(itemText.equals("QUIT")) {
-			GameManager.quitPlayer(p);
+			t.getArena().playerLeave(p);
 			//TODO: Remove from kitmenu cooldown
 		}
 		if(itemText.equals("REGULAR CLASSES")) {
@@ -91,7 +90,7 @@ public class PurchasedMenu
 	}
 	
 	private void teleportByTeam(TrenchPlayer t) {
-		if(TeamManager.findTrenchPlayer(t.getPlayer()).getPlayerTeam() == TrenchTeams.BLUE) {
+		if(TrenchPvP.getTrenchManager().findTrenchPlayer(t.getPlayer()).getPlayerTeam() == TrenchTeam.BLUE) {
 			t.getPlayer().teleport(Teleports.getBlueSpawn());
 		}else {
 			t.getPlayer().teleport(Teleports.getRedSpawn());

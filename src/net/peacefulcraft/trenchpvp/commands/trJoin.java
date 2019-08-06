@@ -5,7 +5,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import net.peacefulcraft.trenchpvp.gamehandle.GameManager;
+import net.peacefulcraft.trenchpvp.TrenchPvP;
 
 /**
  * User command for joining Trench
@@ -17,7 +17,8 @@ public class trJoin implements CommandExecutor{
 				
 			if(sender instanceof Player){
 			
-				return GameManager.joinPlayer((Player) sender);
+				TrenchPvP.getTrenchManager().getCurrentArena().playerJoin((Player) sender); 
+				return true;
 				
 			}else{
 				

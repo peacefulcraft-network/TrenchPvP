@@ -6,9 +6,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 
+import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gamehandle.Announcer;
-import net.peacefulcraft.trenchpvp.gamehandle.GameManager;
-import net.peacefulcraft.trenchpvp.gamehandle.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 
 public class LeaveGameSign implements Listener {
@@ -25,13 +24,13 @@ public class LeaveGameSign implements Listener {
 		if(sign.getLine(0).equalsIgnoreCase("[Trench]")) {
 			if(sign.getLine(1).equalsIgnoreCase("Leave")) {
 				
-				TrenchPlayer t = TeamManager.findTrenchPlayer(e.getPlayer());
+				TrenchPlayer t = TrenchPvP.getTrenchManager().findTrenchPlayer(e.getPlayer());
 				if(t == null) { 
 					Announcer.messagePlayer(e.getPlayer(), "You must be playing TrenchPvP before you can leave TrenchPvP.");
 					return;
 				}
 				
-				GameManager.quitPlayer(e.getPlayer());
+				t.getArena().playerLeave(e.getPlayer());
 			}
 		}
 		
