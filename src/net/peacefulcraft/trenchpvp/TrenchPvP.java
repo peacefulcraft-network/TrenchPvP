@@ -80,6 +80,7 @@ public class TrenchPvP extends JavaPlugin{
 		trenchManager = new TrenchManager();
 		tracker = new StatTracker();
 		partyManager = new PartyManager();
+
 		SyncStats.onEnable();
 		this.getLogger().info("[TPP]Trench PvP Alpha 0.1 has been enabled!");
 

@@ -130,4 +130,11 @@ public class TrenchParty
 		
 		updateParty();
 	}
+	
+	public void ExecuteOnAllMembers(PlayerWideExecutor ex) {
+		for(TrenchPlayer t : getMembers()) {
+			ex.execute(t);
+		}
+	}
+	
 }

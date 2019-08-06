@@ -10,6 +10,7 @@ import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchPyro;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchUndefined;
 import net.peacefulcraft.trenchpvp.gamehandle.TrenchArena;
+import net.peacefulcraft.trenchpvp.gamehandle.TrenchTeam;
 
 public class TrenchPlayer{
 	private Player p;

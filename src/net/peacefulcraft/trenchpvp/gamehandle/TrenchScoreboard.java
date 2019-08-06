@@ -13,7 +13,7 @@ import org.bukkit.scoreboard.Team;
  * - The object instance lives in TeamManager
  */
 public class TrenchScoreboard {
-
+	
 	private Team red;
 		public Team getRedTeam() { return red; }
 	private Team blue;
@@ -27,6 +27,7 @@ public class TrenchScoreboard {
 	 */
 	public TrenchScoreboard() {
 		
+
 		ScoreboardManager smb = Bukkit.getScoreboardManager();
 		sb = smb.getMainScoreboard(); 
 		

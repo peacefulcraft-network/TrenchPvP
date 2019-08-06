@@ -9,7 +9,6 @@ import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
-import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchTeam;
 
 public abstract class Announcer {
 	
@@ -60,14 +59,13 @@ public abstract class Announcer {
 		messageTarget(message, TrenchTeam.BLUE);
 	}
 	
-		private static void messageTarget(String message, TrenchTeam team) {
-			
-			TrenchPvP.getTrenchManager().getCurrentArena().executeOnAllPlayers(
-				(TrenchPlayer t) -> {
-					if(team == null || t.getPlayerTeam() == team)
-						t.getPlayer().sendMessage(trench_prefix + " " + message);
-				}
-			);
-		}
+	private static void messageTarget(String message, TrenchTeam team) {
+		TrenchPvP.getTrenchManager().getCurrentArena().executeOnAllPlayers(
+			(TrenchPlayer t) -> {
+				if(team == null || t.getPlayerTeam() == team)
+					t.getPlayer().sendMessage(trench_prefix + " " + message);
+			}
+		);
+	}
 
 }

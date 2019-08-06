@@ -47,5 +47,4 @@ public class PartyManager
 		return ret;
 	}
 	
-	
 }

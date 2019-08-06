@@ -11,9 +11,9 @@ import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchElement
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchJuniorCommunityManager;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchNthEntity;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchPigKing;
+import net.peacefulcraft.trenchpvp.gamehandle.TrenchTeam;
 import net.peacefulcraft.trenchpvp.gamehandle.player.Teleports;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
-import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchTeam;
 import net.peacefulcraft.trenchpvp.menu.GameMenu;
 import net.peacefulcraft.trenchpvp.menu.GameMenu.Row;
 import net.peacefulcraft.trenchpvp.menu.GameMenu.onClick;

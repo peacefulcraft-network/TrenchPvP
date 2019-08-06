@@ -9,8 +9,8 @@ import org.bukkit.potion.PotionEffectType;
 
 import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
+import net.peacefulcraft.trenchpvp.gamehandle.TrenchTeam;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
-import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchTeam;
 import net.peacefulcraft.trenchpvp.stats.TrenchStats.DemoStat;
 import net.peacefulcraft.trenchpvp.stats.TrenchStats.GeneralStat;
 import net.peacefulcraft.trenchpvp.stats.TrenchStats.HeavyStat;
