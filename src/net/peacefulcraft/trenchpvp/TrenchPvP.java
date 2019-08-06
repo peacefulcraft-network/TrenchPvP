@@ -15,11 +15,6 @@ import net.peacefulcraft.trenchpvp.gameclasses.listeners.AbilityPlayerDeathListe
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.AbilityPlayerInteractEntity;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.AbilityPlayerMoveListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.AbilityPlayerToggleFlight;
-<<<<<<< HEAD
-import net.peacefulcraft.trenchpvp.gamehandle.ArenaManager;
-import net.peacefulcraft.trenchpvp.gamehandle.GameManager;
-=======
->>>>>>> 8163ba828370bc66e5cd96f82be7052fef98950f
 import net.peacefulcraft.trenchpvp.gamehandle.PartyManager;
 import net.peacefulcraft.trenchpvp.gamehandle.TrenchManager;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.ArrowImpactListener;

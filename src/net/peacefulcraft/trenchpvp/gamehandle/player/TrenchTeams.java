@@ -1,7 +1,7 @@
 package net.peacefulcraft.trenchpvp.gamehandle.player;
 
 //Add get spawns from config later
-public enum TrenchTeam {
+public enum TrenchTeams {
 	BLUE, RED;
 }
 

@@ -7,7 +7,7 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gamehandle.player.Teleports;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
-import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchTeam;
+import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchTeams;
 
 public class PlayerRespawning implements Listener{
 
@@ -22,7 +22,7 @@ public class PlayerRespawning implements Listener{
 			t.equipKit(t.getKit());
 			
 			//Teleport player
-			if(t.getPlayerTeam() == TrenchTeam.BLUE) {
+			if(t.getPlayerTeam() == TrenchTeams.BLUE) {
 				e.setRespawnLocation(Teleports.getBlueSpawn());
 			}else {
 				e.setRespawnLocation(Teleports.getRedSpawn());

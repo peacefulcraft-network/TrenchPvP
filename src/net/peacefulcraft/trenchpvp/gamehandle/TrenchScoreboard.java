@@ -25,9 +25,9 @@ public class TrenchScoreboard {
 	private Team blue;
 		public Team getBlueTeam() { return blue; }
 	
-	private Scoreboard sb;
+
 	private Objective trenchStats;
-<<<<<<< HEAD
+
 	private Objective redPlayers;
 	private Objective redKills;
 	private Objective bluePlayers;
@@ -37,19 +37,17 @@ public class TrenchScoreboard {
 		public ScoreboardManager getScoreboardManager() { return smb; }
 	private Scoreboard sb;
 		public Scoreboard getScoreboard() { return sb; }
-=======
+
 	private String time = "10:00";
->>>>>>> 8163ba828370bc66e5cd96f82be7052fef98950f
+
 	/**
 	 * Reset / Create Scoreboard Teams and Objectives
 	 */
 	public TrenchScoreboard() {
 		
-<<<<<<< HEAD
-		smb = Bukkit.getScoreboardManager();
-=======
+
 		ScoreboardManager smb = Bukkit.getScoreboardManager();
->>>>>>> 8163ba828370bc66e5cd96f82be7052fef98950f
+
 		sb = smb.getMainScoreboard(); 
 		
 		if(sb.getTeam("Red") != null) {

@@ -13,7 +13,7 @@ import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchNthEnti
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchPigKing;
 import net.peacefulcraft.trenchpvp.gamehandle.player.Teleports;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
-import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchTeam;
+import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchTeams;
 import net.peacefulcraft.trenchpvp.menu.GameMenu;
 import net.peacefulcraft.trenchpvp.menu.GameMenu.Row;
 import net.peacefulcraft.trenchpvp.menu.GameMenu.onClick;
@@ -90,7 +90,7 @@ public class PurchasedMenu
 	}
 	
 	private void teleportByTeam(TrenchPlayer t) {
-		if(TrenchPvP.getTrenchManager().findTrenchPlayer(t.getPlayer()).getPlayerTeam() == TrenchTeam.BLUE) {
+		if(TrenchPvP.getTrenchManager().findTrenchPlayer(t.getPlayer()).getPlayerTeam() == TrenchTeams.BLUE) {
 			t.getPlayer().teleport(Teleports.getBlueSpawn());
 		}else {
 			t.getPlayer().teleport(Teleports.getRedSpawn());

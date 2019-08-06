@@ -10,7 +10,7 @@ import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gamehandle.Announcer;
 import net.peacefulcraft.trenchpvp.gamehandle.player.Teleports;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
-import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchTeam;
+import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchTeams;
 
 public class ChangeClassSign implements Listener {
 
@@ -32,7 +32,7 @@ public class ChangeClassSign implements Listener {
 						return;
 					}
 					
-					if(t.getPlayerTeam() == TrenchTeam.BLUE) {
+					if(t.getPlayerTeam() == TrenchTeams.BLUE) {
 						t.getPlayer().teleport(Teleports.getBlueClassSpawn());
 					}else {
 						t.getPlayer().teleport(Teleports.getRedClassSpawn());

@@ -37,7 +37,7 @@ public class TeamManager {
 		if(red.getSize() < blue.getSize()) {
 			
 			//Add to red team
-			TrenchPlayer t = new TrenchPlayer(p, TrenchTeams.RED);
+			TrenchPlayer t = new TrenchPlayer(p, null, TrenchTeams.RED); //TODO: Add arena instead of null
 			red.addEntry(p.getName());
 			scoreboard.registerRedPlayer();
 			players.put(p.getUniqueId(), t);
@@ -46,7 +46,7 @@ public class TeamManager {
 		}else {
 			
 			//Add to blue team
-			TrenchPlayer t = new TrenchPlayer(p, TrenchTeams.BLUE);
+			TrenchPlayer t = new TrenchPlayer(p, null, TrenchTeams.BLUE); //TODO: Add arena instead of null
 			blue.addEntry(p.getName());
 			scoreboard.registerBluePlayer();
 			players.put(p.getUniqueId(), t);

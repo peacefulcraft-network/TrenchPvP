@@ -15,8 +15,8 @@ public class TrenchPlayer{
 	private Player p;
 		public Player getPlayer() {return this.p;}
 	
-	private TrenchTeam team;
-		public TrenchTeam getPlayerTeam() { return this.team; }
+	private TrenchTeams team;
+		public TrenchTeams getPlayerTeam() { return this.team; }
 	
 	protected TrenchKit kitInstance;
 		public TrenchKit getKit() { return kitInstance; }
@@ -39,7 +39,7 @@ public class TrenchPlayer{
 			//TODO: update file
 		}
 		
-	public TrenchPlayer(Player user, TrenchArena arena, TrenchTeam team){
+	public TrenchPlayer(Player user, TrenchArena arena, TrenchTeams team){
 		this.p = user;
 		this.arena = arena;
 		this.team = team;

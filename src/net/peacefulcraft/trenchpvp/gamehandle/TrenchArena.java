@@ -13,7 +13,7 @@ import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.config.ArenaConfig;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
-import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchTeam;
+import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchTeams;
 import net.peacefulcraft.trenchpvp.gamehandle.tasks.ArenaTimer;
 import net.peacefulcraft.trenchpvp.gamehandle.tasks.Endgame;
 import net.peacefulcraft.trenchpvp.gamehandle.tasks.SyncStats;
@@ -157,14 +157,14 @@ public class TrenchArena {
 	 * @param t: The team to join
 	 * @param force: Override balance checks
 	 */
-	public void playerJoin(Player p , TrenchTeam t, boolean force) {
+	public void playerJoin(Player p , TrenchTeams t, boolean force) {
 		
 		if(TrenchPvP.getTrenchManager().findTrenchPlayer(p) != null) 
 			throw new RuntimeException("Command executor is already playing Trench");
 		
 		p.setGameMode(GameMode.ADVENTURE);
 		
-		if(t == TrenchTeam.RED) {
+		if(t == TrenchTeams.RED) {
 			
 			if(force) {
 				joinPlayerToRed(p);
@@ -205,7 +205,7 @@ public class TrenchArena {
 		private void joinPlayerToRed(Player p) {
 			
 			//Add to blue team
-			TrenchPlayer t = new TrenchPlayer(p, this, TrenchTeam.RED);
+			TrenchPlayer t = new TrenchPlayer(p, this, TrenchTeams.RED);
 			blue.addEntry(p.getName());
 			scoreboard.registerBluePlayer();
 			bluePlayers.put(p.getUniqueId(), t);
@@ -224,7 +224,7 @@ public class TrenchArena {
 		private void joinPlayerToBlue(Player p) {
 			
 			//Add to blue team
-			TrenchPlayer t = new TrenchPlayer(p, this, TrenchTeam.BLUE);
+			TrenchPlayer t = new TrenchPlayer(p, this, TrenchTeams.BLUE);
 			blue.addEntry(p.getName());
 			scoreboard.registerBluePlayer();
 			bluePlayers.put(p.getUniqueId(), t);
@@ -248,7 +248,7 @@ public class TrenchArena {
 		
 		TrenchPvP.getTrenchManager().unregisterPlayer(t);
 		
-		if(t.getPlayerTeam() == TrenchTeam.RED) {
+		if(t.getPlayerTeam() == TrenchTeams.RED) {
 			redPlayers.remove(t.getPlayer().getUniqueId());
 			red.removeEntry(t.getPlayer().getName());
 			scoreboard.unregisterRedPlayer();
@@ -284,7 +284,7 @@ public class TrenchArena {
 	 * @param t: The TrenchPlayer
 	 */
 	public void teleportToClassSelection(TrenchPlayer t) {
-		if(t.getPlayerTeam() == TrenchTeam.BLUE) {
+		if(t.getPlayerTeam() == TrenchTeams.BLUE) {
 			t.getPlayer().teleport(ac.getBlue_class_spawn());
 		}else {
 			t.getPlayer().teleport(ac.getRed_spawn());
@@ -296,7 +296,7 @@ public class TrenchArena {
 	 * @param t: The TrenchPlayer
 	 */
 	public void teleportToSpawn(TrenchPlayer t) {
-		if(t.getPlayerTeam() == TrenchTeam.BLUE) {
+		if(t.getPlayerTeam() == TrenchTeams.BLUE) {
 			t.getPlayer().teleport(ac.getBlue_spawn());
 		}else {
 			t.getPlayer().teleport(ac.getRed_spawn());

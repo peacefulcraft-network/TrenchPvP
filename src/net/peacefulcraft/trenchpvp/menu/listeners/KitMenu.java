@@ -25,7 +25,7 @@ import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchSoldier
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchSpy;
 import net.peacefulcraft.trenchpvp.gamehandle.player.Teleports;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
-import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchTeam;
+import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchTeams;
 import net.peacefulcraft.trenchpvp.menu.GameMenu;
 import net.peacefulcraft.trenchpvp.menu.GameMenu.Row;
 import net.peacefulcraft.trenchpvp.menu.GameMenu.onClick;
@@ -163,7 +163,7 @@ public class KitMenu implements Listener
 			
 		}
 		
-		if(TrenchPvP.getTrenchManager().findTrenchPlayer(p).getPlayerTeam() == TrenchTeam.BLUE) {
+		if(TrenchPvP.getTrenchManager().findTrenchPlayer(p).getPlayerTeam() == TrenchTeams.BLUE) {
 			p.teleport(Teleports.getBlueSpawn());
 		}else {
 			p.teleport(Teleports.getRedSpawn());
