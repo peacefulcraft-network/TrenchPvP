@@ -30,37 +30,53 @@ public class KillListener implements Listener
 		if( !(e.getEntity().getKiller() instanceof Player) ) { return; }
 		
 		Player killer = e.getEntity().getKiller();
+		Player dead = e.getEntity();
 		
-		TrenchPlayer t = TeamManager.findTrenchPlayer(killer);
-		if(t == null) {
+		TrenchPlayer tk = TeamManager.findTrenchPlayer(killer);
+		TrenchPlayer td = TeamManager.findTrenchPlayer(dead);
+		if(tk == null || td == null) {
+			/*
+			 * TODO: This won't track environment deaths, IE falling
+			 * or spawned fireballs for some explosions
+			 */
 			return;
 		}
-		TrenchKits kit = t.getKitType();
+		TrenchKits kit = tk.getKitType();
 		
-		TrenchPvP.getStatTracker().track(t, GeneralStat.player_kills, 1);
+		TrenchPvP.getStatTracker().track(tk, GeneralStat.player_kills, 1);
+		TrenchPvP.getStatTracker().track(td, GeneralStat.player_deaths, 1);
+
 		
-		if(t.getPlayerTeam() == TrenchTeams.BLUE) {
+		if(tk.getPlayerTeam() == TrenchTeams.BLUE) {
 			TrenchPvP.getTeamManager().getScoreboard().registerBlueKill();
 		}else {
 			TrenchPvP.getTeamManager().getScoreboard().registerRedKill();
 		}
 		
 		if(kit == TrenchKits.DEMOMAN) {
-			demoKill(t);
+			TrenchPvP.getStatTracker().track(td, DemoStat.demoman_deaths, 1);
+			demoKill(tk);
 		} else if(kit == TrenchKits.HEAVY) {
-			heavyKill(t);
+			TrenchPvP.getStatTracker().track(td, HeavyStat.heavy_deaths, 1);
+			heavyKill(tk);
 		} else if(kit == TrenchKits.MEDIC) {
-			medicKill(t);
+			TrenchPvP.getStatTracker().track(td, HeavyStat.heavy_deaths, 1);
+			medicKill(tk);
 		} else if(kit == TrenchKits.PYRO) {
-			pyroKill(t);
+			TrenchPvP.getStatTracker().track(td, PyroStat.pyro_deaths, 1);
+			pyroKill(tk);
 		} else if(kit == TrenchKits.SCOUT) {
-			scoutKill(t);
+			TrenchPvP.getStatTracker().track(td, ScoutStat.scout_deaths, 1);
+			scoutKill(tk);
 		} else if(kit == TrenchKits.SNIPER) {
-			sniperKill(t);
+			TrenchPvP.getStatTracker().track(td, SniperStat.sniper_deaths, 1);
+			sniperKill(tk);
 		} else if(kit == TrenchKits.SOLDIER) {
-			soldierKill(t);
+			TrenchPvP.getStatTracker().track(td, SoldierStat.soldier_deaths, 1);
+			soldierKill(tk);
 		} else if(kit == TrenchKits.SPY) {
-			spyKill(t);
+			TrenchPvP.getStatTracker().track(td, SpyStat.spy_deaths, 1);
+			spyKill(tk);
 		}
 	}
 	private void demoKill(TrenchPlayer demoman) {
