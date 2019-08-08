@@ -52,7 +52,7 @@ public class PoisonRound extends TrenchAbility{
 			
 			p.getInventory().setItem(itemIndex, tipped);
 			
-			TrenchPvP.getStatTracker().track(p.getUniqueId(), SniperStat.sniper_poison_upgrades, 1);
+			TrenchPvP.getStatTracker().track(k.getTrenchPlayer(), SniperStat.sniper_poison_upgrades, 1);
 			
 			//Delay arrow return switch
 			BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
