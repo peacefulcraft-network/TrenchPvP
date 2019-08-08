@@ -60,7 +60,7 @@ public class KillListener implements Listener
 			TrenchPvP.getStatTracker().track(td, HeavyStat.heavy_deaths, 1);
 			heavyKill(tk);
 		} else if(kit == TrenchKits.MEDIC) {
-			TrenchPvP.getStatTracker().track(td, HeavyStat.heavy_deaths, 1);
+			TrenchPvP.getStatTracker().track(td, MedicStat.medic_deaths, 1);
 			medicKill(tk);
 		} else if(kit == TrenchKits.PYRO) {
 			TrenchPvP.getStatTracker().track(td, PyroStat.pyro_deaths, 1);
