@@ -53,7 +53,7 @@ public class AbsoluteDefense extends TrenchAbility{
 		p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, EFFECT_TIME, 3));
 		p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, EFFECT_TIME, 5));
 		
-		TrenchPvP.getStatTracker().track(p.getUniqueId(), HeavyStat.heavy_absolute_defense_usage, 1);
+		TrenchPvP.getStatTracker().track(k.getTrenchPlayer(), HeavyStat.heavy_absolute_defense_usage, 1);
 	}
 
 }

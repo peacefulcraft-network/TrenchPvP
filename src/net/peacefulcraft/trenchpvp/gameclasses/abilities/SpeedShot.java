@@ -60,7 +60,7 @@ public class SpeedShot extends TrenchAbility{
 			target.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 140, 4));
 			e.getPlayer().sendMessage(ChatColor.RED + "Ability is now on cooldown for 16 seconds.");
 			
-			TrenchPvP.getStatTracker().track(spy.getPlayer().getUniqueId(), SpyStat.spy_speed_shot_usage, 1);
+			TrenchPvP.getStatTracker().track(spy, SpyStat.spy_speed_shot_usage, 1);
 			
 		}catch(ClassCastException ex) {
 			
