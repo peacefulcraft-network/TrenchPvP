@@ -1,5 +1,6 @@
 package net.peacefulcraft.trenchpvp;
 
+import java.io.File;
 import java.util.logging.Level;
 
 import org.bukkit.ChatColor;
@@ -8,7 +9,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 import net.peacefulcraft.trenchpvp.commands.tppSet;
 import net.peacefulcraft.trenchpvp.commands.trJoin;
 import net.peacefulcraft.trenchpvp.commands.trLeave;
+import net.peacefulcraft.trenchpvp.config.ArenaConfig;
 import net.peacefulcraft.trenchpvp.config.TrenchConfig;
+import net.peacefulcraft.trenchpvp.config.YAMLFileFilter;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.AbilityClickListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.AbilityEntityDamageEntityListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.AbilityPlayerDeathListener;
@@ -16,6 +19,7 @@ import net.peacefulcraft.trenchpvp.gameclasses.listeners.AbilityPlayerInteractEn
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.AbilityPlayerMoveListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.AbilityPlayerToggleFlight;
 import net.peacefulcraft.trenchpvp.gamehandle.PartyManager;
+import net.peacefulcraft.trenchpvp.gamehandle.TrenchArena;
 import net.peacefulcraft.trenchpvp.gamehandle.TrenchManager;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.ArrowImpactListener;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.BlockIgnitionTimer;
@@ -141,8 +145,21 @@ public class TrenchPvP extends JavaPlugin{
 		//Menu listeners
 		kitMenu = new KitMenu();
 		getServer().getPluginManager().registerEvents(kitMenu, this);
+		
+		//Load / register the arenas to the map pool
+		loadArenas();
 	}
 
+		private void loadArenas(){
+			File arenaDataDir = new File(this.getDataFolder().toPath() + "/arenas");
+			String[] arenaFileNames = arenaDataDir.list(new YAMLFileFilter());
+			for(String arenaName : arenaFileNames) {
+				trenchManager.registerArena(
+					new TrenchArena(new ArenaConfig(arenaName))
+				);
+			}
+		}
+	
 	/**
 	 * Record warning with logger
 	 * @param msg: The warning message to log

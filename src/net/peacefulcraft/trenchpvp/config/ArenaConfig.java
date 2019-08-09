@@ -34,17 +34,65 @@ public class ArenaConfig {
 	public ArenaConfig(String arenaName) {
 		this.arenaName = arenaName;
 		
-		try {
-			saveConfig();
-		} catch (IOException e) {
-			e.printStackTrace();
-			TrenchPvP.logErrors("Erorr saving arena " + arenaName);
+		File arenaFile = new File(
+			TrenchPvP.getPluginInstance().getDataFolder().getPath() + "/arenas/" + arenaName + ".yml"
+		);
+
+		if(arenaFile.exists()) {
+			
+			c = new YamlConfiguration();
+			try {
+				c.load(arenaFile);
+			} catch (IOException | InvalidConfigurationException e) {
+				e.printStackTrace();
+				TrenchPvP.logErrors("Error loading arena config " + arenaName);
+			}
+			
+		}else {
+			
+			try {
+				saveConfig();
+			} catch (IOException e) {
+				e.printStackTrace();
+				TrenchPvP.logErrors("Erorr saving arena " + arenaName);
+			}
 		}
+		
+		loadArena();
+			
 	}
 	
 		private void saveConfig() throws IOException{
 			FileConfiguration c = new YamlConfiguration();
 			c.save("arena/" + arenaName + ".yml");
+		}
+		
+		private void loadArena() {
+			arenaName = c.getString("arena.name");
+			
+			if(c.contains("arena.spawns.quit")){
+				quit_spawn = c.getConfigurationSection("arena.spawns.quit").getValues(false);
+			}
+			
+			if(c.contains("arena.spawns.red")){
+				red_spawn = c.getConfigurationSection("arena.spawns.red").getValues(false);
+			}
+			
+			if(c.contains("arena.spawns.blue")) {
+				blue_spawn = c.getConfigurationSection("arena.spawns.blue").getValues(false);
+			}
+			
+			if(c.contains("arena.spawns.red_classes")) {
+				red_class_spawn = c.getConfigurationSection("arena.spawns.red_class").getValues(false);
+			}
+			
+			if(c.contains("arena.spawns.blue_class")){
+				blue_class_spawn = c.getConfigurationSection("arena.spawns.blue_class").getValues(false);
+			}
+		
+			if(c.contains("arena.spawns.spectator")) {
+				spectator_spawn = c.getConfigurationSection("arena.spawns.spectator").getValues(false);
+			}
 		}
 	
 	/**
@@ -55,29 +103,13 @@ public class ArenaConfig {
 	}
 		
 		/**
-		 * Internal delete function. Prevents outsider from deleting any config
+		 * Internal delete function. Prevents outsider from deleting _any_ config
 		 * @param arenaName
 		 */
 		private void deleteArenaConfig(String arenaName) {
 			File target = new File(TrenchPvP.getPluginInstance().getDataFolder(), "arenas/" + arenaName + ".yml");
 			target.delete();
 		}
-	
-	/**
-	 * Load arena from config file
-	 * @param c FileConfig resource to get config values from
-	 */
-	public ArenaConfig(FileConfiguration c) {
-		
-		arenaName = c.getString("arena.name");
-		
-		quit_spawn = c.getConfigurationSection("arena.spawns.quit").getValues(false);
-		red_spawn = c.getConfigurationSection("arena.spawns.red").getValues(false);
-		blue_spawn = c.getConfigurationSection("arena.spawns.blue").getValues(false);
-		red_class_spawn = c.getConfigurationSection("arena.spawns.red_class").getValues(false);
-		blue_class_spawn = c.getConfigurationSection("arena.spawns.blue_class").getValues(false);
-		spectator_spawn = c.getConfigurationSection("arena.spawns.spectator").getValues(false);
-	}
 	
 	/*
 	 * Various getters for all the Trench settings
