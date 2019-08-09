@@ -48,7 +48,7 @@ public class InfernoTrapPlacer extends TrenchAbility{
            	 if(itemIndex >= 0) {
            		 ItemStack trap = p.getInventory().getItem(itemIndex);
            		 
-           		 TrenchPvP.getStatTracker().track(p.getUniqueId(), PyroStat.pyro_traps_placed, 1);
+           		 TrenchPvP.getStatTracker().track(k.getTrenchPlayer(), PyroStat.pyro_traps_placed, 1);
            		 
            		 if(trap.getAmount() <= 1) {
            			 upBlock.setType(Material.LIGHT_WEIGHTED_PRESSURE_PLATE);//"Places" trap
