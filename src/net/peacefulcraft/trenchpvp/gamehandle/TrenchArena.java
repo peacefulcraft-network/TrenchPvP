@@ -40,22 +40,22 @@ public class TrenchArena {
 			}
 		}
 	
-	public void executeOnAllPlayers(PlayerWideExecutor ex) {
-		executeOnAllRedPlayers(ex);
-		executeOnAllBluePlayers(ex);
-	}
-	
-	public void executeOnAllRedPlayers(PlayerWideExecutor ex) {
-		for(Entry<UUID, TrenchPlayer> entry : redPlayers.entrySet()) {
-			ex.execute(entry.getValue());
+		public void executeOnAllPlayers(PlayerWideExecutor ex) {
+			executeOnAllRedPlayers(ex);
+			executeOnAllBluePlayers(ex);
 		}
-	}
-	
-	public void executeOnAllBluePlayers(PlayerWideExecutor ex) {
-		for(Entry<UUID, TrenchPlayer> entry : bluePlayers.entrySet()) {
-			ex.execute(entry.getValue());
+		
+		public void executeOnAllRedPlayers(PlayerWideExecutor ex) {
+			for(Entry<UUID, TrenchPlayer> entry : redPlayers.entrySet()) {
+				ex.execute(entry.getValue());
+			}
 		}
-	}
+		
+		public void executeOnAllBluePlayers(PlayerWideExecutor ex) {
+			for(Entry<UUID, TrenchPlayer> entry : bluePlayers.entrySet()) {
+				ex.execute(entry.getValue());
+			}
+		}
 
 	/**
 	 * Create new Trench Arena by name
