@@ -75,6 +75,13 @@ public class TrenchParty
 		}
 	}
 	
+	public void removeInviteMapEntry(TrenchPlayer invitedPlayer) {
+		if(inviteMap.containsKey(invitedPlayer)) {
+			inviteMap.remove(invitedPlayer);
+		}
+		updateParty();
+	}
+	
 	public void invitePlayer(TrenchPlayer invitedBy, TrenchPlayer invitedPlayer) {
 		if(invitedPlayer.getPlayer().isOnline()) {
 			inviteMap.put(invitedPlayer, invitedBy);

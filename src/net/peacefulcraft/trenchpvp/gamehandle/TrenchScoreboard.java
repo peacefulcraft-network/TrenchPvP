@@ -8,6 +8,8 @@ import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.scoreboard.Team;
 
+import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
+
 /**
  * Scoreboard Objectives for Trench
  * - The object instance lives in TeamManager
@@ -62,6 +64,17 @@ public class TrenchScoreboard {
 		
 		System.out.println("Teams Initialized");
 		
+	}
+	
+	/*
+	 * Sets scoreboards of all players in the arena to current scoreboard
+	 */
+	public void setScoreboard(TrenchArena arena) {
+		arena.executeOnAllPlayers(
+			(TrenchPlayer t) -> {
+				t.getPlayer().setScoreboard(sb);
+			}
+		);	
 	}
 	
 	/**
