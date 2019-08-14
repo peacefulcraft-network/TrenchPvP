@@ -39,7 +39,7 @@ public class KitMenu implements Listener
 	private GameMenu menu = new GameMenu("Kit Menu", 3, new onClick() {
 	    @Override
 	    public boolean click(Player p, GameMenu menu, Row row, int slot, ItemStack item) {
-	        if(row.getRow() == 0 || row.getRow() == 2){
+	        if(item != null){
 	            inventoryClick(p, item);
 	        }
 	        return true;
@@ -56,7 +56,7 @@ public class KitMenu implements Listener
 		menu.addButton(menu.getRow(0), 6, new ItemStack(Material.ANVIL), "Heavy", "Click to Equip The Heavy Class!");
 		menu.addButton(menu.getRow(2), 6, new ItemStack(Material.CLOCK), "Spy", "Click to Equip The Spy Class!");
 		menu.addButton(menu.getRow(0), 8, new ItemStack(Material.RED_STAINED_GLASS_PANE), "Quit", "Click to Leave Trench!");
-		menu.addButton(menu.getRow(2), 8, new ItemStack(Material.BLUE_STAINED_GLASS_PANE), "Purchased Classes", "Click to Access Classes Purchased Through The Store!");
+		//menu.addButton(menu.getRow(2), 8, new ItemStack(Material.BLUE_STAINED_GLASS_PANE), "Purchased Classes", "Click to Access Classes Purchased Through The Store!");
 	}
 	
 	@EventHandler
@@ -74,7 +74,7 @@ public class KitMenu implements Listener
 
 		if(cooldown.containsKey(p.getUniqueId())) {
 			long timeLeft = ((cooldown.get(p.getUniqueId())/1000) + COOLDOWN_TIME) - (System.currentTimeMillis()/1000);
-			if(canUseAgain(p) == true) {
+			if(canUseAgain(p) == true || t.getKitType() == TrenchKits.UNASSIGNED) {
 				
 				menuOpen(p);
 				
@@ -114,6 +114,7 @@ public class KitMenu implements Listener
 		if(itemText.equals("QUIT")) {
 			GameManager.quitPlayer(p);
 			cooldown.remove(p.getUniqueId());
+			return;
 		}
 		if(itemText.equals("PURCHASED CLASSES")) {
 			PurchasedMenu purchasedMenu = new PurchasedMenu();

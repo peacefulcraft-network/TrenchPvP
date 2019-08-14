@@ -59,6 +59,9 @@ public class TrenchPvP extends JavaPlugin{
 	private static StatTracker tracker;
 		public static StatTracker getStatTracker() {return tracker;}
 
+	private static KitMenu kitMenu;
+		public static KitMenu getKitMenu() { return kitMenu; }
+		
 	public TrenchPvP(){
 		main = this;
 		config = new TrenchConfig(getConfig());
@@ -142,7 +145,8 @@ public class TrenchPvP extends JavaPlugin{
 		getServer().getPluginManager().registerEvents(new KillStreakListener(), this);
 
 		//Menu listeners
-		getServer().getPluginManager().registerEvents(new KitMenu(), this);
+		kitMenu = new KitMenu();
+		getServer().getPluginManager().registerEvents(kitMenu, this);
 	}
 
 	/**

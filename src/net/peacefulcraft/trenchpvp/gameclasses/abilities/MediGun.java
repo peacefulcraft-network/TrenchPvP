@@ -62,10 +62,10 @@ public class MediGun extends TrenchAbility{
 		Damageable patient = (Damageable) e.getRightClicked();
 		if((patient.getHealth() + 2) > 20){
 			e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 1, 16), true);
-			TrenchPvP.getStatTracker().track(k.getTrenchPlayer().getPlayer().getUniqueId(), MedicStat.medic_damage_healed, 4);
+			TrenchPvP.getStatTracker().track(k.getTrenchPlayer(), MedicStat.medic_damage_healed, 4);
 		}else{
 			patient.setHealth((patient.getHealth() + 8));
-			TrenchPvP.getStatTracker().track(k.getTrenchPlayer().getPlayer().getUniqueId(), MedicStat.medic_damage_healed, 2);
+			TrenchPvP.getStatTracker().track(k.getTrenchPlayer(), MedicStat.medic_damage_healed, 2);
 		}
 		
 	}
