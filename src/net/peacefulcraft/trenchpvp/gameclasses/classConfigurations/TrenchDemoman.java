@@ -10,6 +10,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.BigBertha;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.GrenadeLauncher;
+import net.peacefulcraft.trenchpvp.gameclasses.abilities.LastWish;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.TrenchAbilityType;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 
@@ -22,6 +23,7 @@ public class TrenchDemoman extends TrenchKit{
 		//Register special ability handlers
 		getAbilityManager().registerAbility(TrenchAbilityType.PLAYER_INTERACT, new GrenadeLauncher(this));
 		getAbilityManager().registerAbility(TrenchAbilityType.PLAYER_INTERACT, new BigBertha(this));
+		getAbilityManager().registerAbility(TrenchAbilityType.ENTITY_DAMAGE_ENTITY, new LastWish(this));
 	}
 
 	/**
@@ -36,12 +38,15 @@ public class TrenchDemoman extends TrenchKit{
 
 		Inventory inv = this.getTrenchPlayer().getPlayer().getInventory();
 
-		/**
-		 * primary weapon
-		 */
 		final String PRIMARY_NAME = "Grenade Launcher";
 		final String UTIL_NAME = "Grenades";
+		final String SECONDARY_NAME = "Big Bertha's Embrace";
+		final String PASSIVE_NAME = "Last Wish";
+		final String MELEE_NAME = "Headless Horseless Headmans Axe";
 		
+		/*
+		 * Primary Weapon
+		 */
 		ItemStack primary = new ItemStack(Material.QUARTZ, 1);
 		ItemMeta pMetaData = primary.getItemMeta();
 		pMetaData.setDisplayName(PRIMARY_NAME);
@@ -52,7 +57,7 @@ public class TrenchDemoman extends TrenchKit{
 
 		primary.setItemMeta(pMetaData);
 
-		ItemStack primaryUtil = new ItemStack(Material.FIREWORK_ROCKET, 32);
+		ItemStack primaryUtil = new ItemStack(Material.FIREWORK_ROCKET, 24);
 		pMetaData = primaryUtil.getItemMeta();
 		pMetaData.setDisplayName(UTIL_NAME);
 
@@ -61,16 +66,9 @@ public class TrenchDemoman extends TrenchKit{
 
 		primaryUtil.setItemMeta(pMetaData);
 
-		inv.setItem(1, primary);
-		inv.setItem(3, primaryUtil);
-		
-		addItemName(PRIMARY_NAME, 1);
-		addItemName(UTIL_NAME, 2);
-
 		/**
 		 * Secondary Weapon
 		 */
-		final String SECONDARY_NAME = "Big Bertha's Embrace";
 		
 		ItemStack secondary = new ItemStack(Material.TNT, 1);
 		ItemMeta sMetaData = secondary.getItemMeta();
@@ -83,14 +81,10 @@ public class TrenchDemoman extends TrenchKit{
 		sMetaData.setLore(sDesc);
 
 		secondary.setItemMeta(sMetaData);
-		inv.setItem(2, secondary);
 		
-		addItemName(SECONDARY_NAME, 1);
-
 		/**
 		 * Melee Weapon
 		 */
-		final String MELEE_NAME = "Headless Horseless Headmans Axe";
 		
 		ItemStack melee = new ItemStack(Material.IRON_AXE, 1);
 		ItemMeta meleeMeta = melee.getItemMeta();
@@ -101,10 +95,31 @@ public class TrenchDemoman extends TrenchKit{
 		meleeMeta.setLore(mDesc);
 
 		melee.setItemMeta(meleeMeta);
-
-		inv.setItem(0, melee);
 		
+		/**
+		 * Passive Ability
+		 */
+		ItemStack passive = new ItemStack(Material.MUSIC_DISC_STRAD, 1);
+		ItemMeta passMeta = passive.getItemMeta();
+		passMeta.setDisplayName(PASSIVE_NAME);
+		
+		ArrayList<String> passDesc = new ArrayList<String>();
+		passDesc.add("Passive Ability: Triggers All Remaining Grenades on Death!");
+		passMeta.setLore(passDesc);
+		
+		passive.setItemMeta(passMeta);	
+		
+		inv.setItem(0, melee);
+		inv.setItem(1, primary);
+		inv.setItem(2, secondary);
+		inv.setItem(3, primaryUtil);
+		inv.setItem(5, passive);
+		
+		addItemName(PRIMARY_NAME, 1);
+		addItemName(UTIL_NAME, 2);
+		addItemName(SECONDARY_NAME, 1);
 		addItemName(MELEE_NAME, 2);
+		addItemName(PASSIVE_NAME, 2);
 	}
 
 	/*Leather Helment
