@@ -62,11 +62,13 @@ public class TrenchSniper extends TrenchKit{
 		final String PRIMARY_NAME = "Component Rifle Mk.II";
 		final String FIRST_UTIL_NAME = "Bullets";
 		final String SECOND_UTIL_NAME = "Power Shot";
+		final String PASSIVE_NAME = "Phantom Arrow";
 		
 		addItemName(MELEE_NAME, 2);
 		addItemName(PRIMARY_NAME, 2);
 		addItemName(FIRST_UTIL_NAME, 1);
 		addItemName(SECOND_UTIL_NAME, 1);
+		addItemName(PASSIVE_NAME, 2);
 		
 		/**
 		 * Sniper Bow & Arrows
@@ -86,7 +88,7 @@ public class TrenchSniper extends TrenchKit{
 		primary.setItemMeta(pMetaData);
 
 		//Create arrows for sniper riffle
-		ItemStack primaryUtil = new ItemStack(Material.ARROW, 64);
+		ItemStack primaryUtil = new ItemStack(Material.ARROW, 56);
 		ItemMeta pUMetaData = primaryUtil.getItemMeta();
 		pUMetaData.setDisplayName(FIRST_UTIL_NAME);
 		ArrayList<String> pUDesc = new ArrayList<String>();
@@ -120,9 +122,26 @@ public class TrenchSniper extends TrenchKit{
 		sMeta.setDisplayName(MELEE_NAME);
 		secondary.setItemMeta(sMeta);
 		secondary.addEnchantment(Enchantment.SWEEPING_EDGE, 1);
+		secondary.addEnchantment(Enchantment.DURABILITY, 3);
 
 		inv.setItem(1, secondary);
-
+		
+		/*
+		 * Passive
+		 */
+		ItemStack passive = new ItemStack(Material.END_ROD, 1);
+		ItemMeta passMeta = passive.getItemMeta();
+		passMeta.setDisplayName(PASSIVE_NAME);
+		
+		ArrayList<String> passDesc = new ArrayList<String>();
+		passDesc.add("Passive Ability: 40% Chance For Arrow");
+		passDesc.add("to Return to You After Being Shot!");
+		passMeta.setLore(passDesc);
+		
+		passive.setItemMeta(passMeta);
+		
+		inv.setItem(5, passive);
+		
 	}
 
 }

@@ -11,6 +11,7 @@ import net.peacefulcraft.trenchpvp.commands.tppSet;
 import net.peacefulcraft.trenchpvp.commands.tppToggle;
 import net.peacefulcraft.trenchpvp.commands.trJoin;
 import net.peacefulcraft.trenchpvp.commands.trLeave;
+import net.peacefulcraft.trenchpvp.gameclasses.abilities.PhantomArrow;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.AbilityClickListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.AbilityEntityDamageEntityListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.AbilityPlayerDeathListener;
@@ -136,6 +137,7 @@ public class TrenchPvP extends JavaPlugin{
 		getServer().getPluginManager().registerEvents(new AbilityPlayerToggleFlight(), this);
 		
 		getServer().getPluginManager().registerEvents(new LaunchPadUse(), this);
+		getServer().getPluginManager().registerEvents(new PhantomArrow(), this);
 
 		//Stat listeners
 		getServer().getPluginManager().registerEvents(new ConsumeListener(), this);
