@@ -23,7 +23,7 @@ public class AbsoluteDefense extends TrenchAbility{
 	
 	public AbsoluteDefense(TrenchKit k) {
 		//Set cooldown time to 20 seconds
-		super(k.getTrenchPlayer(), 30000, "Absolute Defense");
+		super(k.getTrenchPlayer(), 50000, "Absolute Defense");
 		
 		this.k = k;
 	}
@@ -38,6 +38,7 @@ public class AbsoluteDefense extends TrenchAbility{
 		//Checks item in main hand is Armadillo Shell
 		if(!(p.getInventory().getItemInMainHand().getType() == Material.SHULKER_SHELL)) { return false; }
 		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Absolute Defense"))) { return false; }
+		if(p.hasPotionEffect(PotionEffectType.SLOW)) return false;
 		
 		return true;	
 	}
@@ -49,7 +50,7 @@ public class AbsoluteDefense extends TrenchAbility{
 	public void triggerAbility(Event ev) {
 		
 		Player p = k.getTrenchPlayer().getPlayer();
-		p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, EFFECT_TIME, 4));
+		p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, EFFECT_TIME, 3));
 		p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, EFFECT_TIME, 3));
 		p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, EFFECT_TIME, 5));
 		

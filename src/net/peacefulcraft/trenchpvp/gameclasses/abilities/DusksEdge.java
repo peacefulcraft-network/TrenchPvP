@@ -28,6 +28,7 @@ public class DusksEdge extends TrenchAbility{
 		//Checks item in main hand is Dense Axe
 		if(!(p.getInventory().getItemInMainHand().getType() == Material.IRON_AXE)) return false;
 		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Dusk's Edge"))) return false;
+		if(p.hasPotionEffect(PotionEffectType.SLOW)) return false;
 		
 		if(ev instanceof PlayerInteractEntityEvent) { return false; }
 		

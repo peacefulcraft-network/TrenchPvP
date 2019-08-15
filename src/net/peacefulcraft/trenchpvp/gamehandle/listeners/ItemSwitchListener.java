@@ -1,3 +1,4 @@
+
 package net.peacefulcraft.trenchpvp.gamehandle.listeners;
 
 import org.bukkit.Material;
@@ -5,7 +6,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerItemHeldEvent;
-import org.bukkit.inventory.ItemStack;
 
 import net.md_5.bungee.api.ChatColor;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKit;
@@ -24,8 +24,7 @@ public class ItemSwitchListener implements Listener
 	public void switchEvent(PlayerItemHeldEvent e) {
 		
 		TrenchPlayer t = TeamManager.findTrenchPlayer(e.getPlayer());
-		if(t == null)
-			return;
+		if(t == null) {return;}
 		
 		TrenchKit k = t.getKit();
 		Player p = t.getPlayer();
@@ -33,12 +32,10 @@ public class ItemSwitchListener implements Listener
 		if(p.getInventory().getItemInMainHand().getType().equals(Material.AIR) || p.getInventory().getItemInMainHand().getType().equals(null)) {
 			return;
 		}
-
-		ItemStack item = p.getInventory().getItem(e.getNewSlot());
-		if(item == null) { return; } // Empty Slot
-		
-		if(k.getItemNamesSet().contains(item.getItemMeta().getDisplayName())) {
-			Announcer.messagePlayerActionBar(p, message(k, item.getItemMeta().getDisplayName()));
+		//TODO:Null Pointer fix
+		int index = e.getNewSlot();
+		if(k.getItemNamesSet().contains(p.getInventory().getItem(index).getItemMeta().getDisplayName())) {
+			Announcer.messagePlayerActionBar(p, message(k, p.getInventory().getItem(index).getItemMeta().getDisplayName()));
 		}
 	}
 	
@@ -49,7 +46,6 @@ public class ItemSwitchListener implements Listener
 			return getLeftPrefix() + ChatColor.AQUA + "None" + ChatColor.WHITE + "  |  " + ChatColor.AQUA + name + getRightPrefix();
 		} else {
 			return getLeftPrefix() + ChatColor.AQUA + "None" + ChatColor.WHITE + "  |  " + ChatColor.AQUA + "None" + getRightPrefix();
-	
 		}
 	}
 }
