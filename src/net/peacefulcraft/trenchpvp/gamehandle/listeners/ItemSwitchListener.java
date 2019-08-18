@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerItemHeldEvent;
+import org.bukkit.inventory.ItemStack;
 
 import net.md_5.bungee.api.ChatColor;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKit;
@@ -33,9 +34,10 @@ public class ItemSwitchListener implements Listener
 			return;
 		}
 		//TODO:Null Pointer fix
-		int index = e.getNewSlot();
-		if(k.getItemNamesSet().contains(p.getInventory().getItem(index).getItemMeta().getDisplayName())) {
-			Announcer.messagePlayerActionBar(p, message(k, p.getInventory().getItem(index).getItemMeta().getDisplayName()));
+		ItemStack item = p.getInventory().getItem(e.getNewSlot());
+		if(item == null) { return; }
+		if(k.getItemNamesSet().contains(item.getItemMeta().getDisplayName())) {
+			Announcer.messagePlayerActionBar(p, message(k, item.getItemMeta().getDisplayName()));
 		}
 	}
 	
