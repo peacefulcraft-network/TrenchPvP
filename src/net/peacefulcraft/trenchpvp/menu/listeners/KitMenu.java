@@ -56,7 +56,8 @@ public class KitMenu implements Listener
 		menu.addButton(menu.getRow(0), 6, new ItemStack(Material.ANVIL), "Heavy", "Click to Equip The Heavy Class!");
 		menu.addButton(menu.getRow(2), 6, new ItemStack(Material.CLOCK), "Spy", "Click to Equip The Spy Class!");
 		menu.addButton(menu.getRow(0), 8, new ItemStack(Material.RED_STAINED_GLASS_PANE), "Quit", "Click to Leave Trench!");
-		//menu.addButton(menu.getRow(2), 8, new ItemStack(Material.BLUE_STAINED_GLASS_PANE), "Purchased Classes", "Click to Access Classes Purchased Through The Store!");
+		menu.addButton(menu.getRow(1), 8, new ItemStack(Material.GREEN_STAINED_GLASS_PANE), "Ultimate Classes", "Click to Access Your Next Level Classes!");
+		menu.addButton(menu.getRow(2), 8, new ItemStack(Material.BLUE_STAINED_GLASS_PANE), "Purchased Classes", "Click to Access Classes Purchased Through The Store!");
 	}
 	
 	@EventHandler
@@ -120,6 +121,9 @@ public class KitMenu implements Listener
 			PurchasedMenu purchasedMenu = new PurchasedMenu();
 			menu.close(p);
 			purchasedMenu.menuOpen(p);
+		}
+		if(itemText.equals("NEXT LEVEL CLASSES")) {
+			
 		}
 		
 		switch(TrenchKits.valueOf(itemText)){//Check which class was selected (based on 3rd line of class sign)	

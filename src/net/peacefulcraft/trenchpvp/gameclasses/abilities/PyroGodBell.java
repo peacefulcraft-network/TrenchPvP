@@ -46,7 +46,7 @@ public class PyroGodBell extends TrenchAbility
 	public void triggerAbility(Event ev)
 	{
 		Player p = k.getTrenchPlayer().getPlayer();
-		int primaryIndex = p.getInventory().first(Material.BELL);
+		int primaryIndex = p.getInventory().first(Material.DIAMOND_AXE); //Changed from enchanting bell to enchanting axe
 		ItemStack primary = p.getInventory().getItem(primaryIndex);
 		
 		ItemStack copy = primary;

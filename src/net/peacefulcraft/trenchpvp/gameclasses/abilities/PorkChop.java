@@ -3,7 +3,9 @@ package net.peacefulcraft.trenchpvp.gameclasses.abilities;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
+import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKit;
 
 public class PorkChop extends TrenchAbility
@@ -20,10 +22,20 @@ public class PorkChop extends TrenchAbility
 	@Override
 	public boolean abilitySignature(Event ev)
 	{
-		Player p = k.getTrenchPlayer().getPlayer();
-		
-		if(!(p.getInventory().getItemInMainHand().getType() == Material.PORKCHOP)) { return false; }
-		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Pork CHOP"))) { return false; }
+		try {
+			
+			EntityDamageByEntityEvent e = (EntityDamageByEntityEvent) ev;
+			
+			Player victim = (Player) e.getEntity();
+			Player king = (Player) e.getDamager();
+			
+			if(!(king.getInventory().getItemInMainHand().getType() == Material.PORKCHOP)) { return false; }
+			if(!(king.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Pork CHOP"))) { return false; }
+			
+		} catch(ClassCastException ex) {
+			TrenchPvP.logWarning("Error Triggering Witherbringer event. Incompatible event loop " + ev.getClass());
+			return false;
+		}
 		
 		return true;
 	}
@@ -31,7 +43,23 @@ public class PorkChop extends TrenchAbility
 	@Override
 	public void triggerAbility(Event ev)
 	{
-		//TODO
+		try {
+			
+			EntityDamageByEntityEvent e = (EntityDamageByEntityEvent) ev;
+			
+			Player victim = (Player) e.getEntity();
+			Player king = (Player) e.getDamager();
+			
+			if(victim.getHealth() - 2 <= 0) {
+				victim.setHealth(0);
+			} else {
+				victim.setHealth(victim.getHealth() - 4);	
+			}
+			
+		} catch(ClassCastException ex) {
+			TrenchPvP.logWarning("Error Triggering Witherbringer event. Incompatible event loop " + ev.getClass());
+			return;
+		}
 	}
 
 }
