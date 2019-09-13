@@ -32,7 +32,7 @@ public class TrenchPyro extends TrenchKit{
 		super(t, TrenchKits.PYRO);
 		this.t = t;
 
-		resetInfernoTraps();
+		infernoTraps = new ArrayList<Location>();
 		
 		//Register special ability handlers
 		infernoTrapRemover = new InfernoTrapRemover(this);
@@ -42,6 +42,11 @@ public class TrenchPyro extends TrenchKit{
 		getAbilityManager().registerAbility(TrenchAbilityType.PLAYER_DEATH, infernoTrapRemover);
 	}
 
+	@Override
+	public void dinitConfig() {
+		infernoTrapRemover.removeInfernoTraps();
+	}
+	
 	@Override
 	public void equipArmor() {
 

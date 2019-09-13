@@ -16,7 +16,7 @@ import org.bukkit.potion.PotionEffectType;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.TrenchAbilityManager;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 
-public abstract class TrenchKit implements TrenchKitInventory{
+public abstract class TrenchKit implements TrenchKitInventory, TrenchClassConfiguration{
 	
 	protected TrenchPlayer t;
 		public TrenchPlayer getTrenchPlayer() { return t; }
@@ -43,6 +43,24 @@ public abstract class TrenchKit implements TrenchKitInventory{
 		this.kitType = kitType;
 		this.abilities = new TrenchAbilityManager();
 		this.itemNames = new HashMap<String, Integer>();
+	}
+	
+	/**
+	 * Overriden by children if needed
+	 */
+	@Override
+	public void initConfig() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/**
+	 * Overriden by children if needed
+	 */
+	@Override
+	public void dinitConfig() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	/**
