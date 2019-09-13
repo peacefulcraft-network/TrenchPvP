@@ -12,6 +12,7 @@ import net.peacefulcraft.trenchpvp.gameclasses.abilities.CriticalIntelligence;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.FriendlyKissOfDeath;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.HiddenBlade;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.HiddenBladeBlock;
+import net.peacefulcraft.trenchpvp.gameclasses.abilities.IntelligenceRemover;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.TrenchAbilityType;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 
@@ -22,6 +23,7 @@ public class TrenchSpy extends TrenchKit{
 	private ArrayList<TrenchPlayer> intelligenceList;
 		public ArrayList<TrenchPlayer> getIntelligence() {return intelligenceList; }
 		public void resetIntelligence() {intelligenceList = new ArrayList<TrenchPlayer>(); }
+	public IntelligenceRemover intelligenceRemover;
 	
 	public TrenchSpy(TrenchPlayer t) {
 		super(t, TrenchKits.SPY);
@@ -29,6 +31,7 @@ public class TrenchSpy extends TrenchKit{
 		resetIntelligence();
 		
 		//Register ability listeners
+		intelligenceRemover = new IntelligenceRemover(this);
 		getAbilityManager().registerAbility(TrenchAbilityType.PLAYER_INTERACT, new HiddenBlade(this));
 		getAbilityManager().registerAbility(TrenchAbilityType.ENTITY_DAMAGE_ENTITY, new HiddenBladeBlock(this));
 		getAbilityManager().registerAbility(TrenchAbilityType.PLAYER_INTERACT_ENTITY, new CriticalIntelligence(this));

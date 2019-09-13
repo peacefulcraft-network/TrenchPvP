@@ -29,6 +29,15 @@ public class TrenchScout extends TrenchKit {
 		getAbilityManager().registerAbility(TrenchAbilityType.PLAYER_TOGGLE_FLIGHT, dj);
 	}
 
+	public void initConfig() {
+		this.getTrenchPlayer().getPlayer().setAllowFlight(true);
+	}	
+	
+	public void dinitConfig() {
+		this.getTrenchPlayer().getPlayer().setAllowFlight(false);
+		this.getTrenchPlayer().getPlayer().setFlying(false);
+	}
+	
 	@Override
 	public void equipItems() {
 		Inventory inv = this.getTrenchPlayer().getPlayer().getInventory();
