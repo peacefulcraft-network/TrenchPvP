@@ -43,23 +43,26 @@ public class TerraWall extends TrenchAbility
 		
 		Block lookingBlock = p.getTargetBlock((Set<Material>) null, 4);
 		Block upBlock = lookingBlock.getRelative(BlockFace.UP);
-		if(upBlock != null && upBlock.getType().equals(Material.AIR)) {
+		if(upBlock != null && (upBlock.getType().equals(Material.AIR) || upBlock.getType().equals(Material.FIRE))) {
 			for(int y=0; y <= 6; y++) {
 				Block replace = upBlock.getRelative(BlockFace.UP, y);
 				
-				for(int i=-1; i <= 1; i+=2) {
+				for(int i=-3; i <= 3; i++) {
 					Block side = replace.getRelative(getSideDirections(p), i);
-					if(side.getType().equals(Material.AIR) && side != null) {
+					if(i == 0) {
+						continue;
+					}
+					if((side.getType().equals(Material.AIR) || side.getType().equals(Material.FIRE)) && side != null) {
 						side.setType(Material.STONE);
 						k.getTerraWalls().add(side.getLocation());
 					} 
 				}
 				
-				if(replace.getType().equals(Material.AIR) && replace != null) {
+				if((replace.getType().equals(Material.AIR) || replace.getType().equals(Material.FIRE)) && replace != null) {
 					replace.setType(Material.STONE);
 					k.getTerraWalls().add(replace.getLocation()); //Adding block locations to wall list
 				} else {
-					break;
+					continue; //Was break
 				}
 			}
 		}
