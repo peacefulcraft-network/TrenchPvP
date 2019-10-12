@@ -6,13 +6,21 @@ import java.util.UUID;
 import org.bukkit.entity.Player;
 
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
+import net.peacefulcraft.trenchpvp.stats.TrenchStats.GeneralStat;
 
 public class StatTracker
 {
 	private HashMap<TrenchPlayer, HashMap<TrenchStat, Integer>> statMap = new HashMap<TrenchPlayer, HashMap<TrenchStat, Integer>>();
 		public HashMap<TrenchPlayer, HashMap<TrenchStat, Integer>> getStatData(){ return statMap; }
-		public void clearStats() { statMap = new HashMap<TrenchPlayer, HashMap<TrenchStat,Integer>>(); }
-		
+	
+	private HashMap<TrenchPlayer, Double> bounties = new HashMap<TrenchPlayer, Double>();
+		public HashMap<TrenchPlayer, Double> getBounties(){ return bounties; }
+	
+	public void clearStats() { 
+		statMap = new HashMap<TrenchPlayer, HashMap<TrenchStat,Integer>>(); 
+		bounties = new HashMap<TrenchPlayer, Double>();
+	}
+	
 	public StatTracker() {
 
 	}
@@ -28,10 +36,19 @@ public class StatTracker
 				temp.put(stat, value);
 				statMap.put(t, temp);
 			}
-		} else if(!(statMap.containsKey(t))) {
+			
+		} else {
 			HashMap<TrenchStat, Integer> temp = new HashMap<TrenchStat, Integer>();
 			temp.put(stat, value);
 			statMap.put(t, temp);
+		}
+		
+		if((stat instanceof GeneralStat) && stat == GeneralStat.player_kills) {
+			if(bounties.containsKey(t)) {
+				bounties.put(t, bounties.get(t) + 2.5);
+			}else {
+				bounties.put(t, 2.5);
+			}
 		}
 	}
 	
