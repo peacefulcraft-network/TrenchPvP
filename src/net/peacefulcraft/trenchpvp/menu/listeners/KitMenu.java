@@ -56,7 +56,7 @@ public class KitMenu implements Listener
 		menu.addButton(menu.getRow(0), 6, new ItemStack(Material.ANVIL), "Heavy", "Click to Equip The Heavy Class!");
 		menu.addButton(menu.getRow(2), 6, new ItemStack(Material.CLOCK), "Spy", "Click to Equip The Spy Class!");
 		menu.addButton(menu.getRow(0), 8, new ItemStack(Material.RED_STAINED_GLASS_PANE), "Quit", "Click to Leave Trench!");
-		//menu.addButton(menu.getRow(2), 8, new ItemStack(Material.BLUE_STAINED_GLASS_PANE), "Purchased Classes", "Click to Access Classes Purchased Through The Store!");
+		menu.addButton(menu.getRow(2), 8, new ItemStack(Material.BLUE_STAINED_GLASS_PANE), "Purchased Classes", "Click to Access Classes Purchased Through The Minigames Store!");
 	}
 	
 	@EventHandler
@@ -122,7 +122,29 @@ public class KitMenu implements Listener
 			purchasedMenu.menuOpen(p);
 		}
 		
-		switch(TrenchKits.valueOf(itemText)){//Check which class was selected (based on 3rd line of class sign)	
+		/*
+			Check that the enum is valid before we try taking the
+			.valueOf. Eventually we should probably look at the 
+			name of the inventory and check it matches "Trench Kits" 
+			as that's faster than this and we'll just assume that inv.
+			will only have PurchasedKit enum types. if it doesn't something is wrong
+		*/
+		boolean invalid = true;
+		for(TrenchKits key : TrenchKits.values()) {
+			if(itemText.equalsIgnoreCase( key.toString() )) {
+				invalid = false;
+				break;
+			}
+		}
+		
+		if(invalid)
+			return;
+		
+		/*
+		  End of Check
+		*/
+		
+		switch(TrenchKits.valueOf(itemText)){
 		case SCOUT:
 				
 			t.equipKit(new TrenchScout(t));
