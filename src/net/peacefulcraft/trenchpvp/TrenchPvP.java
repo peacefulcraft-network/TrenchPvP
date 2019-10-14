@@ -68,13 +68,13 @@ public class TrenchPvP extends JavaPlugin{
 		
 	public TrenchPvP(){
 		main = this;
-		config = new TrenchConfig(getConfig());
 	}
 
 	public void onEnable(){
-		//Generate default config, if none exists
+		//Generate default config, if none exists. Parse config
 		this.saveDefaultConfig();
-
+		config = new TrenchConfig(getConfig());
+		
 		//Load all plugin commands from ~.commands.CommandLoader.java
 		this.loadCommands();
 		
