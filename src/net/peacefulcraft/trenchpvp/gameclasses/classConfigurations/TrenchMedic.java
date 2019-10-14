@@ -10,6 +10,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 
+import net.peacefulcraft.trenchpvp.gameclasses.abilities.DangerousHealthHose;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.MediGun;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.TrenchAbilityType;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
@@ -21,7 +22,7 @@ public class TrenchMedic extends TrenchKit{
 
 		//Register special ability handlers
 		getAbilityManager().registerAbility(TrenchAbilityType.PLAYER_INTERACT_ENTITY, new MediGun(this));
-
+		getAbilityManager().registerAbility(TrenchAbilityType.PLAYER_INTERACT, new DangerousHealthHose(this));
 	}
 
 
@@ -65,11 +66,13 @@ public class TrenchMedic extends TrenchKit{
 		
 		final String MELEE_NAME = "Scalpel";
 		final String PRIMARY_NAME = "Medi Gun";
-		final String SECONDARY_NAME = "Syringe Gun";
+		final String RANGED_NAME = "Syringe Gun";
+		final String SECONDARY_NAME = "Dangerous Health Hose";		
 		
 		addItemName(MELEE_NAME, 2);
 		addItemName(PRIMARY_NAME, 1);
-		addItemName(SECONDARY_NAME, 2);	
+		addItemName(RANGED_NAME, 2);
+		addItemName(SECONDARY_NAME, 1);
 		
 		ItemStack melee = new ItemStack(Material.IRON_SWORD, 1);
 		ItemMeta meleeMeta = melee.getItemMeta();
@@ -84,7 +87,7 @@ public class TrenchMedic extends TrenchKit{
 		
 		melee.setItemMeta(meleeMeta);
 		
-		inv.setItem(1, melee);		
+		inv.setItem(0, melee);		
 		
 		/*Medic - Medi Gun
 		 *Heal players ever 1.5 seconds (MediGun.java (class))
@@ -97,23 +100,39 @@ public class TrenchMedic extends TrenchKit{
 		pMetaData.setDisplayName(PRIMARY_NAME);
 
 		ArrayList<String> pDesc = new ArrayList<String>();
-		pDesc.add("Right Click Your Teamates to Heal Them! (1.5 second cool down)");
+		pDesc.add("Right Click Your Teamates to Heal Them!");
+		pDesc.add("Cooldown Time: 1.5 seconds");
 		pMetaData.setLore(pDesc);
 
 		primary.setItemMeta(pMetaData);
-		inv.setItem(0, primary);
+		inv.setItem(2, primary);
 
 		/*Bow:Syringe Gun w/ 32 arrows
 		 *
 		 */
-		ItemStack secondary = new ItemStack(Material.BOW, 1);
+		ItemStack ranged = new ItemStack(Material.BOW, 1);
+		ItemMeta rMeta = ranged.getItemMeta();
+		rMeta.setDisplayName(RANGED_NAME);
+		ranged.setItemMeta(rMeta);
+		ItemStack rangedUtil = new ItemStack(Material.ARROW, 32);//give arrows for syringe gun
+
+		inv.setItem(1, ranged);
+		inv.setItem(4, rangedUtil);
+		
+		/*
+		 * Secondary ability
+		 */
+		ItemStack secondary = new ItemStack(Material.BEACON);
 		ItemMeta sMeta = secondary.getItemMeta();
 		sMeta.setDisplayName(SECONDARY_NAME);
+		
+		ArrayList<String> sDesc = new ArrayList<String>();
+		sDesc.add("Right Click To Pour Your Life Into Your Teammates!");
+		sDesc.add("Cooldown Time: 30 Seconds");
+		sMeta.setLore(sDesc);
+		
 		secondary.setItemMeta(sMeta);
-		ItemStack secondaryyUtil = new ItemStack(Material.ARROW, 32);//give arrows for syringe gun
-
-		inv.setItem(2, secondary);
-		inv.setItem(3, secondaryyUtil);
-
+		
+		inv.setItem(3, secondary);
 	}
 }

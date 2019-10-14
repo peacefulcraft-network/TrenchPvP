@@ -38,24 +38,24 @@ public class DamageListener implements Listener
 				TrenchKits kit = t.getKitType();
 				int damage = (int) e.getDamage();
 				
-				TrenchPvP.getStatTracker().track(damager.getUniqueId(), GeneralStat.player_damage, damage);
+				TrenchPvP.getStatTracker().track(t, GeneralStat.player_damage, damage);
 				
 				if(kit == TrenchKits.DEMOMAN) {
-					TrenchPvP.getStatTracker().track(damager.getUniqueId(), DemoStat.demoman_damage_dealt, damage);
+					TrenchPvP.getStatTracker().track(t, DemoStat.demoman_damage_dealt, damage);
 				} else if(kit == TrenchKits.HEAVY) {
-					TrenchPvP.getStatTracker().track(damager.getUniqueId(), HeavyStat.heavy_damage_dealt, damage);
+					TrenchPvP.getStatTracker().track(t, HeavyStat.heavy_damage_dealt, damage);
 				} else if(kit == TrenchKits.MEDIC) {
-					TrenchPvP.getStatTracker().track(damager.getUniqueId(), MedicStat.medic_damage_dealt, damage);
+					TrenchPvP.getStatTracker().track(t, MedicStat.medic_damage_dealt, damage);
 				} else if(kit == TrenchKits.PYRO) {
-					TrenchPvP.getStatTracker().track(damager.getUniqueId(), PyroStat.pyro_damage_dealt, damage);
+					TrenchPvP.getStatTracker().track(t, PyroStat.pyro_damage_dealt, damage);
 				} else if(kit == TrenchKits.SCOUT) {
-					TrenchPvP.getStatTracker().track(damager.getUniqueId(), ScoutStat.scout_damage_dealt, damage);
+					TrenchPvP.getStatTracker().track(t, ScoutStat.scout_damage_dealt, damage);
 				} else if(kit == TrenchKits.SNIPER) {
-					TrenchPvP.getStatTracker().track(damager.getUniqueId(), SniperStat.sniper_damage_dealt, damage);
+					TrenchPvP.getStatTracker().track(t, SniperStat.sniper_damage_dealt, damage);
 				} else if(kit == TrenchKits.SOLDIER) {
-					TrenchPvP.getStatTracker().track(damager.getUniqueId(), SoldierStat.soldier_damage_dealt, damage);
+					TrenchPvP.getStatTracker().track(t, SoldierStat.soldier_damage_dealt, damage);
 				} else if(kit == TrenchKits.SPY) {
-					TrenchPvP.getStatTracker().track(damager.getUniqueId(), SpyStat.spy_damage_dealt, damage);
+					TrenchPvP.getStatTracker().track(t, SpyStat.spy_damage_dealt, damage);
 				}
 			}
 		}

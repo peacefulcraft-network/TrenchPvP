@@ -54,7 +54,7 @@ public class PowerShot extends TrenchAbility{
 			
 			p.getInventory().setItem(itemIndex, shotR);
 			
-			TrenchPvP.getStatTracker().track(p.getUniqueId(), SniperStat.sniper_power_shot_upgrades, 1);
+			TrenchPvP.getStatTracker().track(k.getTrenchPlayer(), SniperStat.sniper_power_shot_upgrades, 1);
 			
 			BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
             scheduler.scheduleSyncDelayedTask(TrenchPvP.getPluginInstance() , new Runnable() {

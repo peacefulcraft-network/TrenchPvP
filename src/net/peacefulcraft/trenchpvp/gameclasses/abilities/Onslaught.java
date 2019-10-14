@@ -65,7 +65,7 @@ public class Onslaught extends TrenchAbility{
 					redstone.setAmount(redstone.getAmount() + 1);
 					killer.getInventory().setItem(itemIndex, redstone);
 					
-					if(redstone.getAmount() > 4) {
+					if(redstone.getAmount() > 4 || killCount > 4) {
 						return;
 					}
 					

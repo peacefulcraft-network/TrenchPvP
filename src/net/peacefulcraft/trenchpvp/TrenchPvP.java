@@ -12,6 +12,7 @@ import net.peacefulcraft.trenchpvp.commands.trLeave;
 import net.peacefulcraft.trenchpvp.config.ArenaConfig;
 import net.peacefulcraft.trenchpvp.config.TrenchConfig;
 import net.peacefulcraft.trenchpvp.config.YAMLFileFilter;
+import net.peacefulcraft.trenchpvp.gameclasses.abilities.PhantomArrow;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.AbilityClickListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.AbilityEntityDamageEntityListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.AbilityPlayerDeathListener;
@@ -24,7 +25,7 @@ import net.peacefulcraft.trenchpvp.gamehandle.TrenchManager;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.ArrowImpactListener;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.BlockIgnitionTimer;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.ChangeClassSign;
-import net.peacefulcraft.trenchpvp.gamehandle.listeners.ItemListener;
+import net.peacefulcraft.trenchpvp.gamehandle.listeners.ItemDropListener;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.ItemSwitchListener;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.JoinGameListen;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.JoinGameSign;
@@ -121,6 +122,8 @@ public class TrenchPvP extends JavaPlugin{
 		getServer().getPluginManager().registerEvents(new QuitGameListen(), this);
 		getServer().getPluginManager().registerEvents(new PlayerRespawning(), this);
 		getServer().getPluginManager().registerEvents(new ItemListener(), this);
+		getServer().getPluginManager().registerEvents(new PvPController(), this);
+		getServer().getPluginManager().registerEvents(new ItemDropListener(), this);
 		getServer().getPluginManager().registerEvents(new ArrowImpactListener(), this);
 		getServer().getPluginManager().registerEvents(new TNTIgnition(), this);
 		getServer().getPluginManager().registerEvents(new ItemSwitchListener(), this);
@@ -134,6 +137,7 @@ public class TrenchPvP extends JavaPlugin{
 		getServer().getPluginManager().registerEvents(new AbilityPlayerToggleFlight(), this);
 		
 		getServer().getPluginManager().registerEvents(new LaunchPadUse(), this);
+		getServer().getPluginManager().registerEvents(new PhantomArrow(), this);
 
 		//Stat listeners
 		getServer().getPluginManager().registerEvents(new ConsumeListener(), this);

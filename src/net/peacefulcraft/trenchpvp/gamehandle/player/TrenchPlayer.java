@@ -59,25 +59,21 @@ public class TrenchPlayer{
 	}
 	
 	public void equipKit(TrenchKit k) {
+		
 		dequipKits();
 		clearPotionEffects();
 		this.kitInstance = k;
+		k.initConfig();
 		k.equip();
 		p.setGameMode(GameMode.ADVENTURE);
 	}
 	
-	public void dequipKits() {
-		//Dirty way to remove all inferno traps
-		//TODO: Standardize dequip tasks for all Kits
-		if(kitInstance instanceof TrenchPyro) {
-			((TrenchPyro) kitInstance).infernoTrapRemover.removeInfernoTraps();
-		}
-		
+	public void dequipKits() {		
 		clearPotionEffects();
 		p.getInventory().clear();
 		p.getInventory().setArmorContents(new ItemStack[p.getInventory().getArmorContents().length]);
-		p.setFlying(false);
-		p.setAllowFlight(false);
+		kitInstance.dinitConfig();
+		
 		this.kitInstance = new TrenchUndefined(this);
 	}
 	

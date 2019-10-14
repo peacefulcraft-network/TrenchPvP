@@ -27,7 +27,7 @@ public class FriendlykillListener implements Listener
 		}
 		
 		if(killer.getPlayerTeam() == vic.getPlayerTeam()) {
-			TrenchPvP.getStatTracker().track(agent.getUniqueId(), GeneralStat.player_friendly_kills, 1);
+			TrenchPvP.getStatTracker().track(killer, GeneralStat.player_friendly_kills, 1);
 		}
 	}
 }

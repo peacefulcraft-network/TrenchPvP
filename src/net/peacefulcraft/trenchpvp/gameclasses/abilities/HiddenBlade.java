@@ -15,7 +15,7 @@ import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKit;
 
 public class HiddenBlade extends TrenchAbility{
 	
-	private final int EFFECT_TIME = 200;
+	private final int EFFECT_TIME = 140;
 	
 	public HiddenBlade(TrenchKit k) {
 		super(k.getTrenchPlayer(), 16000, "Hidden Blade");

@@ -24,10 +24,10 @@ public class ConsumeListener implements Listener
 		}
 		
 		if(food.getType() == Material.BREAD) {
-			TrenchPvP.getStatTracker().track(p.getUniqueId(), GeneralStat.player_bread_eaten, 1);
+			TrenchPvP.getStatTracker().track(t, GeneralStat.player_bread_eaten, 1);
 		}
 		if(food.getType() == Material.POTION) {
-			TrenchPvP.getStatTracker().track(p.getUniqueId(), GeneralStat.player_health_potions_drank, 1);
+			TrenchPvP.getStatTracker().track(t, GeneralStat.player_health_potions_drank, 1);
 		}
 	}
 }

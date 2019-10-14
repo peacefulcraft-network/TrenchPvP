@@ -29,109 +29,125 @@ public class KillListener implements Listener
 		if( !(e.getEntity().getKiller() instanceof Player) ) { return; }
 		
 		Player killer = e.getEntity().getKiller();
+		Player dead = e.getEntity();
 		
-		TrenchPlayer t = TrenchPvP.getTrenchManager().findTrenchPlayer(killer);
-		if(t == null) {
+		TrenchPlayer tk = TeamManager.findTrenchPlayer(killer);
+		TrenchPlayer td = TeamManager.findTrenchPlayer(dead);
+		if(tk == null || td == null) {
+			/*
+			 * TODO: This won't track environment deaths, IE falling
+			 * or spawned fireballs for some explosions
+			 */
 			return;
 		}
-		TrenchKits kit = t.getKitType();
+		TrenchKits kit = tk.getKitType();
 		
-		TrenchPvP.getStatTracker().track(killer.getUniqueId(), GeneralStat.player_kills, 1);
+		TrenchPvP.getStatTracker().track(tk, GeneralStat.player_kills, 1);
+		TrenchPvP.getStatTracker().track(td, GeneralStat.player_deaths, 1);
+
 		
-		if(t.getPlayerTeam() == TrenchTeam.BLUE) {
-			TrenchPvP.getTrenchManager().getCurrentArena().getScoreboard().registerBlueKill();
+		if(tk.getPlayerTeam() == TrenchTeams.BLUE) {
+			TrenchPvP.getTeamManager().getScoreboard().registerBlueKill();
 		}else {
 			TrenchPvP.getTrenchManager().getCurrentArena().getScoreboard().registerRedKill();
 		}
 		
 		if(kit == TrenchKits.DEMOMAN) {
-			demoKill(killer);
+			TrenchPvP.getStatTracker().track(td, DemoStat.demoman_deaths, 1);
+			demoKill(tk);
 		} else if(kit == TrenchKits.HEAVY) {
-			heavyKill(killer);
+			TrenchPvP.getStatTracker().track(td, HeavyStat.heavy_deaths, 1);
+			heavyKill(tk);
 		} else if(kit == TrenchKits.MEDIC) {
-			medicKill(killer);
+			TrenchPvP.getStatTracker().track(td, MedicStat.medic_deaths, 1);
+			medicKill(tk);
 		} else if(kit == TrenchKits.PYRO) {
-			pyroKill(killer);
+			TrenchPvP.getStatTracker().track(td, PyroStat.pyro_deaths, 1);
+			pyroKill(tk);
 		} else if(kit == TrenchKits.SCOUT) {
-			scoutKill(killer);
+			TrenchPvP.getStatTracker().track(td, ScoutStat.scout_deaths, 1);
+			scoutKill(tk);
 		} else if(kit == TrenchKits.SNIPER) {
-			sniperKill(killer);
+			TrenchPvP.getStatTracker().track(td, SniperStat.sniper_deaths, 1);
+			sniperKill(tk);
 		} else if(kit == TrenchKits.SOLDIER) {
-			soldierKill(killer);
+			TrenchPvP.getStatTracker().track(td, SoldierStat.soldier_deaths, 1);
+			soldierKill(tk);
 		} else if(kit == TrenchKits.SPY) {
-			spyKill(killer);
+			TrenchPvP.getStatTracker().track(td, SpyStat.spy_deaths, 1);
+			spyKill(tk);
 		}
 	}
-	private void demoKill(Player demoman) {
-		TrenchPvP.getStatTracker().track(demoman.getUniqueId(), DemoStat.demoman_kills, 1);
+	private void demoKill(TrenchPlayer demoman) {
+		TrenchPvP.getStatTracker().track(demoman, DemoStat.demoman_kills, 1);
 	}
-	private void heavyKill(Player heavy) {
-		TrenchPvP.getStatTracker().track(heavy.getUniqueId(), HeavyStat.heavy_kills, 1);
-		if(heavy.getInventory().getItemInMainHand().getType() == Material.IRON_AXE) {
-			if(heavy.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Dense Axe")) {
-				TrenchPvP.getStatTracker().track(heavy.getUniqueId(), HeavyStat.heavy_dusks_edge_kills, 1);
-			}
-		}
-	}
-	private void medicKill(Player medic) {
-		TrenchPvP.getStatTracker().track(medic.getUniqueId(), MedicStat.medic_kills, 1);
-		if(medic.getInventory().getItemInMainHand().getType() == Material.BOW) {
-			if(medic.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Syringe Gun")) {
-				TrenchPvP.getStatTracker().track(medic.getUniqueId(), MedicStat.medic_syringe_gun_kills, 1);
+	private void heavyKill(TrenchPlayer heavy) {
+		TrenchPvP.getStatTracker().track(heavy, HeavyStat.heavy_kills, 1);
+		if(heavy.getPlayer().getInventory().getItemInMainHand().getType() == Material.IRON_AXE) {
+			if(heavy.getPlayer().getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Dense Axe")) {
+				TrenchPvP.getStatTracker().track(heavy, HeavyStat.heavy_dusks_edge_kills, 1);
 			}
 		}
 	}
-	private void pyroKill(Player pyro) {
-		TrenchPvP.getStatTracker().track(pyro.getUniqueId(), PyroStat.pyro_kills, 1);
-		if(pyro.getInventory().getItemInMainHand().getType() == Material.GOLDEN_AXE) {
-			if(pyro.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Inferno Axe")) {
-				TrenchPvP.getStatTracker().track(pyro.getUniqueId(), PyroStat.pyro_inferno_axe_kills, 1);
+	private void medicKill(TrenchPlayer medic) {
+		TrenchPvP.getStatTracker().track(medic, MedicStat.medic_kills, 1);
+		if(medic.getPlayer().getInventory().getItemInMainHand().getType() == Material.BOW) {
+			if(medic.getPlayer().getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Syringe Gun")) {
+				TrenchPvP.getStatTracker().track(medic, MedicStat.medic_syringe_gun_kills, 1);
 			}
 		}
 	}
-	private void scoutKill(Player scout) {
-		TrenchPvP.getStatTracker().track(scout.getUniqueId(), ScoutStat.scout_kills, 1);
-		if(scout.getInventory().getItemInMainHand().getType() == Material.STONE_SWORD) {
-			if(scout.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Slim Slicer")) {
-				TrenchPvP.getStatTracker().track(scout.getUniqueId(), ScoutStat.scout_windsong_blade_kills, 1);
-			}
-		} else if(scout.getInventory().getItemInMainHand().getType() == Material.BOW) {
-			if(scout.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Sling Shot")) {
-				TrenchPvP.getStatTracker().track(scout.getUniqueId(), ScoutStat.scout_sling_shot_kills, 1);
+	private void pyroKill(TrenchPlayer pyro) {
+		TrenchPvP.getStatTracker().track(pyro, PyroStat.pyro_kills, 1);
+		if(pyro.getPlayer().getInventory().getItemInMainHand().getType() == Material.GOLDEN_AXE) {
+			if(pyro.getPlayer().getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Inferno Axe")) {
+				TrenchPvP.getStatTracker().track(pyro, PyroStat.pyro_inferno_axe_kills, 1);
 			}
 		}
 	}
-	private void sniperKill(Player sniper) {
-		TrenchPvP.getStatTracker().track(sniper.getUniqueId(), SniperStat.sniper_kills, 1);
-		if(sniper.getInventory().getItemInMainHand().getType() == Material.BOW) {
-			if(sniper.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Component Rifle Mk.II")) {
-				TrenchPvP.getStatTracker().track(sniper.getUniqueId(), SniperStat.sniper_component_rifle_kills, 1);
-			} else if(sniper.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Component Rifle Mk.IV")) {
-				TrenchPvP.getStatTracker().track(sniper.getUniqueId(), SniperStat.sniper_component_rifle_kills, 1);
+	private void scoutKill(TrenchPlayer scout) {
+		TrenchPvP.getStatTracker().track(scout, ScoutStat.scout_kills, 1);
+		if(scout.getPlayer().getInventory().getItemInMainHand().getType() == Material.STONE_SWORD) {
+			if(scout.getPlayer().getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Slim Slicer")) {
+				TrenchPvP.getStatTracker().track(scout, ScoutStat.scout_windsong_blade_kills, 1);
 			}
-		} else if(sniper.getInventory().getItemInMainHand().getType() == Material.STONE_SWORD) {
-			if(sniper.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Kukri")) {
-				TrenchPvP.getStatTracker().track(sniper.getUniqueId(), SniperStat.sniper_kukiri_kills, 1);
+		} else if(scout.getPlayer().getInventory().getItemInMainHand().getType() == Material.BOW) {
+			if(scout.getPlayer().getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Sling Shot")) {
+				TrenchPvP.getStatTracker().track(scout, ScoutStat.scout_sling_shot_kills, 1);
 			}
 		}
 	}
-	private void soldierKill(Player soldier) {
-		TrenchPvP.getStatTracker().track(soldier.getUniqueId(), SoldierStat.soldier_kills, 1);
-		if(soldier.getInventory().getItemInMainHand().getType() == Material.IRON_SWORD) {
-			if(soldier.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Deep Cut")) {
-				TrenchPvP.getStatTracker().track(soldier.getUniqueId(), SoldierStat.soldier_witherbringer_kills, 1);
+	private void sniperKill(TrenchPlayer sniper) {
+		TrenchPvP.getStatTracker().track(sniper, SniperStat.sniper_kills, 1);
+		if(sniper.getPlayer().getInventory().getItemInMainHand().getType() == Material.BOW) {
+			if(sniper.getPlayer().getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Component Rifle Mk.II")) {
+				TrenchPvP.getStatTracker().track(sniper, SniperStat.sniper_component_rifle_kills, 1);
+			} else if(sniper.getPlayer().getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Component Rifle Mk.IV")) {
+				TrenchPvP.getStatTracker().track(sniper, SniperStat.sniper_component_rifle_kills, 1);
+			}
+		} else if(sniper.getPlayer().getInventory().getItemInMainHand().getType() == Material.STONE_SWORD) {
+			if(sniper.getPlayer().getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Kukri")) {
+				TrenchPvP.getStatTracker().track(sniper, SniperStat.sniper_kukiri_kills, 1);
 			}
 		}
 	}
-	private void spyKill(Player spy) {
-		TrenchPvP.getStatTracker().track(spy.getUniqueId(), SpyStat.spy_kills, 1);
-		if(spy.getInventory().getItemInMainHand().getType() == Material.GOLDEN_SWORD) {
-			if(spy.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Hidden Blade")) {
-				TrenchPvP.getStatTracker().track(spy.getUniqueId(), SpyStat.spy_hidden_blade_kills, 1);
+	private void soldierKill(TrenchPlayer soldier) {
+		TrenchPvP.getStatTracker().track(soldier, SoldierStat.soldier_kills, 1);
+		if(soldier.getPlayer().getInventory().getItemInMainHand().getType() == Material.IRON_SWORD) {
+			if(soldier.getPlayer().getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Deep Cut")) {
+				TrenchPvP.getStatTracker().track(soldier, SoldierStat.soldier_witherbringer_kills, 1);
 			}
 		}
-		if(spy.hasPotionEffect(PotionEffectType.INVISIBILITY)) {
-			TrenchPvP.getStatTracker().track(spy.getUniqueId(), SpyStat.spy_kills_while_invisible, 1);
+	}
+	private void spyKill(TrenchPlayer spy) {
+		TrenchPvP.getStatTracker().track(spy, SpyStat.spy_kills, 1);
+		if(spy.getPlayer().getInventory().getItemInMainHand().getType() == Material.GOLDEN_SWORD) {
+			if(spy.getPlayer().getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Hidden Blade")) {
+				TrenchPvP.getStatTracker().track(spy, SpyStat.spy_hidden_blade_kills, 1);
+			}
+		}
+		if(spy.getPlayer().hasPotionEffect(PotionEffectType.INVISIBILITY)) {
+			TrenchPvP.getStatTracker().track(spy, SpyStat.spy_kills_while_invisible, 1);
 		}
 	}
 }

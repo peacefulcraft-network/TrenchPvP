@@ -31,7 +31,7 @@ public class KillStreakListener implements Listener
 			return;
 		}
 		
-		TrenchPvP.getStatTracker().track(killer.getUniqueId(), GeneralStat.player_highest_kill_streak, 1);
+		TrenchPvP.getStatTracker().track(kt, GeneralStat.player_highest_kill_streak, 1);
 		if(reference.containsKey(killer.getUniqueId())) {
 			reference.put(killer.getUniqueId(), reference.get(killer.getUniqueId()) + 1);
 		} else if(!(reference.containsKey(killer.getUniqueId()))) {
@@ -55,11 +55,11 @@ public class KillStreakListener implements Listener
 			reference.put(victim.getUniqueId(), 0);
 		}
 		
-		if(TrenchPvP.getStatTracker().check(victim.getUniqueId(), GeneralStat.player_highest_kill_streak) == true) {
+		if(TrenchPvP.getStatTracker().check(t, GeneralStat.player_highest_kill_streak) == true) {
 			if(reference.containsKey(victim.getUniqueId())) {
 				int streak = reference.get(victim.getUniqueId());
-				if(streak >= TrenchPvP.getStatTracker().getValue(victim.getUniqueId(), GeneralStat.player_highest_kill_streak)) {
-					TrenchPvP.getStatTracker().track(victim.getUniqueId(), GeneralStat.player_highest_kill_streak, streak);
+				if(streak >= TrenchPvP.getStatTracker().getValue(t, GeneralStat.player_highest_kill_streak)) {
+					TrenchPvP.getStatTracker().track(t, GeneralStat.player_highest_kill_streak, streak);
 					reference.put(victim.getUniqueId(), 0);
 				} else {
 					reference.put(victim.getUniqueId(), 0);
