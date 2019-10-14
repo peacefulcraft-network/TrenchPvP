@@ -48,7 +48,7 @@ public class TrenchHeavy extends TrenchKit{
 		ArrayList<String> pDesc = new ArrayList<String>();
 		pDesc.add("Right Click to Increase Attack!");
 		pDesc.add("Ability Time: 10 Seconds");
-		pDesc.add("Cooldwon Time: 25 Seconds");
+		pDesc.add("Cooldown Time: 25 Seconds");
 
 		pMetaData.setLore(pDesc);
 		
