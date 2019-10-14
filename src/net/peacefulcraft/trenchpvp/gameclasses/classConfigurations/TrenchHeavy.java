@@ -12,7 +12,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.AbsoluteDefense;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.DusksEdge;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.TrenchAbilityType;
-import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
+import net.peacefulcraft.trenchpvp.gamehandle.TrenchPlayer;
 
 public class TrenchHeavy extends TrenchKit{
 

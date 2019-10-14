@@ -14,7 +14,7 @@ import org.bukkit.inventory.meta.LeatherArmorMeta;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.LaunchPad;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.SyrumHigh;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.TrenchAbilityType;
-import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
+import net.peacefulcraft.trenchpvp.gamehandle.TrenchPlayer;
 
 public class TrenchAdrenalineJunkie extends TrenchKit
 {

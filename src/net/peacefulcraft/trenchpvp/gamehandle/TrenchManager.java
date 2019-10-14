@@ -6,7 +6,6 @@ import java.util.UUID;
 import org.bukkit.entity.Player;
 
 import net.peacefulcraft.trenchpvp.TrenchPvP;
-import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 
 /**
  * Handles game cycle on server:

@@ -8,7 +8,6 @@ import org.bukkit.configuration.file.FileConfiguration;
 
 import net.md_5.bungee.api.ChatColor;
 import net.peacefulcraft.trenchpvp.TrenchPvP;
-import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 
 public class TrenchParty
 {

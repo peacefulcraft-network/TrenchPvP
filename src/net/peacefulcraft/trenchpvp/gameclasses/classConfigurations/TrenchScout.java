@@ -13,7 +13,7 @@ import net.peacefulcraft.trenchpvp.gameclasses.abilities.DoubleJump;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.SpeedShot;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.TrenchAbilityType;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.WindsongBlade;
-import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
+import net.peacefulcraft.trenchpvp.gamehandle.TrenchPlayer;
 
 public class TrenchScout extends TrenchKit {
 	public TrenchScout(TrenchPlayer t) {

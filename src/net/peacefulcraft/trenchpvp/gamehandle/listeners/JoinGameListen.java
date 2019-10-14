@@ -5,7 +5,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 
-import net.peacefulcraft.trenchpvp.gamehandle.player.Teleports;
+import net.peacefulcraft.trenchpvp.gamehandle.Teleports;
 
 public class JoinGameListen implements Listener {
 

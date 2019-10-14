@@ -12,7 +12,6 @@ import org.bukkit.scoreboard.Team;
 import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.config.ArenaConfig;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
-import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.gamehandle.tasks.ArenaTimer;
 import net.peacefulcraft.trenchpvp.gamehandle.tasks.Endgame;
 import net.peacefulcraft.trenchpvp.gamehandle.tasks.SyncStats;

@@ -9,7 +9,7 @@ import org.bukkit.inventory.ItemStack;
 import net.md_5.bungee.api.ChatColor;
 import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchSpy;
-import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
+import net.peacefulcraft.trenchpvp.gamehandle.TrenchPlayer;
 
 public class CriticalIntelligence extends TrenchAbility
 {

@@ -8,9 +8,9 @@ import org.bukkit.event.player.PlayerInteractEvent;
 
 import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gamehandle.Announcer;
+import net.peacefulcraft.trenchpvp.gamehandle.Teleports;
+import net.peacefulcraft.trenchpvp.gamehandle.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.gamehandle.TrenchTeam;
-import net.peacefulcraft.trenchpvp.gamehandle.player.Teleports;
-import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 
 public class ChangeClassSign implements Listener {
 

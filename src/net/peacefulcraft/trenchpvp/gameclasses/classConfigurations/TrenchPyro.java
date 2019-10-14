@@ -14,7 +14,7 @@ import net.peacefulcraft.trenchpvp.gameclasses.abilities.InfernoTrapDetonator;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.InfernoTrapPlacer;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.InfernoTrapRemover;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.TrenchAbilityType;
-import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
+import net.peacefulcraft.trenchpvp.gamehandle.TrenchPlayer;
 
 public class TrenchPyro extends TrenchKit{
 

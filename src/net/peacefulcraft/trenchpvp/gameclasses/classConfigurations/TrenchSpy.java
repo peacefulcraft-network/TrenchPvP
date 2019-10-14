@@ -14,7 +14,7 @@ import net.peacefulcraft.trenchpvp.gameclasses.abilities.HiddenBlade;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.HiddenBladeBlock;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.IntelligenceRemover;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.TrenchAbilityType;
-import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
+import net.peacefulcraft.trenchpvp.gamehandle.TrenchPlayer;
 
 public class TrenchSpy extends TrenchKit{
 	

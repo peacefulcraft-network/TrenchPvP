@@ -8,8 +8,6 @@ import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.scoreboard.Team;
 
-import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
-
 /**
  * Scoreboard Objectives for Trench
  * - The object instance lives in TeamManager

@@ -8,7 +8,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 
 import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gamehandle.Announcer;
-import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
+import net.peacefulcraft.trenchpvp.gamehandle.TrenchPlayer;
 
 public class LeaveGameSign implements Listener {
 
