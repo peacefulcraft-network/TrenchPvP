@@ -7,7 +7,6 @@ import org.bukkit.potion.PotionEffect;
 
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKit;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
-import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchPyro;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchUndefined;
 import net.peacefulcraft.trenchpvp.gamehandle.TrenchArena;
 import net.peacefulcraft.trenchpvp.gamehandle.TrenchTeam;

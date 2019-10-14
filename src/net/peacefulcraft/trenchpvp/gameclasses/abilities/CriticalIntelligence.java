@@ -7,8 +7,8 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.inventory.ItemStack;
 
 import net.md_5.bungee.api.ChatColor;
+import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchSpy;
-import net.peacefulcraft.trenchpvp.gamehandle.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 
 public class CriticalIntelligence extends TrenchAbility
@@ -32,7 +32,7 @@ public class CriticalIntelligence extends TrenchAbility
 		if(!(p.getInventory().getItemInMainHand().getType() == Material.PAPER)) return false;
 		if(!(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Critical Intelligence"))) return false;	
 		
-		TrenchPlayer target = TeamManager.findTrenchPlayer((Player) e.getRightClicked());
+		TrenchPlayer target = TrenchPvP.getTrenchManager().findTrenchPlayer((Player) e.getRightClicked());
 		if(target == null) { return false; }
 		if(k.getTrenchPlayer().getPlayerTeam() == target.getPlayerTeam()) return false;
 		
@@ -43,7 +43,7 @@ public class CriticalIntelligence extends TrenchAbility
 	public void triggerAbility(Event ev)
 	{
 		PlayerInteractEntityEvent e = (PlayerInteractEntityEvent) ev;
-		TrenchPlayer target = TeamManager.findTrenchPlayer((Player) e.getRightClicked());
+		TrenchPlayer target = TrenchPvP.getTrenchManager().findTrenchPlayer((Player) e.getRightClicked());
 		Player p = k.getTrenchPlayer().getPlayer();
 		
 		if(k.getIntelligence().contains(target)) {

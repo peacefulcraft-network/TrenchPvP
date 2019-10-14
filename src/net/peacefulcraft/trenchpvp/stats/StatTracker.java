@@ -1,9 +1,6 @@
 package net.peacefulcraft.trenchpvp.stats;
 
 import java.util.HashMap;
-import java.util.UUID;
-
-import org.bukkit.entity.Player;
 
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.stats.TrenchStats.GeneralStat;

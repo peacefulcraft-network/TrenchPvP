@@ -10,8 +10,8 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import net.md_5.bungee.api.ChatColor;
+import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKit;
-import net.peacefulcraft.trenchpvp.gamehandle.TeamManager;
 
 public class DangerousHealthHose extends TrenchAbility
 {
@@ -43,7 +43,7 @@ public class DangerousHealthHose extends TrenchAbility
 		for(Entity e : list) {
 			if(e instanceof Player) {
 				Player vic = (Player) e;
-				if(TeamManager.findTrenchPlayer(vic).getPlayerTeam() != k.getTrenchPlayer().getPlayerTeam()) {
+				if(TrenchPvP.getTrenchManager().findTrenchPlayer(vic).getPlayerTeam() != k.getTrenchPlayer().getPlayerTeam()) {
 					if(vic.getHealth() - 5 <= 0) {
 						vic.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 100, 4));
 					} else {

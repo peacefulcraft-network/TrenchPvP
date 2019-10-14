@@ -121,8 +121,7 @@ public class TrenchPvP extends JavaPlugin{
 		getServer().getPluginManager().registerEvents(new BlockIgnitionTimer(), this);
 		getServer().getPluginManager().registerEvents(new QuitGameListen(), this);
 		getServer().getPluginManager().registerEvents(new PlayerRespawning(), this);
-		getServer().getPluginManager().registerEvents(new ItemListener(), this);
-		getServer().getPluginManager().registerEvents(new PvPController(), this);
+		getServer().getPluginManager().registerEvents(new ItemDropListener(), this);
 		getServer().getPluginManager().registerEvents(new ItemDropListener(), this);
 		getServer().getPluginManager().registerEvents(new ArrowImpactListener(), this);
 		getServer().getPluginManager().registerEvents(new TNTIgnition(), this);
