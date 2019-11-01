@@ -30,7 +30,7 @@ public class LeaveGameSign implements Listener {
 					return;
 				}
 				
-				t.getArena().playerLeave(e.getPlayer());
+				TrenchPvP.getTrenchManager().getCurrentArena().playerLeave(t.getPlayer());
 			}
 		}
 		
