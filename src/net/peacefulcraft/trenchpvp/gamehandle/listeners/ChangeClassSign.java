@@ -8,9 +8,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 
 import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gamehandle.Announcer;
-import net.peacefulcraft.trenchpvp.gamehandle.Teleports;
 import net.peacefulcraft.trenchpvp.gamehandle.TrenchPlayer;
-import net.peacefulcraft.trenchpvp.gamehandle.TrenchTeam;
 
 public class ChangeClassSign implements Listener {
 
@@ -32,11 +30,7 @@ public class ChangeClassSign implements Listener {
 						return;
 					}
 					
-					if(t.getPlayerTeam() == TrenchTeam.BLUE) {
-						t.getPlayer().teleport(Teleports.getBlueClassSpawn());
-					}else {
-						t.getPlayer().teleport(Teleports.getRedClassSpawn());
-					}
+					TrenchPvP.getTrenchManager().getCurrentArena().teleportToSpawn(t);
 					
 				}
 			}
