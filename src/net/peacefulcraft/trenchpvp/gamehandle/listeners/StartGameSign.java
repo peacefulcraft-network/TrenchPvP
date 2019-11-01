@@ -7,9 +7,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 import net.peacefulcraft.trenchpvp.TrenchPvP;
-import net.peacefulcraft.trenchpvp.gamehandle.Teleports;
 import net.peacefulcraft.trenchpvp.gamehandle.TrenchPlayer;
-import net.peacefulcraft.trenchpvp.gamehandle.TrenchTeam;
 
 public class StartGameSign implements Listener {
 
@@ -27,11 +25,7 @@ public class StartGameSign implements Listener {
 			if(sign.getLine(0).equalsIgnoreCase("[Trench]")) {
 				if(sign.getLine(1).equalsIgnoreCase("Start")) {
 					
-					if(t.getPlayerTeam() == TrenchTeam.BLUE) {
-						t.getPlayer().teleport(Teleports.getBlueSpawn());
-					}else {
-						t.getPlayer().teleport(Teleports.getRedSpawn());
-					}
+					TrenchPvP.getTrenchManager().getCurrentArena().teleportToSpawn(t);
 					
 				}
 				

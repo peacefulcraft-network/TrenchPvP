@@ -9,9 +9,7 @@ import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchAdrenalineJunkie;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchPigKing;
 import net.peacefulcraft.trenchpvp.gamehandle.Announcer;
-import net.peacefulcraft.trenchpvp.gamehandle.Teleports;
 import net.peacefulcraft.trenchpvp.gamehandle.TrenchPlayer;
-import net.peacefulcraft.trenchpvp.gamehandle.TrenchTeam;
 import net.peacefulcraft.trenchpvp.menu.GameMenu;
 import net.peacefulcraft.trenchpvp.menu.GameMenu.Row;
 import net.peacefulcraft.trenchpvp.menu.GameMenu.onClick;
@@ -131,11 +129,7 @@ public class PurchasedMenu
 	}
 	
 	private void teleportByTeam(TrenchPlayer t) {
-		if(TrenchPvP.getTrenchManager().findTrenchPlayer(t.getPlayer()).getPlayerTeam() == TrenchTeam.BLUE) {
-			t.getPlayer().teleport(Teleports.getBlueSpawn());
-		}else {
-			t.getPlayer().teleport(Teleports.getRedSpawn());
-		}
+		TrenchPvP.getTrenchManager().getCurrentArena().teleportToSpawn(t);
 		t.getPlayer().sendMessage(ChatColor.AQUA + "You are now type " + ChatColor.RED + t.getKitType());
 	}
 	
