@@ -1,8 +1,6 @@
-package net.peacefulcraft.trenchpvp.gamehandle;
+package net.peacefulcraft.trenchpvp.gamehandle.arena;
 
 import java.util.Iterator;
-
-import net.peacefulcraft.trenchpvp.gamehandle.arena.MapCycleIterator;
 
 /**
  * This is a glorified, circular linked list

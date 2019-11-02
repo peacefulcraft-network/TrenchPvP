@@ -2,19 +2,17 @@ package net.peacefulcraft.trenchpvp.config;
 
 import java.util.Map;
 
+import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
+
+import net.peacefulcraft.trenchpvp.TrenchPvP;
 
 public class TrenchConfig {
 
 	private FileConfiguration c;
 	
 	//Teleport Points
-	private Map<String, Object> quit_spawn;
-	private Map<String, Object> red_spawn;
-	private Map<String, Object> blue_spawn;
-	private Map<String, Object> red_class_spawn;
-	private Map<String, Object> blue_class_spawn;
-	private Map<String, Object> spectator_spawn;
+	private Map<String, Object> server_spawn;
 	
 	//Database Information
 	private String db_ip = "";
@@ -30,12 +28,7 @@ public class TrenchConfig {
 		
 		this.c = c;
 		
-		quit_spawn = c.getConfigurationSection("trenchspawns.quit").getValues(false);
-		red_spawn = c.getConfigurationSection("trenchspawns.red").getValues(false);
-		blue_spawn = c.getConfigurationSection("trenchspawns.blue").getValues(false);
-		red_class_spawn = c.getConfigurationSection("trenchspawns.red_class").getValues(false);
-		blue_class_spawn = c.getConfigurationSection("trenchspawns.blue_class").getValues(false);
-		spectator_spawn = c.getConfigurationSection("trenchspawns.spectator").getValues(false);
+		server_spawn = c.getConfigurationSection("trenchspawns.server_spawn").getValues(false);
 	
 		db_ip = (String) c.getString("database.ip");
 		db_name = (String) c.getString("database.name");
@@ -46,10 +39,15 @@ public class TrenchConfig {
 
 	/*
 	 * Various getters for all the Trench settings
-	 */
+	*/
 	
-	public Map<String, Object> getQuit_spawn() {
-		return quit_spawn;
+	public Location getServer_Spawn() {
+		return new Location(
+				TrenchPvP.getPluginInstance().getServer().getWorld((String) server_spawn.get("world")),
+				Double.valueOf(server_spawn.get("x").toString()),
+				Double.valueOf(server_spawn.get("y").toString()),
+				Double.valueOf(server_spawn.get("z").toString())
+		);
 	}
 	
 	public String getDb_ip() {

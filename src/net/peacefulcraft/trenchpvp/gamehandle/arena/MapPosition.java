@@ -1,4 +1,4 @@
-package net.peacefulcraft.trenchpvp.gamehandle;
+package net.peacefulcraft.trenchpvp.gamehandle.arena;
 
 public class MapPosition {
 

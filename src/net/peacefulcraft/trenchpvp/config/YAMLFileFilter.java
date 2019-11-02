@@ -10,4 +10,10 @@ public class YAMLFileFilter implements FilenameFilter {
 		return name.endsWith(".yml");
 	}
 
+	public static String removeExtension(String name) {
+		while(name.contains(".")) {
+			name = name.substring(0, name.lastIndexOf('.'));
+		}
+		return name;
+	}
 }

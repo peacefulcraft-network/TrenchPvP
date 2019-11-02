@@ -2,10 +2,6 @@ package net.peacefulcraft.trenchpvp.gamehandle.arena;
 
 import java.util.Iterator;
 
-import net.peacefulcraft.trenchpvp.gamehandle.MapCycle;
-import net.peacefulcraft.trenchpvp.gamehandle.MapPosition;
-import net.peacefulcraft.trenchpvp.gamehandle.TrenchArena;
-
 public class MapCycleIterator implements Iterator<TrenchArena>{
 
 	private MapPosition first;

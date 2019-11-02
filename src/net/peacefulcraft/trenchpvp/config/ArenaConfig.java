@@ -16,9 +16,11 @@ import net.peacefulcraft.trenchpvp.TrenchPvP;
 
 public class ArenaConfig {
 
+	private File arenaFile;
 	private FileConfiguration c;
 	
 	private String arenaName;
+	private boolean active;
 	
 	private Map<String, Object> quit_spawn;
 	private Map<String, Object> red_spawn;
@@ -28,21 +30,25 @@ public class ArenaConfig {
 	private Map<String, Object> spectator_spawn;
 	
 	/**
-	 * Create new arena config with name
-	 * @param arenaName: name of arena and subsequent config file
+	 * Create an arena configuration. 
+	 * If arenaName already exists, load the .yml file
+	 * else, create a new one.
+	 * @param arenaName: name of arena
 	 */
 	public ArenaConfig(String arenaName) {
-		this.arenaName = arenaName;
+		this.arenaName = YAMLFileFilter.removeExtension(arenaName);
+		c = new YamlConfiguration();
 		
-		File arenaFile = new File(
+		arenaFile = new File(
 			TrenchPvP.getPluginInstance().getDataFolder().getPath() + "/arenas/" + arenaName + ".yml"
 		);
 
 		if(arenaFile.exists()) {
 			
-			c = new YamlConfiguration();
+			
 			try {
 				c.load(arenaFile);
+				TrenchPvP.logWarning("Loaded " + arenaName);
 			} catch (IOException | InvalidConfigurationException e) {
 				e.printStackTrace();
 				TrenchPvP.logErrors("Error loading arena config " + arenaName);
@@ -52,6 +58,7 @@ public class ArenaConfig {
 			
 			try {
 				saveConfig();
+				TrenchPvP.logWarning("saved " + arenaName);
 			} catch (IOException e) {
 				e.printStackTrace();
 				TrenchPvP.logErrors("Erorr saving arena " + arenaName);
@@ -63,35 +70,57 @@ public class ArenaConfig {
 	}
 	
 		private void saveConfig() throws IOException{
-			FileConfiguration c = new YamlConfiguration();
-			c.save("arena/" + arenaName + ".yml");
+			c.save(arenaFile);
 		}
 		
 		private void loadArena() {
-			arenaName = c.getString("arena.name");
-			
+			if(c.contains("arena.active")) {
+				active = c.getBoolean("arena.active");
+			}else {
+				active = false;
+				TrenchPvP.logWarning(arenaName + " did not contain an arena.active declaration. Assuming false.");
+			}
+				
 			if(c.contains("arena.spawns.quit")){
 				quit_spawn = c.getConfigurationSection("arena.spawns.quit").getValues(false);
+			}else {
+				active = false;
+				TrenchPvP.logWarning(arenaName + " did not contain an arena.spawns.quit declaration so the arena was disabled.");
 			}
 			
 			if(c.contains("arena.spawns.red")){
 				red_spawn = c.getConfigurationSection("arena.spawns.red").getValues(false);
+			}else {
+				active = false;
+				TrenchPvP.logWarning(arenaName + " did not contain an arena.spawns.red declaration so the arena was disabled.");
 			}
 			
 			if(c.contains("arena.spawns.blue")) {
 				blue_spawn = c.getConfigurationSection("arena.spawns.blue").getValues(false);
+			}else {
+				active = false;
+				TrenchPvP.logWarning(arenaName + " did not contain an arena.spawns.blue declaration so the arena was disabled.");
 			}
 			
 			if(c.contains("arena.spawns.red_classes")) {
 				red_class_spawn = c.getConfigurationSection("arena.spawns.red_class").getValues(false);
+			}else {
+				active = false;
+				TrenchPvP.logWarning(arenaName + " did not contain an arena.spawns.red_class declaration so the arena was disabled.");
 			}
 			
 			if(c.contains("arena.spawns.blue_class")){
 				blue_class_spawn = c.getConfigurationSection("arena.spawns.blue_class").getValues(false);
+			}else {
+				active = false;
+				TrenchPvP.logWarning(arenaName + " did not contain an arena.spawns.blue_class declaration so the arena was disabled.");
 			}
 		
 			if(c.contains("arena.spawns.spectator")) {
 				spectator_spawn = c.getConfigurationSection("arena.spawns.spectator").getValues(false);
+			}else {
+				active = false;
+				TrenchPvP.logWarning(arenaName + " did not contain an arena.spawns.spectator declaration so the arena was disabled.");
 			}
 		}
 	
@@ -120,6 +149,13 @@ public class ArenaConfig {
 	 */
 	public String getArenaName() {
 		return arenaName;
+	}
+	
+	/**
+	 * @return Arena is active and can be put in map cycle
+	 */
+	public boolean isArenaActive() {
+		return active;
 	}
 	
 	/**
@@ -299,7 +335,7 @@ public class ArenaConfig {
 	}
 	
 	/**
-	 * Log arena settings from config should it exist.
+	 * Load arena settings from config should it exist.
 	 * If arena doesn't exist, return null
 	 * @param arenaName 
 	 * @return FileConfiguration of arena, or null of arena doesn't exist

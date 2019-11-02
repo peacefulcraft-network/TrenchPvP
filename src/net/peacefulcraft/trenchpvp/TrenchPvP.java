@@ -86,11 +86,11 @@ public class TrenchPvP extends JavaPlugin{
 		tracker = new StatTracker();
 		partyManager = new PartyManager();
 
+		//Load / register the arenas to the map pool
+		loadArenas();
+		
 		SyncStats.onEnable();
 		this.getLogger().info("[TPP]Trench PvP Alpha 0.1 has been enabled!");
-
-		//Trigger game start
-		//TODO: NEW START SEQUENCE
 	}
 
 	public void onDisable(){
@@ -148,17 +148,22 @@ public class TrenchPvP extends JavaPlugin{
 		//Menu listeners
 		kitMenu = new KitMenu();
 		getServer().getPluginManager().registerEvents(kitMenu, this);
-		
-		//Load / register the arenas to the map pool
-		loadArenas();
 	}
 
 		private void loadArenas(){
 			File arenaDataDir = new File(this.getDataFolder().toPath() + "/arenas");
 			String[] arenaFileNames = arenaDataDir.list(new YAMLFileFilter());
+			if(arenaFileNames == null || arenaFileNames.length == 0) {
+				logWarning("No arena configurations found in TrenchPvP/arenas");
+				return;
+			}
 			for(String arenaName : arenaFileNames) {
 				trenchManager.registerArena(
-					new TrenchArena(new ArenaConfig(arenaName))
+					new TrenchArena(
+						new ArenaConfig(
+							YAMLFileFilter.removeExtension(arenaName)
+						)
+					)
 				);
 			}
 		}
