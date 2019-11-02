@@ -22,7 +22,7 @@ public class trLeave implements CommandExecutor{
 				if(t == null)
 					return true;
 				
-				t.getArena().playerLeave((Player) sender);
+				TrenchPvP.getTrenchManager().getCurrentArena().playerLeave((Player) sender);
 				
 				return true;
 				
