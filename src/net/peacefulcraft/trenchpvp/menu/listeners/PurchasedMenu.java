@@ -11,6 +11,7 @@ import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchElement
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchJuniorCommunityManager;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchNthEntity;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchPigKing;
+import net.peacefulcraft.trenchpvp.gamehandle.Announcer;
 import net.peacefulcraft.trenchpvp.gamehandle.GameManager;
 import net.peacefulcraft.trenchpvp.gamehandle.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehandle.player.Teleports;
@@ -40,10 +41,12 @@ public class PurchasedMenu
 	public PurchasedMenu() {
 		menu.addButton(menu.getRow(0), 0, new ItemStack(Material.GLASS_BOTTLE), "Adrenaline Junkie", "Click to Equip The Adrenaline Junkie Class!");
 		menu.addButton(menu.getRow(2), 0, new ItemStack(Material.PORKCHOP), "Pig King", "Click to Equip The Pig King Class!");
-		menu.addButton(menu.getRow(0), 2, new ItemStack(Material.GRAY_BANNER), "Nth Entity", "Click to Equip The Nth Entity Class!");
-		menu.addButton(menu.getRow(2), 2, new ItemStack(Material.TURTLE_EGG), "Junior Community Manager", "Click to Equip The Junior Community Manager Class!");
-		menu.addButton(menu.getRow(0), 4, new ItemStack(Material.DARK_OAK_SAPLING), "Elementalist", "Click to Equip The Elementalist Class!");
-		menu.addButton(menu.getRow(2), 4, new ItemStack(Material.FEATHER), "Duolingo Bird", "Click to Equip The Duolingo Bird Class!");
+		//menu.addButton(menu.getRow(0), 2, new ItemStack(Material.GRAY_BANNER), "Nth Entity", "Click to Equip The Nth Entity Class!");
+		menu.addButton(menu.getRow(0), 2, new ItemStack(Material.GRAY_BANNER), "Nth Entity", "Coming Soon....");
+		//menu.addButton(menu.getRow(2), 2, new ItemStack(Material.TURTLE_EGG), "Junior Community Manager", "Click to Equip The Junior Community Manager Class!");
+		menu.addButton(menu.getRow(2), 2, new ItemStack(Material.TURTLE_EGG), "Junior Community Manager", "Coming Soon....");
+		//menu.addButton(menu.getRow(0), 4, new ItemStack(Material.DARK_OAK_SAPLING), "Elementalist", "Click to Equip The Elementalist Class!");
+		menu.addButton(menu.getRow(0), 4, new ItemStack(Material.DARK_OAK_SAPLING), "Elementalist", "Coming Soon....");
 		
 		menu.addButton(menu.getRow(0), 8, new ItemStack(Material.RED_STAINED_GLASS_PANE), "Quit", "Click to Leave Trench!");
 		menu.addButton(menu.getRow(2), 8, new ItemStack(Material.BLUE_STAINED_GLASS_PANE), "Regular Classes", "Click to Return to Regular Class Selection!");
@@ -64,31 +67,67 @@ public class PurchasedMenu
 			kitMenu.menuOpen(p);
 		}
 		itemText = itemText.replaceAll(" ", "_");
+		
+		
+		/*
+			Check that the enum is valid before we try taking the
+			.valueOf. Eventually we should probably look at the 
+			name of the inventory and check it matches "Purchased Kits" 
+			as that's faster than this and we'll just assume that inv.
+			will only have PurchasedKit enum types. if it doesn't something is wrong
+		*/
+		boolean invalid = true;
+		for(PurchasedKits key : PurchasedKits.values()) {
+			if(itemText.equalsIgnoreCase( key.toString() )) {
+				invalid = false;
+				break;
+			}
+		}
+		
+		if(invalid)
+			return;
+		
+		/*
+		  End of Check
+		*/
+					
+					
 		switch(PurchasedKits.valueOf(itemText)) {
 		case ADRENALINE_JUNKIE:
-			t.equipKit(new TrenchAdrenalineJunkie(t));
-			teleportByTeam(t);
+			if(p.hasPermission("trenchpvp.class.adrenaline_junky")) {
+				t.equipKit(new TrenchAdrenalineJunkie(t));
+				teleportByTeam(t);
+			}else {
+				sendKitBuyMessage(p);
+			}
 			return;
+			
 		case PIG_KING:
-			t.equipKit(new TrenchPigKing(t));
-			teleportByTeam(t);
+			if(p.hasPermission("trenchpvp.class.pig_king")) {
+				t.equipKit(new TrenchPigKing(t));
+				teleportByTeam(t);
+			}else {
+				sendKitBuyMessage(p);
+			}
 			return;
 		case NTH_ENTITY:
-			t.equipKit(new TrenchNthEntity(t));
-			teleportByTeam(t);
+			sendKitDisabledMessage(p);
 			return;
+//			t.equipKit(new TrenchNthEntity(t));
+//			teleportByTeam(t);
+//			return;
 		case JUNIOR_COMMUNITY_MANAGER:
-			t.equipKit(new TrenchJuniorCommunityManager(t));
-			teleportByTeam(t);
+			sendKitDisabledMessage(p);
 			return;
+//			t.equipKit(new TrenchJuniorCommunityManager(t));
+//			teleportByTeam(t);
+//			return;
 		case ELEMENTALIST:
-			t.equipKit(new TrenchElementalist(t));
-			teleportByTeam(t);
+			sendKitDisabledMessage(p);
 			return;
-		case DUOLINGO_BIRD:
-			t.equipKit(new TrenchDuolingoBird(t));
-			teleportByTeam(t);
-			return;
+//			t.equipKit(new TrenchElementalist(t));
+//			teleportByTeam(t);
+//			return;
 		}
 	}
 	
@@ -103,5 +142,14 @@ public class PurchasedMenu
 			t.getPlayer().teleport(Teleports.getRedSpawn());
 		}
 		t.getPlayer().sendMessage(ChatColor.AQUA + "You are now type " + ChatColor.RED + t.getKitType());
+	}
+	
+	private void sendKitBuyMessage(Player p) {
+		p.sendMessage(Announcer.getTrenchPrefix() + "You must purchase this kit in the kit shop on minigames to use it.");
+		p.sendMessage(Announcer.getTrenchPrefix() + "Use points earned through playing Minigames to buy things in the shop.");
+	}
+	
+	private void sendKitDisabledMessage(Player p) {
+		p.sendMessage(Announcer.getTrenchPrefix() + "Sorry, this kit is not available right now.");
 	}
 }

@@ -15,6 +15,7 @@ import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchTeams;
 import net.peacefulcraft.trenchpvp.gamehandle.tasks.Endgame;
 import net.peacefulcraft.trenchpvp.gamehandle.tasks.Startgame;
+import net.peacefulcraft.trenchpvp.gamehandle.tasks.SyncBounties;
 import net.peacefulcraft.trenchpvp.gamehandle.tasks.SyncStats;
 
 public class GameManager {
@@ -119,8 +120,13 @@ public class GameManager {
 		
 		SyncStats sync = new SyncStats();
 		sync.commitStats(TrenchPvP.getStatTracker().getStatData());
-		TrenchPvP.getStatTracker().clearStats();
 		sync.runTaskAsynchronously(TrenchPvP.getPluginInstance());
+		
+		SyncBounties bounties = new SyncBounties();
+		bounties.commitBounties(TrenchPvP.getStatTracker().getBounties());
+		bounties.runTaskAsynchronously(TrenchPvP.getPluginInstance());
+		
+		TrenchPvP.getStatTracker().clearStats();
 		
 		//Execute registered post game tasks
 		for(BukkitRunnable task : postGameTasks) {
