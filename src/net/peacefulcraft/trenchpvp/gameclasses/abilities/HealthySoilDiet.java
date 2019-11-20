@@ -49,7 +49,7 @@ public class HealthySoilDiet extends TrenchAbility
 			Block b = p.getLocation().getBlock().getRelative(BlockFace.DOWN);
 			
 			if(b.getType().equals(Material.DIRT) || b.getType().equals(Material.GRASS_BLOCK) || b.getType().equals(Material.COARSE_DIRT) || b.getType().equals(Material.PODZOL)) {
-				p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 99999, 2));
+				p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 99999, 1));
 			} else {
 				p.removePotionEffect(PotionEffectType.DAMAGE_RESISTANCE);
 			}

@@ -6,6 +6,7 @@ import org.bukkit.inventory.ItemStack;
 
 import net.md_5.bungee.api.ChatColor;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchAdrenalineJunkie;
+import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchDuolingoBird;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchElementalist;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchJuniorCommunityManager;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchNthEntity;
@@ -23,7 +24,7 @@ public class PurchasedMenu
 {
 	private enum PurchasedKits {
 		ADRENALINE_JUNKIE, PIG_KING, NTH_ENTITY, 
-		JUNIOR_COMMUNITY_MANAGER, ELEMENTALIST, ;
+		JUNIOR_COMMUNITY_MANAGER, ELEMENTALIST, DUOLINGO_BIRD;
 	}
 	
 	private GameMenu menu = new GameMenu("Purchased Menu", 3, new onClick() {
@@ -42,6 +43,7 @@ public class PurchasedMenu
 		menu.addButton(menu.getRow(0), 2, new ItemStack(Material.GRAY_BANNER), "Nth Entity", "Click to Equip The Nth Entity Class!");
 		menu.addButton(menu.getRow(2), 2, new ItemStack(Material.TURTLE_EGG), "Junior Community Manager", "Click to Equip The Junior Community Manager Class!");
 		menu.addButton(menu.getRow(0), 4, new ItemStack(Material.DARK_OAK_SAPLING), "Elementalist", "Click to Equip The Elementalist Class!");
+		menu.addButton(menu.getRow(2), 4, new ItemStack(Material.FEATHER), "Duolingo Bird", "Click to Equip The Duolingo Bird Class!");
 		
 		menu.addButton(menu.getRow(0), 8, new ItemStack(Material.RED_STAINED_GLASS_PANE), "Quit", "Click to Leave Trench!");
 		menu.addButton(menu.getRow(2), 8, new ItemStack(Material.BLUE_STAINED_GLASS_PANE), "Regular Classes", "Click to Return to Regular Class Selection!");
@@ -81,6 +83,10 @@ public class PurchasedMenu
 			return;
 		case ELEMENTALIST:
 			t.equipKit(new TrenchElementalist(t));
+			teleportByTeam(t);
+			return;
+		case DUOLINGO_BIRD:
+			t.equipKit(new TrenchDuolingoBird(t));
 			teleportByTeam(t);
 			return;
 		}
