@@ -6,6 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Fireball;
@@ -61,6 +62,7 @@ public class BigBertha extends TrenchAbility{
 				
 				upBlock.setType(Material.TNT); //Places Big Bertha
 				p.sendMessage(ChatColor.RED + "Fuse is lit!");
+				p.playSound(p.getLocation(), Sound.ENTITY_TNT_PRIMED, 1.0f, 1.0f);
 				
 				TrenchPvP.getStatTracker().track(k.getTrenchPlayer(), DemoStat.demoman_berthas_placed, 1);
 				

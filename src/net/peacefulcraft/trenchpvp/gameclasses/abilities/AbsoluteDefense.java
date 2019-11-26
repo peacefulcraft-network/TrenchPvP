@@ -1,6 +1,7 @@
 package net.peacefulcraft.trenchpvp.gameclasses.abilities;
 
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.potion.PotionEffect;
@@ -50,6 +51,7 @@ public class AbsoluteDefense extends TrenchAbility{
 	public void triggerAbility(Event ev) {
 		
 		Player p = k.getTrenchPlayer().getPlayer();
+		p.playSound(p.getLocation(), Sound.BLOCK_ANVIL_PLACE, 1.0f, 1.0f);
 		p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, EFFECT_TIME, 3));
 		p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, EFFECT_TIME, 3));
 		p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, EFFECT_TIME, 5));
