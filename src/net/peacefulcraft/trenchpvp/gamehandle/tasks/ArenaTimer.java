@@ -15,7 +15,7 @@ public class ArenaTimer extends BukkitRunnable{
 	private long mSecRemaining;
 		public long getMSecRemaining() { return mSecRemaining; }
 		public int getMinutesRemaining() { return (int) (mSecRemaining / 60000); }
-		public int getRoundedSecondsRemaining() { return (int) (mSecRemaining % 60000); }
+		public int getRoundedSecondsRemaining() { return (int) (mSecRemaining / 1000) % 60; }
 	
 	private TrenchScoreboard target;
 	
@@ -27,7 +27,7 @@ public class ArenaTimer extends BukkitRunnable{
 	@Override
 	public void run() {
 		mSecRemaining-= 1000L;
-		target.setTimerTime(getMinutesRemaining() + ":" + String.valueOf(getRoundedSecondsRemaining()).substring(0, 2));
+		target.setTimerTime(String.format("%02d:%02d", getMinutesRemaining(), getRoundedSecondsRemaining()));
 		
 		//Schedule next decrement if time is left
 		if(mSecRemaining < 1000)
