@@ -110,7 +110,10 @@ public class TrenchPvP extends JavaPlugin{
 	private void loadCommands(){
 		this.getCommand("trjoin").setExecutor(new trJoin());
 		this.getCommand("trleave").setExecutor(new trLeave());
-		this.getCommand("tra").setExecutor(new tra());
+		
+		tra tra = new tra();
+		this.getCommand("tra").setExecutor(tra);
+		this.getCommand("tra").setTabCompleter(tra);	
 	}
 	
 	/**
