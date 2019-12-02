@@ -6,6 +6,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import net.peacefulcraft.trenchpvp.TrenchPvP;
+import net.peacefulcraft.trenchpvp.gamehandle.Announcer;
+import net.peacefulcraft.trenchpvp.gamehandle.TrenchPlayer;
 
 /**
  * User command for joining Trench
@@ -17,8 +19,14 @@ public class trJoin implements CommandExecutor{
 				
 			if(sender instanceof Player){
 			
-				TrenchPvP.getTrenchManager().getCurrentArena().playerJoin((Player) sender); 
-				return true;
+				TrenchPlayer t = TrenchPvP.getTrenchManager().findTrenchPlayer((Player) sender);
+				if(t == null) {
+					TrenchPvP.getTrenchManager().getCurrentArena().playerJoin((Player) sender); 
+					return true;
+				}else {
+					Announcer.messagePlayer(sender, "You are already playing TrenchPvP.");
+					return true;
+				}
 				
 			}else{
 				

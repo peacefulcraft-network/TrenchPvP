@@ -6,6 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import net.peacefulcraft.trenchpvp.TrenchPvP;
+import net.peacefulcraft.trenchpvp.gamehandle.Announcer;
 import net.peacefulcraft.trenchpvp.gamehandle.TrenchPlayer;
 
 /**
@@ -19,11 +20,13 @@ public class trLeave implements CommandExecutor{
 			if(sender instanceof Player) {
 				
 				TrenchPlayer t = TrenchPvP.getTrenchManager().findTrenchPlayer((Player) sender);
-				if(t == null)
+				if(t == null) {
+					Announcer.messagePlayer(sender, "You are not playing TrenchPvP.");
 					return true;
+				}
 				
 				TrenchPvP.getTrenchManager().getCurrentArena().playerLeave((Player) sender);
-				
+				Announcer.messagePlayer(sender, "You've left TrenchPvP.");
 				return true;
 				
 			}else {

@@ -52,24 +52,44 @@ public class TrenchManager {
 	 * Add new TrenchArena into map cycle
 	 * @param arena
 	 */
-	public void activateArena(TrenchArena arena) {
+	public boolean activateArena(TrenchArena arena) {
 		mapCycle.addArena(arena);
+		arena.setActive(true);
+		return true;
 	}
 	
 	/**
 	 * Remove a TrenchArena from the active MapCycle
 	 * @param arena
 	 */
-	public void deactivateArena(TrenchArena arena) {
+	public boolean deactivateArena(TrenchArena arena) {
 		if(mapCycle.getCurrentMap() == arena) {
 			TrenchPvP.logErrors(
 					"Warning, attempted to unregister arena while game is in session."
 					+ "Cycle the map, then attempt to disable the map."
 			);
+			return false;
 		}
+		mapCycle.removeArena(arena);
+		arena.setActive(false);
+		return true;
 	}
 	
 	public void startMapCycle() {
 		mapCycle.getCurrentMap().startGame();
+	}
+	
+	public void cycleMap() {
+		TrenchArena oldMap = getCurrentArena();
+		mapCycle.nextMap();
+		TrenchArena newMap = getCurrentArena();
+		
+		// Kick everyone out of the old arena and force join them to the same teams in the new one
+		oldMap.executeOnAllPlayers( (t) -> {
+			oldMap.playerLeave(t.getPlayer());
+			newMap.playerJoin(t.getPlayer(), t.getPlayerTeam(), true);
+		});
+		
+		newMap.startGame();
 	}
 }

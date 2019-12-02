@@ -2,12 +2,12 @@ package net.peacefulcraft.trenchpvp.gamehandle.arena;
 
 import java.util.Iterator;
 
-public class MapCycleIterator implements Iterator<TrenchArena>{
+public class MapPositionIterator implements Iterator<MapPosition>{
 
 	private MapPosition first;
 	private MapPosition current;
 	
-	public MapCycleIterator(MapCycle cycle) {
+	public MapPositionIterator(MapCycle cycle) {
 		first = cycle.getFirstMapPosition();
 		current = first;
 	}
@@ -18,14 +18,14 @@ public class MapCycleIterator implements Iterator<TrenchArena>{
 		if(current == null)
 			return false;
 		
-		return (current.getNext() != first)? true : false;
+		return (current.getNext() == first)? false : true;
 	}
 
 	@Override
-	public TrenchArena next() {
-		TrenchArena ret = current.getArena();
+	public MapPosition next() {
+		MapPosition ret = current;
 		current = current.getNext();
 		return ret;
 	}
-	
+
 }

@@ -9,6 +9,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import net.peacefulcraft.trenchpvp.commands.tppSet;
 import net.peacefulcraft.trenchpvp.commands.trJoin;
 import net.peacefulcraft.trenchpvp.commands.trLeave;
+import net.peacefulcraft.trenchpvp.commands.tra;
 import net.peacefulcraft.trenchpvp.config.ArenaConfig;
 import net.peacefulcraft.trenchpvp.config.TrenchConfig;
 import net.peacefulcraft.trenchpvp.config.YAMLFileFilter;
@@ -20,8 +21,8 @@ import net.peacefulcraft.trenchpvp.gameclasses.listeners.AbilityPlayerInteractEn
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.AbilityPlayerMoveListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.AbilityPlayerToggleFlight;
 import net.peacefulcraft.trenchpvp.gamehandle.PartyManager;
-import net.peacefulcraft.trenchpvp.gamehandle.TrenchArena;
 import net.peacefulcraft.trenchpvp.gamehandle.TrenchManager;
+import net.peacefulcraft.trenchpvp.gamehandle.arena.TrenchArena;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.ArrowImpactListener;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.BlockIgnitionTimer;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.ChangeClassSign;
@@ -89,12 +90,16 @@ public class TrenchPvP extends JavaPlugin{
 		//Load / register the arenas to the map pool
 		loadArenas();
 		
-		SyncStats.onEnable();
+		trenchManager.startMapCycle();
 		this.getLogger().info("[TPP]Trench PvP Alpha 0.1 has been enabled!");
 	}
 
 	public void onDisable(){
 		this.saveConfig();		
+		
+		for(TrenchArena ta: trenchManager.getConfiguredArenas()) {
+			ta.saveArenaConfig();
+		}
 		//SyncStats.onDisable();
 		this.getLogger().info("[TPP]Trench PvP Alpha 0.1 has been disabled!");
 	}
@@ -105,7 +110,7 @@ public class TrenchPvP extends JavaPlugin{
 	private void loadCommands(){
 		this.getCommand("trjoin").setExecutor(new trJoin());
 		this.getCommand("trleave").setExecutor(new trLeave());
-		this.getCommand("tppSet").setExecutor(new tppSet());
+		this.getCommand("tra").setExecutor(new tra());
 	}
 	
 	/**

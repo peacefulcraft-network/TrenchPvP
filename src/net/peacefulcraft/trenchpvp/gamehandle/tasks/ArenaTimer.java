@@ -27,11 +27,11 @@ public class ArenaTimer extends BukkitRunnable{
 	@Override
 	public void run() {
 		mSecRemaining-= 1000L;
-		target.setTimerTime(getMinutesRemaining() + ":" + getRoundedSecondsRemaining());
+		target.setTimerTime(getMinutesRemaining() + ":" + String.valueOf(getRoundedSecondsRemaining()).substring(0, 2));
 		
 		//Schedule next decrement if time is left
-		if(mSecRemaining > 0)
-			runTaskLater(TrenchPvP.getPluginInstance(), 20);
+		if(mSecRemaining < 1000)
+			this.cancel();
 	}
 
 }

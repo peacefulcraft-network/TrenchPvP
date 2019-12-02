@@ -1,5 +1,6 @@
 package net.peacefulcraft.trenchpvp.config;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.bukkit.Location;
@@ -64,6 +65,17 @@ public class TrenchConfig {
 	
 	public String getDb_password() {
 		return db_password;
+	}
+	
+	public static Map<String, Object> locToMap(Location loc){
+		Map<String, Object> cords = new HashMap<String, Object>();
+		
+		cords.put("x", loc.getBlockX());
+		cords.put("y", loc.getBlockY());
+		cords.put("z", loc.getBlockZ());
+		cords.put("world", loc.getWorld().getName());
+		
+		return cords;
 	}
 
 }

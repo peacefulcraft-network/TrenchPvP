@@ -3,7 +3,7 @@ package net.peacefulcraft.trenchpvp.gamehandle.arena;
 import java.util.Iterator;
 
 /**
- * This is a glorified, circular linked list
+ * This is a glorified, circular, doubly-linked list
  */
 public class MapCycle implements Iterable<TrenchArena>{
 	
@@ -22,8 +22,12 @@ public class MapCycle implements Iterable<TrenchArena>{
 			first = map;
 			tail = map;
 			map.setNext(map);
+			map.setPrev(map);
+			currentMap = map;
 		}else {
+			map.setPrev(tail);
 			tail.setNext(map);
+			first.setPrev(map);
 			map.setNext(first);
 		}
 	}
@@ -33,12 +37,19 @@ public class MapCycle implements Iterable<TrenchArena>{
 		return currentMap.getArena();
 	}
 	
-/*	We need another iterator for MapPositions if we want to be able to do this
- *  It's not something we strictly need right now so.. TODO: MapPosition iterator, probably private
 	public void removeArena(TrenchArena arena) {
+		MapPositionIterator i = new MapPositionIterator(this);
+		MapPosition target = null;
+		while(i.hasNext()) {
+			MapPosition mp = i.next();
+			if(mp.getArena() == arena) { target = mp; break; }
+		}
 		
+		if(target == null) { return; }
+		
+		target.getPrev().setNext(target.getNext());
+		target.getNext().setPrev(target.getPrev());
 	}
-*/
 	
 	@Override
 	public Iterator<TrenchArena> iterator() {

@@ -6,11 +6,13 @@ import java.util.UUID;
 
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.Team;
 
 import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.config.ArenaConfig;
+import net.peacefulcraft.trenchpvp.config.TrenchConfig;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
 import net.peacefulcraft.trenchpvp.gamehandle.Announcer;
 import net.peacefulcraft.trenchpvp.gamehandle.PlayerWideExecutor;
@@ -26,6 +28,26 @@ public class TrenchArena {
 	private ArenaConfig ac;
 		public String getArenaName() { return ac.getArenaName(); }
 		public boolean isArenaActive() { return ac.isArenaActive(); }
+		
+		public Location getBlueSpawn() { return ac.getBlue_spawn(); }
+		public void setBlueSpawn(Location loc) { ac.setBlue_spawn(TrenchConfig.locToMap(loc)); }
+		
+		public Location getBlueClassSpawn() { return ac.getBlue_class_spawn(); }
+		public void setBlueClassSpawn(Location loc) { ac.setBlue_class_spawn(TrenchConfig.locToMap(loc)); }
+		
+		public Location getRedSpawn() { return ac.getRed_spawn(); }
+		public void setRedSpawn(Location loc) { ac.setRed_spawn(TrenchConfig.locToMap(loc)); }
+		
+		public Location getRedClassSpawn() { return ac.getRed_class_spawn(); }
+		public void setRedClassSpawn(Location loc) { ac.setRed_class_spawn(TrenchConfig.locToMap(loc)); }
+		
+		public Location getSpectatorSpawn() { return ac.getSpectator_spawn(); }
+		public void setSpectatorSpawn(Location loc) { ac.setSpectator_spawn(TrenchConfig.locToMap(loc)); }
+		
+		public boolean isActive() { return ac.isArenaActive(); }
+		public void setActive(boolean active) { ac.setArenaActive(active); }
+		
+		public void saveArenaConfig() { ac.saveAll(); }
 		
 	private TrenchScoreboard scoreboard;
 		public TrenchScoreboard getScoreboard() { return scoreboard; }
@@ -89,42 +111,35 @@ public class TrenchArena {
 	 */
 	public void startGame() {
 		
-		//Teleport all players to the spawn points and reset their kits
-		executeOnAllRedPlayers(
-			(TrenchPlayer t)->{
-				if(t.getKitType() != TrenchKits.UNASSIGNED) {
-					t.equipKit(t.getKit());
-					t.getPlayer().teleport(ac.getRed_spawn());
-				}
-			}
-		);
-		
-		executeOnAllBluePlayers(
-			(TrenchPlayer t)->{
-				if(t.getKitType() != TrenchKits.UNASSIGNED) {
-					t.equipKit(t.getKit());
-					t.getPlayer().teleport(ac.getBlue_spawn());
-				}
-			}
-		);
-		
 		//Reset scoreboard objectives
 		scoreboard.resetScores();
 		
 		//Reset timer
 		scoreboardTimer = new ArenaTimer(scoreboard);
-		scoreboardTimer.runTaskLater(TrenchPvP.getPluginInstance(), 20);
+		scoreboardTimer.runTaskTimer(TrenchPvP.getPluginInstance(), 20, 20);
 		(new Endgame(TrenchPvP.getPluginInstance(), this)).runTaskLater(TrenchPvP.getPluginInstance(), 12000);
 		
-		Announcer.messageAll("A new game has begun!.");
+		//Teleport players to their respective locations
+		executeOnAllPlayers( (TrenchPlayer t)->{
+			if(t.getKitType() != TrenchKits.UNASSIGNED) {
+				t.equipKit(t.getKit());
+				teleportToSpawn(t);
+			}else {
+				teleportToClassSelection(t);
+			}
+		});
 		
+		Announcer.messageAll("A new game has begun!");
+		TrenchPvP.logWarning("Started new game in arena " + getArenaName());
 	}
 	
 	public void endGame() {
 		
 		Announcer.messageAll("Game over! A new game will begin shortly.");
+		TrenchPvP.logWarning("Ended game in arena " + getArenaName());
 		//TODO Announce winner
 		
+		// Async; send stats to the database
 		SyncStats sync = new SyncStats();
 		sync.commitStats(TrenchPvP.getStatTracker().getStatData());
 		TrenchPvP.getStatTracker().clearStats();
@@ -141,18 +156,20 @@ public class TrenchArena {
 		
 		if(TrenchPvP.getTrenchManager().findTrenchPlayer(p) != null) 
 			throw new RuntimeException("Command executor is already playing Trench");
+		TrenchPlayer t = null;
 		
 		p.setGameMode(GameMode.ADVENTURE);
 		
 		if(red.getSize() < blue.getSize()) {
 			
-			joinPlayerToRed(p);
+			t = joinPlayerToRed(p);
 			
 		}else {
 			
-			joinPlayerToBlue(p);			
+			t = joinPlayerToBlue(p);			
 		}
-		
+	
+		TrenchPvP.getTrenchManager().registerPlayer(t);
 	}
 	
 	/**
@@ -162,44 +179,51 @@ public class TrenchArena {
 	 * @param t: The team to join
 	 * @param force: Override balance checks
 	 */
-	public void playerJoin(Player p , TrenchTeam t, boolean force) {
+	public void playerJoin(Player p , TrenchTeam tt, boolean force) {
 		
 		if(TrenchPvP.getTrenchManager().findTrenchPlayer(p) != null) 
 			throw new RuntimeException("Command executor is already playing Trench");
 		
 		p.setGameMode(GameMode.ADVENTURE);
+		TrenchPlayer t = null;
 		
-		if(t == TrenchTeam.RED) {
+		if(tt == TrenchTeam.RED) {
 			
 			if(force) {
-				joinPlayerToRed(p);
-				return;
+				t = joinPlayerToRed(p);
+				
 			}
 			
 			//If there is a delta>2 between teamsize, don't allow a force join; just join them to blue
 			if(red.getSize() - 2 > blue.getSize()) {
-				joinPlayerToBlue(p);
-				p.sendMessage(TrenchPvP.CMD_PREFIX + ChatColor.RED + "Sorry, the teams are too imbalanced to join red.");
+				Announcer.messagePlayer(p, "Sorry, the teams are too imbalanced to join red.");
+				t = joinPlayerToBlue(p);
+				
 			}else {
-				joinPlayerToRed(p);
+				t = joinPlayerToRed(p);	
+				
 			}
 			
 		}else {
 		
 			if(force) {
-				joinPlayerToBlue(p);
-				return;
+				t = joinPlayerToBlue(p);
+				
 			}
 			
 			//If there is a delta>2 between teamsize, don't allow a force join; just join them to blue
 			if(red.getSize() - 2 > blue.getSize()) {
-				joinPlayerToRed(p);
-				p.sendMessage(TrenchPvP.CMD_PREFIX + ChatColor.RED + "Sorry, the teams are too imbalanced to join blue.");
+				Announcer.messagePlayer(p, "Sorry, the teams are too imbalanced to join blue.");
+				t = joinPlayerToRed(p);
+				
 			}else {
-				joinPlayerToBlue(p);
+				t = joinPlayerToBlue(p);
+				
 			}
 			
 		}
+		
+		TrenchPvP.getTrenchManager().registerPlayer(t);
 		
 	}
 	
@@ -207,7 +231,7 @@ public class TrenchArena {
 		 * Player join logic for red team
 		 * @param p: The Player to join to red
 		 */
-		private void joinPlayerToRed(Player p) {
+		private TrenchPlayer joinPlayerToRed(Player p) {
 			
 			//Add to blue team
 			TrenchPlayer t = new TrenchPlayer(p, this, TrenchTeam.RED);
@@ -216,17 +240,18 @@ public class TrenchArena {
 			bluePlayers.put(p.getUniqueId(), t);
 			
 			//Teleport to class selection
-			p.teleport(ac.getBlue_class_spawn());
-			p.sendMessage(TrenchPvP.CMD_PREFIX + ChatColor.RED + "You have joined Red team!");
+			teleportToClassSelection(t);
+			Announcer.messagePlayer(t.getPlayer(), ChatColor.RED + "You have joined Red team!");
 			TrenchPvP.getKitMenu().menuOpen(p);
 			
+			return t;
 		}
 		
 		/**
 		 * Player join logic for blue team
 		 * @param p: The Player to join to blue
 		 */
-		private void joinPlayerToBlue(Player p) {
+		private TrenchPlayer joinPlayerToBlue(Player p) {
 			
 			//Add to blue team
 			TrenchPlayer t = new TrenchPlayer(p, this, TrenchTeam.BLUE);
@@ -235,9 +260,11 @@ public class TrenchArena {
 			bluePlayers.put(p.getUniqueId(), t);
 			
 			//Teleport to class selection
-			p.teleport(ac.getBlue_class_spawn());
-			p.sendMessage(TrenchPvP.CMD_PREFIX + ChatColor.RED + "You have joined " + ChatColor.DARK_BLUE + "Blue" + ChatColor.RED + " team!");
+			teleportToClassSelection(t);
+			Announcer.messagePlayer(t.getPlayer(), "You have joined " + ChatColor.DARK_BLUE + "Blue" + ChatColor.RED + " team!");
 			TrenchPvP.getKitMenu().menuOpen(p);
+			
+			return t;
 			
 		}
 	
@@ -251,8 +278,6 @@ public class TrenchArena {
 		if(t == null)
 			return;
 		
-		TrenchPvP.getTrenchManager().unregisterPlayer(t);
-		
 		if(t.getPlayerTeam() == TrenchTeam.RED) {
 			redPlayers.remove(t.getPlayer().getUniqueId());
 			red.removeEntry(t.getPlayer().getName());
@@ -264,7 +289,8 @@ public class TrenchArena {
 		}
 		
 		t.dequipKits();
-		t.getPlayer().teleport(ac.getQuit_spawn());
+		teleportToSpectatorArea(t.getPlayer());
+		TrenchPvP.getTrenchManager().unregisterPlayer(t);
 		t.getPlayer().sendMessage(TrenchPvP.CMD_PREFIX + ChatColor.RED + "You've left Trench!");
 	}
 
@@ -274,14 +300,6 @@ public class TrenchArena {
 	 */
 	public void teleportToSpectatorArea(Player p) {
 		p.teleport(ac.getSpectator_spawn());
-	}
-	
-	/**
-	 * Teleport TrenchPlayer to quit area for arena
-	 * @param t: The TrenchPlayer
-	 */
-	public void teleportToQuitArea(TrenchPlayer t) {
-		t.getPlayer().teleport(ac.getQuit_spawn());
 	}
 	
 	/**

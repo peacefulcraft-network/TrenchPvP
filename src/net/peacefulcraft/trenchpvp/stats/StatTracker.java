@@ -61,12 +61,18 @@ public class StatTracker
 		}
 		return check;
 	}
+	
 	public void resetEntry(TrenchPlayer t, TrenchStat stat) {
 		HashMap<TrenchStat, Integer> temp = statMap.get(t);
 		temp.put(stat, 0);
 		statMap.put(t, temp);
 	}
+	
 	public int getValue(TrenchPlayer t, TrenchStat stat) {
+		if(!statMap.containsKey(t)) {
+			return 0;
+		}
+		
 		HashMap<TrenchStat, Integer> temp = statMap.get(t);
 		if(!(temp.containsKey(stat))) { return 0; }
 		

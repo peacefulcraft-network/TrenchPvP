@@ -10,6 +10,6 @@ commands:
     trleave:
       description: Leave Trench
       usage: /<command> To join game
-    tppSet:
-      description: Configured Trench Settings
-      usage: "/<command> [ blueSpawn | blueClassSpawn | redSpawn | redClassSpawn | quitSpawn | spectatorSpawn ]"
+    tra:
+      description: Configure Trench Settings
+      usage: "/<command>, there are so many options this is not useful"

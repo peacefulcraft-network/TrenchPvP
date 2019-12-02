@@ -69,9 +69,18 @@ public class ArenaConfig {
 			
 	}
 	
+	public void saveAll() {
+		try {
+			saveConfig();
+		}catch(IOException e) {
+			e.printStackTrace();
+			TrenchPvP.logErrors("Error saving arena " + arenaName);
+		}
+	}
 		private void saveConfig() throws IOException{
 			c.save(arenaFile);
 		}
+		
 		
 		private void loadArena() {
 			if(c.contains("arena.active")) {
@@ -79,13 +88,6 @@ public class ArenaConfig {
 			}else {
 				active = false;
 				TrenchPvP.logWarning(arenaName + " did not contain an arena.active declaration. Assuming false.");
-			}
-				
-			if(c.contains("arena.spawns.quit")){
-				quit_spawn = c.getConfigurationSection("arena.spawns.quit").getValues(false);
-			}else {
-				active = false;
-				TrenchPvP.logWarning(arenaName + " did not contain an arena.spawns.quit declaration so the arena was disabled.");
 			}
 			
 			if(c.contains("arena.spawns.red")){
@@ -102,7 +104,7 @@ public class ArenaConfig {
 				TrenchPvP.logWarning(arenaName + " did not contain an arena.spawns.blue declaration so the arena was disabled.");
 			}
 			
-			if(c.contains("arena.spawns.red_classes")) {
+			if(c.contains("arena.spawns.red_class")) {
 				red_class_spawn = c.getConfigurationSection("arena.spawns.red_class").getValues(false);
 			}else {
 				active = false;
@@ -152,13 +154,6 @@ public class ArenaConfig {
 	}
 	
 	/**
-	 * @return Arena is active and can be put in map cycle
-	 */
-	public boolean isArenaActive() {
-		return active;
-	}
-	
-	/**
 	 * Change trench arena name. (Will delete and save a new config file)
 	 * @param arenaName: New arena name
 	 */
@@ -184,29 +179,19 @@ public class ArenaConfig {
 		deleteArenaConfig(oldArena);
 		return true;
 	}
+
+	/**
+	 * @return Arena is active and can be put in map cycle
+	 */
+	public boolean isArenaActive() {
+		return active;
+	}
 	
-	/**
-	 * @return Map of quit spawn location coordinates
-	 */
-	public Location getQuit_spawn() {
-		return new Location(
-					TrenchPvP.getPluginInstance().getServer().getWorld(
-						(String) quit_spawn.get("world")
-					), 
-					(Integer) quit_spawn.get("x"), 
-					(Integer) quit_spawn.get("y"), 
-					(Integer) quit_spawn.get("z")
-				);
+	public void setArenaActive(boolean active) {
+		this.active = active;
+		c.set("arena.active", active);
 	}
-
-	/**
-	 * @param Map with quit spawn coordinates, (x, y, z, world)
-	 */
-	public void setQuit_spawn(Map<String, Object> quit_spawn) {
-		this.quit_spawn = quit_spawn;
-		c.set("arena.spawns.quit", quit_spawn);
-	}
-
+	
 	/**
 	 * @return Map with red player spawn coordinates
 	 */
