@@ -7,8 +7,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import net.peacefulcraft.trenchpvp.commands.tppSet;
-import net.peacefulcraft.trenchpvp.commands.trJoin;
-import net.peacefulcraft.trenchpvp.commands.trLeave;
+import net.peacefulcraft.trenchpvp.commands.trjoin;
+import net.peacefulcraft.trenchpvp.commands.trleave;
 import net.peacefulcraft.trenchpvp.commands.tra;
 import net.peacefulcraft.trenchpvp.config.ArenaConfig;
 import net.peacefulcraft.trenchpvp.config.TrenchConfig;
@@ -108,8 +108,12 @@ public class TrenchPvP extends JavaPlugin{
 	 * Register all commands with the server
 	 */
 	private void loadCommands(){
-		this.getCommand("trjoin").setExecutor(new trJoin());
-		this.getCommand("trleave").setExecutor(new trLeave());
+		this.getCommand("trleave").setExecutor(new trleave());
+		
+		trjoin trjoin = new trjoin();
+		this.getCommand("trjoin").setTabCompleter(trjoin);
+		this.getCommand("trjoin").setExecutor(trjoin);
+
 		
 		tra tra = new tra();
 		this.getCommand("tra").setExecutor(tra);
