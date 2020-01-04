@@ -118,6 +118,7 @@ public class KitMenu implements Listener
 			PurchasedMenu purchasedMenu = new PurchasedMenu();
 			menu.close(p);
 			purchasedMenu.menuOpen(p);
+			return;
 		}
 		
 		/*
