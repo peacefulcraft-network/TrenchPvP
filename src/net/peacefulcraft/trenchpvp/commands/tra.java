@@ -3,16 +3,20 @@ package net.peacefulcraft.trenchpvp.commands;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitScheduler;
+import org.bukkit.scheduler.BukkitTask;
 
 import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.config.ArenaConfig;
 import net.peacefulcraft.trenchpvp.gamehandle.Announcer;
 import net.peacefulcraft.trenchpvp.gamehandle.arena.TrenchArena;
+import net.peacefulcraft.trenchpvp.gamehandle.tasks.Endgame;
 
 public class tra implements CommandExecutor, TabCompleter{
 
@@ -188,8 +192,10 @@ public class tra implements CommandExecutor, TabCompleter{
 			}
 			
 		break; case "status":
-			
 			status_globalStatus(p);
+			
+		break; case "control":
+			control_forceMapCycle();
 			
 		break; default:
 			
@@ -333,5 +339,25 @@ public class tra implements CommandExecutor, TabCompleter{
 		}
 		
 		return opts;
+	}
+	
+	/**
+	 * Forces the map to cycle
+	 */
+	@SuppressWarnings("static-access")
+	private void control_forceMapCycle() {
+		// Remove the old endgame task that was scheduled to run
+		BukkitScheduler scheduler = TrenchPvP.getPluginInstance().getServer().getScheduler();
+		BukkitTask currentArenaEndTask = TrenchPvP.getTrenchManager().getCurrentArena().getEndgameTask();
+		
+		if(scheduler.isQueued(currentArenaEndTask.getTaskId()) || scheduler.isCurrentlyRunning(currentArenaEndTask.getTaskId())) {
+			scheduler.cancelTask(currentArenaEndTask.getTaskId());
+		}
+		
+		// Trigger endgame sequence to run right now
+		(new Endgame(
+				TrenchPvP.getPluginInstance(), 
+				TrenchPvP.getPluginInstance().getTrenchManager().getCurrentArena())
+		).runTask(TrenchPvP.getPluginInstance());
 	}
 }

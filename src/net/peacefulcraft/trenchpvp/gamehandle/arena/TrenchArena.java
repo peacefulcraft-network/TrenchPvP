@@ -8,6 +8,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitScheduler;
+import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.scoreboard.Team;
 
 import net.peacefulcraft.trenchpvp.TrenchPvP;
@@ -54,7 +56,9 @@ public class TrenchArena {
 	private Team red;
 	private Team blue;
 	
-	private ArenaTimer scoreboardTimer;
+	private BukkitTask scoreboardTimerTask;
+	private BukkitTask endgameTask;
+		public BukkitTask getEndgameTask() { return endgameTask; }
 	
 	private HashMap<UUID, TrenchPlayer> redPlayers;
 	private HashMap<UUID, TrenchPlayer> bluePlayers;
@@ -115,9 +119,8 @@ public class TrenchArena {
 		scoreboard.resetScores();
 		
 		//Reset timer
-		scoreboardTimer = new ArenaTimer(scoreboard);
-		scoreboardTimer.runTaskTimer(TrenchPvP.getPluginInstance(), 20, 20);
-		(new Endgame(TrenchPvP.getPluginInstance(), this)).runTaskLater(TrenchPvP.getPluginInstance(), 12000);
+		scoreboardTimerTask = (new ArenaTimer(scoreboard)).runTaskTimer(TrenchPvP.getPluginInstance(), 20, 20);
+		endgameTask = (new Endgame(TrenchPvP.getPluginInstance(), this)).runTaskLater(TrenchPvP.getPluginInstance(), 12000);
 		
 		//Teleport players to their respective locations
 		executeOnAllPlayers( (TrenchPlayer t)->{
@@ -134,6 +137,12 @@ public class TrenchArena {
 	}
 	
 	public void endGame() {
+		
+		// Make sure the timer stops
+		BukkitScheduler scheduler = TrenchPvP.getPluginInstance().getServer().getScheduler();
+		if(scheduler.isQueued(scoreboardTimerTask.getTaskId()) || scheduler.isCurrentlyRunning(scoreboardTimerTask.getTaskId())) {
+			scheduler.cancelTask(scoreboardTimerTask.getTaskId());
+		}
 		
 		Announcer.messageAll("Game over! A new game will begin shortly.");
 		TrenchPvP.logWarning("Ended game in arena " + getArenaName());
