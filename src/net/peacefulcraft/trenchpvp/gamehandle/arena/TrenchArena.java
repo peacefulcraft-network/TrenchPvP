@@ -201,15 +201,16 @@ public class TrenchArena {
 			if(force) {
 				t = joinPlayerToRed(p);
 				
-			}
-			
-			//If there is a delta>2 between teamsize, don't allow a force join; just join them to blue
-			if(red.getSize() - 2 > blue.getSize()) {
-				Announcer.messagePlayer(p, "Sorry, the teams are too imbalanced to join red.");
-				t = joinPlayerToBlue(p);
-				
 			}else {
-				t = joinPlayerToRed(p);	
+				//If there is a delta>2 between teamsize, don't allow a force join; just join them to blue
+				if(red.getSize() - 2 > blue.getSize()) {
+					Announcer.messagePlayer(p, "Sorry, the teams are too imbalanced to join red.");
+					t = joinPlayerToBlue(p);
+					
+				}else {
+					t = joinPlayerToRed(p);	
+					
+				}
 				
 			}
 			
@@ -218,16 +219,16 @@ public class TrenchArena {
 			if(force) {
 				t = joinPlayerToBlue(p);
 				
-			}
-			
-			//If there is a delta>2 between teamsize, don't allow a force join; just join them to blue
-			if(red.getSize() - 2 > blue.getSize()) {
-				Announcer.messagePlayer(p, "Sorry, the teams are too imbalanced to join blue.");
-				t = joinPlayerToRed(p);
-				
-			}else {
-				t = joinPlayerToBlue(p);
-				
+			}else{
+				//If there is a delta>2 between teamsize, don't allow a force join; just join them to blue
+				if(red.getSize() - 2 > blue.getSize()) {
+					Announcer.messagePlayer(p, "Sorry, the teams are too imbalanced to join blue.");
+					t = joinPlayerToRed(p);
+					
+				}else {
+					t = joinPlayerToBlue(p);
+					
+				}
 			}
 			
 		}
