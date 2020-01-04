@@ -161,7 +161,7 @@ public class TrenchScoreboard {
 	public void setTimerTime(String time) {
 		
 		sb.resetScores(this.time);
-		trenchStats.getScore(time).setScore(15);
+		trenchStats.getScore(time).setScore(99);
 		this.time = time;
 		
 	}
