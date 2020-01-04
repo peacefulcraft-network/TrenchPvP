@@ -235,9 +235,9 @@ public class TrenchArena {
 			
 			//Add to blue team
 			TrenchPlayer t = new TrenchPlayer(p, this, TrenchTeam.RED);
-			blue.addEntry(p.getName());
+			red.addEntry(p.getName());
 			scoreboard.registerBluePlayer();
-			bluePlayers.put(p.getUniqueId(), t);
+			redPlayers.put(p.getUniqueId(), t);
 			
 			//Teleport to class selection
 			teleportToClassSelection(t);
