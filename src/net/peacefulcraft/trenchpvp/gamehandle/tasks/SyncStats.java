@@ -31,7 +31,7 @@ public class SyncStats extends BukkitRunnable{
 		//Mkae sure we have a fresh database connection
 		//Lingering old ones have probably gone away.
 		try {
-			if(!mysql.isClosed()) {
+			if(mysql != null || !mysql.isClosed()) {
 				onDisable();
 			}
 		} catch (SQLException e1) {
