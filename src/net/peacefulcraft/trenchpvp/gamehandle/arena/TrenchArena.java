@@ -294,7 +294,7 @@ public class TrenchArena {
 			scoreboard.unregisterRedPlayer();
 		}else {
 			bluePlayers.remove(t.getPlayer().getUniqueId());
-			red.removeEntry(t.getPlayer().getName());
+			blue.removeEntry(t.getPlayer().getName());
 			scoreboard.unregisterBluePlayer();
 		}
 		
