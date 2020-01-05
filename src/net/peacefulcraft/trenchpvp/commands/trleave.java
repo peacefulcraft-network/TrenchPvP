@@ -26,6 +26,7 @@ public class trleave implements CommandExecutor{
 				}
 				
 				TrenchPvP.getTrenchManager().getCurrentArena().playerLeave((Player) sender);
+				((Player) sender).getInventory().clear();
 				Announcer.messagePlayer(sender, "You've left TrenchPvP.");
 				return true;
 				
