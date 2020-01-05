@@ -301,7 +301,6 @@ public class TrenchArena {
 		t.dequipKits();
 		teleportToSpectatorArea(t.getPlayer());
 		TrenchPvP.getTrenchManager().unregisterPlayer(t);
-		t.getPlayer().sendMessage(TrenchPvP.CMD_PREFIX + ChatColor.RED + "You've left Trench!");
 	}
 
 	/**

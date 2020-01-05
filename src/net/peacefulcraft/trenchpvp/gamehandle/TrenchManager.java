@@ -7,6 +7,7 @@ import java.util.UUID;
 import org.bukkit.entity.Player;
 
 import net.peacefulcraft.trenchpvp.TrenchPvP;
+import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
 import net.peacefulcraft.trenchpvp.gamehandle.arena.MapCycle;
 import net.peacefulcraft.trenchpvp.gamehandle.arena.TrenchArena;
 
@@ -86,8 +87,11 @@ public class TrenchManager {
 		
 		// Kick everyone out of the old arena and force join them to the same teams in the new one
 		oldMap.executeOnAllPlayers( (t) -> {
-			oldMap.playerLeave(t.getPlayer());
-			newMap.playerJoin(t.getPlayer(), t.getPlayerTeam(), true);
+			Player p = t.getPlayer();
+			TrenchTeam team = t.getPlayerTeam();
+			
+			oldMap.playerLeave(p);
+			newMap.playerJoin(p, team, true);
 		});
 		
 		newMap.startGame();

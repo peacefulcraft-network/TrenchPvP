@@ -42,7 +42,10 @@ public class TrenchPlayer{
 		this.p = user;
 		this.arena = arena;
 		this.team = team;
-		kitInstance = new TrenchUndefined(this);
+		
+		// Equip the compass
+		this.kitInstance = new TrenchUndefined(this);
+		dequipKits();
 		
 		partyName = "";
 		lastInvite = "";
@@ -73,6 +76,7 @@ public class TrenchPlayer{
 		kitInstance.dinitConfig();
 		
 		this.kitInstance = new TrenchUndefined(this);
+		kitInstance.equip();
 	}
 	
 	public void clearPotionEffects() {
