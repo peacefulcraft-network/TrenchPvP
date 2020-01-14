@@ -51,7 +51,7 @@ public class NthExplosion extends TrenchAbility
 					if(rand.nextBoolean()) {
 						
 						Location loc = vic.getLocation();
-						loc.getWorld().createExplosion(loc.getX(), loc.getY(), loc.getZ(), 1.0f, false, false);
+						loc.getWorld().createExplosion(loc.getX(), loc.getY(), loc.getZ(), 3.0f, false, false);
 				
 					}
 				}

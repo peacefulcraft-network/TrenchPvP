@@ -55,9 +55,9 @@ public class PyroGodBellWalk extends TrenchAbility
 			blockList.add(block.getRelative(BlockFace.NORTH_WEST));
 			
 			for(Block b : blockList) {
-				if(b.getType().equals(Material.AIR)) {
+				if(b.getType().equals(Material.AIR) && b.getType() != null) {
 					b.setType(Material.FIRE);
-				} else if(b.getRelative(BlockFace.UP).getType().equals(Material.AIR)) {
+				} else if(b.getRelative(BlockFace.UP).getType().equals(Material.AIR) && b.getRelative(BlockFace.UP).getType() != null) {
 					b.getRelative(BlockFace.UP).setType(Material.FIRE);
 				}
 			}

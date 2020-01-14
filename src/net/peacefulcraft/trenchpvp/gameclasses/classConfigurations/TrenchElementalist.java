@@ -3,6 +3,7 @@ package net.peacefulcraft.trenchpvp.gameclasses.classConfigurations;
 
 import java.util.ArrayList;
 
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -10,24 +11,42 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import net.peacefulcraft.trenchpvp.gameclasses.abilities.HealthySoilDiet;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.PyroGodBell;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.PyroGodBellWalk;
+import net.peacefulcraft.trenchpvp.gameclasses.abilities.TerraWall;
+import net.peacefulcraft.trenchpvp.gameclasses.abilities.TerraWallRemover;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.ThunderStruck;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.TrenchAbilityType;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 
 public class TrenchElementalist extends TrenchKit
 {
-
+	private TrenchPlayer t;
+	private TrenchKits k = TrenchKits.ELEMENTALIST;
+		public TrenchKits getKitType() { return k; }
+		
+	public ArrayList<Location> terraWalls;
+		public ArrayList<Location> getTerraWalls() { return terraWalls; }
+		public void resetTerraWalls() { terraWalls = new ArrayList<Location>(); }
+	public TerraWallRemover terraWallRemover;
+	
 	public TrenchElementalist(TrenchPlayer t)
 	{
 		super(t, TrenchKits.ELEMENTALIST);
+		this.t = t;
+		
+		resetTerraWalls();
 		
 		//TODO: Register ability handlers
+		terraWallRemover = new TerraWallRemover(this);
 		PyroGodBellWalk walkEnforcer = new PyroGodBellWalk(this);
 		getAbilityManager().registerAbility(TrenchAbilityType.ENTITY_DAMAGE_ENTITY, new ThunderStruck(this));
 		getAbilityManager().registerAbility(TrenchAbilityType.PLAYER_INTERACT, new PyroGodBell(this, walkEnforcer));
+		getAbilityManager().registerAbility(TrenchAbilityType.PLAYER_INTERACT, new TerraWall(this));
+		getAbilityManager().registerAbility(TrenchAbilityType.PLAYER_MOVE, new HealthySoilDiet(this));
 		getAbilityManager().registerAbility(TrenchAbilityType.PLAYER_MOVE, walkEnforcer);
+		getAbilityManager().registerAbility(TrenchAbilityType.PLAYER_DEATH, terraWallRemover);
 	}
 
 	@Override
@@ -38,7 +57,7 @@ public class TrenchElementalist extends TrenchKit
 		final String MELEE_NAME = "Thunderstruck";
 		final String PRIMARY_NAME = "Bell of The Pyro God";
 		final String SECONDARY_NAME = "Terra Wall";
-		final String PASSIVE_NAME = "Grassy Life Drain";
+		final String PASSIVE_NAME = "Healthy Soil Diet";
 		
 		addItemName(MELEE_NAME, 2);
 		addItemName(PRIMARY_NAME, 1);
@@ -97,7 +116,7 @@ public class TrenchElementalist extends TrenchKit
 		paMeta.setDisplayName(PASSIVE_NAME);
 		
 		ArrayList<String> paDesc = new ArrayList<String>();
-		paDesc.add("Passive: Regenerate Health While Standing On Grass!");
+		paDesc.add("Passive: Gain Resistence When Standing On Soil!");
 		paMeta.setLore(paDesc);
 	
 		passive.setItemMeta(paMeta);

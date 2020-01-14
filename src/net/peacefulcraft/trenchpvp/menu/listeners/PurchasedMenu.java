@@ -6,6 +6,7 @@ import org.bukkit.inventory.ItemStack;
 
 import net.md_5.bungee.api.ChatColor;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchAdrenalineJunkie;
+import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchDuolingoBird;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchElementalist;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchJuniorCommunityManager;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchNthEntity;
@@ -24,7 +25,7 @@ public class PurchasedMenu
 {
 	private enum PurchasedKits {
 		ADRENALINE_JUNKIE, PIG_KING, NTH_ENTITY, 
-		JUNIOR_COMMUNITY_MANAGER, ELEMENTALIST, ;
+		JUNIOR_COMMUNITY_MANAGER, ELEMENTALIST, DUOLINGO_BIRD;
 	}
 	
 	private GameMenu menu = new GameMenu("Purchased Menu", 3, new onClick() {
