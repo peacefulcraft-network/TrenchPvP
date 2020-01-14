@@ -33,7 +33,7 @@ public class ItemSwitchListener implements Listener
 		if(p.getInventory().getItemInMainHand().getType().equals(Material.AIR) || p.getInventory().getItemInMainHand().getType().equals(null)) {
 			return;
 		}
-		//TODO:Null Pointer fix
+
 		ItemStack item = p.getInventory().getItem(e.getNewSlot());
 		if(item == null) { return; }
 		if(k.getItemNamesSet().contains(item.getItemMeta().getDisplayName())) {

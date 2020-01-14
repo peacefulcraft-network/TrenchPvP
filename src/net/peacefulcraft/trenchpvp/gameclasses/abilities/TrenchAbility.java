@@ -14,7 +14,6 @@ import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 /**
  * TrenchAbility
  * Common utility functions for TrenchClass Abilities
- * @author wyatt
  *
  */
 public abstract class TrenchAbility {

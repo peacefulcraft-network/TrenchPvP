@@ -32,7 +32,9 @@ public class PorkChop extends TrenchAbility
 			if(!(king.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Pork CHOP"))) { return false; }
 			
 		} catch(ClassCastException ex) {
+
 			TrenchPvP.logWarning("Error Triggering PorkChop event. Incompatible event loop " + ev.getClass());
+
 			return false;
 		}
 		
@@ -47,7 +49,7 @@ public class PorkChop extends TrenchAbility
 			EntityDamageByEntityEvent e = (EntityDamageByEntityEvent) ev;
 			
 			Player victim = (Player) e.getEntity();
-			
+	
 			if(victim.getHealth() - 6 <= 0) {
 				victim.setHealth(0);
 			} else {
@@ -58,6 +60,7 @@ public class PorkChop extends TrenchAbility
 			TrenchPvP.logWarning("Error Triggering PorkChop event. Incompatible event loop " + ev.getClass());
 			return;
 		}
+
 	}
 
 }
