@@ -23,7 +23,6 @@ public class TrenchPigKing extends TrenchKit
 	{
 		super(t, TrenchKits.PIG_KING);
 		
-		//TODO: Register special abilities
 		getAbilityManager().registerAbility(TrenchAbilityType.PLAYER_INTERACT, new SacraficialCannon(this));
 		getAbilityManager().registerAbility(TrenchAbilityType.ENTITY_DAMAGE_ENTITY, new PorkChop(this));
 	}

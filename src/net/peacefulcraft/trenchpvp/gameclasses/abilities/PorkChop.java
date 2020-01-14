@@ -26,14 +26,13 @@ public class PorkChop extends TrenchAbility
 			
 			EntityDamageByEntityEvent e = (EntityDamageByEntityEvent) ev;
 			
-			Player victim = (Player) e.getEntity();
 			Player king = (Player) e.getDamager();
 			
 			if(!(king.getInventory().getItemInMainHand().getType() == Material.PORKCHOP)) { return false; }
 			if(!(king.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Pork CHOP"))) { return false; }
 			
 		} catch(ClassCastException ex) {
-			TrenchPvP.logWarning("Error Triggering Witherbringer event. Incompatible event loop " + ev.getClass());
+			TrenchPvP.logWarning("Error Triggering PorkChop event. Incompatible event loop " + ev.getClass());
 			return false;
 		}
 		
@@ -48,16 +47,15 @@ public class PorkChop extends TrenchAbility
 			EntityDamageByEntityEvent e = (EntityDamageByEntityEvent) ev;
 			
 			Player victim = (Player) e.getEntity();
-			Player king = (Player) e.getDamager();
 			
-			if(victim.getHealth() - 2 <= 0) {
+			if(victim.getHealth() - 6 <= 0) {
 				victim.setHealth(0);
 			} else {
-				victim.setHealth(victim.getHealth() - 4);	
+				victim.setHealth(victim.getHealth() - 6);	
 			}
 			
 		} catch(ClassCastException ex) {
-			TrenchPvP.logWarning("Error Triggering Witherbringer event. Incompatible event loop " + ev.getClass());
+			TrenchPvP.logWarning("Error Triggering PorkChop event. Incompatible event loop " + ev.getClass());
 			return;
 		}
 	}
