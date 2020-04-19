@@ -11,6 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 
+import net.peacefulcraft.trenchpvp.gameclasses.abilities.PorkChop;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.SacraficialCannon;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.TrenchAbilityType;
 import net.peacefulcraft.trenchpvp.gamehandle.TrenchPlayer;
@@ -22,8 +23,8 @@ public class TrenchPigKing extends TrenchKit
 	{
 		super(t, TrenchKits.PIG_KING);
 		
-		//TODO: Register special abilities
 		getAbilityManager().registerAbility(TrenchAbilityType.PLAYER_INTERACT, new SacraficialCannon(this));
+		getAbilityManager().registerAbility(TrenchAbilityType.ENTITY_DAMAGE_ENTITY, new PorkChop(this));
 	}
 
 	@Override

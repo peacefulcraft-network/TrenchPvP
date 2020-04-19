@@ -46,6 +46,8 @@ public class InfernoTrapDetonator extends TrenchAbility{
 		if(p.getInventory().contains(Material.LIGHT_WEIGHTED_PRESSURE_PLATE)) {
 			int itemIndex = p.getInventory().first(Material.LIGHT_WEIGHTED_PRESSURE_PLATE);
 			p.getInventory().getItem(itemIndex).setAmount(5);
+		} else if(p.getInventory().getItemInOffHand().getType().equals(Material.LIGHT_WEIGHTED_PRESSURE_PLATE)) {
+			p.getInventory().getItemInOffHand().setAmount(5);
 		} else {
 			ItemStack trapAmmo = new ItemStack(Material.LIGHT_WEIGHTED_PRESSURE_PLATE, 5);
 			ItemMeta tAMeta = trapAmmo.getItemMeta();

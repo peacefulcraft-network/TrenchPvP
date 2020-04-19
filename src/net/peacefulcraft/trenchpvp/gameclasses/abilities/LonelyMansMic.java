@@ -5,6 +5,7 @@ import java.util.List;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Pig;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 
@@ -49,6 +50,14 @@ public class LonelyMansMic extends TrenchAbility
 				t.multiply(2); //Change
 				
 				vic.setVelocity(t.toVector());
+			} else if(e instanceof Pig) {
+				Pig pig = (Pig) e;
+				Location t = pig.getLocation().subtract(loc);
+				double distance = pig.getLocation().distance(loc);
+				
+				t.getDirection().normalize().multiply(-1);
+				t.multiply(distance/1.2);
+				t.multiply(1.7); //Change
 			}
 		}
 	}

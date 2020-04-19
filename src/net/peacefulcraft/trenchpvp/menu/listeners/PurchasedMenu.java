@@ -18,7 +18,7 @@ public class PurchasedMenu
 {
 	private enum PurchasedKits {
 		ADRENALINE_JUNKIE, PIG_KING, NTH_ENTITY, 
-		JUNIOR_COMMUNITY_MANAGER, ELEMENTALIST, ;
+		JUNIOR_COMMUNITY_MANAGER, ELEMENTALIST, DUOLINGO_BIRD;
 	}
 	
 	private GameMenu menu = new GameMenu("Purchased Menu", 3, new onClick() {
