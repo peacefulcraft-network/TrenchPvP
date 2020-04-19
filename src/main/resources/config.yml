@@ -1,4 +1,5 @@
 trenchspawns:
+  server_spawn: {}
   quit: {}
   red: {}
   blue: {}
