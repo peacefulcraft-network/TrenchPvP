@@ -6,7 +6,6 @@ import java.util.logging.Level;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import net.peacefulcraft.trenchpvp.commands.tppSet;
 import net.peacefulcraft.trenchpvp.commands.trjoin;
 import net.peacefulcraft.trenchpvp.commands.trleave;
 import net.peacefulcraft.trenchpvp.commands.tra;
@@ -36,7 +35,6 @@ import net.peacefulcraft.trenchpvp.gamehandle.listeners.PlayerRespawning;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.QuitGameListen;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.StartGameSign;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.TNTIgnition;
-import net.peacefulcraft.trenchpvp.gamehandle.tasks.SyncStats;
 import net.peacefulcraft.trenchpvp.menu.listeners.KitMenu;
 import net.peacefulcraft.trenchpvp.stats.StatTracker;
 import net.peacefulcraft.trenchpvp.stats.listeners.ConsumeListener;
