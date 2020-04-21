@@ -8,7 +8,7 @@ trenchspawns:
   spectator: {}
 
 database:
-    ip: "127.0.0.1"
-    name: "database name"
-    username: "user"
-    password: "super secret"
+  ip: "127.0.0.1"
+  name: "database name"
+  username: "user"
+  password: "super secret"
