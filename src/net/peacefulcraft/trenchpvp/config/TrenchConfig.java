@@ -29,7 +29,7 @@ public class TrenchConfig {
 		
 		this.c = c;
 		
-		server_spawn = c.getConfigurationSection("trenchspawns.server_spawn").getValues(false);
+		server_spawn = c.getConfigurationSection("server_spawn").getValues(false);
 	
 		db_ip = (String) c.getString("database.ip");
 		db_name = (String) c.getString("database.name");
