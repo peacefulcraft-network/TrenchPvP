@@ -77,6 +77,11 @@ public class TrenchManager {
 	}
 	
 	public void startMapCycle() {
+		if (!mapCycle.hasMaps()) {
+			TrenchPvP.logInfo("No maps configured. Not starting map cycle.");
+			return;
+		}
+
 		mapCycle.getCurrentMap().startGame();
 	}
 	

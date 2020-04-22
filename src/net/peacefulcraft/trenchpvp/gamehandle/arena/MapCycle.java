@@ -6,13 +6,16 @@ import java.util.Iterator;
  * This is a glorified, circular, doubly-linked list
  */
 public class MapCycle implements Iterable<TrenchArena>{
-	
+
+	public boolean hasMaps() { return (currentMap != null); }
+
 	private MapPosition first;
 		public MapPosition getFirstMapPosition() { return first; }
 		
 	private MapPosition tail;
 	private MapPosition currentMap;
 		public TrenchArena getCurrentMap() { return currentMap.getArena(); }
+
 	
 	public void addArena(TrenchArena arena) {
 		

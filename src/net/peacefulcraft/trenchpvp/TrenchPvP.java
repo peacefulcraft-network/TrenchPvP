@@ -89,7 +89,7 @@ public class TrenchPvP extends JavaPlugin{
 		loadArenas();
 		
 		trenchManager.startMapCycle();
-		this.getLogger().info("[TPP]Trench PvP Alpha 0.1 has been enabled!");
+		this.getLogger().info("[TPP] Trench PvP Alpha 0.1 has been enabled!");
 	}
 
 	public void onDisable(){
@@ -99,7 +99,7 @@ public class TrenchPvP extends JavaPlugin{
 			ta.saveArenaConfig();
 		}
 		//SyncStats.onDisable();
-		this.getLogger().info("[TPP]Trench PvP Alpha 0.1 has been disabled!");
+		this.getLogger().info("[TPP] Trench PvP Alpha 0.1 has been disabled!");
 	}
 	
 	/**
@@ -179,11 +179,19 @@ public class TrenchPvP extends JavaPlugin{
 		}
 	
 	/**
+	 * Record informational message with loger
+	 * @param msg The message to log
+	 */
+	public static void logInfo(String msg) {
+		getPluginInstance().getServer().getLogger().log(Level.INFO, "[Trench] " + msg);
+	}
+
+	/**
 	 * Record warning with logger
 	 * @param msg: The warning message to log
 	 */
 	public static void logWarning(String msg) {
-		getPluginInstance().getServer().getLogger().log(Level.WARNING, "[Trench]" + msg);
+		getPluginInstance().getServer().getLogger().log(Level.WARNING, "[Trench] " + msg);
 	}
 	
 	/**
@@ -191,7 +199,7 @@ public class TrenchPvP extends JavaPlugin{
 	 * @param msg: The error to log
 	 */
 	public static void logErrors(String msg) {
-		getPluginInstance().getServer().getLogger().log(Level.SEVERE, "[Trench]" + msg);
+		getPluginInstance().getServer().getLogger().log(Level.SEVERE, "[Trench] " + msg);
 	}
 
 }
