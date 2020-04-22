@@ -20,7 +20,7 @@ public abstract class Announcer {
 	}
 	
 	public static void messagePlayer(CommandSender cs, String message) {
-		cs.sendMessage(trench_prefix + ChatColor.RESET + " " + message);
+		cs.sendMessage(trench_prefix + ChatColor.RESET + ChatColor.GRAY + " " + message);
 	}
 	
 	public static void messagePlayerActionBar(Player p, String message) {
