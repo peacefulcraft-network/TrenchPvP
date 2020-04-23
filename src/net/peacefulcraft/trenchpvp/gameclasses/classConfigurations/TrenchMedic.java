@@ -43,17 +43,24 @@ public class TrenchMedic extends TrenchKit{
 
 		armor[0] = new ItemStack(Material.LEATHER_BOOTS, 1);
 		
-		LeatherArmorMeta metaH = (LeatherArmorMeta) armor[3].getItemMeta();
-		metaH.setColor(Color.WHITE);
+		ItemMeta metaH = armor[3].getItemMeta();
+		metaH.setUnbreakable(true);
+		((LeatherArmorMeta)metaH).setColor(Color.WHITE);
 		armor[3].setItemMeta(metaH);
-		LeatherArmorMeta metaC = (LeatherArmorMeta) armor[2].getItemMeta();
-		metaC.setColor(Color.WHITE);
+
+		ItemMeta metaC = armor[2].getItemMeta();
+		metaC.setUnbreakable(true);
+		((LeatherArmorMeta)metaC).setColor(Color.WHITE);
 		armor[2].setItemMeta(metaC);
-		LeatherArmorMeta metaL = (LeatherArmorMeta) armor[1].getItemMeta();
-		metaL.setColor(Color.WHITE);
+
+		ItemMeta metaL = armor[1].getItemMeta();
+		metaL.setUnbreakable(true);
+		((LeatherArmorMeta)metaL).setColor(Color.WHITE);
 		armor[1].setItemMeta(metaL);
-		LeatherArmorMeta metaB = (LeatherArmorMeta) armor[0].getItemMeta();
-		metaB.setColor(Color.BLACK);
+
+		ItemMeta metaB = armor[0].getItemMeta();
+		metaB.setUnbreakable(true);
+		((LeatherArmorMeta)metaB).setColor(Color.BLACK);
 		armor[0].setItemMeta(metaB);
 		
 		t.getPlayer().getInventory().setArmorContents(armor);
@@ -112,6 +119,7 @@ public class TrenchMedic extends TrenchKit{
 		 */
 		ItemStack ranged = new ItemStack(Material.BOW, 1);
 		ItemMeta rMeta = ranged.getItemMeta();
+		rMeta.setUnbreakable(true);
 		rMeta.setDisplayName(RANGED_NAME);
 		ranged.setItemMeta(rMeta);
 		ItemStack rangedUtil = new ItemStack(Material.ARROW, 32);//give arrows for syringe gun

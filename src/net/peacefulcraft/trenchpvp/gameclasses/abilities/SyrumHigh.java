@@ -56,7 +56,7 @@ public class SyrumHigh extends TrenchAbility
 				case 1:
 					p.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, EFFECT_TIME, 2));
 				case 2:
-					p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, EFFECT_TIME, 3));
+					p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, EFFECT_TIME, 2));
 				case 3:
 					p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, EFFECT_TIME, 3));
 				case 4:

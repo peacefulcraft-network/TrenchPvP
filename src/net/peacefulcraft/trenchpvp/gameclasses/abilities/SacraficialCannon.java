@@ -23,7 +23,7 @@ public class SacraficialCannon extends TrenchAbility
 	private TrenchKit k;
 	
 	public SacraficialCannon(TrenchKit k) {
-		super(k.getTrenchPlayer(), 30000, "Sacraficial Cannon");
+		super(k.getTrenchPlayer(), 20000, "Sacraficial Cannon");
 		
 		this.k = k;
 	}
@@ -64,10 +64,10 @@ public class SacraficialCannon extends TrenchAbility
 			public void run() {
 				for(Pig pig : pigs) {
 					Location loc = pig.getLocation();
-					loc.getWorld().createExplosion(loc.getX(), loc.getY(), loc.getZ(), 2.0f, false, false);
+					loc.getWorld().createExplosion(loc.getX(), loc.getY(), loc.getZ(), 3.0f, false, false);
 					pig.setHealth(0);
 				}
 			}
-		}, 100);
+		}, 60);
 	}
 }

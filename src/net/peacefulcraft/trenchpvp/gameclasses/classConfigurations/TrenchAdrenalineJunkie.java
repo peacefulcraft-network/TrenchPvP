@@ -51,6 +51,7 @@ public class TrenchAdrenalineJunkie extends TrenchKit
 		ArrayList<String> mDesc = new ArrayList<String>();
 		mDesc.add("Flip 'em The Bird!");
 		meleeMeta.setLore(mDesc);
+		meleeMeta.setUnbreakable(true);
 		melee.setItemMeta(meleeMeta);
 		
 		//Primary Ability
@@ -113,14 +114,21 @@ public class TrenchAdrenalineJunkie extends TrenchKit
 		
 		ItemMeta MetaH = armor[3].getItemMeta();
 		MetaH.addEnchant(Enchantment.PROTECTION_EXPLOSIONS, 2, true);
+		MetaH.setUnbreakable(true);
 		armor[3].setItemMeta(MetaH);	
 		
 		ItemMeta MetaC = armor[2].getItemMeta();
 		MetaC.addEnchant(Enchantment.THORNS, 2, true);
+		MetaC.setUnbreakable(true);
 		armor[2].setItemMeta(MetaC);
+
+		ItemMeta MetaL = armor[1].getItemMeta();
+		MetaL.setUnbreakable(true);
+		armor[1].setItemMeta(MetaL);
 		
 		ItemMeta MetaB = armor[0].getItemMeta();
 		MetaB.addEnchant(Enchantment.PROTECTION_FALL, 4, true);
+		MetaB.setUnbreakable(true);
 		armor[0].setItemMeta(MetaB);
 		
 		p.getInventory().setArmorContents(armor);

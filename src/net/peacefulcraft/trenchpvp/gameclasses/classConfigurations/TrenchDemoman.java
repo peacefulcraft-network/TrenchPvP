@@ -93,7 +93,7 @@ public class TrenchDemoman extends TrenchKit{
 		ArrayList<String> mDesc = new ArrayList<String>();
 		mDesc.add("The Legendary Axe of The Headless Horseless Headman");
 		meleeMeta.setLore(mDesc);
-
+		meleeMeta.setUnbreakable(true);
 		melee.setItemMeta(meleeMeta);
 		
 		/**
@@ -140,7 +140,23 @@ public class TrenchDemoman extends TrenchKit{
 		armor[1].addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 1);
 
 		armor[0] = new ItemStack(Material.LEATHER_BOOTS, 1);
-		this.getTrenchPlayer().getPlayer().getInventory().setArmorContents(armor);
 
+		ItemMeta metaH = armor[3].getItemMeta();
+		metaH.setUnbreakable(true);
+		armor[3].setItemMeta(metaH);
+
+		ItemMeta metaC = armor[2].getItemMeta();
+		metaC.setUnbreakable(true);
+		armor[2].setItemMeta(metaC);
+
+		ItemMeta metaL = armor[1].getItemMeta();
+		metaL.setUnbreakable(true);
+		armor[1].setItemMeta(metaL);
+
+		ItemMeta metaB = armor[0].getItemMeta();
+		metaB.setUnbreakable(true);
+		armor[0].setItemMeta(metaB);
+
+		this.getTrenchPlayer().getPlayer().getInventory().setArmorContents(armor);
 	}
 }

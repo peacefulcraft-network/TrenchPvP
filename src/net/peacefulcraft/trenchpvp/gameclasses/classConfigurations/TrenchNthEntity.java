@@ -55,6 +55,7 @@ public class TrenchNthEntity extends TrenchKit
 		meleeMeta.setLore(mDesc);
 		
 		meleeMeta.addEnchant(Enchantment.DAMAGE_ALL, 2, true);
+		meleeMeta.setUnbreakable(true);
 		
 		melee.setItemMeta(meleeMeta);
 		
@@ -104,20 +105,26 @@ public class TrenchNthEntity extends TrenchKit
 		
 		armor[0] = new ItemStack(Material.GOLDEN_BOOTS, 1);
 		
-		LeatherArmorMeta metaH = (LeatherArmorMeta) armor[3].getItemMeta();
-		metaH.setColor(Color.WHITE);
+		ItemMeta metaH = armor[3].getItemMeta();
+		metaH.addEnchant(Enchantment.PROTECTION_EXPLOSIONS, 5, true);
+		metaH.setUnbreakable(true);
+		((LeatherArmorMeta)metaH).setColor(Color.WHITE);
 		armor[3].setItemMeta(metaH);
-		LeatherArmorMeta metaL = (LeatherArmorMeta) armor[1].getItemMeta();
-		metaL.setColor(Color.BLACK);
+
+		ItemMeta metaC = armor[2].getItemMeta();
+		metaC.setUnbreakable(true);
+		armor[2].setItemMeta(metaC);
+
+		ItemMeta metaL = armor[1].getItemMeta();
+		metaL.setUnbreakable(true);
+		((LeatherArmorMeta)metaL).setColor(Color.BLACK);
 		armor[1].setItemMeta(metaL);
 		
-		ItemMeta MetaH = armor[3].getItemMeta();
-		MetaH.addEnchant(Enchantment.PROTECTION_EXPLOSIONS, 5, true);
-		armor[3].setItemMeta(MetaH);
-		ItemMeta MetaB = armor[0].getItemMeta();
-		MetaB.addEnchant(Enchantment.PROTECTION_EXPLOSIONS, 2, true);
-		MetaB.addEnchant(Enchantment.PROTECTION_FALL, 1, true);
-		armor[0].setItemMeta(MetaB);
+		ItemMeta metaB = armor[0].getItemMeta();
+		metaB.setUnbreakable(true);
+		metaB.addEnchant(Enchantment.PROTECTION_EXPLOSIONS, 2, true);
+		metaB.addEnchant(Enchantment.PROTECTION_FALL, 1, true);
+		armor[0].setItemMeta(metaB);
 		
 		p.getInventory().setArmorContents(armor);
 	}

@@ -77,6 +77,7 @@ public class TrenchElementalist extends TrenchKit
 		mDesc.add("Forged From The Armpit Hairs of Zeus");
 		mDesc.add("Has Chance to Summon A Bolt of Lightning");
 		meleeMeta.setLore(mDesc);
+		meleeMeta.setUnbreakable(true);
 		melee.setItemMeta(meleeMeta);
 		
 		//Primary Ability
@@ -143,13 +144,22 @@ public class TrenchElementalist extends TrenchKit
 		
 		ItemMeta metaH = armor[3].getItemMeta();
 		metaH.addEnchant(Enchantment.THORNS, 1, true);
+		metaH.setUnbreakable(true);
 		armor[3].setItemMeta(metaH);
+
 		ItemMeta metaC = armor[2].getItemMeta();
 		metaC.addEnchant(Enchantment.PROTECTION_FIRE, 4, true);
+		metaC.setUnbreakable(true);
 		armor[2].setItemMeta(metaC);
+
+		ItemMeta metaL = armor[1].getItemMeta();
+		metaL.setUnbreakable(true);
+		armor[1].setItemMeta(metaL);
+
 		ItemMeta metaB = armor[0].getItemMeta();
 		metaB.addEnchant(Enchantment.PROTECTION_FIRE, 4, true);
 		metaB.addEnchant(Enchantment.PROTECTION_FALL, 1, true);
+		metaB.setUnbreakable(true);
 		armor[0].setItemMeta(metaB);
 		
 		p.getInventory().setArmorContents(armor);

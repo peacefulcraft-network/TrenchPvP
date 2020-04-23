@@ -56,6 +56,7 @@ public class TrenchSpy extends TrenchKit{
 		//Creates sword
 		ItemStack melee = new ItemStack(Material.GOLDEN_SWORD, 1);
 		ItemMeta enchantMeta = melee.getItemMeta();
+		enchantMeta.setUnbreakable(true);
 		enchantMeta.addEnchant(Enchantment.KNOCKBACK, 2, true);
 		enchantMeta.addEnchant(Enchantment.DAMAGE_ALL, 2, true);
 		enchantMeta.addEnchant(Enchantment.DURABILITY, 5, true);
