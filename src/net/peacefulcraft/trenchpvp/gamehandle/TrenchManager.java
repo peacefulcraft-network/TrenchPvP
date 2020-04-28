@@ -99,6 +99,13 @@ public class TrenchManager {
 			newMap.playerJoin(p, team, true);
 		});
 		
+		// Teleport spectators to new arena lobby
+		Bukkit.getServer().getOnlinePlayers().forEach(player -> {
+			if (TrenchPvP.getTrenchManager().findTrenchPlayer(player) == null) {
+				player.teleport(newMap.getSpectatorSpawn());
+			}
+		});
+
 		newMap.startGame();
 	}
 }
