@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import net.peacefulcraft.trenchpvp.TrenchPvP;
-import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
 import net.peacefulcraft.trenchpvp.gamehandle.arena.MapCycle;
 import net.peacefulcraft.trenchpvp.gamehandle.arena.TrenchArena;
 
@@ -76,6 +76,9 @@ public class TrenchManager {
 		return true;
 	}
 	
+	/**
+	 * Start the mapcycle on first configured map
+	 */
 	public void startMapCycle() {
 		if (!mapCycle.hasMaps()) {
 			TrenchPvP.logInfo("No maps configured. Not starting map cycle.");
@@ -85,6 +88,9 @@ public class TrenchManager {
 		mapCycle.getCurrentMap().startGame();
 	}
 	
+	/**
+	 * End current game, move map cycle to next arena, start next game
+	 */
 	public void cycleMap() {
 		TrenchArena oldMap = getCurrentArena();
 		mapCycle.nextMap();
@@ -107,5 +113,43 @@ public class TrenchManager {
 		});
 
 		newMap.startGame();
+	}
+
+	/**
+	 * Joins a player to the currently active Trench arena, assigning them to a random team
+	 * @param p Player to join to Trench
+	 */
+	public void joinPlayerToGame(Player p) {
+		if (findTrenchPlayer(p) == null) {
+			mapCycle.getCurrentMap().playerJoin(p);
+		} else {
+			TrenchPvP.logErrors("Attempted to join player " + p.getDisplayName() + " to Trench, but they were already playing.");
+			throw new RuntimeException("Player " + p.getDisplayName() + " is already playing Trench and can not join twice");
+		}
+	}
+
+	/**
+	 * Joins a player to the currently active Trench game. Will attempt to place them on the
+	 * requested team, so long as each team will still have no more than a 2 player discrepency.
+	 * @param p Player to join to Trench
+	 * @param team Team preference
+	 * @param force Skip the team balance check and join to team preference
+	 */
+	public void joinPlayerToGame(Player p, TrenchTeam team, boolean force) {
+		if (findTrenchPlayer(p) == null) {
+			mapCycle.getCurrentMap().playerJoin(p, team, force);
+		} else {
+			TrenchPvP.logErrors("Attempted to join player " + p.getDisplayName() + " to Trench, but they were already playing.");
+			throw new RuntimeException("Player " + p.getDisplayName() + " is already playing Trench and can not join twice");
+		}
+	}
+
+	public void removePlayerFromGame(Player p) {
+		if (findTrenchPlayer(p) == null) {
+			TrenchPvP.logErrors("Attempted to remove player " + p.getDisplayName() + " from Trench, but they are not playing.");
+			throw new RuntimeException("Player " + p.getDisplayName() + " is not playing Trench and can not be removed from the game.");
+		} else {
+			mapCycle.getCurrentMap().playerLeave(p);
+		}
 	}
 }

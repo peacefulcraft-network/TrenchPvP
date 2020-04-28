@@ -33,10 +33,10 @@ public class trjoin implements CommandExecutor, TabCompleter{
 				if(args.length > 0 && sender.hasPermission("trenchpvp.prem.teamjoin")) {
 						
 					if(args[0].equalsIgnoreCase("blue")) {
-						TrenchPvP.getTrenchManager().getCurrentArena().playerJoin((Player) sender, TrenchTeam.BLUE, false);
+						TrenchPvP.getTrenchManager().joinPlayerToGame((Player) sender, TrenchTeam.BLUE, false);
 						
 					}else if(args[0].equalsIgnoreCase("red")) {
-						TrenchPvP.getTrenchManager().getCurrentArena().playerJoin((Player) sender, TrenchTeam.RED, false);
+						TrenchPvP.getTrenchManager().joinPlayerToGame((Player) sender, TrenchTeam.RED, false);
 						
 					}else if(args[0].trim().length() > 0){
 						Announcer.messagePlayer(sender, "Invalid team supplied. trjoin [ blue | red ]");
@@ -46,7 +46,7 @@ public class trjoin implements CommandExecutor, TabCompleter{
 					return true;
 					
 				}else {
-					TrenchPvP.getTrenchManager().getCurrentArena().playerJoin((Player) sender); 
+					TrenchPvP.getTrenchManager().joinPlayerToGame((Player) sender); 
 					return true;
 				}
 				

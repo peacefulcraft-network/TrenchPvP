@@ -15,7 +15,7 @@ public class QuitGameListen implements Listener {
 		if(t == null)
 			return;
 		
-		TrenchPvP.getTrenchManager().getCurrentArena().playerLeave(t.getPlayer());
+		TrenchPvP.getTrenchManager().removePlayerFromGame(t.getPlayer());
 		
 	}
 }
