@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>TrenchPvP</groupId>
   <artifactId>TrenchPvP</artifactId>
-  <version>vB1.0.7</version>
+  <version>vB1.0.8-SNAPSHOT</version>
   <name>TrenchPvP</name>
   <description>KitPvP++++</description>
   <build>
