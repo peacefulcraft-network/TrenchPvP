@@ -233,7 +233,8 @@ public class tra implements CommandExecutor, TabCompleter{
 					if(args.length > 2) {
 						
 						if(args[2].equalsIgnoreCase("get") || args[2].equalsIgnoreCase("set")) {
-							
+
+							opts.add("active");
 							opts.add("blueSpawn");
 							opts.add("blueClass");
 							opts.add("redSpawn");
@@ -261,6 +262,7 @@ public class tra implements CommandExecutor, TabCompleter{
 				}else {
 					opts.add("create");
 					opts.add("list");
+					opts.add("control");
 					opts.addAll(arena_nameSuggestions());
 					return opts;
 				}
