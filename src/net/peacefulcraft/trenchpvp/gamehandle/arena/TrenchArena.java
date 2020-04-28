@@ -95,9 +95,7 @@ public class TrenchArena {
 	 */
 	public TrenchArena(ArenaConfig ac) {
 		this.ac = ac;
-		
-		//TODO: Make scoreboard contextual and only send scoreboard
-		//		to players in specific arena. (Can we do this?)
+
 		scoreboard = new TrenchScoreboard();
 		red = scoreboard.getRedTeam();
 		blue = scoreboard.getBlueTeam();
