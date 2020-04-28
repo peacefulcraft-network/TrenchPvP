@@ -11,7 +11,7 @@ public class JoinGameListen implements Listener {
 
 	@EventHandler
 	public void onJoinEvent(PlayerJoinEvent e) {
-		e.getPlayer().teleport(TrenchPvP.getTrenchCFG().getServer_Spawn());
+		e.getPlayer().teleport(TrenchPvP.getTrenchManager().getCurrentArena().getSpectatorSpawn());
 		e.getPlayer().getInventory().clear();
 		e.getPlayer().getInventory().setArmorContents(new ItemStack[4]);
 	}
