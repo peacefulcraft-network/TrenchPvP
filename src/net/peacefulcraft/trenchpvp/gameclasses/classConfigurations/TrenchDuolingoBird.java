@@ -56,6 +56,7 @@ public class TrenchDuolingoBird extends TrenchKit
 		
 		meleeMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
 		meleeMeta.addEnchant(Enchantment.DURABILITY, 4, true);
+		meleeMeta.setUnbreakable(true);
 		melee.setItemMeta(meleeMeta);
 		
 		//Ranged weapon
@@ -73,6 +74,7 @@ public class TrenchDuolingoBird extends TrenchKit
 		rangedMeta.addEnchant(Enchantment.DURABILITY, 4, true);
 		rangedMeta.addEnchant(Enchantment.ARROW_KNOCKBACK, 1, true);
 		rangedMeta.addEnchant(Enchantment.ARROW_INFINITE, 1, true);
+		rangedMeta.setUnbreakable(true);
 		ranged.setItemMeta(rangedMeta);
 		
 		//Primary ability
@@ -134,17 +136,24 @@ public class TrenchDuolingoBird extends TrenchKit
 		ItemMeta MetaH = armor[3].getItemMeta();
 		MetaH.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 2, true);
 		MetaH.addEnchant(Enchantment.DURABILITY, 5, true);
+		MetaH.setUnbreakable(true);
 		armor[3].setItemMeta(MetaH);
+
 		ItemMeta MetaC = armor[2].getItemMeta();
 		MetaC.addEnchant(Enchantment.PROTECTION_PROJECTILE, 1, true);
 		MetaC.addEnchant(Enchantment.DURABILITY, 5, true);
+		MetaC.setUnbreakable(true);
 		armor[2].setItemMeta(MetaC);
+
 		ItemMeta MetaL = armor[1].getItemMeta();
 		MetaL.addEnchant(Enchantment.DURABILITY, 5, true);
+		MetaL.setUnbreakable(true);
 		armor[1].setItemMeta(MetaL);
+
 		ItemMeta MetaB = armor[0].getItemMeta();
 		MetaB.addEnchant(Enchantment.PROTECTION_FALL, 2, true);
 		MetaB.addEnchant(Enchantment.DURABILITY, 5, true);
+		MetaB.setUnbreakable(true);
 		armor[0].setItemMeta(MetaB);
 		
 		p.getInventory().setArmorContents(armor);

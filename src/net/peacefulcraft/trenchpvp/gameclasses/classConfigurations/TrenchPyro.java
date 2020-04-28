@@ -60,6 +60,23 @@ public class TrenchPyro extends TrenchKit{
 		armor[1].addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 1);
 
 		armor[0] = new ItemStack(Material.LEATHER_BOOTS, 1);
+
+		ItemMeta metaH = armor[3].getItemMeta();
+		metaH.setUnbreakable(true);
+		armor[3].setItemMeta(metaH);
+
+		ItemMeta metaC = armor[2].getItemMeta();
+		metaC.setUnbreakable(true);
+		armor[2].setItemMeta(metaC);
+
+		ItemMeta metaL = armor[1].getItemMeta();
+		metaL.setUnbreakable(true);
+		armor[1].setItemMeta(metaL);
+
+		ItemMeta metaB = armor[0].getItemMeta();
+		metaB.setUnbreakable(true);
+		armor[0].setItemMeta(metaB);
+		
 		t.getPlayer().getInventory().setArmorContents(armor);
 
 	}
@@ -84,6 +101,7 @@ public class TrenchPyro extends TrenchKit{
 
 		ItemStack primary = new ItemStack(Material.GOLDEN_AXE);
 		ItemMeta pMetaData = primary.getItemMeta();
+		pMetaData.setUnbreakable(true);
 		pMetaData.setDisplayName(MELEE_NAME);
 
 		ArrayList<String> pDesc = new ArrayList<String>();

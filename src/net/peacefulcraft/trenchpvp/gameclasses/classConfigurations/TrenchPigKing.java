@@ -58,8 +58,8 @@ public class TrenchPigKing extends TrenchKit
 		
 		ArrayList<String> pDesc = new ArrayList<String>();
 		pDesc.add("Right Click On Ground to Summon Explosive Pigs!");
-		pDesc.add("Summons 5-7 Pigs That Explode After 5 Seconds");
-		pDesc.add("Cooldown Time: 15 Seconds");
+		pDesc.add("Summons 5-7 Pigs That Explode After 3 Seconds");
+		pDesc.add("Cooldown Time: 20 Seconds");
 		pMeta.setLore(pDesc);
 		
 		primary.setItemMeta(pMeta);
@@ -82,21 +82,24 @@ public class TrenchPigKing extends TrenchKit
 		
 		armor[0] = new ItemStack(Material.IRON_BOOTS, 1);
 		
-		LeatherArmorMeta metaH = (LeatherArmorMeta) armor[3].getItemMeta();
-		metaH.setColor(Color.FUCHSIA);
+		ItemMeta metaH = armor[3].getItemMeta();
+		metaH.setUnbreakable(true);
+		metaH.addEnchant(Enchantment.PROTECTION_FIRE, 3, true);
+		((LeatherArmorMeta)metaH).setColor(Color.FUCHSIA);
 		armor[3].setItemMeta(metaH);
-		LeatherArmorMeta metaL = (LeatherArmorMeta) armor[1].getItemMeta();
-		metaL.setColor(Color.FUCHSIA);
-		armor[1].setItemMeta(metaL);
 		
-		ItemMeta MetaH = armor[3].getItemMeta();
-		MetaH.addEnchant(Enchantment.PROTECTION_FIRE, 3, true);
-		armor[3].setItemMeta(MetaH);
 		ItemMeta MetaC = armor[2].getItemMeta();
+		MetaC.setUnbreakable(true);
 		MetaC.addEnchant(Enchantment.PROTECTION_PROJECTILE, 2, true);
 		armor[2].setItemMeta(MetaC);
+
+		ItemMeta metaL = armor[1].getItemMeta();
+		metaL.setUnbreakable(true);
+		((LeatherArmorMeta)metaL).setColor(Color.FUCHSIA);
+		armor[1].setItemMeta(metaL);
 		
 		ItemMeta MetaB = armor[0].getItemMeta();
+		MetaB.setUnbreakable(true);
 		MetaB.addEnchant(Enchantment.PROTECTION_FALL, 1, true);
 		armor[0].setItemMeta(MetaB);
 		

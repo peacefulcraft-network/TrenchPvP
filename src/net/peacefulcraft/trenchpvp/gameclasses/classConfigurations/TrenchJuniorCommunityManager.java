@@ -86,9 +86,11 @@ public class TrenchJuniorCommunityManager extends TrenchKit
 		Player p = this.getTrenchPlayer().getPlayer();
 		
 		ItemStack[] armor = new ItemStack[4];
+		
 		armor[1] = new ItemStack(Material.CHAINMAIL_LEGGINGS, 1);
 		ItemMeta leg = armor[1].getItemMeta();
 		leg.addEnchant(Enchantment.THORNS, 1, true);
+		leg.setUnbreakable(true);
 		armor[1].setItemMeta(leg);
 		
 		p.getInventory().setArmorContents(armor);

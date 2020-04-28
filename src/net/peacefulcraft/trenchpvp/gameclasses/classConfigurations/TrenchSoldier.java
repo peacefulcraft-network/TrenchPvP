@@ -38,6 +38,23 @@ public class TrenchSoldier extends TrenchKit{
 
 		armor[0] = new ItemStack(Material.IRON_BOOTS, 1);
 		armor[0].addEnchantment(Enchantment.PROTECTION_FALL, 1);
+
+		ItemMeta metaH = armor[3].getItemMeta();
+		metaH.setUnbreakable(true);
+		armor[3].setItemMeta(metaH);
+
+		ItemMeta metaC = armor[2].getItemMeta();
+		metaC.setUnbreakable(true);
+		armor[2].setItemMeta(metaC);
+
+		ItemMeta metaL = armor[1].getItemMeta();
+		metaL.setUnbreakable(true);
+		armor[1].setItemMeta(metaL);
+
+		ItemMeta metaB = armor[0].getItemMeta();
+		metaB.setUnbreakable(true);
+		armor[0].setItemMeta(metaB);
+
 		this.getTrenchPlayer().getPlayer().getInventory().setArmorContents(armor);
 	}
 
@@ -53,6 +70,7 @@ public class TrenchSoldier extends TrenchKit{
 		
 		ItemStack primary = new ItemStack(Material.IRON_SWORD, 1);
 		ItemMeta pMetaData = primary.getItemMeta();
+		pMetaData.setUnbreakable(true);
 		primary.addEnchantment(Enchantment.DAMAGE_ALL, 1);
 		pMetaData.setDisplayName(PRIMARY_NAME);
 

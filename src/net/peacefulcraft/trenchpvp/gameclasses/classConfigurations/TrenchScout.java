@@ -59,6 +59,7 @@ public class TrenchScout extends TrenchKit {
 		ArrayList<String> pDesc = new ArrayList<String>();
 		pDesc.add("Hold Blade for Increased Attack Speed!");
 		pMetaData.setLore(pDesc);
+		pMetaData.setUnbreakable(true);
 
 		primary.setItemMeta(pMetaData);
 
@@ -73,6 +74,7 @@ public class TrenchScout extends TrenchKit {
 
 		ItemMeta arrowMetaData = arrows.getItemMeta();
 		arrowMetaData.setDisplayName(SECONDARY_NAME);
+		arrowMetaData.setUnbreakable(true);
 		arrows.setItemMeta(arrowMetaData);
 
 		ArrayList<String> sDesc = new ArrayList<String>();
@@ -100,17 +102,24 @@ public class TrenchScout extends TrenchKit {
 
 		armor[0] = new ItemStack(Material.LEATHER_BOOTS, 1);
 
-		LeatherArmorMeta metaH = (LeatherArmorMeta) armor[3].getItemMeta();
-		metaH.setColor(Color.BLACK);
+		ItemMeta metaH =armor[3].getItemMeta();
+		metaH.setUnbreakable(true);
+		((LeatherArmorMeta)metaH).setColor(Color.BLACK);
 		armor[3].setItemMeta(metaH);
-		LeatherArmorMeta metaC = (LeatherArmorMeta) armor[2].getItemMeta();
-		metaC.setColor(Color.RED);
+
+		ItemMeta metaC = armor[2].getItemMeta();
+		metaC.setUnbreakable(true);
+		((LeatherArmorMeta)metaC).setColor(Color.RED);
 		armor[2].setItemMeta(metaC);
-		LeatherArmorMeta metaL = (LeatherArmorMeta) armor[1].getItemMeta();
-		metaL.setColor(Color.BLUE);
+		
+		ItemMeta metaL = armor[1].getItemMeta();
+		metaL.setUnbreakable(true);
+		((LeatherArmorMeta)metaL).setColor(Color.BLUE);
 		armor[1].setItemMeta(metaL);
-		LeatherArmorMeta metaS = (LeatherArmorMeta) armor[0].getItemMeta();
-		metaS.setColor(Color.BLACK);
+
+		ItemMeta metaS = armor[0].getItemMeta();
+		metaS.setUnbreakable(true);
+		((LeatherArmorMeta)metaS).setColor(Color.BLACK);
 		armor[0].setItemMeta(metaS);
 
 		this.getTrenchPlayer().getPlayer().getInventory().setArmorContents(armor);

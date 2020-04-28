@@ -43,12 +43,24 @@ public class TrenchSniper extends TrenchKit{
 
 		armor[0] = new ItemStack(Material.IRON_BOOTS, 1);
 
-		LeatherArmorMeta metaH = (LeatherArmorMeta) armor[3].getItemMeta();
-		metaH.setColor(Color.BLACK);
+		ItemMeta metaH = armor[3].getItemMeta();
+		metaH.setUnbreakable(true);
+		((LeatherArmorMeta)metaH).setColor(Color.BLACK);
 		armor[3].setItemMeta(metaH);
-		LeatherArmorMeta metaC = (LeatherArmorMeta) armor[2].getItemMeta();
-		metaC.setColor(Color.GREEN);
-		armor[3].setItemMeta(metaC);
+
+		ItemMeta metaC = armor[2].getItemMeta();
+		metaC.setUnbreakable(true);
+		((LeatherArmorMeta)metaC).setColor(Color.GREEN);
+		armor[2].setItemMeta(metaC);
+
+		ItemMeta metaL = armor[1].getItemMeta();
+		metaL.setUnbreakable(true);
+		armor[1].setItemMeta(metaL);
+
+		ItemMeta metaB = armor[0].getItemMeta();
+		metaB.setUnbreakable(true);
+		armor[0].setItemMeta(metaB);
+
 		this.getTrenchPlayer().getPlayer().getInventory().setArmorContents(armor);
 
 	}
@@ -80,6 +92,7 @@ public class TrenchSniper extends TrenchKit{
 
 		//Get metadata / set bow name
 		ItemMeta pMetaData = primary.getItemMeta();
+		pMetaData.setUnbreakable(true);
 		pMetaData.setDisplayName(PRIMARY_NAME);
 		ArrayList<String> pDesc = new ArrayList<String>();
 		pDesc.add("Equipped With Upgradable Components!");
@@ -119,6 +132,7 @@ public class TrenchSniper extends TrenchKit{
 		 */
 		ItemStack secondary = new ItemStack(Material.STONE_SWORD, 1);
 		ItemMeta sMeta = secondary.getItemMeta();
+		sMeta.setUnbreakable(true);
 		sMeta.setDisplayName(MELEE_NAME);
 		secondary.setItemMeta(sMeta);
 		secondary.addEnchantment(Enchantment.SWEEPING_EDGE, 1);

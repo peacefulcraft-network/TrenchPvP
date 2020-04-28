@@ -51,6 +51,7 @@ public class TrenchHeavy extends TrenchKit{
 		pDesc.add("Cooldown Time: 25 Seconds");
 
 		pMetaData.setLore(pDesc);
+		pMetaData.setUnbreakable(true);
 		
 		primary.setItemMeta(pMetaData);
 		
@@ -96,13 +97,23 @@ public class TrenchHeavy extends TrenchKit{
 
 		armor[0] = new ItemStack(Material.LEATHER_BOOTS, 1);
 
-		ItemMeta helmetMeta = armor[3].getItemMeta();
-		helmetMeta.addEnchant(Enchantment.PROTECTION_EXPLOSIONS, 1, true);
-		armor[3].setItemMeta(helmetMeta);
+		ItemMeta metaH = armor[3].getItemMeta();
+		metaH.addEnchant(Enchantment.PROTECTION_EXPLOSIONS, 1, true);
+		metaH.setUnbreakable(true);
+		armor[3].setItemMeta(metaH);
 
-		ItemMeta enchantMeta = armor[2].getItemMeta();
-		enchantMeta.addEnchant(Enchantment.PROTECTION_PROJECTILE, 1, true);
-		armor[2].setItemMeta(enchantMeta);
+		ItemMeta metaC = armor[2].getItemMeta();
+		metaC.addEnchant(Enchantment.PROTECTION_PROJECTILE, 1, true);
+		metaC.setUnbreakable(true);
+		armor[2].setItemMeta(metaC);
+
+		ItemMeta metaL = armor[1].getItemMeta();
+		metaL.setUnbreakable(true);
+		armor[1].setItemMeta(metaL);
+
+		ItemMeta metaB = armor[0].getItemMeta();
+		metaB.setUnbreakable(true);
+		armor[0].setItemMeta(metaB);
 
 		p.getInventory().setArmorContents(armor);
 
