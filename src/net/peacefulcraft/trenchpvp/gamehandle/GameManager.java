@@ -73,7 +73,7 @@ public class GameManager {
 		if(t == null) {
 			return false;
 		}
-		
+			
 		t.dequipKits();
 		TrenchPvP.getTeamManager().leaveTeam(p);
 		p.setGameMode(GameMode.ADVENTURE);

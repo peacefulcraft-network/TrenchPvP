@@ -1,5 +1,6 @@
 package net.peacefulcraft.trenchpvp;
 
+import java.util.HashMap;
 import java.util.logging.Level;
 
 import org.bukkit.ChatColor;
@@ -23,6 +24,7 @@ import net.peacefulcraft.trenchpvp.gamehandle.TeamManager;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.ArrowImpactListener;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.BlockIgnitionTimer;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.ChangeClassSign;
+import net.peacefulcraft.trenchpvp.gamehandle.listeners.CombatLoggerListener;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.ItemDropListener;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.ItemSwitchListener;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.JoinGameListen;
@@ -34,6 +36,7 @@ import net.peacefulcraft.trenchpvp.gamehandle.listeners.PvPController;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.QuitGameListen;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.StartGameSign;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.TNTIgnition;
+import net.peacefulcraft.trenchpvp.gamehandle.regions.Region;
 import net.peacefulcraft.trenchpvp.gamehandle.tasks.Startgame;
 import net.peacefulcraft.trenchpvp.gamehandle.tasks.SyncStats;
 import net.peacefulcraft.trenchpvp.menu.listeners.KitMenu;
@@ -62,10 +65,16 @@ public class TrenchPvP extends JavaPlugin{
 
 	private static KitMenu kitMenu;
 		public static KitMenu getKitMenu() { return kitMenu; }
+
+	/**Probably can remove or switch to own class. Storing all temporary instances of regions in the game currently */
+	private static HashMap<String, Region> regions;
+		public static HashMap<String,Region> getRegions() { return regions; }
 		
 	public TrenchPvP(){
 		main = this;
 		config = new TrenchConfig(getConfig());
+
+		regions = new HashMap<>();
 	}
 
 	public void onEnable(){
@@ -127,6 +136,7 @@ public class TrenchPvP extends JavaPlugin{
 		getServer().getPluginManager().registerEvents(new ArrowImpactListener(), this);
 		getServer().getPluginManager().registerEvents(new TNTIgnition(), this);
 		getServer().getPluginManager().registerEvents(new ItemSwitchListener(), this);
+		getServer().getPluginManager().registerEvents(new CombatLoggerListener(), this);
 
 		//new gameclasses.listeners
 		getServer().getPluginManager().registerEvents(new AbilityClickListener(), this);

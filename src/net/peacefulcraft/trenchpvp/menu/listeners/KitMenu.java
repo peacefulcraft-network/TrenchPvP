@@ -73,6 +73,12 @@ public class KitMenu implements Listener
 		TrenchPlayer t = TeamManager.findTrenchPlayer(p);
 		if(t == null) { return; }
 
+		//Player is combat logged
+		if(t.isCombatLogged()) {
+			p.sendMessage(ChatColor.RED + "Can't open menu while in combat!");
+			return;
+		}
+
 		if(cooldown.containsKey(p.getUniqueId())) {
 			long timeLeft = ((cooldown.get(p.getUniqueId())/1000) + COOLDOWN_TIME) - (System.currentTimeMillis()/1000);
 			if(canUseAgain(p) == true || t.getKitType() == TrenchKits.UNASSIGNED) {
