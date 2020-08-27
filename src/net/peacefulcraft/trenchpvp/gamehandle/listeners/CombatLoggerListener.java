@@ -11,6 +11,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 
 import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gamehandle.TeamManager;
+import net.peacefulcraft.trenchpvp.gamehandle.TeamManager.PlayerWideExecutor;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 
 public class CombatLoggerListener implements Listener {
@@ -73,5 +74,18 @@ public class CombatLoggerListener implements Listener {
             damageMap.remove(t);
             t.setCombatLogged(false);
         }
+    }
+
+    public static void clearAll() {
+        taskMap.clear();
+        damageMap.clear();
+        TeamManager.ExecuteOnAllPlayers(new PlayerWideExecutor(){
+
+            @Override
+            public void execute(TrenchPlayer t) {
+                t.setCombatLogged(false);
+            }
+            
+        });
     }
 }
