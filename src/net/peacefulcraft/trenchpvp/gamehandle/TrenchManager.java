@@ -119,9 +119,13 @@ public class TrenchManager {
 	 * Joins a player to the currently active Trench arena, assigning them to a random team
 	 * @param p Player to join to Trench
 	 */
-	public void joinPlayerToGame(Player p) {
+	public void joinPlayerToGame(Player p) throws RuntimeException {
 		if (findTrenchPlayer(p) == null) {
-			mapCycle.getCurrentMap().playerJoin(p);
+			if (mapCycle.getCurrentMap() == null) {
+				Announcer.messagePlayer(p, "No Trench games are running right now. Please wait a few minutes; we'll be back soon!");
+			} else {
+				mapCycle.getCurrentMap().playerJoin(p);
+			}
 		} else {
 			TrenchPvP.logErrors("Attempted to join player " + p.getDisplayName() + " to Trench, but they were already playing.");
 			throw new RuntimeException("Player " + p.getDisplayName() + " is already playing Trench and can not join twice");
@@ -135,16 +139,20 @@ public class TrenchManager {
 	 * @param team Team preference
 	 * @param force Skip the team balance check and join to team preference
 	 */
-	public void joinPlayerToGame(Player p, TrenchTeam team, boolean force) {
+	public void joinPlayerToGame(Player p, TrenchTeam team, boolean force) throws RuntimeException {
 		if (findTrenchPlayer(p) == null) {
-			mapCycle.getCurrentMap().playerJoin(p, team, force);
+			if (mapCycle.getCurrentMap() == null) {
+				Announcer.messagePlayer(p, "No Trench games are running right now. Please wait a few minutes; we'll be back soon!");
+			} else {
+				mapCycle.getCurrentMap().playerJoin(p, team, force);
+			}
 		} else {
 			TrenchPvP.logErrors("Attempted to join player " + p.getDisplayName() + " to Trench, but they were already playing.");
 			throw new RuntimeException("Player " + p.getDisplayName() + " is already playing Trench and can not join twice");
 		}
 	}
 
-	public void removePlayerFromGame(Player p) {
+	public void removePlayerFromGame(Player p) throws RuntimeException {
 		if (findTrenchPlayer(p) == null) {
 			TrenchPvP.logErrors("Attempted to remove player " + p.getDisplayName() + " from Trench, but they are not playing.");
 			throw new RuntimeException("Player " + p.getDisplayName() + " is not playing Trench and can not be removed from the game.");
