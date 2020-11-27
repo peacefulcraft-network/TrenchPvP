@@ -14,7 +14,7 @@ public class MapCycle implements Iterable<TrenchArena>{
 		
 	private MapPosition tail;
 	private MapPosition currentMap;
-		public TrenchArena getCurrentMap() { return currentMap.getArena(); }
+		public TrenchArena getCurrentMap() { return (currentMap == null)? null : currentMap.getArena(); }
 
 	
 	public void addArena(TrenchArena arena) {
