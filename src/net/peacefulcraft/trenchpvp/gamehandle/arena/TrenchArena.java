@@ -124,7 +124,7 @@ public class TrenchArena {
 		//Teleport players to their respective locations
 		executeOnAllPlayers( (TrenchPlayer t)->{
 			if(t.getKitType() != TrenchKits.UNASSIGNED) {
-				t.equipKit(t.getKit());
+				t.equipKit(t.getKit().getKitType());
 				teleportToSpawn(t);
 			}else {
 				teleportToClassSelection(t);
@@ -160,7 +160,7 @@ public class TrenchArena {
 	 * automatic team selection
 	 * @param p: The Player
 	 */
-	public void playerJoin(Player p) {
+	public TrenchPlayer playerJoin(Player p) {
 		
 		if(TrenchPvP.getTrenchManager().findTrenchPlayer(p) != null) 
 			throw new RuntimeException("Command executor is already playing Trench");
@@ -178,6 +178,7 @@ public class TrenchArena {
 		}
 	
 		TrenchPvP.getTrenchManager().registerPlayer(t);
+		return t;
 	}
 	
 	/**
@@ -187,7 +188,7 @@ public class TrenchArena {
 	 * @param t: The team to join
 	 * @param force: Override balance checks
 	 */
-	public void playerJoin(Player p , TrenchTeam tt, boolean force) {
+	public TrenchPlayer playerJoin(Player p , TrenchTeam tt, boolean force) {
 		
 		if(TrenchPvP.getTrenchManager().findTrenchPlayer(p) != null) 
 			throw new RuntimeException("Command executor is already playing Trench");
@@ -233,7 +234,7 @@ public class TrenchArena {
 		}
 		
 		TrenchPvP.getTrenchManager().registerPlayer(t);
-		
+		return t;
 	}
 	
 		/**

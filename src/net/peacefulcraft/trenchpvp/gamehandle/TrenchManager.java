@@ -8,6 +8,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import net.peacefulcraft.trenchpvp.TrenchPvP;
+import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
 import net.peacefulcraft.trenchpvp.gamehandle.arena.MapCycle;
 import net.peacefulcraft.trenchpvp.gamehandle.arena.TrenchArena;
 
@@ -100,13 +101,15 @@ public class TrenchManager {
 		mapCycle.nextMap();
 		TrenchArena newMap = getCurrentArena();
 		
-		// Kick everyone out of the old arena and force join them to the same teams in the new one
+		// Kick everyone out of the old arena and force join them to the same teams in the new one, giving them the same kit
 		oldMap.executeOnAllPlayers( (t) -> {
 			Player p = t.getPlayer();
 			TrenchTeam team = t.getPlayerTeam();
+			TrenchKits kitType = t.getKitType();
 			
 			oldMap.playerLeave(p);
-			newMap.playerJoin(p, team, true);
+			TrenchPlayer nt = newMap.playerJoin(p, team, true);
+			nt.equipKit(kitType);
 		});
 		
 		// Teleport spectators to new arena lobby

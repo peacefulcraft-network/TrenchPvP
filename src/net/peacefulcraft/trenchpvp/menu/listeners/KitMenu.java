@@ -14,15 +14,7 @@ import org.bukkit.inventory.ItemStack;
 
 import net.md_5.bungee.api.ChatColor;
 import net.peacefulcraft.trenchpvp.TrenchPvP;
-import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchDemoman;
-import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchHeavy;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
-import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchMedic;
-import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchPyro;
-import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchScout;
-import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchSniper;
-import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchSoldier;
-import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchSpy;
 import net.peacefulcraft.trenchpvp.gamehandle.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.menu.GameMenu;
 import net.peacefulcraft.trenchpvp.menu.GameMenu.Row;
@@ -143,47 +135,7 @@ public class KitMenu implements Listener
 		  End of Check
 		*/
 		
-		switch(TrenchKits.valueOf(itemText)){
-		case SCOUT:
-				
-			t.equipKit(new TrenchScout(t));
-			p.setAllowFlight(true);
-			
-		break;case SOLDIER:
-			
-			t.equipKit(new TrenchSoldier(t));
-			
-		break;case PYRO:
-				
-			t.equipKit(new TrenchPyro(t));
-			
-		break;case DEMOMAN:
-			
-			t.equipKit(new TrenchDemoman(t));
-			
-		break;case HEAVY:
-			
-			t.equipKit(new TrenchHeavy(t));
-		
-		break;case SNIPER:
-		
-			t.equipKit(new TrenchSniper(t));
-			
-		break;case MEDIC:
-			
-			t.equipKit(new TrenchMedic(t));
-		
-		break;case SPY:
-			
-			t.equipKit(new TrenchSpy(t));
-		
-		break;default:
-			
-			TrenchPvP.logErrors("User attempted to select invalid Trench class " + itemText);
-			return;
-			
-		}
-		
+		t.equipKit(TrenchKits.valueOf(itemText));		
 		TrenchPvP.getTrenchManager().getCurrentArena().teleportToSpawn(t);
 		p.sendMessage(ChatColor.AQUA + "You are now type " + ChatColor.RED + t.getKitType());
 		

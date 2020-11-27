@@ -6,7 +6,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerRespawnEvent;
 
 import net.peacefulcraft.trenchpvp.TrenchPvP;
-import net.peacefulcraft.trenchpvp.gamehandle.Announcer;
 import net.peacefulcraft.trenchpvp.gamehandle.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.gamehandle.TrenchTeam;
 
@@ -20,7 +19,7 @@ public class PlayerRespawning implements Listener{
 			return;
 		
 		//Reset kit
-		t.equipKit(t.getKit());
+		t.equipKit(t.getKit().getKitType());
 		
 		//Teleport player
 		Location spawnLoc = null;
