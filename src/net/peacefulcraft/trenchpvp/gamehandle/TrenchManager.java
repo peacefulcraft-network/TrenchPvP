@@ -44,7 +44,7 @@ public class TrenchManager {
 	 */
 	public void registerArena(TrenchArena arena) {
 		configuredArenas.add(arena);
-		if(arena.isArenaActive()) {
+		if(arena.isArenaConfigured() && arena.isArenaActive()) {
 			activateArena(arena);
 		}
 	}
@@ -53,10 +53,14 @@ public class TrenchManager {
 	 * Add new TrenchArena into map cycle
 	 * @param arena
 	 */
-	public boolean activateArena(TrenchArena arena) {
-		mapCycle.addArena(arena);
-		arena.setActive(true);
-		return true;
+	public void activateArena(TrenchArena arena) throws RuntimeException {
+		if (arena.isArenaConfigured()) {
+			mapCycle.addArena(arena);
+			arena.setActive(true);
+		} else {
+			TrenchPvP.logWarning("Attempted to activate arena " + arena.getArenaName() + " before it was fully configured.");
+			throw new RuntimeException("Attempted to activate arena " + arena.getArenaName() + " before it was fully configured.");
+		}
 	}
 	
 	/**

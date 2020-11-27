@@ -22,7 +22,6 @@ public class ArenaConfig {
 	private String arenaName;
 	private boolean active;
 	
-	private Map<String, Object> quit_spawn;
 	private Map<String, Object> red_spawn;
 	private Map<String, Object> blue_spawn;
 	private Map<String, Object> red_class_spawn;
@@ -126,6 +125,22 @@ public class ArenaConfig {
 			}
 		}
 	
+	/**
+	 * Validates loaded arena configuration values
+	 * @return Whether the arena is sufficiently configured to be enabled
+	 */
+	public boolean isArenaConfigured() {
+		if (
+			arenaName == null
+			|| blue_class_spawn == null
+			|| blue_spawn == null
+			|| red_class_spawn == null
+			|| red_spawn == null
+			|| spectator_spawn == null
+		) { return false; }
+		else { return true; }
+	}
+
 	/**
 	 * Delete this arena config
 	 */

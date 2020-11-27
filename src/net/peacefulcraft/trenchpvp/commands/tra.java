@@ -128,9 +128,12 @@ public class tra implements CommandExecutor, TabCompleter{
 					}
 					
 					if (args[4].equalsIgnoreCase("yes") || args[4].equalsIgnoreCase("true") || args[4].equalsIgnoreCase("enabled")) {
-						TrenchPvP.getTrenchManager().activateArena(arena);
-						Announcer.messagePlayer(sender, "Arena " + arenaName + " enabled.");
-						
+						if (arena.isArenaConfigured()) {
+							TrenchPvP.getTrenchManager().activateArena(arena);
+							Announcer.messagePlayer(sender, "Arena " + arenaName + " enabled.");
+						} else {
+							Announcer.messagePlayer(p, "Arena " + arenaName + " is not fully configured. Please finish the configration process before enabling it.");
+						}
 					} else {
 						if (TrenchPvP.getTrenchManager().deactivateArena(arena)) {
 							Announcer.messagePlayer(sender, "Arena " + arenaName + " disabled.");
@@ -268,7 +271,7 @@ public class tra implements CommandExecutor, TabCompleter{
 	 * @param p
 	 */
 	private void status_globalStatus(Player p) {
-		Announcer.messagePlayer(p, "Current arena " + TrenchPvP.getTrenchManager().getCurrentArena());
+		Announcer.messagePlayer(p, "Current arena " + TrenchPvP.getTrenchManager().getCurrentArena().getArenaName());
 	}
 	
 	/**

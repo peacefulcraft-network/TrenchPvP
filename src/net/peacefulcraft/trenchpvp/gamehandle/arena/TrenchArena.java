@@ -29,6 +29,7 @@ public class TrenchArena {
 
 	private ArenaConfig ac;
 		public String getArenaName() { return ac.getArenaName(); }
+		public boolean isArenaConfigured() { return ac.isArenaConfigured(); }
 		public boolean isArenaActive() { return ac.isArenaActive(); }
 		
 		public Location getBlueSpawn() { return ac.getBlue_spawn(); }
@@ -103,7 +104,7 @@ public class TrenchArena {
 		redPlayers = new HashMap<UUID, TrenchPlayer>();
 		bluePlayers = new HashMap<UUID, TrenchPlayer>();
 	}
-	
+
 	/**
 	 * Start the game
 	 * - Re-equip all their kits
