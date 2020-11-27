@@ -271,6 +271,10 @@ public class tra implements CommandExecutor, TabCompleter{
 	 * @param p
 	 */
 	private void status_globalStatus(Player p) {
+		if (TrenchPvP.getTrenchManager().getCurrentArena() == null) {
+			Announcer.messagePlayer(p, "No active Trench games.");
+			return;
+		}
 		Announcer.messagePlayer(p, "Current arena " + TrenchPvP.getTrenchManager().getCurrentArena().getArenaName());
 	}
 	
