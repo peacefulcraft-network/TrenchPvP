@@ -1,6 +1,6 @@
 package net.peacefulcraft.trenchpvp.gameclasses.classConfigurations;
 
-import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
+import net.peacefulcraft.trenchpvp.gamehandle.TrenchPlayer;
 
 public class TrenchWitchDoctor extends TrenchKit
 {

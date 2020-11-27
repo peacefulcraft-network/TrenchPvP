@@ -10,8 +10,7 @@ import java.util.UUID;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import net.peacefulcraft.trenchpvp.TrenchPvP;
-import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
-import net.peacefulcraft.trenchpvp.stats.StatTracker.TrenchStat;
+import net.peacefulcraft.trenchpvp.gamehandle.TrenchPlayer;
 
 public class SyncBounties extends BukkitRunnable{
 

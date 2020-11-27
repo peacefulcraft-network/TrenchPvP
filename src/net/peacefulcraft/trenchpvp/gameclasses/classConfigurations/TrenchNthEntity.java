@@ -15,7 +15,7 @@ import net.peacefulcraft.trenchpvp.gameclasses.abilities.CatastrophicRapier;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.EntityUprising;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.NthExplosion;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.TrenchAbilityType;
-import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
+import net.peacefulcraft.trenchpvp.gamehandle.TrenchPlayer;
 
 public class TrenchNthEntity extends TrenchKit
 {

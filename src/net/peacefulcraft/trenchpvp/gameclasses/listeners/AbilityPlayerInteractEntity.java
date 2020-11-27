@@ -5,10 +5,10 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 
+import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.TrenchAbilityType;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
-import net.peacefulcraft.trenchpvp.gamehandle.TeamManager;
-import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
+import net.peacefulcraft.trenchpvp.gamehandle.TrenchPlayer;
 
 public class AbilityPlayerInteractEntity implements Listener{
 
@@ -19,8 +19,8 @@ public class AbilityPlayerInteractEntity implements Listener{
 		if(!(ev.getRightClicked() instanceof Player)) { return; }
 		
 		//Make sure both players are playing Trench
-		if(TeamManager.findTrenchPlayer((Player) ev.getRightClicked()) == null) { return; }
-		TrenchPlayer t = TeamManager.findTrenchPlayer(ev.getPlayer());
+		if(TrenchPvP.getTrenchManager().findTrenchPlayer((Player) ev.getRightClicked()) == null) { return; }
+		TrenchPlayer t = TrenchPvP.getTrenchManager().findTrenchPlayer(ev.getPlayer());
 		if(t == null) { return; }
 		
 		//Ignore damage from players that don't have a class

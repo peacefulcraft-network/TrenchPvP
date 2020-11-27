@@ -9,8 +9,7 @@ import org.bukkit.potion.PotionEffectType;
 
 import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKit;
-import net.peacefulcraft.trenchpvp.gamehandle.TeamManager;
-import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
+import net.peacefulcraft.trenchpvp.gamehandle.TrenchPlayer;
 
 public class WindsongBlade extends TrenchAbility{
 
@@ -28,7 +27,7 @@ public class WindsongBlade extends TrenchAbility{
 		try {
 			
 			PlayerMoveEvent e = (PlayerMoveEvent) ev;
-			TrenchPlayer t = TeamManager.findTrenchPlayer(e.getPlayer());
+			TrenchPlayer t = TrenchPvP.getTrenchManager().findTrenchPlayer(e.getPlayer());
 			
 			//if(!(t.getPlayer().getInventory().getItemInMainHand().getType() == Material.STONE_SWORD)) { return false; }
 			//if(!(t.getPlayer().getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("Windsong Blade"))) { return false; }

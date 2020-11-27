@@ -6,10 +6,10 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
+import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.TrenchAbilityType;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
-import net.peacefulcraft.trenchpvp.gamehandle.TeamManager;
-import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
+import net.peacefulcraft.trenchpvp.gamehandle.TrenchPlayer;
 
 public class AbilityClickListener implements Listener {
 	
@@ -20,7 +20,7 @@ public class AbilityClickListener implements Listener {
 		if(!(ev.getAction().equals(Action.RIGHT_CLICK_AIR) || ev.getAction().equals(Action.RIGHT_CLICK_BLOCK))) {return;}
 		
 		//Ignore clicks not from Trench players
-		TrenchPlayer t = TeamManager.findTrenchPlayer(ev.getPlayer());
+		TrenchPlayer t = TrenchPvP.getTrenchManager().findTrenchPlayer(ev.getPlayer());
 		if(t == null) { return; }
 		
 		//Ignore clicks from players that don't have classes
@@ -37,7 +37,7 @@ public class AbilityClickListener implements Listener {
 	public void onPlayerClick(PlayerInteractEntityEvent ev) {
 
 		//Ignore clicks not from Trench players
-		TrenchPlayer t = TeamManager.findTrenchPlayer(ev.getPlayer());
+		TrenchPlayer t = TrenchPvP.getTrenchManager().findTrenchPlayer(ev.getPlayer());
 		if(t == null) { return; }
 		
 		//Ignore clicks from players that don't have classes

@@ -1,13 +1,11 @@
-trenchspawns:
-  quit: {}
-  red: {}
-  blue: {}
-  red_class: {}
-  blue_class: {}
-  spectator: {}
+server_spawn:
+  world:
+  x:
+  y:
+  z:
 
 database:
-    ip: "127.0.0.1"
-    name: "database name"
-    username: "user"
-    password: "super secret"
+  ip: "127.0.0.1"
+  name: "database name"
+  username: "user"
+  password: "super secret"

@@ -14,7 +14,7 @@ import org.bukkit.inventory.meta.LeatherArmorMeta;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.HomeInvasion;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.SpanishLesson;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.TrenchAbilityType;
-import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
+import net.peacefulcraft.trenchpvp.gamehandle.TrenchPlayer;
 
 public class TrenchDuolingoBird extends TrenchKit
 {
@@ -158,7 +158,4 @@ public class TrenchDuolingoBird extends TrenchKit
 		
 		p.getInventory().setArmorContents(armor);
 	}
-	
-	
-	
 }

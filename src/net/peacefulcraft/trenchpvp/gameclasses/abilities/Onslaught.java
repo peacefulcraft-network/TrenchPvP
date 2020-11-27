@@ -12,8 +12,7 @@ import org.bukkit.potion.PotionEffectType;
 import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKit;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
-import net.peacefulcraft.trenchpvp.gamehandle.TeamManager;
-import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
+import net.peacefulcraft.trenchpvp.gamehandle.TrenchPlayer;
 
 public class Onslaught extends TrenchAbility{
 
@@ -32,7 +31,7 @@ public class Onslaught extends TrenchAbility{
 		try{
 			
 			PlayerDeathEvent e = (PlayerDeathEvent) ev;
-			TrenchPlayer trenchKiller = TeamManager.findTrenchPlayer(e.getEntity().getKiller());
+			TrenchPlayer trenchKiller = TrenchPvP.getTrenchManager().findTrenchPlayer(e.getEntity().getKiller());
 			
 			if(!(trenchKiller.getKitType() == TrenchKits.SOLDIER)) { return false; }
 			
@@ -51,8 +50,8 @@ public class Onslaught extends TrenchAbility{
 		try{
 		
 			PlayerDeathEvent e = (PlayerDeathEvent) ev;
-			TrenchPlayer trenchKiller = TeamManager.findTrenchPlayer(e.getEntity().getKiller());
-			TrenchPlayer trenchDead = TeamManager.findTrenchPlayer(e.getEntity());
+			TrenchPlayer trenchKiller = TrenchPvP.getTrenchManager().findTrenchPlayer(e.getEntity().getKiller());
+			TrenchPlayer trenchDead = TrenchPvP.getTrenchManager().findTrenchPlayer(e.getEntity());
 			
 			//Relevant entity is the killer, add buffs
 			if(trenchKiller == k.getTrenchPlayer()) {

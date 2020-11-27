@@ -13,7 +13,7 @@ import org.bukkit.inventory.meta.LeatherArmorMeta;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.DangerousHealthHose;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.MediGun;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.TrenchAbilityType;
-import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
+import net.peacefulcraft.trenchpvp.gamehandle.TrenchPlayer;
 
 public class TrenchMedic extends TrenchKit{
 

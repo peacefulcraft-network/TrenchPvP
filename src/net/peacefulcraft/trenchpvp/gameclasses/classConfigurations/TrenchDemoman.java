@@ -12,7 +12,7 @@ import net.peacefulcraft.trenchpvp.gameclasses.abilities.BigBertha;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.GrenadeLauncher;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.LastWish;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.TrenchAbilityType;
-import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
+import net.peacefulcraft.trenchpvp.gamehandle.TrenchPlayer;
 
 public class TrenchDemoman extends TrenchKit{
 

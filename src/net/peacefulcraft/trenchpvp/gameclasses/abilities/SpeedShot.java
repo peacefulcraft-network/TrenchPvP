@@ -10,8 +10,7 @@ import org.bukkit.potion.PotionEffectType;
 
 import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKit;
-import net.peacefulcraft.trenchpvp.gamehandle.TeamManager;
-import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
+import net.peacefulcraft.trenchpvp.gamehandle.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.stats.TrenchStats.SpyStat;
 
 public class SpeedShot extends TrenchAbility{
@@ -53,8 +52,8 @@ public class SpeedShot extends TrenchAbility{
 			PlayerInteractEntityEvent e = (PlayerInteractEntityEvent) ev;
 			
 			TrenchPlayer spy, target;
-			spy = TeamManager.findTrenchPlayer(e.getPlayer());
-			target = TeamManager.findTrenchPlayer((Player)e.getRightClicked());
+			spy = TrenchPvP.getTrenchManager().findTrenchPlayer(e.getPlayer());
+			target = TrenchPvP.getTrenchManager().findTrenchPlayer((Player)e.getRightClicked());
 			
 			if(!(spy.getPlayerTeam() == target.getPlayerTeam())) return;
 			target.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 140, 4));

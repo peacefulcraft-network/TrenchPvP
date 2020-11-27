@@ -9,9 +9,8 @@ import org.bukkit.potion.PotionEffectType;
 
 import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
-import net.peacefulcraft.trenchpvp.gamehandle.TeamManager;
-import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
-import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchTeams;
+import net.peacefulcraft.trenchpvp.gamehandle.TrenchPlayer;
+import net.peacefulcraft.trenchpvp.gamehandle.TrenchTeam;
 import net.peacefulcraft.trenchpvp.stats.TrenchStats.DemoStat;
 import net.peacefulcraft.trenchpvp.stats.TrenchStats.GeneralStat;
 import net.peacefulcraft.trenchpvp.stats.TrenchStats.HeavyStat;
@@ -32,8 +31,8 @@ public class KillListener implements Listener
 		Player killer = e.getEntity().getKiller();
 		Player dead = e.getEntity();
 		
-		TrenchPlayer tk = TeamManager.findTrenchPlayer(killer);
-		TrenchPlayer td = TeamManager.findTrenchPlayer(dead);
+		TrenchPlayer tk = TrenchPvP.getTrenchManager().findTrenchPlayer(killer);
+		TrenchPlayer td = TrenchPvP.getTrenchManager().findTrenchPlayer(dead);
 		if(tk == null || td == null) {
 			/*
 			 * TODO: This won't track environment deaths, IE falling
@@ -47,10 +46,10 @@ public class KillListener implements Listener
 		TrenchPvP.getStatTracker().track(td, GeneralStat.player_deaths, 1);
 
 		
-		if(tk.getPlayerTeam() == TrenchTeams.BLUE) {
-			TrenchPvP.getTeamManager().getScoreboard().registerBlueKill();
+		if(tk.getPlayerTeam() == TrenchTeam.BLUE) {
+			TrenchPvP.getTrenchManager().getCurrentArena().getScoreboard().registerBlueKill();
 		}else {
-			TrenchPvP.getTeamManager().getScoreboard().registerRedKill();
+			TrenchPvP.getTrenchManager().getCurrentArena().getScoreboard().registerRedKill();
 		}
 		
 		if(kit == TrenchKits.DEMOMAN) {

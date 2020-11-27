@@ -9,16 +9,16 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.inventory.ItemStack;
 
+import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
-import net.peacefulcraft.trenchpvp.gamehandle.TeamManager;
-import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
+import net.peacefulcraft.trenchpvp.gamehandle.TrenchPlayer;
 
 public class PhantomArrow implements Listener
 {
 	@EventHandler
 	private void ArrowReturn(EntityShootBowEvent e) {
 		if(e.getEntity() instanceof Player) {
-			TrenchPlayer t = TeamManager.findTrenchPlayer((Player) e.getEntity()); 
+			TrenchPlayer t = TrenchPvP.getTrenchManager().findTrenchPlayer((Player) e.getEntity()); 
 			if(t == null) { return; }
 			
 			if(t.getKitType() != TrenchKits.SNIPER) { return; }

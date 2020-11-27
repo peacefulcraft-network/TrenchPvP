@@ -15,8 +15,7 @@ import net.md_5.bungee.api.ChatColor;
 import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKit;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
-import net.peacefulcraft.trenchpvp.gamehandle.TeamManager;
-import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
+import net.peacefulcraft.trenchpvp.gamehandle.TrenchPlayer;
 
 public class LaunchPad extends TrenchAbility
 {
@@ -63,7 +62,7 @@ public class LaunchPad extends TrenchAbility
 					
 					Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(TrenchPvP.getPluginInstance(), new Runnable() {
 						public void run() {
-							TrenchPlayer t = TeamManager.findTrenchPlayer(p);
+							TrenchPlayer t = TrenchPvP.getTrenchManager().findTrenchPlayer(p);
 		                	if(!(t.getKitType() == TrenchKits.ADRENALINE_JUNKIE)) {return;}
 		                	
 		                	padLoc.getBlock().setType(Material.AIR);

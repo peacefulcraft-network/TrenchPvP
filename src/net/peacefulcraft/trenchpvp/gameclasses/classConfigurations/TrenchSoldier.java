@@ -12,7 +12,7 @@ import net.peacefulcraft.trenchpvp.gameclasses.abilities.Onslaught;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.TrenchAbilityType;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.Witherbringer;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.WitherbringerBuddy;
-import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
+import net.peacefulcraft.trenchpvp.gamehandle.TrenchPlayer;
 
 public class TrenchSoldier extends TrenchKit{
 

@@ -1,11 +1,8 @@
 package net.peacefulcraft.trenchpvp.stats;
 
 import java.util.HashMap;
-import java.util.UUID;
 
-import org.bukkit.entity.Player;
-
-import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
+import net.peacefulcraft.trenchpvp.gamehandle.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.stats.TrenchStats.GeneralStat;
 
 public class StatTracker
@@ -64,12 +61,18 @@ public class StatTracker
 		}
 		return check;
 	}
+	
 	public void resetEntry(TrenchPlayer t, TrenchStat stat) {
 		HashMap<TrenchStat, Integer> temp = statMap.get(t);
 		temp.put(stat, 0);
 		statMap.put(t, temp);
 	}
+	
 	public int getValue(TrenchPlayer t, TrenchStat stat) {
+		if(!statMap.containsKey(t)) {
+			return 0;
+		}
+		
 		HashMap<TrenchStat, Integer> temp = statMap.get(t);
 		if(!(temp.containsKey(stat))) { return 0; }
 		

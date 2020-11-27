@@ -9,9 +9,9 @@ import org.bukkit.event.Event;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKit;
-import net.peacefulcraft.trenchpvp.gamehandle.TeamManager;
-import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
+import net.peacefulcraft.trenchpvp.gamehandle.TrenchPlayer;
 
 public class SpanishLesson extends TrenchAbility
 {
@@ -46,10 +46,10 @@ public class SpanishLesson extends TrenchAbility
 		for(Entity e : list) {
 			if(e instanceof Player) {
 				Player vic = (Player) e;
-				if(TeamManager.findTrenchPlayer(vic).getPlayerTeam() != t.getPlayerTeam()) {
+				if(TrenchPvP.getTrenchManager().findTrenchPlayer(vic).getPlayerTeam() != t.getPlayerTeam()) {
 					vic.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, EFFECT_TIME, 6));
 					vic.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, EFFECT_TIME, 2));
-				} else if(TeamManager.findTrenchPlayer(vic).getPlayerTeam() == t.getPlayerTeam()) {
+				} else if(TrenchPvP.getTrenchManager().findTrenchPlayer(vic).getPlayerTeam() == t.getPlayerTeam()) {
 					vic.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, EFFECT_TIME/2, 1));
 				}
 			}

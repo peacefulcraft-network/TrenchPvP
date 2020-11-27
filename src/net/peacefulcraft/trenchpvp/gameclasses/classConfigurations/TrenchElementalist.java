@@ -18,7 +18,7 @@ import net.peacefulcraft.trenchpvp.gameclasses.abilities.TerraWall;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.TerraWallRemover;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.ThunderStruck;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.TrenchAbilityType;
-import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
+import net.peacefulcraft.trenchpvp.gamehandle.TrenchPlayer;
 
 public class TrenchElementalist extends TrenchKit
 {

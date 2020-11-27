@@ -9,9 +9,9 @@ import org.bukkit.event.Event;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKit;
-import net.peacefulcraft.trenchpvp.gamehandle.TeamManager;
-import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
+import net.peacefulcraft.trenchpvp.gamehandle.TrenchPlayer;
 
 public class EntityUprising extends TrenchAbility
 {
@@ -47,7 +47,7 @@ public class EntityUprising extends TrenchAbility
 		for(Entity e : levList) {
 			if(e instanceof Player) {
 				Player vic = (Player) e;
-				if(TeamManager.findTrenchPlayer(vic).getPlayerTeam() != t.getPlayerTeam()) {
+				if(TrenchPvP.getTrenchManager().findTrenchPlayer(vic).getPlayerTeam() != t.getPlayerTeam()) {
 					vic.addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, EFFECT_TIME, 1));
 					vic.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, EFFECT_TIME, 4));
 				}

@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>TrenchPvP</groupId>
   <artifactId>TrenchPvP</artifactId>
-  <version>vB1.0.7</version>
+  <version>vB1.0.8-SNAPSHOT</version>
   <name>TrenchPvP</name>
   <description>KitPvP++++</description>
   <build>
@@ -29,7 +29,7 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.14.4-R0.1-SNAPSHOT</version>
+            <version>1.16.4-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

@@ -2,15 +2,13 @@ package net.peacefulcraft.trenchpvp.gameclasses.abilities;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
 import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKit;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
-import net.peacefulcraft.trenchpvp.gamehandle.TeamManager;
-import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
+import net.peacefulcraft.trenchpvp.gamehandle.TrenchPlayer;
 
 public class LastWish extends TrenchAbility
 {
@@ -28,7 +26,7 @@ public class LastWish extends TrenchAbility
 		try {
 		
 			PlayerDeathEvent e = (PlayerDeathEvent) ev;
-			TrenchPlayer killed = TeamManager.findTrenchPlayer(e.getEntity());
+			TrenchPlayer killed = TrenchPvP.getTrenchManager().findTrenchPlayer(e.getEntity());
 			if(!(killed.getKitType() == TrenchKits.DEMOMAN)) return false;
 			
 			if(!(e.getEntity().getInventory().contains(Material.FIREWORK_ROCKET))) return false;
@@ -46,7 +44,7 @@ public class LastWish extends TrenchAbility
 	{
 		try {
 			PlayerDeathEvent e = (PlayerDeathEvent) ev;
-			TrenchPlayer killed = TeamManager.findTrenchPlayer(e.getEntity());
+			TrenchPlayer killed = TrenchPvP.getTrenchManager().findTrenchPlayer(e.getEntity());
 			
 			if(killed == k.getTrenchPlayer()) {
 				Location loc = e.getEntity().getLocation();

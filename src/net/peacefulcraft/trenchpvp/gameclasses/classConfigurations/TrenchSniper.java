@@ -13,7 +13,7 @@ import org.bukkit.inventory.meta.LeatherArmorMeta;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.PoisonRound;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.PowerShot;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.TrenchAbilityType;
-import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
+import net.peacefulcraft.trenchpvp.gamehandle.TrenchPlayer;
 
 public class TrenchSniper extends TrenchKit{
 

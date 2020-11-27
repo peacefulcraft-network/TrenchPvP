@@ -12,7 +12,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.BuildTimer;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.LonelyMansMic;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.TrenchAbilityType;
-import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
+import net.peacefulcraft.trenchpvp.gamehandle.TrenchPlayer;
 
 public class TrenchJuniorCommunityManager extends TrenchKit
 {

@@ -6,8 +6,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
 import net.peacefulcraft.trenchpvp.TrenchPvP;
-import net.peacefulcraft.trenchpvp.gamehandle.TeamManager;
-import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
+import net.peacefulcraft.trenchpvp.gamehandle.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.stats.TrenchStats.GeneralStat;
 
 public class FriendlykillListener implements Listener
@@ -20,8 +19,8 @@ public class FriendlykillListener implements Listener
 		Player agent = e.getEntity().getKiller();
 		Player victim = e.getEntity();
 		
-		TrenchPlayer killer = TeamManager.findTrenchPlayer(agent);
-		TrenchPlayer vic = TeamManager.findTrenchPlayer(victim);
+		TrenchPlayer killer = TrenchPvP.getTrenchManager().findTrenchPlayer(agent);
+		TrenchPlayer vic = TrenchPvP.getTrenchManager().findTrenchPlayer(victim);
 		
 		if(killer == null || vic == null) {
 			return;

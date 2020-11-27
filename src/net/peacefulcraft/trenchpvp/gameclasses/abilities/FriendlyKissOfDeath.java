@@ -9,9 +9,9 @@ import org.bukkit.event.Event;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchSpy;
-import net.peacefulcraft.trenchpvp.gamehandle.TeamManager;
-import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
+import net.peacefulcraft.trenchpvp.gamehandle.TrenchPlayer;
 
 public class FriendlyKissOfDeath extends TrenchAbility
 {
@@ -45,7 +45,7 @@ public class FriendlyKissOfDeath extends TrenchAbility
 		for(Entity e : list) {
 			if(e instanceof Player) {
 				Player vic = (Player) e;
-				if(TeamManager.findTrenchPlayer(vic).getPlayerTeam() != t.getPlayerTeam()) {
+				if(TrenchPvP.getTrenchManager().findTrenchPlayer(vic).getPlayerTeam() != t.getPlayerTeam()) {
 
 					int index = p.getInventory().first(Material.PAPER);
 					int multiplier = (p.getInventory().getItem(index).getAmount() / 2) + 1;

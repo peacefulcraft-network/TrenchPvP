@@ -12,7 +12,7 @@ import java.util.UUID;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import net.peacefulcraft.trenchpvp.TrenchPvP;
-import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
+import net.peacefulcraft.trenchpvp.gamehandle.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.stats.StatTracker.TrenchStat;
 
 public class SyncStats extends BukkitRunnable{
@@ -31,7 +31,7 @@ public class SyncStats extends BukkitRunnable{
 		//Mkae sure we have a fresh database connection
 		//Lingering old ones have probably gone away.
 		try {
-			if(!mysql.isClosed()) {
+			if(mysql != null && !mysql.isClosed()) {
 				onDisable();
 			}
 		} catch (SQLException e1) {

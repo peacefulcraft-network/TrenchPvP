@@ -13,9 +13,9 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
+import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
-import net.peacefulcraft.trenchpvp.gamehandle.TeamManager;
-import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
+import net.peacefulcraft.trenchpvp.gamehandle.TrenchPlayer;
 
 public class LaunchPadUse implements Listener
 {
@@ -23,7 +23,7 @@ public class LaunchPadUse implements Listener
 	private void LaunchPadLaunch(PlayerInteractEvent e) {
 		if(e.getPlayer().getGameMode() != GameMode.ADVENTURE) { return; }
 		
-		TrenchPlayer t = TeamManager.findTrenchPlayer(e.getPlayer());
+		TrenchPlayer t = TrenchPvP.getTrenchManager().findTrenchPlayer(e.getPlayer());
 		if(t == null) { return; }
 		
 		if(t.getKitType() == TrenchKits.UNASSIGNED) { return; }

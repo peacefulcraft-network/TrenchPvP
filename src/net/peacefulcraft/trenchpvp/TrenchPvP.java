@@ -1,16 +1,17 @@
 package net.peacefulcraft.trenchpvp;
 
+import java.io.File;
 import java.util.logging.Level;
 
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import net.peacefulcraft.trenchpvp.commands.tppDebug;
-import net.peacefulcraft.trenchpvp.commands.tppGetGameState;
-import net.peacefulcraft.trenchpvp.commands.tppSet;
-import net.peacefulcraft.trenchpvp.commands.tppToggle;
-import net.peacefulcraft.trenchpvp.commands.trJoin;
-import net.peacefulcraft.trenchpvp.commands.trLeave;
+import net.peacefulcraft.trenchpvp.commands.trjoin;
+import net.peacefulcraft.trenchpvp.commands.trleave;
+import net.peacefulcraft.trenchpvp.commands.tra;
+import net.peacefulcraft.trenchpvp.config.ArenaConfig;
+import net.peacefulcraft.trenchpvp.config.TrenchConfig;
+import net.peacefulcraft.trenchpvp.config.YAMLFileFilter;
 import net.peacefulcraft.trenchpvp.gameclasses.abilities.PhantomArrow;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.AbilityClickListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.AbilityEntityDamageEntityListener;
@@ -18,24 +19,18 @@ import net.peacefulcraft.trenchpvp.gameclasses.listeners.AbilityPlayerDeathListe
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.AbilityPlayerInteractEntity;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.AbilityPlayerMoveListener;
 import net.peacefulcraft.trenchpvp.gameclasses.listeners.AbilityPlayerToggleFlight;
-import net.peacefulcraft.trenchpvp.gamehandle.GameManager;
-import net.peacefulcraft.trenchpvp.gamehandle.TeamManager;
+import net.peacefulcraft.trenchpvp.gamehandle.PartyManager;
+import net.peacefulcraft.trenchpvp.gamehandle.TrenchManager;
+import net.peacefulcraft.trenchpvp.gamehandle.arena.TrenchArena;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.ArrowImpactListener;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.BlockIgnitionTimer;
-import net.peacefulcraft.trenchpvp.gamehandle.listeners.ChangeClassSign;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.ItemDropListener;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.ItemSwitchListener;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.JoinGameListen;
-import net.peacefulcraft.trenchpvp.gamehandle.listeners.JoinGameSign;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.LaunchPadUse;
-import net.peacefulcraft.trenchpvp.gamehandle.listeners.LeaveGameSign;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.PlayerRespawning;
-import net.peacefulcraft.trenchpvp.gamehandle.listeners.PvPController;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.QuitGameListen;
-import net.peacefulcraft.trenchpvp.gamehandle.listeners.StartGameSign;
 import net.peacefulcraft.trenchpvp.gamehandle.listeners.TNTIgnition;
-import net.peacefulcraft.trenchpvp.gamehandle.tasks.Startgame;
-import net.peacefulcraft.trenchpvp.gamehandle.tasks.SyncStats;
 import net.peacefulcraft.trenchpvp.menu.listeners.KitMenu;
 import net.peacefulcraft.trenchpvp.stats.StatTracker;
 import net.peacefulcraft.trenchpvp.stats.listeners.ConsumeListener;
@@ -48,8 +43,8 @@ public class TrenchPvP extends JavaPlugin{
 	//Prefix for all plugin -> player messages
 	public static final String CMD_PREFIX = ChatColor.DARK_RED + "[" + ChatColor.RED + "Trench" + ChatColor.DARK_RED + "]";
 
-	private static TeamManager teamManager;
-		public static TeamManager getTeamManager() {return teamManager;}
+	private static TrenchManager trenchManager;
+		public static TrenchManager getTrenchManager() {return trenchManager;}
 
 	private static TrenchPvP main;
 		public static TrenchPvP getPluginInstance(){return main;}
@@ -63,15 +58,18 @@ public class TrenchPvP extends JavaPlugin{
 	private static KitMenu kitMenu;
 		public static KitMenu getKitMenu() { return kitMenu; }
 		
+	private static PartyManager partyManager;
+		public static PartyManager getPartyManager() {return partyManager;}
+		
 	public TrenchPvP(){
 		main = this;
-		config = new TrenchConfig(getConfig());
 	}
 
 	public void onEnable(){
-		//Generate default config, if none exists
+		//Generate default config, if none exists. Parse config
 		this.saveDefaultConfig();
-
+		config = new TrenchConfig(getConfig());
+		
 		//Load all plugin commands from ~.commands.CommandLoader.java
 		this.loadCommands();
 		
@@ -79,34 +77,41 @@ public class TrenchPvP extends JavaPlugin{
 		this.loadEventListners();
 
 		//Initialize game resources
-		teamManager = new TeamManager();
+		trenchManager = new TrenchManager();
 		tracker = new StatTracker();
-		SyncStats.onEnable();
-		this.getLogger().info("[TPP]Trench PvP Alpha 0.1 has been enabled!");
+		partyManager = new PartyManager();
 
-		//Trigger game start
-		(new Startgame(this)).runTask(this);
+		// Load / register the arenas to the map pool
+		// Map cycle auto starts the game when the first active arena is added.
+		loadArenas();
+
+		this.getLogger().info("[TPP] Trench PvP Alpha 0.1 has been enabled!");
 	}
 
 	public void onDisable(){
-		this.saveConfig();
-		//End game
-		GameManager.closeGame();
+		this.saveConfig();		
 		
+		for(TrenchArena ta: trenchManager.getConfiguredArenas()) {
+			ta.saveArenaConfig();
+		}
 		//SyncStats.onDisable();
-		this.getLogger().info("[TPP]Trench PvP Alpha 0.1 has been disabled!");
+		this.getLogger().info("[TPP] Trench PvP Alpha 0.1 has been disabled!");
 	}
 	
 	/**
 	 * Register all commands with the server
 	 */
 	private void loadCommands(){
-		this.getCommand("tppToggle").setExecutor(new tppToggle());
-		this.getCommand("tppGetGameState").setExecutor(new tppGetGameState());
-		this.getCommand("trjoin").setExecutor(new trJoin());
-		this.getCommand("trleave").setExecutor(new trLeave());
-		this.getCommand("tppdebug").setExecutor(new tppDebug());;
-		this.getCommand("tppSet").setExecutor(new tppSet());
+		this.getCommand("trleave").setExecutor(new trleave());
+		
+		trjoin trjoin = new trjoin();
+		this.getCommand("trjoin").setTabCompleter(trjoin);
+		this.getCommand("trjoin").setExecutor(trjoin);
+
+		
+		tra tra = new tra();
+		this.getCommand("tra").setExecutor(tra);
+		this.getCommand("tra").setTabCompleter(tra);	
 	}
 	
 	/**
@@ -114,15 +119,11 @@ public class TrenchPvP extends JavaPlugin{
 	 */
 	private void loadEventListners(){
 		//gamehandle.listeners
-		getServer().getPluginManager().registerEvents(new JoinGameSign(), this);
-		getServer().getPluginManager().registerEvents(new LeaveGameSign(), this);
-		getServer().getPluginManager().registerEvents(new StartGameSign(), this);
-		getServer().getPluginManager().registerEvents(new ChangeClassSign(), this);
 		getServer().getPluginManager().registerEvents(new JoinGameListen(), this);
 		getServer().getPluginManager().registerEvents(new BlockIgnitionTimer(), this);
 		getServer().getPluginManager().registerEvents(new QuitGameListen(), this);
 		getServer().getPluginManager().registerEvents(new PlayerRespawning(), this);
-		getServer().getPluginManager().registerEvents(new PvPController(), this);
+		getServer().getPluginManager().registerEvents(new ItemDropListener(), this);
 		getServer().getPluginManager().registerEvents(new ItemDropListener(), this);
 		getServer().getPluginManager().registerEvents(new ArrowImpactListener(), this);
 		getServer().getPluginManager().registerEvents(new TNTIgnition(), this);
@@ -151,12 +152,38 @@ public class TrenchPvP extends JavaPlugin{
 		getServer().getPluginManager().registerEvents(kitMenu, this);
 	}
 
+		private void loadArenas(){
+			File arenaDataDir = new File(this.getDataFolder().toPath() + "/arenas");
+			String[] arenaFileNames = arenaDataDir.list(new YAMLFileFilter());
+			if(arenaFileNames == null || arenaFileNames.length == 0) {
+				logWarning("No arena configurations found in TrenchPvP/arenas");
+				return;
+			}
+			for(String arenaName : arenaFileNames) {
+				trenchManager.registerArena(
+					new TrenchArena(
+						new ArenaConfig(
+							YAMLFileFilter.removeExtension(arenaName)
+						)
+					)
+				);
+			}
+		}
+	
+	/**
+	 * Record informational message with loger
+	 * @param msg The message to log
+	 */
+	public static void logInfo(String msg) {
+		getPluginInstance().getServer().getLogger().log(Level.INFO, "[Trench] " + msg);
+	}
+
 	/**
 	 * Record warning with logger
 	 * @param msg: The warning message to log
 	 */
 	public static void logWarning(String msg) {
-		getPluginInstance().getServer().getLogger().log(Level.WARNING, "[Trench]" + msg);
+		getPluginInstance().getServer().getLogger().log(Level.WARNING, "[Trench] " + msg);
 	}
 	
 	/**
@@ -164,7 +191,7 @@ public class TrenchPvP extends JavaPlugin{
 	 * @param msg: The error to log
 	 */
 	public static void logErrors(String msg) {
-		getPluginInstance().getServer().getLogger().log(Level.SEVERE, "[Trench]" + msg);
+		getPluginInstance().getServer().getLogger().log(Level.SEVERE, "[Trench] " + msg);
 	}
 
 }

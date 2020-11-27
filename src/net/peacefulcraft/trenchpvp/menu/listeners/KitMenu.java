@@ -14,20 +14,8 @@ import org.bukkit.inventory.ItemStack;
 
 import net.md_5.bungee.api.ChatColor;
 import net.peacefulcraft.trenchpvp.TrenchPvP;
-import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchDemoman;
-import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchHeavy;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
-import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchMedic;
-import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchPyro;
-import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchScout;
-import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchSniper;
-import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchSoldier;
-import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchSpy;
-import net.peacefulcraft.trenchpvp.gamehandle.GameManager;
-import net.peacefulcraft.trenchpvp.gamehandle.TeamManager;
-import net.peacefulcraft.trenchpvp.gamehandle.player.Teleports;
-import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
-import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchTeams;
+import net.peacefulcraft.trenchpvp.gamehandle.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.menu.GameMenu;
 import net.peacefulcraft.trenchpvp.menu.GameMenu.Row;
 import net.peacefulcraft.trenchpvp.menu.GameMenu.onClick;
@@ -56,8 +44,7 @@ public class KitMenu implements Listener
 		menu.addButton(menu.getRow(0), 6, new ItemStack(Material.ANVIL), "Heavy", "Click to Equip The Heavy Class!");
 		menu.addButton(menu.getRow(2), 6, new ItemStack(Material.CLOCK), "Spy", "Click to Equip The Spy Class!");
 		menu.addButton(menu.getRow(0), 8, new ItemStack(Material.RED_STAINED_GLASS_PANE), "Quit", "Click to Leave Trench!");
-		//menu.addButton(menu.getRow(1), 8, new ItemStack(Material.GREEN_STAINED_GLASS_PANE), "Ultimate Classes", "Click to Access Your Next Level Classes!");
-		menu.addButton(menu.getRow(2), 8, new ItemStack(Material.BLUE_STAINED_GLASS_PANE), "Purchased Classes", "Click to Access Classes Purchased Through The Store!");
+		menu.addButton(menu.getRow(2), 8, new ItemStack(Material.BLUE_STAINED_GLASS_PANE), "Purchased Classes", "Click to Access Classes Purchased Through The Minigames Store!");
 	}
 	
 	@EventHandler
@@ -70,7 +57,7 @@ public class KitMenu implements Listener
 		
 		if(!(e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK)) return;
 		
-		TrenchPlayer t = TeamManager.findTrenchPlayer(p);
+		TrenchPlayer t = TrenchPvP.getTrenchManager().findTrenchPlayer(p);
 		if(t == null) { return; }
 
 		if(cooldown.containsKey(p.getUniqueId())) {
@@ -108,12 +95,14 @@ public class KitMenu implements Listener
 	}
 	
 	private void inventoryClick(Player p, ItemStack item) {
-		TrenchPlayer t = TeamManager.findTrenchPlayer(p);
+		TrenchPlayer t = TrenchPvP.getTrenchManager().findTrenchPlayer(p);
 		if(t == null) { return; }
 		
 		String itemText = item.getItemMeta().getDisplayName().toUpperCase();
 		if(itemText.equals("QUIT")) {
-			GameManager.quitPlayer(p);
+			
+			t.getArena().playerLeave(p);
+			
 			cooldown.remove(p.getUniqueId());
 			return;
 		}
@@ -121,9 +110,7 @@ public class KitMenu implements Listener
 			PurchasedMenu purchasedMenu = new PurchasedMenu();
 			menu.close(p);
 			purchasedMenu.menuOpen(p);
-		}
-		if(itemText.equals("NEXT LEVEL CLASSES")) {
-			
+			return;
 		}
 		
 		/*
@@ -148,52 +135,8 @@ public class KitMenu implements Listener
 		  End of Check
 		*/
 		
-		switch(TrenchKits.valueOf(itemText)){
-		case SCOUT:
-				
-			t.equipKit(new TrenchScout(t));
-			p.setAllowFlight(true);
-			
-		break;case SOLDIER:
-			
-			t.equipKit(new TrenchSoldier(t));
-			
-		break;case PYRO:
-				
-			t.equipKit(new TrenchPyro(t));
-			
-		break;case DEMOMAN:
-			
-			t.equipKit(new TrenchDemoman(t));
-			
-		break;case HEAVY:
-			
-			t.equipKit(new TrenchHeavy(t));
-		
-		break;case SNIPER:
-		
-			t.equipKit(new TrenchSniper(t));
-			
-		break;case MEDIC:
-			
-			t.equipKit(new TrenchMedic(t));
-		
-		break;case SPY:
-			
-			t.equipKit(new TrenchSpy(t));
-		
-		break;default:
-			
-			TrenchPvP.logErrors("User attempted to select invalid Trench class " + itemText);
-			return;
-			
-		}
-		
-		if(TeamManager.findTrenchPlayer(p).getPlayerTeam() == TrenchTeams.BLUE) {
-			p.teleport(Teleports.getBlueSpawn());
-		}else {
-			p.teleport(Teleports.getRedSpawn());
-		}
+		t.equipKit(TrenchKits.valueOf(itemText));		
+		TrenchPvP.getTrenchManager().getCurrentArena().teleportToSpawn(t);
 		p.sendMessage(ChatColor.AQUA + "You are now type " + ChatColor.RED + t.getKitType());
 		
 	}

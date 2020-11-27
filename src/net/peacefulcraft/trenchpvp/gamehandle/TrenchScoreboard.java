@@ -8,30 +8,30 @@ import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.scoreboard.Team;
 
+import net.peacefulcraft.trenchpvp.gamehandle.arena.TrenchArena;
+
 /**
  * Scoreboard Objectives for Trench
  * - The object instance lives in TeamManager
  */
 public class TrenchScoreboard {
-
+	
 	private Team red;
 		public Team getRedTeam() { return red; }
 	private Team blue;
 		public Team getBlueTeam() { return blue; }
 	
+	private Scoreboard sb;
 	private Objective trenchStats;
-	private Objective redPlayers;
-	private Objective redKills;
-	private Objective bluePlayers;
-	private Objective blueKills;
-	
+	private String time = "10:00";
 	/**
 	 * Reset / Create Scoreboard Teams and Objectives
 	 */
 	public TrenchScoreboard() {
 		
+
 		ScoreboardManager smb = Bukkit.getScoreboardManager();
-		Scoreboard sb = smb.getMainScoreboard(); 
+		sb = smb.getMainScoreboard(); 
 		
 		if(sb.getTeam("Red") != null) {
 			sb.getTeam("Red").unregister();
@@ -64,6 +64,17 @@ public class TrenchScoreboard {
 		
 		System.out.println("Teams Initialized");
 		
+	}
+	
+	/*
+	 * Sets scoreboards of all players in the arena to current scoreboard
+	 */
+	public void setScoreboard(TrenchArena arena) {
+		arena.executeOnAllPlayers(
+			(TrenchPlayer t) -> {
+				t.getPlayer().setScoreboard(sb);
+			}
+		);	
 	}
 	
 	/**
@@ -140,6 +151,18 @@ public class TrenchScoreboard {
 		trenchStats.getScore(ChatColor.BLUE + "Kills:").setScore(
 			trenchStats.getScore(ChatColor.BLUE + "Kills:").getScore() + 1
 		);
+		
+	}
+	
+	/**
+	 * Change (decrement) timer on scoreboard
+	 * @param time: Time as a string (0:00)
+	 */
+	public void setTimerTime(String time) {
+		
+		sb.resetScores(this.time);
+		trenchStats.getScore(time).setScore(99);
+		this.time = time;
 		
 	}
 	

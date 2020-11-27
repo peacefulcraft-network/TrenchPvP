@@ -5,18 +5,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import net.md_5.bungee.api.ChatColor;
+import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchAdrenalineJunkie;
-import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchDuolingoBird;
-import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchElementalist;
-import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchJuniorCommunityManager;
-import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchNthEntity;
+import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKits;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchPigKing;
 import net.peacefulcraft.trenchpvp.gamehandle.Announcer;
-import net.peacefulcraft.trenchpvp.gamehandle.GameManager;
-import net.peacefulcraft.trenchpvp.gamehandle.TeamManager;
-import net.peacefulcraft.trenchpvp.gamehandle.player.Teleports;
-import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
-import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchTeams;
+import net.peacefulcraft.trenchpvp.gamehandle.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.menu.GameMenu;
 import net.peacefulcraft.trenchpvp.menu.GameMenu.Row;
 import net.peacefulcraft.trenchpvp.menu.GameMenu.onClick;
@@ -53,12 +47,12 @@ public class PurchasedMenu
 	}
 	
 	private void inventoryClick(Player p, ItemStack item) {
-		TrenchPlayer t = TeamManager.findTrenchPlayer(p);
+		TrenchPlayer t = TrenchPvP.getTrenchManager().findTrenchPlayer(p);
 		if(t == null) { return; }
 		
 		String itemText = item.getItemMeta().getDisplayName().toUpperCase();
 		if(itemText.equals("QUIT")) {
-			GameManager.quitPlayer(p);
+			t.getArena().playerLeave(p);
 			//TODO: Remove from kitmenu cooldown
 		}
 		if(itemText.equals("REGULAR CLASSES")) {
@@ -93,55 +87,42 @@ public class PurchasedMenu
 					
 					
 		switch(PurchasedKits.valueOf(itemText)) {
-		case ADRENALINE_JUNKIE:
-			if(p.hasPermission("trenchpvp.class.adrenaline_junky")) {
-				t.equipKit(new TrenchAdrenalineJunkie(t));
-				teleportByTeam(t);
-			}else {
-				sendKitBuyMessage(p);
-			}
-			return;
-			
-		case PIG_KING:
-			if(p.hasPermission("trenchpvp.class.pig_king")) {
-				t.equipKit(new TrenchPigKing(t));
-				teleportByTeam(t);
-			}else {
-				sendKitBuyMessage(p);
-			}
-			return;
 		case NTH_ENTITY:
 			sendKitDisabledMessage(p);
 			return;
 //			t.equipKit(new TrenchNthEntity(t));
 //			teleportByTeam(t);
-//			return;
 		case JUNIOR_COMMUNITY_MANAGER:
 			sendKitDisabledMessage(p);
 			return;
 //			t.equipKit(new TrenchJuniorCommunityManager(t));
 //			teleportByTeam(t);
-//			return;
 		case ELEMENTALIST:
 			sendKitDisabledMessage(p);
 			return;
 //			t.equipKit(new TrenchElementalist(t));
 //			teleportByTeam(t);
-//			return;
+		case PIG_KING:
+			if(!p.hasPermission("trenchpvp.class.pig_king")) {
+				sendKitBuyMessage(p);
+				return;
+			}
+		break;case ADRENALINE_JUNKIE:
+			if(!p.hasPermission("trenchpvp.class.adrenaline_junky")) {
+				sendKitBuyMessage(p);
+				return;
+			}
+		break;case DUOLINGO_BIRD:
+			sendKitDisabledMessage(p);
+			return;
 		}
+
+		t.equipKit(TrenchKits.valueOf(itemText));
+		TrenchPvP.getTrenchManager().getCurrentArena().teleportToSpawn(t);
 	}
 	
 	public void menuOpen(Player p) {
 		menu.open(p);
-	}
-	
-	private void teleportByTeam(TrenchPlayer t) {
-		if(TeamManager.findTrenchPlayer(t.getPlayer()).getPlayerTeam() == TrenchTeams.BLUE) {
-			t.getPlayer().teleport(Teleports.getBlueSpawn());
-		}else {
-			t.getPlayer().teleport(Teleports.getRedSpawn());
-		}
-		t.getPlayer().sendMessage(ChatColor.AQUA + "You are now type " + ChatColor.RED + t.getKitType());
 	}
 	
 	private void sendKitBuyMessage(Player p) {
