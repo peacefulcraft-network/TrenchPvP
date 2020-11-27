@@ -256,6 +256,7 @@ public class tra implements CommandExecutor, TabCompleter{
 			
 		} else {
 			opts.add("arena");
+			opts.add("control");
 			opts.add("status");
 			return opts;
 
