@@ -81,10 +81,10 @@ public class TrenchPvP extends JavaPlugin{
 		tracker = new StatTracker();
 		partyManager = new PartyManager();
 
-		//Load / register the arenas to the map pool
+		// Load / register the arenas to the map pool
+		// Map cycle auto starts the game when the first active arena is added.
 		loadArenas();
-		
-		trenchManager.startMapCycle();
+
 		this.getLogger().info("[TPP] Trench PvP Alpha 0.1 has been enabled!");
 	}
 
