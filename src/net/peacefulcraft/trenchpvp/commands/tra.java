@@ -185,7 +185,7 @@ public class tra implements CommandExecutor, TabCompleter{
 			status_globalStatus(p);
 			
 		break; case "control":
-			control_forceMapCycle();
+			control_forceMapCycle(p);
 			
 		break; default:
 			Announcer.messagePlayer(sender, "Please specify a valid administrative context. tra [ status | arena ]");
@@ -331,7 +331,12 @@ public class tra implements CommandExecutor, TabCompleter{
 	 * Forces the map to cycle
 	 */
 	@SuppressWarnings("static-access")
-	private void control_forceMapCycle() {
+	private void control_forceMapCycle(CommandSender cs) {
+		if (TrenchPvP.getTrenchManager().getCurrentArena() == null) {
+			Announcer.messagePlayer(cs, "There is no active Trench game. Unable to cycle maps.");
+			return;
+		}
+
 		// Remove the old endgame task that was scheduled to run
 		BukkitScheduler scheduler = TrenchPvP.getPluginInstance().getServer().getScheduler();
 		BukkitTask currentArenaEndTask = TrenchPvP.getTrenchManager().getCurrentArena().getEndgameTask();
