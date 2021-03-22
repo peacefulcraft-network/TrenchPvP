@@ -86,7 +86,7 @@ public class TrenchDemoman extends TrenchKit{
 		 * Melee Weapon
 		 */
 		
-		ItemStack melee = new ItemStack(Material.IRON_AXE, 1);
+		ItemStack melee = new ItemStack(Material.STONE_AXE, 1);
 		ItemMeta meleeMeta = melee.getItemMeta();
 		meleeMeta.setDisplayName(MELEE_NAME);
 

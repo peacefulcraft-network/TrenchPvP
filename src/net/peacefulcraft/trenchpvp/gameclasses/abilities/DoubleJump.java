@@ -58,33 +58,27 @@ public class DoubleJump extends TrenchAbility{
 		if(ev instanceof PlayerToggleFlightEvent) {
 			((PlayerToggleFlightEvent) ev).getPlayer().setFlying(false);
 			((PlayerToggleFlightEvent) ev).setCancelled(true);
+			System.out.println("Canceling double jump.");
 		}
 		
 		//Double jump logic
 		if(canDoubleJump && ev instanceof PlayerToggleFlightEvent) {
+			System.out.println("Vector 1");
 			Player p = ((PlayerToggleFlightEvent)ev).getPlayer();
 			Block b = p.getWorld().getBlockAt(p.getLocation().subtract(0,2,0));
 			
-			//Check that the user is actually jumping
-		    if(!b.getType().equals(Material.AIR)){
-		    	
-		    	//"Boost" their movement vector to simulate a double jump
-		     	Vector v = new Vector(p.getVelocity().getX(), p.getVelocity().getY(), p.getVelocity().getZ());
-		       	Vector forward = p.getLocation().getDirection().multiply(0.3);
-		        Vector jump = p.getLocation().getDirection().multiply(0.05).setY(1);
-		        v.add(forward).add(jump);
-		        p.setVelocity(v);
-		        
-		        //Disable flight / jump until they touch the ground.
-		        canDoubleJump = false;
-		        p.setAllowFlight(false);
-			
-		    }
+			System.out.println("Vector 2");
+			//"Boost" their movement vector to simulate a double jump
+			 Vector v = new Vector(p.getVelocity().getX(), p.getVelocity().getY(), p.getVelocity().getZ());
+			Vector forward = p.getLocation().getDirection().multiply(0.3);
+			Vector jump = p.getLocation().getDirection().multiply(0.05).setY(1);
+			v.add(forward).add(jump);
+			p.setVelocity(v);
+
+			//Disable flight / jump until they touch the ground.
+			canDoubleJump = false;
+			p.setAllowFlight(false);
 			return;
-		}
-		
+		}	
 	}
-	
-	
-	
 }
