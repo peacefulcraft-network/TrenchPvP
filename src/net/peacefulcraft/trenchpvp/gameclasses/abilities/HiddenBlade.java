@@ -15,7 +15,8 @@ import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchKit;
 
 public class HiddenBlade extends TrenchAbility{
 	
-	private final int EFFECT_TIME = 140;
+	private final int EFFECT_TIME = 160;
+	private final int BUFF_TIME = 100;
 	
 	public HiddenBlade(TrenchKit k) {
 		super(k.getTrenchPlayer(), 16000, "Hidden Blade");
@@ -56,7 +57,7 @@ public class HiddenBlade extends TrenchAbility{
 			
 			Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(TrenchPvP.getPluginInstance(), new Runnable() {
 				public void run() {
-					p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, EFFECT_TIME, 3));
+					p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, BUFF_TIME, 3));
 				}
 			}, EFFECT_TIME);
 			
