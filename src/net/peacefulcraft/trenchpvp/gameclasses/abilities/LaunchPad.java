@@ -63,11 +63,13 @@ public class LaunchPad extends TrenchAbility
 					
 					Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(TrenchPvP.getPluginInstance(), new Runnable() {
 						public void run() {
+							// Remove launch pad
+							padLoc.getBlock().setType(Material.AIR);
+
+							// Check if we should give the launch pad back to the player.
 							TrenchPlayer t = TeamManager.findTrenchPlayer(p);
-		                	if(!(t.getKitType() == TrenchKits.ADRENALINE_JUNKIE)) {return;}
-		                	
-		                	padLoc.getBlock().setType(Material.AIR);
-		                	p.getInventory().setItem(itemIndex, pad);
+							if(!(t.getKitType() == TrenchKits.ADRENALINE_JUNKIE)) {return;}
+							p.getInventory().setItem(itemIndex, pad);
 						}
 					}, 300);
 				}
