@@ -19,6 +19,13 @@ public class TrenchPlayer{
 	protected TrenchKit kitInstance;
 		public TrenchKit getKit() { return kitInstance; }
 		public TrenchKits getKitType() { return kitInstance.getKitType(); }
+
+	/**
+	 * Determines if player is able to open menu / log out safely 
+	 */
+	private Boolean combatLogged;
+		public Boolean isCombatLogged() { return this.combatLogged; }
+		public void setCombatLogged(Boolean b) { this.combatLogged = b; }
 		
 	public TrenchPlayer(Player user, TrenchTeams team){
 		this.p = user;

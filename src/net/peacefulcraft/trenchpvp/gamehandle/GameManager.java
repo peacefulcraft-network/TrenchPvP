@@ -10,6 +10,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import net.peacefulcraft.trenchpvp.TrenchPvP;
 import net.peacefulcraft.trenchpvp.gameclasses.classConfigurations.TrenchUndefined;
+import net.peacefulcraft.trenchpvp.gamehandle.listeners.CombatLoggerListener;
 import net.peacefulcraft.trenchpvp.gamehandle.player.Teleports;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchPlayer;
 import net.peacefulcraft.trenchpvp.gamehandle.player.TrenchTeams;
@@ -73,7 +74,7 @@ public class GameManager {
 		if(t == null) {
 			return false;
 		}
-		
+			
 		t.dequipKits();
 		TrenchPvP.getTeamManager().leaveTeam(p);
 		p.setGameMode(GameMode.ADVENTURE);
@@ -132,6 +133,9 @@ public class GameManager {
 		for(BukkitRunnable task : postGameTasks) {
 			task.runTask(TrenchPvP.getPluginInstance());
 		}
+
+		//Clearing all combat logs
+		CombatLoggerListener.clearAll();
 		
 		//Schedule new game for 10 seconds from now (in ticks)
 		(new Startgame(TrenchPvP.getPluginInstance())).runTaskLater(TrenchPvP.getPluginInstance(), 200);
